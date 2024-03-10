@@ -14,6 +14,7 @@
 		5460651E97F06FB9860C8FA0 /* Pods_Shinefy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8FC223BEAE4E59074C018F8 /* Pods_Shinefy.framework */; };
 		7AEBE78380835078E26ED644 /* Pods_Shinefy_ShinefyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD6670C4D11B6311F352A597 /* Pods_Shinefy_ShinefyTests.framework */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		D9C52B822B9DA3D3000F05A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D9C52B812B9DA3D3000F05A8 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		89C6BE57DB24E9ADA2F236DE /* Pods-Shinefy-ShinefyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shinefy-ShinefyTests.release.xcconfig"; path = "Target Support Files/Pods-Shinefy-ShinefyTests/Pods-Shinefy-ShinefyTests.release.xcconfig"; sourceTree = "<group>"; };
 		A8FC223BEAE4E59074C018F8 /* Pods_Shinefy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shinefy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD6670C4D11B6311F352A597 /* Pods_Shinefy_ShinefyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shinefy_ShinefyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9C52B812B9DA3D3000F05A8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D9C96F632B9CCBB2006C2A04 /* Shinefy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Shinefy.entitlements; path = Shinefy/Shinefy.entitlements; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -87,6 +89,7 @@
 		13B07FAE1A68108700A75B9A /* Shinefy */ = {
 			isa = PBXGroup;
 			children = (
+				D9C52B812B9DA3D3000F05A8 /* GoogleService-Info.plist */,
 				D9C96F632B9CCBB2006C2A04 /* Shinefy.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
@@ -246,6 +249,7 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				D9C52B822B9DA3D3000F05A8 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
