@@ -20,7 +20,6 @@ import {
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Shareratepro} from './Provider/Sharerateapp';
-import {Switch} from 'react-native-switch';
 import {
   Colors,
   Font,

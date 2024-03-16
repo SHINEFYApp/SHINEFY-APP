@@ -1,5 +1,5 @@
-import 'react-native-gesture-handler';
 import React, {Component} from 'react';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {AppProvider, AppConsumer} from './src/Provider/context/AppProvider';
 import Stacknav from './src/Provider/Routenavigation';
@@ -61,16 +61,18 @@ class App extends Component {
   };
   render() {
     return (
-      <NavigationContainer>
-        <AppProvider {...this.props}>
-          <AppConsumer>
-            {funcs => {
-              global.props = {...funcs};
-              return <Stacknav {...funcs} />;
-            }}
-          </AppConsumer>
-        </AppProvider>
-      </NavigationContainer>
+      <GestureHandlerRootView style={{flex: 1}}>
+        <NavigationContainer>
+          <AppProvider {...this.props}>
+            <AppConsumer>
+              {funcs => {
+                global.props = {...funcs};
+                return <Stacknav {...funcs} />;
+              }}
+            </AppConsumer>
+          </AppProvider>
+        </NavigationContainer>
+      </GestureHandlerRootView>
     );
   }
 }

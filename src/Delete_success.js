@@ -89,7 +89,8 @@ export default class Delete_success extends Component {
               alignSelf: 'center',
               marginTop: (mobileW * 50) / 100,
             }}
-            source={localimag.washing1}></Image>
+            source={localimag.washing1}
+          />
           <View
             style={{
               alignSelf: 'center',

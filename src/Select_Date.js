@@ -527,7 +527,7 @@ export default class Select_Date extends Component {
   };
   navigationFun = async () => {
     let {area_id, service_boy_id, today_slots} = this.state;
-    if (today_slots == 'NA' || (today_slots?.length ?? 0 ) == 0) {
+    if (today_slots == 'NA' || (today_slots?.length ?? 0) == 0) {
       this.setState({
         booking_day: Lang_chg.today_txt,
         booking_date: this.state.today_arr.date,
@@ -561,24 +561,27 @@ export default class Select_Date extends Component {
       date_slots,
       day_choose,
     } = this.state;
-    if (booking_date == 'NA' && booking_time == 'NA' && (date_slots?.length ?? 0 ) > 0 ) {
+    if (
+      booking_date == 'NA' &&
+      booking_time == 'NA' &&
+      (date_slots?.length ?? 0) > 0
+    ) {
       msgProvider.toast(Lang_chg.emptyTimeSlot[config.language], 'center');
       return false;
     } else {
-    if (date_slots == 'NA' || (date_slots?.length ?? 0 ) == 0) {
+      if (date_slots == 'NA' || (date_slots?.length ?? 0) == 0) {
         this.setState({
-        booking_day: Lang_chg.today_txt,
-        booking_date: this.state.date_slots.date,
-        booking_time: Lang_chg.waiting_time_slot[config.language],
-        area_id: this.state.date_slots.area_id,
-      });
+          booking_day: Lang_chg.today_txt,
+          booking_date: this.state.date_slots.date,
+          booking_time: Lang_chg.waiting_time_slot[config.language],
+          area_id: this.state.date_slots.area_id,
+        });
       }
       this.redirectionFun();
     }
   };
 
-  navigationFun2 = async () => {        
-
+  navigationFun2 = async () => {
     let {
       area_id,
       service_boy_id,
@@ -593,17 +596,21 @@ export default class Select_Date extends Component {
       date_slots,
       day_choose,
     } = this.state;
-    if (booking_date == 'NA' && booking_time == 'NA' && (date_slots?.length ?? 0 ) > 0 ) {
+    if (
+      booking_date == 'NA' &&
+      booking_time == 'NA' &&
+      (date_slots?.length ?? 0) > 0
+    ) {
       msgProvider.toast(Lang_chg.emptyTimeSlot[config.language], 'center');
       return false;
     } else {
-    if (date_slots == 'NA' || (date_slots?.length ?? 0 ) == 0) {
+      if (date_slots == 'NA' || (date_slots?.length ?? 0) == 0) {
         this.setState({
-        booking_day: Lang_chg.today_txt,
-        booking_date: this.state.date_slots.date,
-        booking_time: Lang_chg.waiting_time_slot[config.language],
-        area_id: this.state.date_slots.area_id,
-      });
+          booking_day: Lang_chg.today_txt,
+          booking_date: this.state.date_slots.date,
+          booking_time: Lang_chg.waiting_time_slot[config.language],
+          area_id: this.state.date_slots.area_id,
+        });
       }
       this.redirectionFun();
     }

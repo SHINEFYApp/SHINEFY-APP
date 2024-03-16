@@ -31,6 +31,9 @@ target 'Shinefy' do
   use_frameworks! :linkage => :static
   $RNFirebaseAsStaticFramework = true
 
+  rn_maps_path = '../node_modules/react-native-maps'
+  pod 'react-native-google-maps', :path => rn_maps_path
+
   use_react_native!(
     :path => config[:reactNativePath],
     # Enables Flipper.
@@ -49,6 +52,11 @@ target 'Shinefy' do
 
   post_install do |installer|
     # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
+    installer.aggregate_targets.first.user_project.native_targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['LIBRARY_SEARCH_PATHS'] = ['$(inherited)', '$(SDKROOT)/usr/lib/swift']
+        end
+    end
     react_native_post_install(
       installer,
       config[:reactNativePath],

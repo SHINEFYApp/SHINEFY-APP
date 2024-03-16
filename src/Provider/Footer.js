@@ -9,7 +9,6 @@ import {
   SafeAreaView,
   StatusBar,
   ScrollView,
-  Switch,
   Modal,
   TouchableOpacity,
   Dimensions,

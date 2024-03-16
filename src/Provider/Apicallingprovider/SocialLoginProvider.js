@@ -28,10 +28,7 @@ global.navigatefunction = '';
 class SocialLoginProvider extends Component {
   constructor(props) {
     super(props);
-    GoogleSignin.configure({
-      webClientId:
-        '927978144846-isqro8n34ick9casun5orghj6i5ag7t1.apps.googleusercontent.com',
-    });
+    GoogleSignin.configure();
   }
 
   goHomePage = navigation => {
@@ -122,9 +119,9 @@ class SocialLoginProvider extends Component {
   GoogleLogin = async navigation => {
     //Prompts a modal to let the user sign in into your application.
     try {
-      await GoogleSignin.hasPlayServices({
-        showPlayServicesUpdateDialog: true,
-      });
+      console.log('test 1111');
+      await GoogleSignin.hasPlayServices();
+      console.log('test 2111');
       const userInfo = await GoogleSignin.signIn();
       consolepro.consolelog('User Info --> ', userInfo);
       var result = {
@@ -139,8 +136,7 @@ class SocialLoginProvider extends Component {
       };
       this.callsocailweb(result, navigation);
     } catch (error) {
-      // alert('Message'+error.message)
-      consolepro.consolelog('Message2', error);
+      console.log('Message', error.message);
 
       consolepro.consolelog('Message2', error.message);
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {

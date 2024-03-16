@@ -62,7 +62,8 @@ export default class Cameragallery extends Component {
                   borderBottomColor: '#D0D7DE',
                   borderBottomWidth: StyleSheet.hairlineWidth,
                   marginTop: 10,
-                }}></View>
+                }}
+              />
               <TouchableOpacity
                 //   onPress={()=>{this.props.Camerapopen()}}>
                 onPress={() => {
@@ -86,7 +87,8 @@ export default class Cameragallery extends Component {
                   borderBottomColor: '#D0D7DE',
                   borderBottomWidth: StyleSheet.hairlineWidth,
                   marginTop: 10,
-                }}></View>
+                }}
+              />
 
               <TouchableOpacity
                 //  onPress={() => {this.props.Galleryopen()}

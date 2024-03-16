@@ -14,6 +14,26 @@
 		5460651E97F06FB9860C8FA0 /* Pods_Shinefy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8FC223BEAE4E59074C018F8 /* Pods_Shinefy.framework */; };
 		7AEBE78380835078E26ED644 /* Pods_Shinefy_ShinefyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD6670C4D11B6311F352A597 /* Pods_Shinefy_ShinefyTests.framework */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		D982532D2BA47F3700471665 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = D982532C2BA47F3700471665 /* File.swift */; };
+		D99AA6FF2BA32CDF0034CC82 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D99AA6EB2BA32CDF0034CC82 /* AntDesign.ttf */; };
+		D99AA7002BA32CDF0034CC82 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D99AA6EC2BA32CDF0034CC82 /* Entypo.ttf */; };
+		D99AA7012BA32CDF0034CC82 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D99AA6ED2BA32CDF0034CC82 /* EvilIcons.ttf */; };
+		D99AA7022BA32CDF0034CC82 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D99AA6EE2BA32CDF0034CC82 /* Feather.ttf */; };
+		D99AA7032BA32CDF0034CC82 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D99AA6EF2BA32CDF0034CC82 /* FontAwesome.ttf */; };
+		D99AA7042BA32CDF0034CC82 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D99AA6F02BA32CDF0034CC82 /* FontAwesome5_Brands.ttf */; };
+		D99AA7052BA32CDF0034CC82 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D99AA6F12BA32CDF0034CC82 /* FontAwesome5_Regular.ttf */; };
+		D99AA7062BA32CDF0034CC82 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D99AA6F22BA32CDF0034CC82 /* FontAwesome5_Solid.ttf */; };
+		D99AA7072BA32CDF0034CC82 /* FontAwesome6_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D99AA6F32BA32CDF0034CC82 /* FontAwesome6_Brands.ttf */; };
+		D99AA7082BA32CDF0034CC82 /* FontAwesome6_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D99AA6F42BA32CDF0034CC82 /* FontAwesome6_Regular.ttf */; };
+		D99AA7092BA32CDF0034CC82 /* FontAwesome6_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D99AA6F52BA32CDF0034CC82 /* FontAwesome6_Solid.ttf */; };
+		D99AA70A2BA32CDF0034CC82 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D99AA6F62BA32CDF0034CC82 /* Fontisto.ttf */; };
+		D99AA70B2BA32CDF0034CC82 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D99AA6F72BA32CDF0034CC82 /* Foundation.ttf */; };
+		D99AA70C2BA32CDF0034CC82 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D99AA6F82BA32CDF0034CC82 /* Ionicons.ttf */; };
+		D99AA70D2BA32CDF0034CC82 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D99AA6F92BA32CDF0034CC82 /* MaterialCommunityIcons.ttf */; };
+		D99AA70E2BA32CDF0034CC82 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D99AA6FA2BA32CDF0034CC82 /* MaterialIcons.ttf */; };
+		D99AA70F2BA32CDF0034CC82 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D99AA6FB2BA32CDF0034CC82 /* Octicons.ttf */; };
+		D99AA7102BA32CDF0034CC82 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D99AA6FC2BA32CDF0034CC82 /* SimpleLineIcons.ttf */; };
+		D99AA7112BA32CDF0034CC82 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D99AA6FD2BA32CDF0034CC82 /* Zocial.ttf */; };
 		D9C52B822B9DA3D3000F05A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D9C52B812B9DA3D3000F05A8 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +64,27 @@
 		89C6BE57DB24E9ADA2F236DE /* Pods-Shinefy-ShinefyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shinefy-ShinefyTests.release.xcconfig"; path = "Target Support Files/Pods-Shinefy-ShinefyTests/Pods-Shinefy-ShinefyTests.release.xcconfig"; sourceTree = "<group>"; };
 		A8FC223BEAE4E59074C018F8 /* Pods_Shinefy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shinefy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD6670C4D11B6311F352A597 /* Pods_Shinefy_ShinefyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shinefy_ShinefyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D982532B2BA47F3600471665 /* Shinefy-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Shinefy-Bridging-Header.h"; sourceTree = "<group>"; };
+		D982532C2BA47F3700471665 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		D99AA6EB2BA32CDF0034CC82 /* AntDesign.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AntDesign.ttf; sourceTree = "<group>"; };
+		D99AA6EC2BA32CDF0034CC82 /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
+		D99AA6ED2BA32CDF0034CC82 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
+		D99AA6EE2BA32CDF0034CC82 /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feather.ttf; sourceTree = "<group>"; };
+		D99AA6EF2BA32CDF0034CC82 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		D99AA6F02BA32CDF0034CC82 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Brands.ttf; sourceTree = "<group>"; };
+		D99AA6F12BA32CDF0034CC82 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Regular.ttf; sourceTree = "<group>"; };
+		D99AA6F22BA32CDF0034CC82 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Solid.ttf; sourceTree = "<group>"; };
+		D99AA6F32BA32CDF0034CC82 /* FontAwesome6_Brands.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome6_Brands.ttf; sourceTree = "<group>"; };
+		D99AA6F42BA32CDF0034CC82 /* FontAwesome6_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome6_Regular.ttf; sourceTree = "<group>"; };
+		D99AA6F52BA32CDF0034CC82 /* FontAwesome6_Solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome6_Solid.ttf; sourceTree = "<group>"; };
+		D99AA6F62BA32CDF0034CC82 /* Fontisto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fontisto.ttf; sourceTree = "<group>"; };
+		D99AA6F72BA32CDF0034CC82 /* Foundation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Foundation.ttf; sourceTree = "<group>"; };
+		D99AA6F82BA32CDF0034CC82 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
+		D99AA6F92BA32CDF0034CC82 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
+		D99AA6FA2BA32CDF0034CC82 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
+		D99AA6FB2BA32CDF0034CC82 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
+		D99AA6FC2BA32CDF0034CC82 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
+		D99AA6FD2BA32CDF0034CC82 /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
 		D9C52B812B9DA3D3000F05A8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D9C96F632B9CCBB2006C2A04 /* Shinefy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Shinefy.entitlements; path = Shinefy/Shinefy.entitlements; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -89,6 +130,7 @@
 		13B07FAE1A68108700A75B9A /* Shinefy */ = {
 			isa = PBXGroup;
 			children = (
+				D99AA6FE2BA32CDF0034CC82 /* Fonts */,
 				D9C52B812B9DA3D3000F05A8 /* GoogleService-Info.plist */,
 				D9C96F632B9CCBB2006C2A04 /* Shinefy.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -97,6 +139,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				D982532C2BA47F3700471665 /* File.swift */,
+				D982532B2BA47F3600471665 /* Shinefy-Bridging-Header.h */,
 			);
 			name = Shinefy;
 			sourceTree = "<group>";
@@ -151,6 +195,33 @@
 				89C6BE57DB24E9ADA2F236DE /* Pods-Shinefy-ShinefyTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		D99AA6FE2BA32CDF0034CC82 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				D99AA6EB2BA32CDF0034CC82 /* AntDesign.ttf */,
+				D99AA6EC2BA32CDF0034CC82 /* Entypo.ttf */,
+				D99AA6ED2BA32CDF0034CC82 /* EvilIcons.ttf */,
+				D99AA6EE2BA32CDF0034CC82 /* Feather.ttf */,
+				D99AA6EF2BA32CDF0034CC82 /* FontAwesome.ttf */,
+				D99AA6F02BA32CDF0034CC82 /* FontAwesome5_Brands.ttf */,
+				D99AA6F12BA32CDF0034CC82 /* FontAwesome5_Regular.ttf */,
+				D99AA6F22BA32CDF0034CC82 /* FontAwesome5_Solid.ttf */,
+				D99AA6F32BA32CDF0034CC82 /* FontAwesome6_Brands.ttf */,
+				D99AA6F42BA32CDF0034CC82 /* FontAwesome6_Regular.ttf */,
+				D99AA6F52BA32CDF0034CC82 /* FontAwesome6_Solid.ttf */,
+				D99AA6F62BA32CDF0034CC82 /* Fontisto.ttf */,
+				D99AA6F72BA32CDF0034CC82 /* Foundation.ttf */,
+				D99AA6F82BA32CDF0034CC82 /* Ionicons.ttf */,
+				D99AA6F92BA32CDF0034CC82 /* MaterialCommunityIcons.ttf */,
+				D99AA6FA2BA32CDF0034CC82 /* MaterialIcons.ttf */,
+				D99AA6FB2BA32CDF0034CC82 /* Octicons.ttf */,
+				D99AA6FC2BA32CDF0034CC82 /* SimpleLineIcons.ttf */,
+				D99AA6FD2BA32CDF0034CC82 /* Zocial.ttf */,
+			);
+			name = Fonts;
+			path = "../node_modules/react-native-vector-icons/Fonts";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,7 +283,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1530;
 					};
 				};
 			};
@@ -248,7 +319,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				D99AA70B2BA32CDF0034CC82 /* Foundation.ttf in Resources */,
+				D99AA7022BA32CDF0034CC82 /* Feather.ttf in Resources */,
+				D99AA7082BA32CDF0034CC82 /* FontAwesome6_Regular.ttf in Resources */,
+				D99AA70E2BA32CDF0034CC82 /* MaterialIcons.ttf in Resources */,
+				D99AA7102BA32CDF0034CC82 /* SimpleLineIcons.ttf in Resources */,
+				D99AA7112BA32CDF0034CC82 /* Zocial.ttf in Resources */,
+				D99AA70C2BA32CDF0034CC82 /* Ionicons.ttf in Resources */,
+				D99AA7052BA32CDF0034CC82 /* FontAwesome5_Regular.ttf in Resources */,
+				D99AA7012BA32CDF0034CC82 /* EvilIcons.ttf in Resources */,
+				D99AA7042BA32CDF0034CC82 /* FontAwesome5_Brands.ttf in Resources */,
+				D99AA7092BA32CDF0034CC82 /* FontAwesome6_Solid.ttf in Resources */,
+				D99AA70F2BA32CDF0034CC82 /* Octicons.ttf in Resources */,
+				D99AA7032BA32CDF0034CC82 /* FontAwesome.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				D99AA6FF2BA32CDF0034CC82 /* AntDesign.ttf in Resources */,
+				D99AA7002BA32CDF0034CC82 /* Entypo.ttf in Resources */,
+				D99AA7062BA32CDF0034CC82 /* FontAwesome5_Solid.ttf in Resources */,
+				D99AA70A2BA32CDF0034CC82 /* Fontisto.ttf in Resources */,
+				D99AA7072BA32CDF0034CC82 /* FontAwesome6_Brands.ttf in Resources */,
+				D99AA70D2BA32CDF0034CC82 /* MaterialCommunityIcons.ttf in Resources */,
 				D9C52B822B9DA3D3000F05A8 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -413,6 +503,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
+				D982532D2BA47F3700471665 /* File.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -432,6 +523,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-Shinefy-ShinefyTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -443,6 +535,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/swift",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -459,6 +555,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-Shinefy-ShinefyTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = ShinefyTests/Info.plist;
@@ -467,6 +564,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/swift",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -494,6 +595,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/swift",
+				);
 				MARKETING_VERSION = 4.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -502,6 +607,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shinefy;
 				PRODUCT_NAME = Shinefy;
+				SWIFT_OBJC_BRIDGING_HEADER = "Shinefy-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -522,6 +628,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/swift",
+				);
 				MARKETING_VERSION = 4.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -530,6 +640,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shinefy;
 				PRODUCT_NAME = Shinefy;
+				SWIFT_OBJC_BRIDGING_HEADER = "Shinefy-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -615,7 +726,10 @@
 					"-DFOLLY_USE_LIBCPP=1",
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 				);
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
@@ -694,7 +808,10 @@
 					"-DFOLLY_USE_LIBCPP=1",
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 				);
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;

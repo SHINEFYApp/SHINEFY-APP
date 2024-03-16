@@ -20,7 +20,6 @@ import {
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Shareratepro} from './Provider/Sharerateapp';
-import {Switch} from 'react-native-switch';
 //import OneSignal from 'react-native-onesignal';
 import {
   Colors,
@@ -299,8 +298,6 @@ export default class Login extends Component {
     consolepro.consolelog('facebookLogin data', data);
     if (data == null) {
       SocialLogin.Socialfunction(this.props.navigation, 'facebook');
-    } else {
-      SocialLogin.socaillogout('facebook', this.props.navigation);
     }
   };
 
@@ -309,8 +306,6 @@ export default class Login extends Component {
     if (data == null) {
       consolepro.consolelog('google login11 data', data);
       SocialLogin.Socialfunction(this.props.navigation, 'google');
-    } else {
-      SocialLogin.socaillogout('google', this.props.navigation);
     }
   };
 
@@ -915,7 +910,7 @@ export default class Login extends Component {
                 }}
               />
             </View> */}
-            {/* {Platform.OS == 'android' && (
+            {Platform.OS == 'android' && (
               <View
                 style={{
                   flexDirection: 'row',
@@ -1029,7 +1024,7 @@ export default class Login extends Component {
                   </TouchableOpacity>
                 )}
               </View>
-            )} */}
+            )}
 
             <View
               style={{

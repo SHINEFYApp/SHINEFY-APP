@@ -16,11 +16,12 @@ import {
   ImageBackground,
   Dimensions,
   Platform,
+  ScrollView,
 } from 'react-native';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {ScrollView} from 'react-native-gesture-handler';
+// import {ScrollView} from 'react-native-keyboard-aware-scroll-view';
+// import {ScrollView} from 'react-native-gesture-handler';
 import {Shareratepro} from './Provider/Sharerateapp';
-import {Switch} from 'react-native-switch';
+import Switch from 'react-native-ui-lib/switch';
 import {
   LoginManager,
   AccessToken,
@@ -460,7 +461,7 @@ export default class Setting extends Component {
             </View>
           </ImageBackground>
           <ScrollView
-            style={{}}
+            style={{flex: 1}}
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}>
             <ImageBackground
@@ -506,19 +507,8 @@ export default class Setting extends Component {
                     onValueChange={txt => {
                       this.notificationStatus(txt);
                     }}
-                    activeText={''}
-                    inActiveText={''}
-                    backgroundActive={Colors.appColor}
-                    backgroundInactive={'#E9E9E9'}
-                    circleActiveColor={Colors.whiteColor}
-                    circleInActiveColor={Colors.whiteColor}
-                    circleSize={17}
-                    barHeight={17}
-                    circleBorderWidth={0.4}
-                    circleBorderActiveColor={Colors.greyColor}
-                    circleBorderInactiveColor={Colors.greyColor}
-                    switchLeftPx={2} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider
-                    switchRightPx={2}
+                    onColor={Colors.appColor}
+                    offColor={Colors.greyColor}
                   />
                 </View>
               </View>
