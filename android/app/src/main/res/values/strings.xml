@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Shinefy</string>
+    <string name="facebook_app_id">250981121434170</string>
+    <string name="facebook_client_token">204ab0ce29c165d4a42461e50ed83fb4</string>
 </resources>
