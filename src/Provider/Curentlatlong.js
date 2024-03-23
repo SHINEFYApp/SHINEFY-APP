@@ -42,11 +42,9 @@ class Currentlatlong {
   };
   getOneTimeLocation = () => {
     return new Promise((resolve, reject) => {
-      consolepro.consolelog('Getting Location ...');
       Geolocation.getCurrentPosition(
         //Will give you the current location
         position => {
-          consolepro.consolelog('You are Here', position);
           global.props.hideLoader();
           resolve(position);;
         },

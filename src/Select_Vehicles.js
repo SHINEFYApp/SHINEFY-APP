@@ -86,8 +86,6 @@ export default class Select_Vehicles extends Component {
   };
 
   setVehicleData = async () => {
-    var location_arr = await localStorage.getItemObject('location_arr');
-    consolepro.consolelog('location_arr', location_arr);
     var user_arr = await localStorage.getItemObject('user_arr');
     let user_id = user_arr.user_id;
     this.setState({user_id: user_id});
@@ -128,7 +126,6 @@ export default class Select_Vehicles extends Component {
               false,
             );
           }
-          consolepro.consolelog('err', err);
         });
     } else {
       this.setState({vehical_arr: user_vehicle_arr, refresh: false});
@@ -136,7 +133,6 @@ export default class Select_Vehicles extends Component {
         .getApi(url, 1)
         .then(obj => {
           if (obj.success == 'true') {
-            consolepro.consolelog('obj', obj);
             localStorage.setItemObject('user_arr', obj.user_details);
             localStorage.setItemObject('user_vehicle_arr', obj.vehicle_arr);
           } else {
@@ -166,7 +162,6 @@ export default class Select_Vehicles extends Component {
               false,
             );
           }
-          consolepro.consolelog('err', err);
         });
     }
   };

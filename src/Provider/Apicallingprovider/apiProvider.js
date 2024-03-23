@@ -30,7 +30,6 @@ class ApiContainer {
               if (response.status === 423) {
                 alert('Must update app version first');
               } else {
-                console.log('responseeeee', response);
                 return response.json();
               }
             })
@@ -73,26 +72,18 @@ class ApiContainer {
           })
             .then(response => {
               global.props.hideLoader();
-              console.log(response);
-              console.log('myjsonfile', response.status);
               if (response.status === 423) {
                 alert('Must update app version first');
               } else {
-                console.log('responseeeee', response);
                 return response.json();
               }
             })
             .then(obj => {
-              console.log('myjsonfile', 'ssssssssss');
-
               global.props.hideLoader();
               resolve(obj);
             })
             .catch(error => {
-              console.log('myjsonfile', 'qqqqqqqqqq');
-
               global.props.hideLoader();
-              console.log('vikas error', error);
               reject(error);
             });
         } else {
@@ -136,7 +127,6 @@ class ApiContainer {
             })
             .catch(error => {
               global.props.hideLoader();
-              console.log('vikas error', error);
               reject(error);
             });
         } else {
@@ -166,12 +156,10 @@ class ApiContainer {
             body: data,
           })
             .then(response => {
-              console.log(response);
               global.props.hideLoader();
               if (response.status === 423) {
                 alert('Must update app version first');
               } else {
-                console.log('responseeeee', response);
                 return response.json();
               }
             })
@@ -181,7 +169,6 @@ class ApiContainer {
             })
             .catch(error => {
               global.props.hideLoader();
-              console.log('vikas error', error);
               reject(error);
             });
         } else {

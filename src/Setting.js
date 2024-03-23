@@ -115,7 +115,6 @@ export default class Setting extends Component {
       .then(obj => {
         if (obj.success == 'true') {
           this.setState({termsarr: obj.content_arr});
-          consolepro.consolelog('content_arr', this.state.termsarr);
         }
       })
       .catch(err => {
@@ -137,11 +136,8 @@ export default class Setting extends Component {
 
   rateApp = () => {
     let url = 'NA';
-    consolepro.consolelog('termnrsara', this.state.termsarr);
-
     if (Platform.OS == 'ios') {
       url = this.state.termsarr[5].all_content[0];
-      consolepro.consolelog('url', url);
       if (url != 'NA') {
         Shareratepro.Rateusfunction(url);
       } else {
@@ -149,18 +145,15 @@ export default class Setting extends Component {
       }
     } else {
       url = this.state.termsarr[4].all_content[0];
-      consolepro.consolelog('url', url);
       Shareratepro.Rateusfunction(url);
     }
   };
 
   shareApp = () => {
-    consolepro.consolelog('iaminhere');
     let url = 'NA';
 
     if (this.state.termsarr[6].all_content[0] != null) {
       url = this.state.termsarr[6].all_content[0];
-      consolepro.consolelog(url);
       Shareratepro.sharefunction('Shinefy', url);
     }
   };
@@ -173,7 +166,6 @@ export default class Setting extends Component {
       'languagesetenglish',
     );
     if (this.state.login_type == 'facebook') {
-      consolepro.consolelog('shubham aa gya bhai facebookm');
       LoginManager.logOut();
       localStorage.clear();
       localStorage.setItemObject('user_arr', null);
@@ -213,7 +205,6 @@ export default class Setting extends Component {
     } else {
       localStorage.clear();
       let user_arr = localStorage.getItemObject('user_arr');
-      consolepro.consolelog('user_arr', user_arr);
       localStorage.setItemObject('language', language);
       localStorage.setItemObject('languagecathc', languagecathc);
       localStorage.setItemObject('languagesetenglish', languagesetenglish);
@@ -223,7 +214,6 @@ export default class Setting extends Component {
 
   notificationStatus = async status => {
     this.setState({notification: status});
-    consolepro.consolelog(this.state.notification);
     var send_status = 0;
     if (this.state.notification == true) {
       send_status = 2;
@@ -239,13 +229,11 @@ export default class Setting extends Component {
       user_id +
       '/' +
       send_status;
-    consolepro.consolelog('url', url);
     apifuntion
       .getApi(url)
       .then(obj => {
         if (obj.success == 'true') {
           var user_arr = obj.user_details;
-          consolepro.consolelog('user_arr', user_arr);
           localStorage.setItemObject('user_arr', user_arr);
           this.setMyProfile();
         } else {

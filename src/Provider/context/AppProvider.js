@@ -25,8 +25,6 @@ export class AppProvider extends Component {
   }
   componentDidMount() {
     const unsubscribe = NetInfo.addEventListener(state => {
-      console.log('Connection type', state.type);
-      console.log('Is connected?', state.isConnected);
       this.setState({isConnected: state.isConnected});
       if (state.isConnected == false) {
         this.checkconnection();

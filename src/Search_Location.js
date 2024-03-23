@@ -87,7 +87,6 @@ export default class Search_Location extends Component {
     apifuntion
       .getApi(url, 1)
       .then(obj => {
-        console.log(obj);
         if (obj.success == 'true') {
           localStorage.setItemObject('user_arr', obj.user_details);
           var data = obj.saved_location_arr;
@@ -122,7 +121,6 @@ export default class Search_Location extends Component {
           //     false,
           //   );
         }
-        consolepro.consolelog('err', err);
       });
   };
 
@@ -138,13 +136,11 @@ export default class Search_Location extends Component {
       item.longitude +
       '/' +
       user_id;
-    consolepro.consolelog('uqqqqqrl', url);
 
     apifuntion
       .getApi(url, 1)
       .then(obj => {
         global.props.hideLoader();
-        console.log(obj, 'eeeeeeeffffff');
         if (obj.success == 'true') {
           let data = this.state.location_arr;
           for (let i = 0; i < data.length; i++) {
@@ -175,9 +171,7 @@ export default class Search_Location extends Component {
           return false;
         }
       })
-      .catch(err => {
-        consolepro.consolelog('err', err);
-      });
+      .catch(err => {});
   };
 
   locationCheck = async (item, index) => {

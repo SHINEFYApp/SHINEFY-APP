@@ -82,13 +82,11 @@ export default class Terms_about_policy extends Component {
 
   getContent = async () => {
     var url = config.baseURL + 'get_all_content/' + this.state.user_type;
-    consolepro.consolelog('url', url);
     apifuntion
       .getApi(url)
       .then(obj => {
         if (obj.success == 'true') {
           this.setState({termsarr: obj.content_arr});
-          consolepro.consolelog('content_arr', this.state.termsarr);
         }
       })
       .catch(err => {

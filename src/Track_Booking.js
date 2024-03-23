@@ -98,12 +98,10 @@ export default class Change_password extends Component {
     let user_id = user_arr.user_id;
     let booking_id = this.state.booking_id;
     var url = config.baseURL + 'get_booking/' + user_id + '/' + booking_id;
-    consolepro.consolelog('url', url);
     apifuntion
       .getApi(url)
       .then(obj => {
         if (obj.success == 'true') {
-          consolepro.consolelog('obj', obj);
           localStorage.setItemObject('user_arr', obj.user_details);
           this.setState({
             booking_arr: obj.booking_arr,
@@ -142,7 +140,6 @@ export default class Change_password extends Component {
           );
           return false;
         }
-        consolepro.consolelog('err', err);
       });
   };
 

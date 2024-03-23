@@ -11,11 +11,9 @@ export default class Demomap extends Component {
       latitude: 25.1948475,
       longitude: 55.2682899,
     };;
-    consolepro.consolelog('iaminDemoapp');;
   }
 
   onRegionChange = region => {
-    consolepro.consolelog('region', region);;
     this.setState({
       latitude: 25.1948475,
       longitude: 55.2682899,,

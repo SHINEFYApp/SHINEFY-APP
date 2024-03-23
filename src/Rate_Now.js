@@ -65,7 +65,6 @@ export default class Rate_Now extends Component {
 
   componentDidMount() {
     this.props.navigation.addListener('focus', () => {
-      consolepro.consolelog('statuus', this.state.status);
       this.setServiceBoyData(
         this.props.route.params.service_boy_id,
         this.props.route.params.booking_id,
@@ -91,7 +90,6 @@ export default class Rate_Now extends Component {
       .getApi(url)
       .then(obj => {
         if (obj.success == 'true') {
-          consolepro.consolelog('obj', obj);
           setTimeout(() => {
             this.setState({
               service_boy_arr: obj.service_boy_arr,
@@ -155,17 +153,11 @@ export default class Rate_Now extends Component {
     data.append('work_status', work_status);
     data.append('nature_status', nature_status);
     data.append('rating', rating);
-    consolepro.consolelog('dataAaaaaaaa', data);
-    console.log('dataAaaaaaaa', data);
     let url = config.baseURL + 'user_rating';
-    consolepro.consolelog('url', url);
-    consolepro.consolelog('urldata', data);
     apifuntion
       .postApi(url, data)
       .then(obj => {
-        consolepro.consolelog('obj', obj);
         if (obj.success == 'true') {
-          consolepro.consolelog('shubhamstatusis', status);
           if (obj.notification_arr != 'NA') {
             notification.notification_arr_schedule(obj.notification_arr);
           }

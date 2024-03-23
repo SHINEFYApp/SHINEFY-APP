@@ -45,9 +45,6 @@ export default class Footer extends Component {
   componentDidMount() {}
 
   modalFun = async () => {
-    consolepro.consolelog('pagenameis', this.props.page);
-    // if(this.props.page == 'Home'){
-
     let home_data = await localStorage.getItemObject('user_home_data');
     let vehicle_arr = home_data.vehicle_arr;
     if (vehicle_arr == 'NA') {
@@ -70,8 +67,7 @@ export default class Footer extends Component {
           text: Lang_chg.ok[config.language],
           // onPress: () =>  this.btnPageLoginCall(),
           onPress: () => {
-            consolepro.consolelog('Cancel Pressed'),
-              this.props.navigation.navigate('Add_your_vehicle');
+            this.props.navigation.navigate('Add_your_vehicle');
           },
         },
       ],

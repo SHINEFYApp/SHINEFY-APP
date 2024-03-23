@@ -16,13 +16,6 @@ class NotificationProvider {
   }
 
   notificationfunction(massege, action_json, playerid, title) {
-    consolepro.consolelog('innotif');
-    consolepro.consolelog('player_id', playerid);
-    consolepro.consolelog('action_json', action_json);
-    consolepro.consolelog('massege', massege);
-    consolepro.consolelog('title', title);
-    consolepro.consolelog(massege);
-    consolepro.consolelog(title);
     let contents = {en: massege};
     let data = {action_json: action_json};
     let playerIds = [playerid];
@@ -46,7 +39,6 @@ class NotificationProvider {
       collapse_id: collapse_id,
       // "send_after":time
     };
-    consolepro.consolelog('dataPost', dataPost);
     fetch('https://onesignal.com/api/v1/notifications', {
       method: 'POST',
       headers: {
@@ -62,13 +54,8 @@ class NotificationProvider {
       .then(response => response.json())
       .then(obj => {
         // global.props.hideLoader();
-        consolepro.consolelog('success123', obj);
       })
-      .catch(error => {
-        consolepro.consolelog('error123', error);
-        // global.props.hideLoader();
-        reject(error);
-      });
+      .catch(error => {});
   }
 
   //---------------for schedule notification start ------------//
@@ -97,9 +84,6 @@ class NotificationProvider {
       Authorization:
         'key=AAAA2A_OxE4:APA91bHeV1n1vM62ONqy1w4VvfH0ntmONK6YIFGQdw1hSTK1awNbvQpkiP8rffcg55jV5dVTIM_-kRJ3VGc6PQB5RcWEfvJOggyXaN2vgiQ-UWAMPNPi5V4nX7RPJbqpfaa2BY3OTIaJ',
     });
-    consolepro.consolelog('action_json', action_json);
-    consolepro.consolelog('action_json', massege);
-    consolepro.consolelog('action_json', title);
     var raw = {
       data: action_json,
       notification: {
@@ -119,12 +103,8 @@ class NotificationProvider {
       body: JSON.stringify(raw),
     })
       .then(response => response.text())
-      .then(res => {
-        consolepro.consolelog('notificationsuccess', res);
-      })
-      .catch(err => {
-        consolepro.consolelog('notificationerrr', err);
-      });
+      .then(res => {})
+      .catch(err => {});
   };
 
   //-----------------------------------------------end-------------------------------
@@ -137,9 +117,6 @@ class NotificationProvider {
       Authorization:
         'key=AAAAgvQiwnI:APA91bF-qqeFiMxlqUqlFhlFPAp8iJpFD2KEzTe-VWSGIZ5o-Sb2GfOYUXWK9c9Xe04IWlNDo1HF9huLeE-0L0-FSq_aeSx3K5EIxkfWNy4HLCrEP_FxOlbL-zjlghUSoyb9U94YpZKe',
     });
-    consolepro.consolelog('action_json', action_json);
-    consolepro.consolelog('action_json', massege);
-    consolepro.consolelog('action_json', title);
     var raw = {
       data: action_json,
       notification: {
@@ -159,19 +136,13 @@ class NotificationProvider {
       body: JSON.stringify(raw),
     })
       .then(response => response.text())
-      .then(res => {
-        consolepro.consolelog('notificationsuccess', res);
-      })
-      .catch(err => {
-        consolepro.consolelog('notificationerrr', err);
-      });
+      .then(res => {})
+      .catch(err => {});
   };
 
   //----------------------------------------end--------------------------------------------------
 
   notificationfunctionSchedule(message, jsonData, player_id_arr, title) {
-    consolepro.consolelog('notificationfunctionSchedule');
-
     var collapse_id = jsonData.action_id;
     var dataPost = {
       app_id: config.driveronesignalappid,
@@ -186,7 +157,6 @@ class NotificationProvider {
       collapse_id: collapse_id,
       // "send_after":time
     };
-    consolepro.consolelog('dataPost', dataPost);
     fetch('https://onesignal.com/api/v1/notifications', {
       method: 'POST',
       headers: {
@@ -202,24 +172,15 @@ class NotificationProvider {
       .then(response => response.json())
       .then(obj => {
         // global.props.hideLoader();
-        consolepro.consolelog('success', obj);
       })
       .catch(error => {
-        consolepro.consolelog('error', error);
         // global.props.hideLoader();
-        reject(error);
       });
   }
 
   //---------------for schedule notification end  ------------//
 
   Chatnotificationfunction(massege, action_json, playerid, title) {
-    consolepro.consolelog('player_id122', playerid);
-    consolepro.consolelog('action_json', action_json);
-    consolepro.consolelog('massege', massege);
-    consolepro.consolelog('title', title);
-    consolepro.consolelog(massege);
-    consolepro.consolelog(title);
     let contents = {en: massege};
     let data = {action_json: action_json};
     let playerIds = [playerid];
@@ -232,7 +193,6 @@ class NotificationProvider {
   }
   /////////notification using rest api
   oneSignalNotificationSendDriver(message, jsonData, player_id_arr, title) {
-    consolepro.consolelog('oneSignalNotificationSendDriver');
     var collapse_id = jsonData.action_id;
     var dataPost = {
       app_id: config.driveronesignalappid,
@@ -246,7 +206,6 @@ class NotificationProvider {
       priority: 10,
       collapse_id: collapse_id,
     };
-    consolepro.consolelog('dataPost', dataPost);
     fetch('https://onesignal.com/api/v1/notifications', {
       method: 'POST',
       headers: {
@@ -262,10 +221,8 @@ class NotificationProvider {
       .then(response => response.json())
       .then(obj => {
         // global.props.hideLoader();
-        consolepro.consolelog('success', obj);
       })
       .catch(error => {
-        consolepro.consolelog('error', error);
         // global.props.hideLoader();
         reject(error);
       });

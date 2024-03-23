@@ -68,8 +68,6 @@ export default class Reason_message extends Component {
 
   componentDidMount() {
     this.props.navigation.addListener('focus', () => {
-      consolepro.consolelog('wlecomeshubham');
-      consolepro.consolelog('pagestatus', this.state.page_status);
       this.getUserId();
     });
     this._willBlurSubscription = this.props.navigation.addListener(
@@ -159,7 +157,6 @@ export default class Reason_message extends Component {
     } else {
       localStorage.clear();
       let user_arr = localStorage.getItemObject('user_arr');
-      consolepro.consolelog('user_arr', user_arr);
       localStorage.setItemObject('language', language);
       localStorage.setItemObject('languagecathc', languagecathc);
       localStorage.setItemObject('languagesetenglish', languagesetenglish);
@@ -171,12 +168,10 @@ export default class Reason_message extends Component {
     let user_arr = await localStorage.getItemObject('user_arr');
     this.setState({login_type: user_arr.login_type});
     let user_id = user_arr.user_id;
-    consolepro.consolelog('user_id', user_id);
     var data = new FormData();
     data.append('user_id', user_id);
     data.append('message', this.state.message);
     data.append('user_type', user_arr.user_type);
-    consolepro.consolelog('data', data);
     let url = config.baseURL + 'delete_account';
     apifuntion
       .postApi(url, data)
@@ -208,7 +203,6 @@ export default class Reason_message extends Component {
             false,
           );
         }
-        consolepro.consolelog('err', err);
       });
   };
 
@@ -220,12 +214,10 @@ export default class Reason_message extends Component {
     data.append('booking_id', booking_id);
     data.append('message', message);
     data.append('status', page_status);
-    consolepro.consolelog('data', data);
     let url = config.baseURL + 'cancel_booking';
     apifuntion
       .postApi(url, data)
       .then(obj => {
-        consolepro.consolelog('obj', obj);
         if (obj.success == 'true') {
           if (page_status == 3) {
             localStorage.removeItem('user_all_bookings');
@@ -262,7 +254,6 @@ export default class Reason_message extends Component {
       })
       .catch(err => {
         this.setState({loading: false});
-        consolepro.consolelog('err', err);
         if (err == 'noNetwork') {
           msgProvider.alert(
             Lang_chg.msgTitleNoNetwork[config.language],

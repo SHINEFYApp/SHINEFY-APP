@@ -28,8 +28,6 @@ class Validation_provider {
   // ________________________________ end validation___________________________________________
 
   usernotallow_validation(props, pagename) {
-    console.log('navigation', props);
-    console.log('navigation', props.navigation);
     Alert.alert(
       msgTitle.information[config.language],
       msgTitle.account_deactivate_title[config.language],

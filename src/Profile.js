@@ -86,14 +86,11 @@ export default class Profile extends Component {
   getProfile = async () => {
     this.setState({loadingProfile: true});
     let userdata = await localStorage.getItemObject('user_arr');
-    consolepro.consolelog('user_id', userdata.user_id);
     let url = config.baseURL + 'get_profile?user_id=' + userdata.user_id;
-    consolepro.consolelog('url', url);
     apifuntion
       .getApi(url, 1)
       .then(obj => {
         this.setState({loadingProfile: false});
-        consolepro.consolelog('obj', obj);
         if (obj.success == 'true') {
           let user_arr = obj.user_details;
           this.setState({
@@ -111,7 +108,6 @@ export default class Profile extends Component {
       .catch(error => {
         this.setState({loadingProfile: true});
         this.setProfile();
-        consolepro.consolelog('-------- error ------- ' + error);
       });
   };
 
@@ -186,9 +182,6 @@ export default class Profile extends Component {
   };
 
   checkLocation = async () => {
-    consolepro.consolelog('iaminchecklocation');
-    consolepro.consolelog('global.latitude', global.latitude);
-    consolepro.consolelog('global.longitude', global.longitude);
     let userdata = await localStorage.getItemObject('user_arr');
     var url =
       config.baseURL +
@@ -198,7 +191,6 @@ export default class Profile extends Component {
       global.longitude +
       '/' +
       userdata.user_id;
-    consolepro.consolelog('url', url);
     apifuntion
       .getApi(url)
       .then(obj => {
@@ -237,7 +229,6 @@ export default class Profile extends Component {
           );
           return false;
         }
-        consolepro.consolelog('err', err);
       });
   };
 

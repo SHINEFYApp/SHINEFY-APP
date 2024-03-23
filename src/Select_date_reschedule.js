@@ -232,12 +232,10 @@ export default class Select_date_reschedule extends Component {
       reschedule_arr.user_id +
       '/' +
       reschedule_arr.amount;
-    consolepro.consolelog('url', url);
     apifuntion
       .getApi(url, page)
       .then(obj => {
         if (obj.success == 'true') {
-          consolepro.consolelog('obj_data', obj);
           let data = obj.slots_arr;
           this.setState({
             slots_arr: data,
@@ -311,12 +309,10 @@ export default class Select_date_reschedule extends Component {
             false,
           );
         }
-        consolepro.consolelog('err', err);
       });
   };
 
   dateChange = date => {
-    consolepro.consolelog('date', date);
     const monthNames = [
       'Jan',
       'Feb',
@@ -336,7 +332,6 @@ export default class Select_date_reschedule extends Component {
     var getMonth = selected_date_arr.getMonth() + 1;
     var getYear = selected_date_arr.getFullYear();
     var start_date_time_2 = getYear + '-' + getMonth + '-' + getDate;
-    consolepro.consolelog('start_date_time_2', start_date_time_2);
     this.setState({date: start_date_time_2});
     localStorage.removeItem('all_slots');
     localStorage.removeItem('booking_time_slots');
@@ -345,20 +340,17 @@ export default class Select_date_reschedule extends Component {
 
   getmaxdate = () => {
     var getDate = new Date();
-    consolepro.consolelog('getDate', getDate);
     getDate.setTime(getDate.valueOf() + 2 * 24 * 60 * 60 * 1000);
     var today_date = getDate.getDate();
     var getMonth = getDate.getMonth() + 1;
     var getYear = getDate.getFullYear();
     let newDate = getYear + ',' + getMonth + ',' + today_date;
-    consolepro.consolelog('newDate', newDate);
 
     return newDate;
   };
 
   navigationFun = async () => {
     let {today_slots} = this.state;
-    consolepro.consolelog('today_slots', today_slots);
     if (today_slots == 'NA') {
       this.setState({
         booking_day: Lang_chg.today_txt,
@@ -416,15 +408,11 @@ export default class Select_date_reschedule extends Component {
       data.append('area_id', area_id);
       data.append('service_time', reschedule_arr.service_time);
       data.append('service_boy_id', service_boy_id);
-      consolepro.consolelog('data', data);
       let url = config.baseURL + 'reschedule_booking';
-      consolepro.consolelog('url', url);
       apifuntion
         .postApi(url, data)
         .then(obj => {
-          consolepro.consolelog('obj', obj);
           if (obj.success == 'true') {
-            consolepro.consolelog('booking_id', obj.booking_id);
             localStorage.removeItem('reschedule_arr');
             localStorage.removeItem('user_all_bookings');
             this.props.navigation.navigate('Success', {success_status: 1});
@@ -451,7 +439,6 @@ export default class Select_date_reschedule extends Component {
         })
         .catch(err => {
           this.setState({loading: false});
-          consolepro.consolelog('err', err);
           if (err == 'noNetwork') {
             msgProvider.alert(
               Lang_chg.msgTitleNoNetwork[config.language],

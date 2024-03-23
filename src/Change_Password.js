@@ -158,7 +158,6 @@ export default class Change_password extends Component {
     }
 
     var user_arr = await localStorage.getItemObject('user_arr');
-    consolepro.consolelog('user_arr', user_arr);
     var user_id = user_arr.user_id;
     var data = new FormData();
     data.append('old_password', old_password);
@@ -170,7 +169,6 @@ export default class Change_password extends Component {
       .postApi(url, data)
       .then(obj => {
         if (obj.success == 'true') {
-          consolepro.consolelog('obj', obj);
           var user_arr = obj.user_details;
           localStorage.setItemObject('user_arr', obj.user_details);
           localStorage.setItemString('password', new_password);
@@ -201,7 +199,6 @@ export default class Change_password extends Component {
       })
       .catch(err => {
         this.setState({loading: false});
-        consolepro.consolelog('err', err);
         if (err == 'noNetwork') {
           msgProvider.alert(
             Lang_chg.msgTitleNoNetwork[config.language],

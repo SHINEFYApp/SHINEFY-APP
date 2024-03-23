@@ -85,9 +85,7 @@ export default class Login extends Component {
     );
   }
   SetLang = async () => {
-    consolepro.consolelog('I am in set language');
     let language = await localStorage.getItemObject('language');
-    consolepro.consolelog('language', language);
     if (language == null) {
       config.language = 0;
       localStorage.setItemObject('language', 0);
@@ -116,7 +114,6 @@ export default class Login extends Component {
   };
 
   onIds(device) {
-    consolepro.consolelog('Device info: ', device);
     this.setState({
       player_id: device.userId,
     });
@@ -129,14 +126,13 @@ export default class Login extends Component {
   };
 
   language_change = value => {
-    consolepro.consolelog('value', value);
     Alert.alert(
       Lang_chg.language_change[config.language],
       Lang_chg.Lang_change_msg[config.language],
       [
         {
           text: Lang_chg.no_txt[config.language],
-          onPress: () => consolepro.consolelog('Cancel Pressed'),
+          onPress: () => {},
           tyle: 'Yes',
         },
         {
@@ -154,8 +150,6 @@ export default class Login extends Component {
   };
 
   launguage_setbtn = language => {
-    consolepro.consolelog('Welcome');
-    consolepro.consolelog('langueageshc', language);
     Lang_chg.language_set(language);
   };
 
@@ -211,7 +205,6 @@ export default class Login extends Component {
     data.append('device_type', device_type);
     data.append('login_type', login_type);
     data.append('user_type', user_type);
-    consolepro.consolelog('data', data);
     let url = config.baseURL + 'Login';
     apifuntion
       .postApi(url, data)
@@ -230,7 +223,6 @@ export default class Login extends Component {
             user_type: user_type,
           };
           localStorage.setItemObject('user_arr', user_arr);
-          console.log('uuuuuuuuu', user_arr);
           localStorage.setItemObject('user_value', user_value);
           localStorage.setItemObject('user_pass', password);
 
@@ -274,7 +266,6 @@ export default class Login extends Component {
       })
       .catch(err => {
         this.setState({loading: false});
-        consolepro.consolelog('err', err);
         if (err == 'noNetwork') {
           msgProvider.alert(
             Lang_chg.msgTitleNoNetwork[config.language],
@@ -295,7 +286,6 @@ export default class Login extends Component {
 
   facebookLogin = async () => {
     let data = await localStorage.getItemObject('socialdata');
-    consolepro.consolelog('facebookLogin data', data);
     if (data == null) {
       SocialLogin.Socialfunction(this.props.navigation, 'facebook');
     }
@@ -304,7 +294,6 @@ export default class Login extends Component {
   googleLogin = async () => {
     let data = await localStorage.getItemObject('socialdata');
     if (data == null) {
-      consolepro.consolelog('google login11 data', data);
       SocialLogin.Socialfunction(this.props.navigation, 'google');
     }
   };

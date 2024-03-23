@@ -71,7 +71,7 @@ export default class Bookings_Details extends Component {
       [
         {
           text: Lang_chg.no_txt[config.language],
-          onPress: () => consolepro.consolelog('Cancel Pressed'),
+          onPress: () => {},
           style: 'Yes',
         },
         {
@@ -146,12 +146,10 @@ export default class Bookings_Details extends Component {
     let user_id = user_arr.user_id;
     let booking_id = this.state.booking_id;
     var url = config.baseURL + 'get_booking/' + user_id + '/' + booking_id;
-    console.log('url', url);
     apifuntion
       .getApi(url)
       .then(obj => {
         if (obj.success == 'true') {
-          consolepro.consolelog('obj', obj);
           localStorage.setItemObject('user_arr', obj.user_details);
           this.setState({
             booking_arr: obj.booking_arr,
@@ -159,7 +157,6 @@ export default class Bookings_Details extends Component {
             user_image: obj.user_details.image,
             user_id: obj.user_details.user_id,
           });
-          consolepro.consolelog('bookingarr', this.state.booking_arr);
         } else {
           if (obj.account_active_status[0] == 'deactivate') {
             config.checkUserDeactivate(this.props.navigation);
@@ -189,18 +186,15 @@ export default class Bookings_Details extends Component {
           );
           return false;
         }
-        consolepro.consolelog('err', err);
       });
   };
 
   freeDriver = async () => {
     let booking_id = this.state.booking_id;
     var url = config.baseURL + 'update_booking_driver/' + booking_id;
-    consolepro.consolelog('url', url);
     apifuntion
       .getApi(url)
       .then(obj => {
-        consolepro.consolelog('obj', obj);
         if (obj.success == 'true') {
           this.rescheduleFun();
         } else {
@@ -232,7 +226,6 @@ export default class Bookings_Details extends Component {
           );
           return false;
         }
-        consolepro.consolelog('err', err);
       });
   };
 

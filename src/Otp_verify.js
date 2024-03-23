@@ -96,7 +96,6 @@ export default class Otp_verify extends Component {
   setOTP = async () => {
     let user_value = await localStorage.getItemObject('user_value');
     this.setText(user_value.otp);
-    consolepro.consolelog('user_value', user_value);
     this.setState({
       phone_number: user_value.phone_number,
       user_id: user_value.user_id,
@@ -124,12 +123,10 @@ export default class Otp_verify extends Component {
     data.append('player_id', global.player_id_me1);
     // data.append("player_id", player_id_me1)
     data.append('status', check);
-    consolepro.consolelog('data', data);
     var url = config.baseURL + 'otp_verify';
     apifuntion
       .postApi(url, data)
       .then(obj => {
-        consolepro.consolelog('obj', obj);
         if (obj.success == 'true') {
           if (check == 1) {
             if (obj.notification_arr != 'NA') {
@@ -182,7 +179,6 @@ export default class Otp_verify extends Component {
     let {check} = this.state;
     let user_value = await localStorage.getItemObject('user_value');
     var url = config.baseURL + 'resend_otp/' + user_value.user_id + '/' + check;
-    consolepro.consolelog('url', url);
     apifuntion
       .getApi(url)
       .then(obj => {

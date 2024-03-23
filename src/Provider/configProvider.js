@@ -64,7 +64,6 @@ class configProvider {
   };
 
   checkUserDeactivate = async navigation => {
-    console.log('hii');
     // msgProvider.toast('Your account deactivated by admin', 'long')
     setTimeout(() => {
       this.AppLogout(navigation);
@@ -87,18 +86,11 @@ class configProvider {
     return false;
   };
   AppLogout = async navigation => {
-    console.log('AppLogout');
-    //----------------------- if get user login type -------------
     var userdata = await localStorage.getItemObject('user_arr');
-    console.log('user_arr', userdata);
     var password = await localStorage.getItemString('password');
     var email = await localStorage.getItemString('email');
     var remember_me = await localStorage.getItemString('remember_me');
     var language = await localStorage.getItemString('language');
-    console.log(password);
-    console.log(email);
-    console.log(remember_me);
-    console.log(language);
 
     if (userdata != null) {
       if (userdata.login_type == 'app') {
@@ -115,12 +107,10 @@ class configProvider {
         }
         navigation.navigate('Login');
       } else if (userdata.login_type == 1) {
-        console.log('face boook login');
         LoginManager.logOut();
         localStorage.clear();
         navigation.navigate('Login');
       } else if (userdata.login_type == 2) {
-        console.log('google login');
         try {
           await GoogleSignin.revokeAccess();
           await GoogleSignin.signOut();
@@ -130,10 +120,8 @@ class configProvider {
         localStorage.clear();
         navigation.navigate('Login');
       } else if (userdata.login_type == 5) {
-        console.log('face boook login');
       }
     } else {
-      console.log('user arr not found');
     }
   };
 }

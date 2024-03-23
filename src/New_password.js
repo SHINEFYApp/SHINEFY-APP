@@ -131,7 +131,6 @@ export default class Change_password extends Component {
     var data = new FormData();
     data.append('new_password', new_password);
     data.append('user_id', user_id);
-    consolepro.consolelog('data', data);
     let url = config.baseURL + 'set_fogot_password';
     apifuntion
       .postApi(url, data)
@@ -145,7 +144,6 @@ export default class Change_password extends Component {
         }
       })
       .catch(err => {
-        consolepro.consolelog('err', err);
         if (err == 'noNetwork') {
           msgProvider.alert(
             Lang_chg.msgTitleNoNetwork[config.language],

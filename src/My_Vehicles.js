@@ -155,13 +155,10 @@ export default class My_Vehicles extends Component {
     var user_vehicle_arr = await localStorage.getItemObject(
       'saved_vehicle_arr',
     );
-    consolepro.consolelog('uservehiclearr', user_vehicle_arr);
-    consolepro.consolelog('url', url);
     if (user_vehicle_arr == null) {
       apifuntion
         .getApi(url)
         .then(obj => {
-          consolepro.consolelog('obj', obj);
           if (obj.success == 'true') {
             localStorage.setItemObject('user_arr', obj.user_details);
             localStorage.setItemObject('saved_vehicle_arr', obj.vehicle_arr);
@@ -202,7 +199,6 @@ export default class My_Vehicles extends Component {
       apifuntion
         .getApi(url, 1)
         .then(obj => {
-          consolepro.consolelog('obj', obj);
           if (obj.success == 'true') {
             localStorage.setItemObject('user_arr', obj.user_details);
             localStorage.setItemObject('saved_vehicle_arr', obj.vehicle_arr);
@@ -299,9 +295,6 @@ export default class My_Vehicles extends Component {
   };
 
   checkLocation = async () => {
-    consolepro.consolelog('iaminchecklocation');
-    consolepro.consolelog('global.latitude', global.latitude);
-    consolepro.consolelog('global.longitude', global.longitude);
     let userdata = await localStorage.getItemObject('user_arr');
     var url =
       config.baseURL +
@@ -311,7 +304,6 @@ export default class My_Vehicles extends Component {
       global.longitude +
       '/' +
       userdata.user_id;
-    consolepro.consolelog('url', url);
     apifuntion
       .getApi(url)
       .then(obj => {
@@ -352,7 +344,6 @@ export default class My_Vehicles extends Component {
           );
           return false;
         }
-        consolepro.consolelog('err', err);
       });
   };
 

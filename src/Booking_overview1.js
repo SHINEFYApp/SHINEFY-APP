@@ -130,13 +130,8 @@ export default class Booking_overview1 extends Component {
       this.state.wallet_amount = this.state.new_grand_total_amount;
     }
     var mytotal = parseFloat(this.state.new_grand_total_amount);
-    consolepro.consolelog('mytotal', mytotal);
-    consolepro.consolelog('mywalllet', amount);
-
     if (mytotal <= amount) {
       this.setState({netpay: 0, redemwallet: mytotal});
-      consolepro.consolelog('netpay123', this.state.netpay);
-      consolepro.consolelog('redemwallet', this.state.redemwallet);
     } else {
       // total_pay=total-wallet ;
       this.setState({
@@ -144,26 +139,16 @@ export default class Booking_overview1 extends Component {
         redemwallet: amount,
         new_grand_total_amount: mytotal,
       });
-
-      setTimeout(() => {
-        consolepro.consolelog(
-          'new_grand_total_amount1344',
-          this.state.new_grand_total_amount,
-        );
-      }, 3000);
     }
   };
 
   getWalletamount = async () => {
     let userdata = await localStorage.getItemObject('user_arr');
     this.setState({userdata: userdata});
-    console.log('user_id', userdata.user_id);
     let url = config.baseURL + 'get_user_wallet/' + userdata.user_id;
-    console.log('urlllllllll', url);
     apifuntion
       .getApi(url, 1)
       .then(obj => {
-        consolepro.consolelog('oqqqqqqqqqqqbj', obj);
         if (obj.success == 'true') {
           if (obj.canUseWallet === true) {
             this.setState({
@@ -195,7 +180,6 @@ export default class Booking_overview1 extends Component {
         }
       })
       .catch(error => {
-        consolepro.consolelog('-------- error ------- ' + error);
         this.setState({loading: false});
       });
   };
@@ -215,11 +199,6 @@ export default class Booking_overview1 extends Component {
     var vat_data = await localStorage.getItemObject('vat_data');
     var slot_data = await localStorage.getItemObject('booking_time_slots');
     var new_grand_total_amount = vat_data.grand_total_amount;
-    consolepro.consolelog('vehicle_data', vehicle_data);
-    consolepro.consolelog('location_data', location_data);
-    consolepro.consolelog('all_service_data', all_service_data);
-    consolepro.consolelog('vat_data', vat_data);
-    consolepro.consolelog('slot_data', slot_data);
     if (discount_arr != null) {
       new_grand_total_amount = discount_arr.new_amount;
     }
@@ -237,24 +216,12 @@ export default class Booking_overview1 extends Component {
       extra_service_amount: extra_service_amount,
       new_grand_total_amount: new_grand_total_amount,
     });
-
-    consolepro.consolelog(
-      'this.state.slot_data.booking_time',
-      this.state.slot_data.booking_time,
-    );
-    consolepro.consolelog(
-      'this.state.slot_data.booking_day',
-      this.state.slot_data.booking_day,
-    );
   };
 
   coupanApply = async () => {
     Keyboard.dismiss();
     let user_arr = await localStorage.getItemObject('user_arr');
     let user_id = user_arr.user_id;
-    console.log(parseFloat(this.state.service_amount));
-    console.log(parseFloat(this.state.extra_service_amount));
-    console.log(parseFloat(this.state.wallet_amount));
     let amount = parseFloat(this.state.service_amount);
     let coupan_code = this.state.coupan_code;
     let vat_amount = this.state.vat_data.amount;
@@ -268,15 +235,11 @@ export default class Booking_overview1 extends Component {
     data.append('amount', amount);
     data.append('coupan_code', coupan_code);
     data.append('vat_amount', vat_amount);
-    consolepro.consolelog('data', data);
     let url = config.baseURL + 'apply_coupan';
-    consolepro.consolelog('urlurl', url);
 
     apifuntion
       .postApi(url, data)
       .then(obj => {
-        console.log('obj', obj);
-        console.log('couponobj', obj);
         if (obj.success == 'true') {
           if (obj.coupan_id == 'NA' && obj.status == false) {
             this.setState({
@@ -341,7 +304,6 @@ export default class Booking_overview1 extends Component {
         }
       })
       .catch(err => {
-        consolepro.consolelog('err', err);
         if (err == 'noNetwork') {
           msgProvider.alert(
             Lang_chg.msgTitleNoNetwork[config.language],
@@ -361,8 +323,6 @@ export default class Booking_overview1 extends Component {
   };
 
   removeDiscount = () => {
-    consolepro.consolelog('netpay', this.state.netpay);
-    consolepro.consolelog('dis_amount', this.state.dis_amount);
     let dis_amount =
       parseFloat(this.state.netpay) + parseFloat(this.state.dis_amount);
     this.setState({
@@ -414,7 +374,6 @@ export default class Booking_overview1 extends Component {
       extra_service_all_id[i] = extra_service_data[i].extra_service_id;
     }
     let extra_id = extra_service_all_id.toString();
-    consolepro.consolelog('extra_service_data', extra_service_all_id);
     var vat_data = await localStorage.getItemObject('vat_data');
     var slot_data = await localStorage.getItemObject('booking_time_slots');
     var discount_arr = await localStorage.getItemObject('discount_arr');
@@ -422,12 +381,6 @@ export default class Booking_overview1 extends Component {
     var user_arr = await localStorage.getItemObject('user_arr');
     this.setState({user_id: user_arr.user_id});
 
-    consolepro.consolelog('vehicle_data', vehicle_data);
-    consolepro.consolelog('location_data', location_data);
-    consolepro.consolelog('all_service_data', all_service_data);
-    consolepro.consolelog('vat_data', vat_data);
-    consolepro.consolelog('slot_data', slot_data);
-    consolepro.consolelog('discount_arr', discount_arr);
     var data = new FormData();
     data.append('user_id', user_arr.user_id);
     data.append('vehicle_id', vehicle_data.vehicle_id);
@@ -454,12 +407,9 @@ export default class Booking_overview1 extends Component {
     data.append('payment_method', this.state.payment_method);
     data.append('wallet_amount', this.state.redemwallet);
     data.append('online_amount', this.state.netpay);
-    console.log('datadatadatadata', data);
     let url = config.baseURL + 'create_booking';
-    console.log('url', url);
 
     this.setState({loading: false});
-    consolepro.consolelog('err', err);
     if (err == 'noNetwork') {
       msgProvider.alert(
         Lang_chg.msgTitleNoNetwork[config.language],

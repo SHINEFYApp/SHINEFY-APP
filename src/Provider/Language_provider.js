@@ -10,16 +10,10 @@ global.language_key = 1;
 class Language_provider {
   language_get = async () => {
     var item = await localStorage.getItemObject('language');
-    consolepro.consolelog('check launguage option', item);
-
-    consolepro.consolelog('is rtl', I18nManager.isRTL);
-    consolepro.consolelog('is rtl config', config.textalign);
 
     if (item != null) {
-      consolepro.consolelog('kya bat h developer', config.language);
       config.language = item;
     }
-    consolepro.consolelog('language_key123', config.language);
     if (item != null) {
       if (item == 0) {
         // I18nManager.forceRTL(false);
@@ -49,8 +43,6 @@ class Language_provider {
   language_set = async languagem => {
     // var item = await AsyncStorage.getItem('language');
     // localStorage.setItemObject('language', 1)
-    consolepro.consolelog('lang 29 ', languagem);
-    consolepro.consolelog('I18nManager.isRTL Developer', I18nManager.isRTL);
     if (languagem == 0) {
       I18nManager.forceRTL(false);
       I18nManager.allowRTL(false);

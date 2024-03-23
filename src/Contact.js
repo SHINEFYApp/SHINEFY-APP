@@ -75,7 +75,6 @@ export default class Contact extends Component {
 
   setMyProfile = async () => {
     var user_arr = await localStorage.getItemObject('user_arr');
-    consolepro.consolelog('userarrr', user_arr);
     var email = '';
     var editable = true;
     if (user_arr.email != 'NA') {
@@ -89,10 +88,6 @@ export default class Contact extends Component {
       phone_number: user_arr.phone_number,
       editable: editable,
     });
-    setTimeout(() => {
-      consolepro.consolelog('shubham', this.state.email);
-      consolepro.consolelog('editable', this.state.editable);
-    }, 300);
   };
 
   _sendBtn = async () => {
@@ -132,12 +127,10 @@ export default class Contact extends Component {
     data.append('user_id', user_id);
     data.append('email', email);
     data.append('message', message);
-    consolepro.consolelog('data', data);
     let url = config.baseURL + 'contact_us';
     apifuntion
       .postApi(url, data)
       .then(obj => {
-        consolepro.consolelog('obj', obj);
         if (obj.success == 'true') {
           setTimeout(() => {
             msgProvider.toast(obj.msg[config.language], 'center');
@@ -168,7 +161,6 @@ export default class Contact extends Component {
           );
           return false;
         }
-        consolepro.consolelog('err', err);
       });
   };
 

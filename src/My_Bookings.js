@@ -58,9 +58,6 @@ export default class My_Bookings extends Component {
   }
   componentDidMount() {
     this.props.navigation.addListener('focus', () => {
-      consolepro.consolelog('iminbooking');
-      consolepro.consolelog('global.latitude', global.latitude);
-      consolepro.consolelog('global.longitude', global.longitude);
       if (this.props.route.params.booking_check != null) {
         this.setState({status_check: this.props.route.params.booking_check});
       }
@@ -87,7 +84,6 @@ export default class My_Bookings extends Component {
       .getApi(url, 1)
       .then(obj => {
         if (obj.success == 'true') {
-          consolepro.consolelog('obj', obj);
           localStorage.setItemObject('user_arr', obj.user_details);
           localStorage.setItemObject('user_all_bookings', obj.booking_arr);
           let data = obj.booking_arr;
@@ -188,9 +184,6 @@ export default class My_Bookings extends Component {
   };
 
   checkLocation = async () => {
-    consolepro.consolelog('iaminchecklocation');
-    consolepro.consolelog('global.latitude', global.latitude);
-    consolepro.consolelog('global.longitude', global.longitude);
     let userdata = await localStorage.getItemObject('user_arr');
     var url =
       config.baseURL +
@@ -200,7 +193,6 @@ export default class My_Bookings extends Component {
       global.longitude +
       '/' +
       userdata.user_id;
-    consolepro.consolelog('url', url);
     apifuntion
       .getApi(url)
       .then(obj => {

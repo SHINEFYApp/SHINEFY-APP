@@ -146,7 +146,6 @@ export default class Edit_Vechicle extends Component {
   getModal = async (id, status) => {
     this.setState({modal_id: 'NA', modal_name: ''});
     var url = config.baseURL + 'get_modal_data/' + id;
-    consolepro.consolelog('get_modal', url);
     apifuntion
       .getApi(url, status)
       .then(obj => {
@@ -176,7 +175,6 @@ export default class Edit_Vechicle extends Component {
           );
           return false;
         }
-        consolepro.consolelog('err', err);
       });
   };
 
@@ -189,7 +187,6 @@ export default class Edit_Vechicle extends Component {
       .getApi(url)
       .then(obj => {
         if (obj.success == 'true') {
-          consolepro.consolelog('all_vehicle_obj', obj);
           localStorage.setItemObject('user_arr', obj.user_details);
           let car_arr = obj.car_arr;
           this.setState({
@@ -230,7 +227,6 @@ export default class Edit_Vechicle extends Component {
           );
           return false;
         }
-        consolepro.consolelog('err', err);
       });
   };
 
@@ -243,7 +239,6 @@ export default class Edit_Vechicle extends Component {
       .getApi(url)
       .then(obj => {
         if (obj.success == 'true') {
-          consolepro.consolelog('obj', obj);
           let vehicle_arr = obj.vehicle_arr;
           this.getModal(vehicle_arr.make_id, 1);
           this.setState({
@@ -295,7 +290,6 @@ export default class Edit_Vechicle extends Component {
           );
           return false;
         }
-        consolepro.consolelog('err', err);
       });
   };
 
@@ -338,12 +332,10 @@ export default class Edit_Vechicle extends Component {
     data.append('color_id', color_id);
     data.append('user_id', user_id);
     data.append('vehicle_id', vehicle_id);
-    consolepro.consolelog('data', data);
     let url = config.baseURL + 'update_vehicle';
     apifuntion
       .postApi(url, data)
       .then(obj => {
-        consolepro.consolelog(obj);
         if (obj.success == 'true') {
           localStorage.removeItem('saved_vehicle_arr');
           localStorage.removeItem('user_home_data');
@@ -382,7 +374,6 @@ export default class Edit_Vechicle extends Component {
           );
           return false;
         }
-        consolepro.consolelog('err', err);
       });
   };
 

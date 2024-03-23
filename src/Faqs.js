@@ -102,7 +102,6 @@ export default class Faqs extends Component {
     let user_arr = await localStorage.getItemObject('user_arr');
     let user_id = user_arr.user_id;
     let url = config.baseURL + 'get_faqs/' + user_type + '/' + user_id;
-    consolepro.consolelog('url', url);
     apifuntion
       .getApi(url)
       .then(obj => {

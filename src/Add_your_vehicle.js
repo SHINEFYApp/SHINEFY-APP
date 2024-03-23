@@ -143,11 +143,9 @@ export default class Add_your_vehicle extends Component {
 
   getModal = async id => {
     var url = config.baseURL + 'get_modal_data/' + id;
-    consolepro.consolelog('get_modal', url);
     apifuntion
       .getApi(url)
       .then(obj => {
-        consolepro.consolelog('modal_obj', obj);
         if (obj.success == 'true') {
           setTimeout(() => {
             this.setState({
@@ -174,7 +172,6 @@ export default class Add_your_vehicle extends Component {
           );
           return false;
         }
-        consolepro.consolelog('err', err);
       });
   };
 
@@ -229,7 +226,6 @@ export default class Add_your_vehicle extends Component {
             );
             return false;
           }
-          consolepro.consolelog('err', err);
         });
     } else {
       this.setState({
@@ -275,7 +271,6 @@ export default class Add_your_vehicle extends Component {
             );
             return false;
           }
-          consolepro.consolelog('err', err);
         });
     }
   };
@@ -398,13 +393,10 @@ export default class Add_your_vehicle extends Component {
     data.append('plate_number', plate_number);
     data.append('color_id', color_id);
     data.append('user_id', user_id);
-    consolepro.consolelog('data', data);
     let url = config.baseURL + 'add_vehicle';
-    consolepro.consolelog('url', url);
     apifuntion
       .postApi(url, data)
       .then(obj => {
-        consolepro.consolelog(obj);
         if (obj.success == 'true') {
           localStorage.removeItem('saved_vehicle_arr');
           localStorage.removeItem('user_home_data');
@@ -459,7 +451,6 @@ export default class Add_your_vehicle extends Component {
           );
           return false;
         }
-        consolepro.consolelog('err', err);
       });
   };
   render() {

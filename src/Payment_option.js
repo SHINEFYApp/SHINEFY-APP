@@ -67,7 +67,6 @@ export default class Payment_option extends Component {
 
   componentDidMount() {
     this.props.navigation.addListener('focus', () => {
-      consolepro.consolelog('lang', this.state.lang_arr);
       this.setState({lang_arr: this.state.lang_arr});
       this.getUserdata();
     });
@@ -99,14 +98,6 @@ export default class Payment_option extends Component {
   };
 
   PaymentMethod = async () => {
-    console.log(
-      config.baseURL2 +
-        'payment_url.php?user_id=' +
-        this.state.user_id +
-        '&amount=' +
-        parseFloat(parseFloat(this.state.netpay)).toFixed(2),
-      'PPPPPPP',
-    );
     if (this.state.payment_method == 0) {
       this.cashBooking();
     } else if (this.state.payment_method == 1 && this.state.netpay == 0) {
@@ -119,7 +110,6 @@ export default class Payment_option extends Component {
   getUserdata = async () => {
     var discount_arr = await localStorage.getItemObject('discount_arr');
     this.setState({bookingPrice: discount_arr.new_amount});
-    consolepro.consolelog('bookingPrice', this.state.bookingPrice);
     var user_arr = await localStorage.getItemObject('user_arr');
     this.setState({user_id: user_arr.user_id});
   };
@@ -128,18 +118,10 @@ export default class Payment_option extends Component {
     webViewState.canGoBack = false;
 
     if (webViewState.loading == false) {
-      consolepro.consolelog('webViewState', webViewState);
-
-      consolepro.consolelog(webViewState.url);
-
       var t = webViewState.url.split('/').pop().split('?')[0];
-
-      consolepro.consolelog('tis', t);
 
       if (typeof t != null) {
         var p = webViewState.url.split('?').pop().split('&');
-
-        consolepro.consolelog('file name', t);
 
         if (t.includes('payment_success')) {
           var payment_id = 0;
@@ -148,11 +130,8 @@ export default class Payment_option extends Component {
 
           var payment_time = '';
 
-          consolepro.consolelog('p.length', p.length);
-
           // for (var i = 0; i < p.length; i++) {
           //   var val = p[i].split('=');
-          //   console.log('val', val);
           //   if (val[0] == 'payment_id') {
           //     payment_id = val[1];
           //   }
@@ -195,7 +174,6 @@ export default class Payment_option extends Component {
       extra_service_all_id[i] = extra_service_data[i].extra_service_id;
     }
     let extra_id = extra_service_all_id.toString();
-    consolepro.consolelog('extra_service_data', extra_service_all_id);
     var vat_data = await localStorage.getItemObject('vat_data');
     var slot_data = await localStorage.getItemObject('booking_time_slots');
     var discount_arr = await localStorage.getItemObject('discount_arr');
@@ -203,19 +181,12 @@ export default class Payment_option extends Component {
     var user_arr = await localStorage.getItemObject('user_arr');
     this.setState({user_id: user_arr.user_id});
 
-    consolepro.consolelog('vehicle_data', vehicle_data);
-    consolepro.consolelog('location_data', location_data);
-    consolepro.consolelog('all_service_data', all_service_data);
-    consolepro.consolelog('vat_data', vat_data);
-    consolepro.consolelog('slot_data', slot_data);
-    consolepro.consolelog('discount_arr', discount_arr);
     var data = new FormData();
     if ((extra_service_data?.length ?? 0) > 0) {
       let qty = extra_service_data[0].extra_serivce_qty ?? 1;
       let totalExtraService =
         Number(extra_service_data[0].extra_serivce_qty ?? 1) *
         Number(extra_service_data[0].extra_service_price ?? '0');
-      console.log('qqqqqqqqq', qty, totalExtraService);
       data.append('extra_services_quantity', qty);
       data.append('extra_services_total_price', totalExtraService);
     }
@@ -244,16 +215,12 @@ export default class Payment_option extends Component {
     data.append('payment_method', this.state.payment_method);
     data.append('wallet_amount', this.state.redemwallet);
     data.append('online_amount', this.state.netpay);
-    console.log('datadatadatadatadata', data);
     let url = config.baseURL + 'create_booking';
-    console.log('url', url);
     apifuntion
       .postApi(url, data)
       .then(obj => {
-        consolepro.consolelog('obj', obj);
         if (obj.success == 'true') {
           localStorage.setItemObject('user_arr', obj.user_details);
-          consolepro.consolelog('booking_number', obj.booking_number);
           localStorage.setItemObject('booking_number', obj.booking_number);
           localStorage.removeItem('booking_vehicle_arr');
           localStorage.removeItem('user_vehicle_arr');
@@ -290,7 +257,7 @@ export default class Payment_option extends Component {
           setTimeout(() => {
             msgProvider.alert(
               Lang_chg.information[config.language],
-              obj.msg[config.language],
+              obj.msg,
               false,
             );
           }, 200);
@@ -307,7 +274,6 @@ export default class Payment_option extends Component {
       })
       .catch(err => {
         this.setState({loading: false});
-        consolepro.consolelog('err', err);
         if (err == 'noNetwork') {
           msgProvider.alert(
             Lang_chg.msgTitleNoNetwork[config.language],

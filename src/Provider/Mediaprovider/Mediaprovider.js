@@ -18,7 +18,6 @@ class mediaProvider {
       .then(async base64Data => {
         var base64Data = 'data:image/png;base64,' + base64Data;
         // here's base64 encoded image
-        console.log('file_url,message1,subject', file_url, message1, subject);
         await Share.open({
           url: base64Data,
           title: message1,

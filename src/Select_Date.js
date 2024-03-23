@@ -84,7 +84,6 @@ export default class Select_Date extends Component {
 
   componentDidMount() {
     this.props.navigation.addListener('focus', () => {
-      consolepro.consolelog('iaminselectdate');
       //     setTimeout( () => {
       //         this.setSlots(0);
       //    },500);
@@ -214,7 +213,6 @@ export default class Select_Date extends Component {
 
   outNaviagteFun = async () => {
     let getStatus = await localStorage.getItemObject('page_status');
-    consolepro.consolelog('hello');
     if (getStatus == 1) {
       this.props.navigation.navigate('Search_Location');
     } else {
@@ -260,13 +258,11 @@ export default class Select_Date extends Component {
       user_id +
       '/' +
       amount;
-    consolepro.consolelog('url', url);
     if (all_slots == null) {
       apifuntion
         .getApi(url, page)
         .then(obj => {
           if (obj.success == 'true') {
-            consolepro.consolelog('obj_data', obj);
             localStorage.setItemObject('all_slots', obj.slots_arr);
             localStorage.setItemObject('user_arr', obj.user_details);
             localStorage.setItemObject('vat_data', obj.vat_data);
@@ -345,7 +341,6 @@ export default class Select_Date extends Component {
               false,
             );
           }
-          consolepro.consolelog('err', err);
         });
     } else {
       if (booking_time_slots != null) {
@@ -439,7 +434,6 @@ export default class Select_Date extends Component {
           .getApi(url, 1)
           .then(obj => {
             if (obj.success == 'true') {
-              consolepro.consolelog('obj_data', obj);
               localStorage.setItemObject('user_arr', obj.user_details);
               localStorage.setItemObject('vat_data', obj.vat_data);
               this.setState({free_status: obj.free_booking});
@@ -479,14 +473,12 @@ export default class Select_Date extends Component {
                 false,
               );
             }
-            consolepro.consolelog('err', err);
           });
       }
     }
   };
 
   dateChange = date => {
-    consolepro.consolelog('date', date);
     const monthNames = [
       'Jan',
       'Feb',
@@ -506,7 +498,6 @@ export default class Select_Date extends Component {
     var getMonth = selected_date_arr.getMonth() + 1;
     var getYear = selected_date_arr.getFullYear();
     var start_date_time_2 = getYear + '-' + getMonth + '-' + getDate;
-    consolepro.consolelog('start_date_time_2', start_date_time_2);
     this.setState({date: start_date_time_2});
     localStorage.removeItem('all_slots');
     localStorage.removeItem('booking_time_slots');
@@ -515,13 +506,11 @@ export default class Select_Date extends Component {
 
   getmaxdate = () => {
     var getDate = new Date();
-    consolepro.consolelog('getDate', getDate);
     getDate.setTime(getDate.valueOf() + 2 * 24 * 60 * 60 * 1000);
     var today_date = getDate.getDate();
     var getMonth = getDate.getMonth() + 1;
     var getYear = getDate.getFullYear();
     let newDate = getYear + ',' + getMonth + ',' + today_date;
-    consolepro.consolelog('newDate', newDate);
 
     return newDate;
   };
@@ -616,7 +605,6 @@ export default class Select_Date extends Component {
     }
   };
   redirectionFun = async () => {
-    consolepro.consolelog('iaminredirect');
     setTimeout(() => {
       let {
         area_id,
@@ -626,8 +614,6 @@ export default class Select_Date extends Component {
         booking_day,
         free_status,
       } = this.state;
-      consolepro.consolelog('bookingtime123', booking_time);
-      consolepro.consolelog('bookingday123', booking_day);
 
       let booking_slot = {
         area_id: area_id,

@@ -92,7 +92,6 @@ export default class Signup extends Component {
     return true;
   };
   onIds(device) {
-    consolepro.consolelog('Device info: ', device);
     this.setState({
       player_id: device.userId,
     });
@@ -101,7 +100,6 @@ export default class Signup extends Component {
 
   getsocialdata = async () => {
     let data = await localStorage.getItemObject('socialdata');
-    consolepro.consolelog('data', data);
     if (data != null) {
       if (data.social_type == 'facebook') {
         if (data.social_email != undefined || data.social_email != null) {
@@ -140,7 +138,6 @@ export default class Signup extends Component {
   };
   googleLogin = async () => {
     let data = await localStorage.getItemObject('socialdata');
-    consolepro.consolelog('googleLogin data', data);
     if (data == null) {
       SocialLogin.Socialfunction(this.props.navigation, 'google');
     } else {
@@ -150,7 +147,6 @@ export default class Signup extends Component {
 
   facebookLogin = async () => {
     let data = await localStorage.getItemObject('socialdata');
-    consolepro.consolelog('facebookLogin data', data);
     if (data == null) {
       SocialLogin.Socialfunction(this.props.navigation, 'facebook');
     } else {
@@ -317,16 +313,12 @@ export default class Signup extends Component {
     } else {
       data.append('password', password);
     }
-    consolepro.consolelog('data', data);
     let url = config.baseURL + 'signup';
-    consolepro.consolelog('url', url);
     apifuntion
       .postApi(url, data)
       .then(obj => {
-        consolepro.consolelog(obj, 'FFFVSVAVA');
         if (obj.success == 'true') {
           localStorage.setItemObject('user_arr', obj.user_details);
-          console.log(JSON.stringify(obj.user_details.user_id), 'fqqqqfffff');
           // if (social_type == 'app') {
           var user_value = {
             user_id: JSON.stringify(obj.user_details.user_id),
@@ -385,7 +377,6 @@ export default class Signup extends Component {
             false,
           );
         }
-        consolepro.consolelog('err', err);
       });
   };
   render() {

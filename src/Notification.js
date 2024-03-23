@@ -91,8 +91,6 @@ export default class Notification extends Component {
     let user_id = user_details.user_id;
     let url = config.baseURL1 + 'get_notification.php?user_id=' + user_id;
 
-    consolepro.consolelog('url', url);
-
     apifuntion
       .getApi(url, page)
       .then(obj => {
@@ -101,7 +99,6 @@ export default class Notification extends Component {
             notification_arr: obj.notification_arr,
             refresh: false,
           });
-          consolepro.consolelog('notification_arr', obj.notification_arr);
         } else {
           if (
             obj.active_status == msgTitle.deactivate[config.language] ||
@@ -118,24 +115,19 @@ export default class Notification extends Component {
           return false;
         }
       })
-      .catch(error => {
-        consolepro.consolelog('-------- error ------- ' + error);
-      });
+      .catch(error => {});
   };
 
   notification_delete_click = async (item, index) => {
     let user_details = await localStorage.getItemObject('user_arr');
     let user_id = user_details.user_id;
     let notification_message_id = item.notification_message_id;
-    consolepro.consolelog('dvdxvd', item.notification_message_id);
     let url =
       config.baseURL1 +
       'delete_single_notification.php?user_id=' +
       user_id +
       '&notification_message_id=' +
       notification_message_id;
-
-    consolepro.consolelog('url', url);
 
     apifuntion
       .getApi(url)
@@ -164,16 +156,13 @@ export default class Notification extends Component {
           return false;
         }
       })
-      .catch(error => {
-        consolepro.consolelog('-------- error ------- ' + error);
-      });
+      .catch(error => {});
   };
   delete_all_notification_click = async (item, index) => {
     let user_details = await localStorage.getItemObject('user_arr');
     let user_id = user_details.user_id;
     let url =
       config.baseURL1 + 'delete_all_notification.php?user_id=' + user_id;
-    consolepro.consolelog('url', url);
     apifuntion
       .getApi(url)
       .then(obj => {
@@ -195,9 +184,7 @@ export default class Notification extends Component {
           return false;
         }
       })
-      .catch(error => {
-        consolepro.consolelog('-------- error ------- ' + error);
-      });
+      .catch(error => {});
   };
 
   data_delete() {

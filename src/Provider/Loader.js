@@ -31,7 +31,6 @@ export default class Loader extends Component {
     };
   }
   render() {
-    console.log('loading status', this.state.status);
     return (
       <Modal
         transparent={true}
@@ -62,14 +61,13 @@ export default class Loader extends Component {
 //   ...attributes
 // } = props;
 //   const Loader = props => {
-//   console.log('lodding',props);
 //   return (
 
 //     <Modal
 //       transparent={true}
 //       animationType={'none'}
 //       visible={props.loading}
-//       onRequestClose={() => {console.log('close modal')}}>
+//       onRequestClose={() => {}}>
 //       <View style={styles.modalBackground}>
 //         <View style={styles.activityIndicatorWrapper}>
 //           <Text style={{color:'black',fontFamily:'bold',fontSize:14}}>Loding..</Text>

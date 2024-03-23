@@ -16,27 +16,19 @@ class Pushnotificationredirection {
     PushNotification.configure({
       // (optional) Called when Token is generated (iOS and Android)
       onRegister: function (token) {
-        console.log('TOKEN:', token);
+        console.log('FCMTOKEN:', token);
       },
 
       // (required) Called when a remote is received or opened, or local notification is opened
       onNotification: function (notification) {
-        console.log('notification123', notification);
-        console.log(
-          'notification.userInteraction',
-          notification.userInteraction,
-        );
         if (notification.userInteraction == true) {
           // Redirect wherever you want
-          console.log('NOTIFICATION:', notification);
           let mydata = notification.data;
           let action = mydata.action;
-          console.log('action==', action);
           let action_id = mydata.action_id;
           let user_id = mydata.user_id;
           let other_user_id = mydata.other_user_id;
           if (userdata != null) {
-            console.log('navigation run');
             if (action == 'on the way') {
               props.navigation.navigate('Bookings_Details', {
                 booking_id: action_id,
@@ -78,15 +70,12 @@ class Pushnotificationredirection {
   onOpened = async openResult => {
     let navigation = propsnavigation;
 
-    console.log('openResult', openResult);
-
     var datajson = openResult.notification.additionalData.action_json;
     var user_id = datajson.user_id;
     var other_user_id = datajson.other_user_id;
     var action_id = datajson.action_id;
     var action = datajson.action;
     var userdata = await localStorage.getItemObject('user_arr');
-    console.log('datajson_user_id', datajson.user_id);
 
     if (userdata.user_id == other_user_id) {
       other_user_id = datajson.user_id;
@@ -95,7 +84,6 @@ class Pushnotificationredirection {
     // this.setState({loading:false})
     if (userdata != null) {
       if (userdata.user_id != other_user_id) {
-        console.log('navigation run');
         if (action == 'broadcast') {
           navigation.navigate('Notification', {user_id: action_id});
         } else if (action == 'on the way') {
@@ -115,7 +103,6 @@ class Pushnotificationredirection {
     }
   };
   onIds(device) {
-    console.log('Device info: ', device);
     player_id_me1 = device.userId;
   }
 }

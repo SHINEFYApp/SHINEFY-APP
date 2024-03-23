@@ -10,29 +10,20 @@ class FirebaseProvider {
   //-------------------
   blockuserfunction = (user_id, other_user_id, status) => {
     var user_id_send = 'u_' + user_id;
-    var other_user_id_send = 'u_' + other_user_id;
     var inbox_id_me = 'u_' + other_user_id;
-    var inbox_id_other = 'u_' + user_id;
-    consolepro.consolelog('inbox_id', inbox_id_me);
-    consolepro.consolelog('inbox_id_other', inbox_id_other);
     //---------------------- this code for create inbox in first time -----------
-    consolepro.consolelog('FirebaseInboxJsonChck', FirebaseInboxJson);
     var find_inbox_index = FirebaseInboxJson.findIndex(
       x => x.user_id == other_user_id,
     );
-    consolepro.consolelog('find_inbox_index chat', find_inbox_index);
-    consolepro.consolelog('other_user_id chat', other_user_id);
     if (find_inbox_index != -1) {
       var jsonUserDataMe = {
         block_status: status,
       };
       this.UpdateUserInboxMe(user_id_send, inbox_id_me, jsonUserDataMe);
-      consolepro.consolelog('FirebaseUserJson', FirebaseUserJson);
     }
   };
 
   getAllUsers = async () => {
-    consolepro.consolelog('getAllUsers');
     FirebaseUserJson = [];
     //------------------------------ firbase code get user inbox ---------------
     var queryUsers = firebase.database().ref('users');
@@ -41,19 +32,11 @@ class FirebaseProvider {
     // queryOffLoginUsers.off('users');
 
     queryUsers.on('child_added', function (data) {
-      consolepro.consolelog('users child_added', data.toJSON());
       FirebaseUserJson.push(data.toJSON());
       //alert('FirebaseUserJson 1 time='+FirebaseUserJson.length);
     });
 
-    //consolepro.consolelog('FirebaseUserJson child_added',FirebaseUserJson);
-    //consolepro.consolelog('FirebaseUserContactsJson child_added',FirebaseUserContactsJson);
     queryUsers.on('child_changed', function (data) {
-      consolepro.consolelog('users child_changed', data.toJSON());
-
-      //FirebaseGroupJson.push(data.toJSON());
-      //consolepro.consolelog('FirebaseUserJson len',FirebaseUserJson.length);
-
       var user_id = data.val().user_id;
       var name = data.val().name;
       var email = data.val().email;
@@ -78,23 +61,16 @@ class FirebaseProvider {
           FirebaseUserJson[i].user_type = user_type;
           return false;
         }
-        consolepro.consolelog('firebase', FirebaseUserJson);
       }
-
-      //consolepro.consolelog('FirebaseUserJson child_changed',FirebaseUserJson);
     });
 
     //--------------------------------- remove data in inbox --------------
     //var queryUpdate = firebase.database().ref('users/'+id+'/myInbox/');
     queryUsers.on('child_removed', function (data) {
-      //consolepro.consolelog('inbox update removed',data.toJSON());
-      //consolepro.consolelog('inbox update removed user_id',data.val().user_id);
-      //consolepro.consolelog('FirebaseUserJson check',FirebaseUserJson);
       var user_id = data.val().user_id;
       for (var i = 0; i < FirebaseUserJson.length; i++) {
         if (FirebaseUserJson[i].user_id === user_id) {
           FirebaseUserJson.splice(i, 1);
-          //consolepro.consolelog('FirebaseUserJson check removed',FirebaseUserJson);
           return false;
         }
       }
@@ -102,7 +78,6 @@ class FirebaseProvider {
   };
 
   DeleteAllFirebaseData = () => {
-    consolepro.consolelog('DeleteAllFirebaseData');
     var userRef = firebase.database().ref('users');
     userRef.remove();
     var userMsgRef = firebase.database().ref('message');
@@ -110,14 +85,12 @@ class FirebaseProvider {
   };
 
   messagecountforfooter = async () => {
-    consolepro.consolelog('getMyInboxAllDatagetinboxaccount');
     userdata = await localStorage.getItemObject('user_arr');
     //------------------------------ firbase code get user inbox ---------------
     if (userdata != null) {
       // alert("himanshu");
       var id = 'u_' + userdata.user_id;
       if (inboxoffcheck > 0) {
-        consolepro.consolelog('getMyInboxAllDatainboxoffcheck');
         var queryOffinbox = firebase
           .database()
           .ref('users/' + id + '/myInbox/')
@@ -130,14 +103,12 @@ class FirebaseProvider {
         .database()
         .ref('users/' + id + '/myInbox/');
       queryUpdatemyinbox.on('child_changed', data => {
-        consolepro.consolelog('inboxkachildchange', data.toJSON());
         //  this.showUserInbox()
         this.firebaseUserGetInboxCount();
       });
     }
   };
   getMyInboxAllData = async () => {
-    consolepro.consolelog('getMyInboxAllData');
     userdata = await localStorage.getItemObject('user_arr');
     //------------------------------ firbase code get user inbox ---------------
 
@@ -156,22 +127,13 @@ class FirebaseProvider {
       var query = firebase.database().ref('users/' + id + '/myInbox/');
 
       query.on('child_added', data => {
-        consolepro.consolelog('child_added_nielsh');
-        consolepro.consolelog('data', data);
-
         FirebaseInboxJson.push(data.toJSON());
-        //consolepro.consolelog('FirebaseInboxJson-1',FirebaseInboxJson);
       });
 
       //--------------------------------- update code --------------
       var queryUpdate = firebase.database().ref('users/' + id + '/myInbox/');
       queryUpdate.on('child_changed', data => {
         // this.firebaseUserGetInboxCount()
-
-        consolepro.consolelog('inbox update child_changed', data.toJSON());
-
-        var inboxKeyName = data.key.charAt(0);
-        consolepro.consolelog('inboxKeyName', inboxKeyName);
 
         var count = data.val().count;
         var lastMsg = data.val().lastMsg;
@@ -197,14 +159,10 @@ class FirebaseProvider {
         //--------------------- this code  run only index page curremt page -------------
         /*	var user_id_me=userdata.user_id;
 			var other_user_id=user_id;
-			consolepro.consolelog('other_user_id',other_user_id);
 
 			var user_check_inbox_count = FirebaseUserJson.findIndex(x => x.user_id==other_user_id);
-			consolepro.consolelog("user_check_inbox_count",user_check_inbox_count);
 			if(user_check_inbox_count >=0){
-				consolepro.consolelog('FirebaseUserJson',FirebaseUserJson[user_check_inbox_count]);
 				var userData=FirebaseUserJson[user_check_inbox_count];
-				consolepro.consolelog("userDataMeuserDataMe",userData);
 
 				var userImage=URLAPI_img_200X200+userData.image;
 
@@ -237,9 +195,6 @@ class FirebaseProvider {
 					if(count>0){
 						countHtml='<abbr>'+count+'</abbr>';
 					}
-			consolepro.consolelog('otheruseridashish',other_user_id);
-
-					   consolepro.consolelog('lastMsgShowlastMsgShow',lastMsgShow);
 
 					// var htmlData = '<li id="chat_list_'+other_user_id+'_'+order_number+'" data-position="'+lastMsgTime+'">'+
 					// 			  '<a href="/chat/'+other_user_id+'/'+order_id+'/'+order_number+'/'+chat_type+'/">'+
@@ -277,9 +232,7 @@ class FirebaseProvider {
   }; //function closed
 
   firebaseUserCreate = async () => {
-    consolepro.consolelog('firebaseUserCreate');
     var user_arr = await localStorage.getItemObject('user_arr');
-    consolepro.consolelog('user_arr', user_arr);
     var user_id = user_arr.user_id;
     var name = user_arr.name;
     var notification_status = user_arr.notification_status;
@@ -289,7 +242,6 @@ class FirebaseProvider {
     var image = user_arr.image;
     var login_type = user_arr.login_type;
     var id = 'u_' + user_id;
-    consolepro.consolelog('image', image);
     var jsonUserDataMe = {
       name: name,
       email: email,
@@ -305,35 +257,28 @@ class FirebaseProvider {
     this.CreateUser(id, jsonUserDataMe);
   };
   CreateUser = (id, jsonUserData) => {
-    consolepro.consolelog('id', id);
-    consolepro.consolelog('CreateUser', jsonUserData);
     firebase
       .database()
       .ref('users/' + id)
       .update(jsonUserData)
       .then(() => {
-        consolepro.consolelog('CreateUser success.');
         var onlineStatusRef = firebase
           .database()
           .ref('users/' + id + '/onlineStatus/');
         onlineStatusRef.onDisconnect().set('false');
         // var player_idRef = firebase.database().ref('users/'+id+'/player_id/');
         // player_idRef.onDisconnect().set("no");
-        consolepro.consolelog('update_firebase_check', update_firebase_check);
         if (update_firebase_check <= 0) {
           this.firebaseUserCreateUpdatePlayerId();
         }
       })
       .catch(function (error) {
-        consolepro.consolelog('CreateUser error: ' + error.message);
         //msgProvider.alert('Error CreateUser',error.message);
       });
   };
 
   firebaseUserGetInboxCount = async () => {
-    consolepro.consolelog('firebaseUserGetInboxCount');
     var user_arr = await localStorage.getItemObject('user_arr');
-    consolepro.consolelog('user_arr', user_arr);
     if (user_arr != null && user_arr != 'null') {
       var user_id = user_arr.user_id;
       var user_id_me = user_arr.user_id;
@@ -345,28 +290,16 @@ class FirebaseProvider {
       var queryAllUser = firebase.database().ref('users/' + id + '/myInbox');
       queryAllUser.once('value', data => {
         global_count_inbox = 0;
-        consolepro.consolelog(
-          'FirebaseInboxJson get in-box121',
-          FirebaseInboxJson,
-        );
+
         var len = FirebaseInboxJson.length;
-        consolepro.consolelog('FirebaseInboxJson len', len);
 
         if (len > 0) {
-          consolepro.consolelog('user all data', data.toJSON());
           // var allUserArr=data.toJSON();
-          // consolepro.consolelog('allUserArr',allUserArr);
           var allUserArr = Object.values(data.toJSON());
-          consolepro.consolelog('allUserArr', allUserArr);
 
           //   $.each(allUserArr, function(index, keyValue)
           allUserArr.map((keyValue, index) => {
             var count = keyValue.count;
-            var indexGet = index;
-            consolepro.consolelog('indexGet', indexGet);
-            consolepro.consolelog('indexGet', index);
-            consolepro.consolelog('countt', count);
-            // consolepro.consolelog('indexGet charAt',indexGet.charAt(0));
             // var indexGetType=indexGet.charAt(0);
             // if(indexGetType == 'u' || indexGetType == 'g'){
             global_count_inbox = global_count_inbox + parseInt(count);
@@ -374,9 +307,7 @@ class FirebaseProvider {
           });
         }
         //var global_count_inbox= 2;
-        consolepro.consolelog('global_count_inbox', global_count_inbox);
         if (global_count_inbox > 0) {
-          consolepro.consolelog('global_count_inbox show iff');
           if (parseInt(global_count_inbox) >= 10) {
             count_inbox = 10;
             //    $('.global_count_inbox').attr('message-count','9+');
@@ -394,29 +325,22 @@ class FirebaseProvider {
 
   firebaseUserCreateUpdatePlayerId = async () => {
     var user_arr = await localStorage.getItemObject('user_arr');
-    consolepro.consolelog('user_arr', user_arr);
     var user_id = user_arr.user_id;
     update_firebase_check = 1;
-    consolepro.consolelog('firebaseUserCreateUpdatePlayerId');
     var user_id_me = user_id;
     var player_id_me = player_id_me1;
 
     var queryAllUser = firebase.database().ref('users');
     queryAllUser.once('value', data => {
-      consolepro.consolelog('user all data', data.toJSON());
       var allUserArr = Object.values(data.toJSON());
-      consolepro.consolelog('allUserArr', allUserArr);
 
       //   $.each(allUserArr, function(index, keyValue)
       allUserArr.map(keyValue => {
         var other_user_id = keyValue.user_id;
         var player_id_other = keyValue.player_id;
 
-        consolepro.consolelog('other_user_id', other_user_id);
-        consolepro.consolelog('player_id_other', player_id_other);
         if (user_id_me != other_user_id) {
           if (player_id_me == player_id_other) {
-            consolepro.consolelog('player id update', other_user_id);
             var id = 'u_' + other_user_id;
             var jsonUserDataMe = {
               player_id: 'no',
@@ -428,50 +352,37 @@ class FirebaseProvider {
     });
   };
   CreateUserInboxOther = async (id, jsonUserData) => {
-    consolepro.consolelog('CreateUserInboxOther', jsonUserData);
     firebase
       .database()
       .ref()
       .child('users/' + id + '/myInbox/')
       .update(jsonUserData)
-      .then(function () {
-        consolepro.consolelog('Update inbox succeeded.');
-      })
+      .then(function () {})
       .catch(function (error) {
-        consolepro.consolelog('Update Inbox failed: ' + error.message);
         msgProvider.alert('Error CreateUserInboxOther', error.message);
       });
   };
 
   UpdateUserInboxMe = (id, otherId, jsonUserData) => {
-    consolepro.consolelog('jsonUserData', jsonUserData);
     firebase
       .database()
       .ref('users/' + id + '/myInbox/' + otherId)
       .update(jsonUserData)
-      .then(function () {
-        consolepro.consolelog('Update inbox succeeded.');
-      })
+      .then(function () {})
       .catch(function (error) {
-        consolepro.consolelog('Update Inbox failed: ' + error.message);
         msgProvider.alert('Error UpdateUserInboxMe', error.message);
       });
   };
   // SendUserMessage
 
   SendUserMessage = (messageId, messageJson, messageType, inputId) => {
-    consolepro.consolelog('SendUserMessage messageId', messageId);
-
     firebase
       .database()
       .ref('message' + '/' + messageId)
       .push()
       .set(messageJson)
-      .then(function () {
-        consolepro.consolelog('SendUserMessage succeeded.');
-      })
+      .then(function () {})
       .catch(function (error) {
-        consolepro.consolelog('Update Inbox failed: ' + error.message);
         msgProvider.alert('Error SendUserMessage', error.message);
       });
 
@@ -481,18 +392,12 @@ class FirebaseProvider {
     }
   };
   UpdateUserInboxOther = (id, otherId, jsonUserData2) => {
-    consolepro.consolelog('UpdateUserInboxOther id', id);
-    consolepro.consolelog('UpdateUserInboxOther otherId', otherId);
-    consolepro.consolelog('UpdateUserInboxOther', jsonUserData2);
     firebase
       .database()
       .ref('users/' + id + '/myInbox/' + otherId)
       .update(jsonUserData2)
-      .then(() => {
-        consolepro.consolelog('Update inbox succeeded.');
-      })
+      .then(() => {})
       .catch(error => {
-        consolepro.consolelog('Update Inbox failed: ' + error.message);
         msgProvider.alert('Error UpdateUserInboxOther', error.message);
       });
   };
@@ -509,9 +414,6 @@ class FirebaseProvider {
 
     var hours = date1.getHours();
     var minutes = date1.getMinutes();
-
-    // consolepro.consolelog('hours',hours);
-    // consolepro.consolelog('minutes',minutes);
 
     if (format == 12) {
       var ampm = hours >= 12 ? 'PM' : 'AM';
@@ -540,7 +442,6 @@ class FirebaseProvider {
         strTimeAll;
     } else if (format == 'ago') {
       var strTime = timeSince(new Date(time11));
-      //consolepro.consolelog(new Date(time11));
     } else if (format == 'date_time') {
       var date = new Date(time11);
 
@@ -556,9 +457,7 @@ class FirebaseProvider {
         var curr_month = date1.getMonth() + 1; //Months are zero based
         var curr_year = date1.getFullYear();
         var curr_year_small = String(curr_year);
-        consolepro.consolelog('curr_year_small', curr_year_small);
         curr_year_small = curr_year_small.substring(2, 4);
-        consolepro.consolelog('curr_year_small', curr_year_small);
         var strTime = curr_month + '/' + curr_date + '/' + curr_year_small;
       }
     } else if (format == 'date_time_full') {
@@ -576,9 +475,7 @@ class FirebaseProvider {
         var curr_month = date1.getMonth() + 1; //Months are zero based
         var curr_year = date1.getFullYear();
         var curr_year_small = String(curr_year);
-        consolepro.consolelog('curr_year_small', curr_year_small);
         curr_year_small = curr_year_small.substring(2, 4);
-        consolepro.consolelog('curr_year_small', curr_year_small);
 
         var ampm = hours >= 12 ? 'PM' : 'AM';
         hours = hours % 12;

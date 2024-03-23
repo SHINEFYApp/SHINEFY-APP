@@ -79,11 +79,9 @@ export default class Edit_profile extends Component {
   setProfile = async () => {
     var user_arr = await localStorage.getItemObject('user_arr');
     var user_pass = await localStorage.getItemObject('user_pass');
-    consolepro.consolelog('user_pass', user_pass);
     if (user_pass != null) {
       this.setState({password: user_pass});
     }
-    consolepro.consolelog(user_arr, 'user_arr');
     var user_image = 'NA';
     if (this.state.edit_image == 'no' && user_arr.image != 'NA') {
       user_image = config.img_url3 + user_arr.image;
@@ -117,7 +115,6 @@ export default class Edit_profile extends Component {
       user_id: user_arr.user_id,
       login_type: user_arr.login_type,
     });
-    consolepro.consolelog('phone_number', this.state.phone_number);
   };
 
   _updateProfile = async () => {
@@ -192,7 +189,6 @@ export default class Edit_profile extends Component {
     data.append('email', email);
     data.append('phone_number', phone_number);
     data.append('user_type', user_type);
-    consolepro.consolelog('data', data);
     if (profile_image != 'NA') {
       data.append('image', {
         uri: profile_image,
@@ -201,11 +197,9 @@ export default class Edit_profile extends Component {
       });
     }
     let url = config.baseURL + 'edit_profile';
-    console.log(url);
     apifuntion
       .postApi(url, data)
       .then(obj => {
-        console.log(obj);
         if (obj.success == 'true') {
           localStorage.setItemObject('user_arr', obj.user_details);
           var user_arr = obj.user_details;
@@ -260,7 +254,6 @@ export default class Edit_profile extends Component {
 
   _openCamera = () => {
     mediaprovider.launchCamera(true).then(obj => {
-      consolepro.consolelog('obj.path', obj);
       this.setState({
         profile_image: obj.path,
         modalVisible1: false,

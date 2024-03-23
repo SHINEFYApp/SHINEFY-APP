@@ -102,7 +102,6 @@ export default class Home_save_location extends Component {
 
   callLocation = async that => {
     localStorage.getItemObject('position').then(position => {
-      consolepro.consolelog('position', position);
       if (position != null) {
         var pointcheck1 = 0;
         this.getalldata(position);
@@ -125,15 +124,12 @@ export default class Home_save_location extends Component {
           {enableHighAccuracy: true, timeout: 150000, maximumAge: 10000},
         );
         that.watchID = Geolocation.watchPosition(position => {
-          consolepro.consolelog('data', position);
-
           if (pointcheck1 != 1) {
             localStorage.setItemObject('position', position);
             this.getalldata(position);
           }
         });
       } else {
-        consolepro.consolelog('helo gkjodi');
         var pointcheck = 0;
         Geolocation.getCurrentPosition(
           position => {
@@ -155,8 +151,6 @@ export default class Home_save_location extends Component {
           {enableHighAccuracy: true, timeout: 15000, maximumAge: 1000},
         );
         that.watchID = Geolocation.watchPosition(position => {
-          consolepro.consolelog('data', position);
-
           if (pointcheck != 1) {
             localStorage.setItemObject('position', position);
             this.getalldata(position);
@@ -184,10 +178,6 @@ export default class Home_save_location extends Component {
                 title: 'Location Access Required',
                 message: 'This App needs to Access your location',
               },
-            );
-            consolepro.consolelog(
-              'granted',
-              PermissionsAndroid.RESULTS.GRANTED,
             );
             if (granted === PermissionsAndroid.RESULTS.GRANTED) {
               that.callLocation(that);
@@ -220,11 +210,8 @@ export default class Home_save_location extends Component {
 
   //---------------------function for set location ------------//
   getalldata = position => {
-    consolepro.consolelog('I am here in get all data...');
     let longitude = position.coords.longitude;
     let latitude = position.coords.latitude;
-    consolepro.consolelog('positionlatitude', latitude);
-    consolepro.consolelog('positionlongitude', longitude);
     this.setState({
       latitude: latitude,
       longitude: longitude,
@@ -239,7 +226,6 @@ export default class Home_save_location extends Component {
     this.map = map;
   };
   getCoordinates = region => {
-    consolepro.consolelog('region', region);
     return {
       latitude: parseFloat(this.state.google_latitude),
       longitude: parseFloat(this.state.google_longitude),
@@ -250,10 +236,6 @@ export default class Home_save_location extends Component {
 
   //-----------------google address get--------------//
   getadddressfromlatlong = event => {
-    var latitude = event.latitude;
-    var longitude = event.longitude;
-    consolepro.consolelog({latitude, longitude});
-
     fetch(
       'https://maps.googleapis.com/maps/api/geocode/json?address=' +
         event.latitude +
@@ -266,22 +248,9 @@ export default class Home_save_location extends Component {
     )
       .then(response => response.json())
       .then(resp => {
-        consolepro.consolelog(
-          'url',
-          'https://maps.googleapis.com/maps/api/geocode/json?address=' +
-            event.latitude +
-            ',' +
-            event.longitude +
-            '&key=' +
-            config.mapkey +
-            '&language=' +
-            config.maplanguage,
-        );
-        consolepro.consolelog({resp});
         let responseJson = resp.results[0];
         let city = '';
         let administrative_area_level_1 = '';
-        consolepro.consolelog('responseJson', responseJson);
         for (let i = 0; i < responseJson.address_components.length; i++) {
           if (responseJson.address_components[i].types[0] == 'locality') {
             city = responseJson.address_components[i].long_name;
@@ -310,17 +279,10 @@ export default class Home_save_location extends Component {
           city: city,
           administrative_area_level_1: administrative_area_level_1,
         };
-        consolepro.consolelog({data2});
 
         var google_latitude = details.geometry.location.lat;
         var google_longitude = details.geometry.location.lng;
         var google_address = details.formatted_address;
-
-        consolepro.consolelog({
-          google_latitude,
-          google_longitude,
-          google_address,
-        });
 
         this.setState({
           latDelta: event.latitudeDelta,
@@ -351,7 +313,6 @@ export default class Home_save_location extends Component {
       status,
       location_id,
     } = this.state;
-    consolepro.consolelog('google_address', google_address);
     //---------------------------check for address------------------------
     if (address.length <= 0) {
       msgProvider.toast(Lang_chg.emptyaddress[config.language], 'center');
@@ -370,13 +331,10 @@ export default class Home_save_location extends Component {
     data.append('latitude', google_latitude);
     data.append('longitude', google_longitude);
     data.append('location', google_address);
-    consolepro.consolelog('data', data);
     let url = config.baseURL + 'save_user_location';
-    consolepro.consolelog('url', url);
     apifuntion
       .postApi(url, data)
       .then(obj => {
-        consolepro.consolelog(obj);
         if (obj.success == 'true') {
           localStorage.removeItem('saved_location_arr');
           localStorage.setItemObject('user_arr', obj.user_details);
@@ -432,8 +390,6 @@ export default class Home_save_location extends Component {
           );
           return false;
         }
-        consolepro.consolelog('err', err);
-        return false;
       });
   };
 

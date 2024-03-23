@@ -116,28 +116,10 @@ export default class Home extends Component {
 
   //--------for notification get  start -------------
   getnotification = async () => {
-    consolepro.consolelog('iamgetnotification');
-    PushNotification.createChannel(
-      {
-        channelId: 'specialid', // (required)
-        channelName: 'Special messasge', // (required)
-
-        importance: 4, // (optional) default: 4. Int value of the Android notification importance
-        vibrate: true, // (optional) default: true. Creates the default vibration patten if true.
-      },
-      created => consolepro.consolelog(`createChannel returned '${created}'`), // (optional) callback returns whether the channel was created, false means it already existed.
-    );
-
     messaging().onMessage(async remoteMessage => {
-      consolepro.consolelog('remoteMessage', remoteMessage);
-      consolepro.consolelog('logmy', remoteMessage.notification.body);
-      consolepro.consolelog('logmy', remoteMessage.notification.title);
       var isScheduled = remoteMessage.data.isScheduled;
-      consolepro.consolelog({isScheduled});
       if (isScheduled == 'true') {
         var schedule_time = remoteMessage.data.scheduledTime;
-        consolepro.consolelog({schedule_time});
-        //----for local schedule start--------//
         PushNotification.localNotificationSchedule({
           channelId: 'specialid', //his must be same with channelid in createchannel
           title: remoteMessage.notification.title,
@@ -148,9 +130,7 @@ export default class Home extends Component {
           allowWhileIdle: false, // (optional) set notification to work while on doze, default: false
         });
 
-        PushNotification.getDeliveredNotifications(res => {
-          consolepro.consolelog('vikasres', res);
-        });
+        PushNotification.getDeliveredNotifications(res => {});
         //----for local schedule end--------//
       } else {
         //------for local start---------- //
@@ -204,7 +184,6 @@ export default class Home extends Component {
           }
         });
       } else {
-        // consolepro.consolelog('helo gkjodi')
         var pointcheck = 0;
         Geolocation.getCurrentPosition(
           //Will give you the current location
@@ -242,7 +221,6 @@ export default class Home extends Component {
 
   getlatlong = async () => {
     let permission = await localStorage.getItemString('permission');
-    consolepro.consolelog('permission', permission);
     if (permission != 'denied') {
       var that = this;
       //Checking for the permission just after component loaded
@@ -278,7 +256,6 @@ export default class Home extends Component {
         requestLocationPermission();
       }
     } else {
-      consolepro.consolelog('iaminlocationoff');
       let position = {
         coords: {
           latitude: this.state.latitude,
@@ -291,15 +268,10 @@ export default class Home extends Component {
 
   //---------------------function for set location ------------//
   getalldata = position => {
-    consolepro.consolelog('position123', position);
     let longitude = position.coords.longitude;
     let latitude = position.coords.latitude;
-    consolepro.consolelog('getlongitude', longitude);
-    consolepro.consolelog('getlatitude', latitude);
     config.latitude = latitude;
     config.longitude = longitude;
-    consolepro.consolelog('getconfig.latitude', config.latitude);
-    consolepro.consolelog('getconfig.longitude', config.longitude);
     this.setState({
       latitude: latitude,
       longitude: longitude,
@@ -313,8 +285,6 @@ export default class Home extends Component {
     });
 
     (global.latitude = latitude), (global.longitude = longitude);
-    consolepro.consolelog('modal_latitude', this.state.modal_latitude);
-    consolepro.consolelog('modal_longitude', this.state.modal_longitude);
   };
 
   //==========for map -------------//
@@ -327,7 +297,6 @@ export default class Home extends Component {
   };
 
   getCoordinates = region => {
-    consolepro.consolelog('check', region);
     return {
       latitude: parseFloat(global.latitude),
       longitude: parseFloat(global.longitude),
@@ -337,7 +306,6 @@ export default class Home extends Component {
   };
 
   getCoordinatesModal = region => {
-    consolepro.consolelog('modalcheck', region);
     return {
       latitude: parseFloat(global.latitude),
       longitude: parseFloat(global.longitude),
@@ -350,7 +318,6 @@ export default class Home extends Component {
   getadddressfromlatlong = event => {
     var latitude = event.latitude;
     var longitude = event.longitude;
-    consolepro.consolelog('284', event);
 
     // fetch(
     //   'https://maps.googleapis.com/maps/api/geocode/json?address=' +
@@ -417,12 +384,6 @@ export default class Home extends Component {
       (global.address = google_address),
       (global.latdelta = event.latitudeDelta),
       (global.longdelta = event.longitudeDelta);
-    // });
-    consolepro.consolelog('addresslatitude', global.latitude);
-    consolepro.consolelog('addresslongitude', global.longitude);
-    consolepro.consolelog('addresslatdelta', global.latdelta);
-    consolepro.consolelog('addresslongleta', global.longdelta);
-
     this.getCoordinatesModal(event);
   };
 
@@ -497,7 +458,7 @@ export default class Home extends Component {
       [
         {
           text: Lang_chg.no_txt[config.language],
-          onPress: () => consolepro.consolelog('Cancel Pressed'),
+          onPress: () => {},
           tyle: 'Yes',
         },
         {
@@ -523,19 +484,15 @@ export default class Home extends Component {
     apifuntion
       .getApi(url, 1)
       .then(obj => {
-        console.log('hommmmmmmmme addddddds', obj);
         if (obj.success == 'true') {
           // alert(obj?.ad?.description);
           this.setState({adObj: obj?.ad, showHomeAd: true});
         }
       })
-      .catch(err => {
-        console.log('err', err);
-      });
+      .catch(err => {});
   };
 
   setHomeData = async () => {
-    consolepro.consolelog('iaminhoemdata');
     localStorage.removeItem('location_arr');
     localStorage.removeItem('saved_location_arr');
     localStorage.removeItem('booking_service_arr');
@@ -548,13 +505,11 @@ export default class Home extends Component {
     let user_id = user_arr.user_id;
     this.setState({user_id: user_id});
     var url = config.baseURL + 'get_user_home/' + user_id;
-    consolepro.consolelog('homeurl', url);
     var user_home_data = await localStorage.getItemObject('user_home_data');
     if (user_home_data == null) {
       apifuntion
         .getApi(url, 1)
         .then(obj => {
-          consolepro.consolelog('Homeobj', obj);
           if (obj.success == 'true') {
             localStorage.setItemObject('user_arr', obj.user_details);
             localStorage.setItemObject('user_home_data', obj.home_arr);
@@ -607,9 +562,7 @@ export default class Home extends Component {
             return false;
           }
         })
-        .catch(err => {
-          consolepro.consolelog('err', err);
-        });
+        .catch(err => {});
     } else {
       this.setState({
         vehicle_arr: user_home_data.vehicle_arr,
@@ -617,10 +570,6 @@ export default class Home extends Component {
         booking_hours: user_home_data.booking_hours,
         timer: false,
       });
-      consolepro.consolelog(
-        'booking-hours',
-        user_home_data.booking_hours.hours,
-      );
       localStorage.setItemObject(
         'booking_vehicle_arr',
         user_home_data.vehicle_arr[0],
@@ -629,7 +578,6 @@ export default class Home extends Component {
         .getApi(url, 1)
         .then(obj => {
           if (obj.success == 'true') {
-            consolepro.consolelog('home_data', obj);
             localStorage.setItemObject('user_arr', obj.user_details);
             localStorage.setItemObject('user_home_data', obj.home_arr);
             if (obj.home_arr.booking_hours != 'NA') {
@@ -666,19 +614,15 @@ export default class Home extends Component {
             return false;
           }
         })
-        .catch(err => {
-          consolepro.consolelog('err', err);
-        });
+        .catch(err => {});
     }
   };
 
   locationGet = async () => {
-    consolepro.consolelog('iaminlocationget');
     // let {google_address, google_latitude, google_longitude} = this.state;
     var google_address = global.address;
     var google_latitude = global.latitude;
     var google_longitude = global.longitude;
-    consolepro.consolelog({google_address, google_latitude, google_longitude});
     var location_arr = {
       latitude: google_latitude,
       longitude: google_longitude,
@@ -688,7 +632,6 @@ export default class Home extends Component {
     let booking_vehicle = await localStorage.getItemObject(
       'booking_vehicle_arr',
     );
-    consolepro.consolelog({location_arr});
     localStorage.setItemObject('location_arr', location_arr);
   };
 
@@ -704,13 +647,11 @@ export default class Home extends Component {
       global.longitude +
       '/' +
       user_id;
-    consolepro.consolelog('uqqqqqrl', url);
 
     apifuntion
       .getApi(url, 1)
       .then(obj => {
         global.props.hideLoader();
-        console.log(obj, 'eeeeeeeffffff');
         if (obj.success == 'true') {
           localStorage.setItemObject('user_arr', obj.user_details);
           this.setState({modalVisible: false});
@@ -733,28 +674,19 @@ export default class Home extends Component {
           return false;
         }
       })
-      .catch(err => {
-        consolepro.consolelog('err', err);
-      });
+      .catch(err => {});
   };
 
   getNotificationCount = async () => {
     let user_details = await localStorage.getItemObject('user_arr');
     let user_id = user_details.user_id;
-    // consolepro.consolelog("hcgdvhfvffgbfb",user_details)
     let url = config.baseURL1 + 'get_notificationcount.php?user_id=' + user_id;
 
-    consolepro.consolelog('url', url);
     apifuntion
       .getApi(url, 1)
       .then(obj => {
-        consolepro.consolelog('notiobj', obj);
         if (obj.success == 'true') {
           this.setState({notification_count: obj.notification_count});
-          consolepro.consolelog(
-            'shubhamnoticount',
-            this.state.notification_count,
-          );
         } else {
           if (
             obj.active_status == msgTitle.deactivate[config.language] ||
@@ -771,9 +703,7 @@ export default class Home extends Component {
           return false;
         }
       })
-      .catch(error => {
-        consolepro.consolelog('-------- error ------- ' + error);
-      });
+      .catch(error => {});
   };
 
   render() {

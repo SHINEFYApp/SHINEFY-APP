@@ -57,7 +57,6 @@ export default class Language extends Component {
 
   componentDidMount() {
     this.props.navigation.addListener('focus', () => {
-      consolepro.consolelog('config.langugae', config.language);
       this.checkLanguage();
     });
     this._willBlurSubscription = this.props.navigation.addListener(
@@ -71,14 +70,13 @@ export default class Language extends Component {
   }
 
   language_change = value => {
-    consolepro.consolelog('value', value);
     Alert.alert(
       Lang_chg.language_change[config.language],
       Lang_chg.Lang_change_msg[config.language],
       [
         {
           text: Lang_chg.no_txt[config.language],
-          onPress: () => consolepro.consolelog('Cancel Pressed'),
+          onPress: () => {},
           tyle: 'Yes',
         },
         {
@@ -96,8 +94,6 @@ export default class Language extends Component {
   };
 
   launguage_setbtn = language => {
-    consolepro.consolelog('Welcome');
-    consolepro.consolelog('langueageshc', language);
     Lang_chg.language_set(language);
   };
 
@@ -210,7 +206,6 @@ export default class Language extends Component {
               keyExtractor={(item, index) => index.toString()}
               data={this.state.lang_arr}
               renderItem={({index, item}) => {
-                consolepro.consolelog('item', item);
                 return (
                   <TouchableOpacity
                     onPress={() => {

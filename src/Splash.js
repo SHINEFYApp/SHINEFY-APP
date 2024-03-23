@@ -50,7 +50,6 @@ global.player_id_me1 = '123456';
 import messaging from '@react-native-firebase/messaging';
 const requestUserPermission = async () => {
   const authStatus = await messaging().requestPermission();
-  console.log('Authorization status(authStatus):', authStatus);
   return (
     authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
     authStatus === messaging.AuthorizationStatus.PROVISIONAL
@@ -75,14 +74,12 @@ export default class Splash extends Component {
     // OneSignal.setRequiresUserPrivacyConsent(false);
     // OneSignal.promptForPushNotificationsWithUserResponse(response => {
 
-    //     consolepro.consolelog("Prompt response:", response);
     // });
   }
 
   async componentDidMount() {
     this.getfcmtoken();
     this.language_fun();
-    consolepro.consolelog('helllllllllllllllllllllll');
 
     // OneSignal.addEmailSubscriptionObserver((event) => {
     //     this.OSLog("OneSignal: email subscription changed: ", event);
@@ -97,15 +94,12 @@ export default class Splash extends Component {
 
     // var interval = setInterval(async () => {
     //     await OneSignal.getDeviceState().then(state => {
-    //         consolepro.consolelog({ state })
-    //         consolepro.consolelog('hii player', state.userId)
     //         if (state.isSubscribed == true) {
     //             clearInterval(interval);
     //         }
     //         player_id_me1 = state.userId
 
     //     }).catch(error => {
-    //         consolepro.consolelog({ error })
     //     })
     // }, 500);
 
@@ -123,18 +117,15 @@ export default class Splash extends Component {
             player_id: fcmToken,
           });
           player_id_me1 = fcmToken;
-          console.log('FCM Token -> ', fcmToken);
           config.GetPlayeridfunctin(fcmToken);
         });
     }
   };
 
   OSLog = (message, optionalArg) => {
-    consolepro.consolelog({message});
     if (optionalArg) {
       message = message + JSON.stringify(optionalArg);
     }
-    console.log(message.notificationId);
     let consoleValue;
     if (this.state.consoleValue) {
       consoleValue = this.state.consoleValue + '\n' + message;
@@ -145,7 +136,6 @@ export default class Splash extends Component {
   };
 
   onIds(device) {
-    consolepro.consolelog('device', device);
     player_id_me1 = device.userId;
     this.setState({
       player_id: device.userId,
@@ -177,11 +167,9 @@ export default class Splash extends Component {
 
   getsocialhide = async () => {
     let url = config.baseURL1 + 'social_hide.php';
-    consolepro.consolelog('url', url);
     apifuntion
       .getApi(url, 1)
       .then(obj => {
-        consolepro.consolelog('obj', obj);
         if (obj.success == 'true') {
           (config.facebook_hide_android = obj.android_facebook_show),
             (config.facebook_hide_ios = obj.ios_facebook_show),
@@ -206,9 +194,7 @@ export default class Splash extends Component {
           return false;
         }
       })
-      .catch(error => {
-        console.log('-------- error ------- ' + error);
-      });
+      .catch(error => {});
   };
 
   autoLogin = async () => {
@@ -216,8 +202,6 @@ export default class Splash extends Component {
     let user_details = await localStorage.getItemObject('user_arr');
     // let data2= await localStorage.getItemObject('socialdata');
     let result = user_details;
-    consolepro.consolelog('user_value', user_value);
-    consolepro.consolelog('user_details', user_details);
     if (user_details != null) {
       this.props.navigation.navigate('Home', {home_status: 1});
     } else {

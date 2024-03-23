@@ -81,7 +81,6 @@ class SocialLoginProvider extends Component {
     LoginManager.logInWithPermissions(['public_profile', 'email']).then(
       result => {
         if (result.isCancelled) {
-          consolepro.consolelog('Login cancelled');
           // alert('login cancel')
         } else {
           AccessToken.getCurrentAccessToken().then(data => {
@@ -100,7 +99,6 @@ class SocialLoginProvider extends Component {
     if (error) {
       Alert.alert('Error fetching data: ' + error.toString());
     } else {
-      consolepro.consolelog('aa gya kya bhai');
       var socaildata = {
         social_id: result.id,
         social_name: result.name,
@@ -119,11 +117,8 @@ class SocialLoginProvider extends Component {
   GoogleLogin = async navigation => {
     //Prompts a modal to let the user sign in into your application.
     try {
-      console.log('test 1111');
       await GoogleSignin.hasPlayServices();
-      console.log('test 2111');
       const userInfo = await GoogleSignin.signIn();
-      consolepro.consolelog('User Info --> ', userInfo);
       var result = {
         social_name: userInfo.user.name,
         social_first_name: userInfo.user.givenName,
@@ -136,17 +131,10 @@ class SocialLoginProvider extends Component {
       };
       this.callsocailweb(result, navigation);
     } catch (error) {
-      console.log('Message', error.message);
-
-      consolepro.consolelog('Message2', error.message);
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        consolepro.consolelog('User Cancelled the Login Flow');
       } else if (error.code === statusCodes.IN_PROGRESS) {
-        consolepro.consolelog('Signing In');
       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        consolepro.consolelog('Play Services Not Available or Outdated');
       } else {
-        consolepro.consolelog('Some Other Error Happened');
       }
     }
   };
@@ -170,9 +158,7 @@ class SocialLoginProvider extends Component {
           };
           this.callsocailweb(result, navigation);
         },
-        error => {
-          consolepro.consolelog(error);
-        },
+        error => {},
       );
 
     // TODO: Send the token to backend
@@ -186,17 +172,13 @@ class SocialLoginProvider extends Component {
       try {
         await GoogleSignin.revokeAccess();
         await GoogleSignin.signOut();
-      } catch (error) {
-        consolepro.consolelog('errorr');
-      }
+      } catch (error) {}
       localStorage.clear();
       navigation.navigate('Login');
     }
   };
 
   callsocailweb = (result, navigation) => {
-    consolepro.consolelog('result', result);
-    consolepro.consolelog('result', navigation);
     var data = new FormData();
     data.append('social_email', result.social_email);
     data.append('social_id', result.social_id);
@@ -205,13 +187,10 @@ class SocialLoginProvider extends Component {
     data.append('social_type', result.social_type);
     localStorage.setItemObject('socialdata', result);
     var url = config.baseURL1 + 'social_login.php';
-    consolepro.consolelog('home', data);
-    consolepro.consolelog('url', url);
 
     apifuntion
       .postApi(url, data)
       .then(obj => {
-        consolepro.consolelog(obj);
         if (obj.success == 'true') {
           if (obj.user_exist == 'yes') {
             if (obj.user_details.otp_verify === 0) {
@@ -225,7 +204,6 @@ class SocialLoginProvider extends Component {
               localStorage.setItemObject('user_value', user_value);
               navigation.navigate('Otp_verify', {check: 1});
             } else {
-              consolepro.consolelog(obj, 'userrrrrrrrkk');
               // firebaseprovider.firebaseUserCreate();
               // firebaseprovider.getMyInboxAllData();
               localStorage.setItemObject('user_arr', obj.user_details);
@@ -251,7 +229,6 @@ class SocialLoginProvider extends Component {
         }
       })
       .catch(error => {
-        consolepro.consolelog('-------- error ------- ' + error);
         msgProvider.alert(
           msgTitle.server[config.language],
           msgText.servermessage[config.language],

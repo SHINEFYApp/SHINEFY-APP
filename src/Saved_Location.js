@@ -120,7 +120,6 @@ export default class Saved_Location extends Component {
               false,
             );
           }
-          consolepro.consolelog('err', err);
         });
     } else {
       this.setState({location_arr: saved_location_arr});
@@ -128,7 +127,6 @@ export default class Saved_Location extends Component {
         .getApi(url, 1)
         .then(obj => {
           if (obj.success == 'true') {
-            consolepro.consolelog('else_obj', obj);
             localStorage.setItemObject('user_arr', obj.user_details);
             localStorage.setItemObject(
               'saved_location_arr',
@@ -161,7 +159,6 @@ export default class Saved_Location extends Component {
               false,
             );
           }
-          consolepro.consolelog('err', err);
         });
     }
   };
@@ -175,7 +172,6 @@ export default class Saved_Location extends Component {
     let location_id = this.state.delete_location_id;
     let user_id = this.state.user_id;
     var url = config.baseURL + 'delete_location/' + user_id + '/' + location_id;
-    consolepro.consolelog('url', url);
     apifuntion
       .getApi(url)
       .then(obj => {
@@ -184,7 +180,6 @@ export default class Saved_Location extends Component {
             global.props.hideLoader();
           }, 500);
           this.setState({location_arr: obj.saved_location_arr});
-          consolepro.consolelog('delete successfully');
           localStorage.setItemObject(
             'saved_location_arr',
             obj.saved_location_arr,
@@ -217,7 +212,6 @@ export default class Saved_Location extends Component {
             false,
           );
         }
-        consolepro.consolelog('err', err);
       });
   };
   render() {

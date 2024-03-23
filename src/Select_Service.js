@@ -68,7 +68,6 @@ export default class Select_Service extends Component {
 
   componentDidMount() {
     this.props.navigation.addListener('focus', () => {
-      consolepro.consolelog('iminServce');
       //     setTimeout( () => {
       //         this.getServices();
       //    },500);
@@ -94,12 +93,10 @@ export default class Select_Service extends Component {
   getProfile = async callback => {
     var user_arr = await localStorage.getItemObject('user_arr');
     let url = config.baseURL + 'get_profile?user_id=' + user_arr.user_id;
-    consolepro.consolelog('url', url);
     apifuntion
       .getApi(url)
       .then(obj => {
         this.setState({loadingProfile: false});
-        consolepro.consolelog('obj', obj);
         if (obj.success == 'true') {
           let user_arr = obj.user_details;
           localStorage.setItemObject('user_arr', user_arr);
@@ -118,7 +115,6 @@ export default class Select_Service extends Component {
           Lang_chg.noNetwork[config.language],
           false,
         );
-        consolepro.consolelog('-------- error ------- ' + error);
       });
   };
 
@@ -130,7 +126,6 @@ export default class Select_Service extends Component {
     let user_id = user_arr.user_id;
     this.setState({user_id: user_id});
     var url = config.baseURL + 'get_service/' + user_id;
-    console.log('urlurl11', url);
 
     var get_service = await localStorage.getItemObject('all_service_arr');
     if (get_service == null) {
@@ -183,7 +178,6 @@ export default class Select_Service extends Component {
               false,
             );
           }
-          consolepro.consolelog('err', err);
         });
     } else {
       if (booking_service_arr == null) {
@@ -272,7 +266,6 @@ export default class Select_Service extends Component {
               false,
             );
           }
-          consolepro.consolelog('err', err);
         });
     }
   };
@@ -289,7 +282,6 @@ export default class Select_Service extends Component {
     var extra_time = Number(this.state.extra_service_time);
     var new_time = extra_time + Number(item.service_time);
     data[index].status = true;
-    console.log('ssssss', new_amount);
     this.setState({
       mainServiceID: data[index].service_id,
       service_arr: data,
@@ -365,7 +357,6 @@ export default class Select_Service extends Component {
     let subTotal = (
       Number(this.state.service_amount) + Number(extra_amount)
     ).toFixed(2);
-    console.log('ssssss', subTotal);
     //
     this.setState({
       extra_service_arr: data,
@@ -380,7 +371,6 @@ export default class Select_Service extends Component {
   navigationFun = async () => {
     //-----------------notes--------------------
     this.getProfile(userdata => {
-      console.log(userdata);
       var status = 1;
       if (
         userdata.has_company_email === '1' &&
@@ -417,7 +407,6 @@ export default class Select_Service extends Component {
           totalServiceTime: total_service_time,
         };
         localStorage.setItemObject('booking_service_arr', all_service_arr);
-        consolepro.consolelog('booking_service_arr', all_service_arr);
         this.props.navigation.navigate('Select_Date', {date_check: 2});
       } else {
         msgProvider.alert(

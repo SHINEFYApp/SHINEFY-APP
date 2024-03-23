@@ -122,13 +122,10 @@ export default class My_Wallet extends Component {
   };
   getWallet = async page => {
     let userdata = await localStorage.getItemObject('user_arr');
-    consolepro.consolelog('user_id', userdata.user_id);
     let url = config.baseURL + 'get_user_wallet/' + userdata.user_id;
-    consolepro.consolelog('url', url);
     apifuntion
       .getApi(url, page)
       .then(obj => {
-        consolepro.consolelog('obj', obj);
         if (obj.success == 'true') {
           this.setState({
             wallet_arr: obj.wallet_arr,
@@ -136,7 +133,6 @@ export default class My_Wallet extends Component {
             total_wallet: obj.userwallet,
             refresh: false,
           });
-          consolepro.consolelog('wallet_arr', this.state.wallet_arr);
         } else {
           if (
             obj.active_status == 0 ||
@@ -159,7 +155,6 @@ export default class My_Wallet extends Component {
         }
       })
       .catch(error => {
-        consolepro.consolelog('-------- error ------- ' + error);
         this.setState({loading: false});
       });
   };
