@@ -1,28 +1,20 @@
-import React, {Component} from 'react';
+import 'react-native-gesture-handler';
+import {Component} from 'react';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {AppProvider, AppConsumer} from './src/Provider/context/AppProvider';
 import Stacknav from './src/Provider/Routenavigation';
 import {I18nManager} from 'react-native';
 import RNRestart from 'react-native-restart';
-import {
-  Colors,
-  localimag,
-  Font,
-  mobileH,
-  Mapprovider,
-  msgProvider,
-  msgText,
-  config,
-  mobileW,
-  localStorage,
-  handleback,
-  Lang_chg,
-  apifuntion,
-  msgTitle,
-  consolepro,
-} from './src/Provider/utilslib/Utils';
+import {localStorage} from './src/Provider/utilslib/Utils';
 import {LogBox} from 'react-native';
+import WelcomeScreen from './src/screens/welcomeScreen/welcomeScreen';
+import OTPScreen from './src/screens/OTPScreen/OTPScreen';
+import ForgotPasswordScreen from './src/screens/forgotpasswordScreen/forgotPasswordScreen';
+import MyTabs from './src/components/bottomTabs/bottomTabs';
+
+
+// import WelcomeScreen from './src/screens/welcomeScreen/welcomeScreen';
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs(); //Ignore all log notifications
 LogBox.ignoreLogs([
@@ -59,18 +51,21 @@ class App extends Component {
       localStorage.setItemObject('languagesetenglish', 3);
     }
   };
+
   render() {
     return (
       <GestureHandlerRootView style={{flex: 1}}>
         <NavigationContainer>
-          <AppProvider {...this.props}>
+           <AppProvider {...this.props}>
             <AppConsumer>
               {funcs => {
                 global.props = {...funcs};
-                return <Stacknav {...funcs} />;
+                return <Stacknav {...funcs}/>;
               }}
             </AppConsumer>
+            
           </AppProvider>
+
         </NavigationContainer>
       </GestureHandlerRootView>
     );

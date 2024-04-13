@@ -1,6 +1,7 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import Splash from '../Splash';
+import WelcomeScreen from '../screens/welcomeScreen/welcomeScreen';
 import Login from '../Login';
 import Forgot from '../Forgot';
 import Signup from '../Signup';
@@ -12,7 +13,6 @@ import Saved_Location from '../Saved_Location';
 import My_Wallet from '../My_Wallet';
 import Language from '../Language';
 import Setting from '../Setting';
-
 import Change_Password from '../Change_Password';
 import Contact from '../Contact';
 import Faqs from '../Faqs';
@@ -23,8 +23,6 @@ import Bookings_Details from '../Bookings_Details';
 import Track_Booking from '../Track_Booking';
 import Select_Date from '../Select_Date';
 import Success from '../Success';
-
-//------------------------------------Hariom-------------------
 import Otp_verify from '../Otp_verify';
 import New_password from '../New_password';
 import Reason_message from '../Reason_message';
@@ -40,235 +38,259 @@ import Home_save_location from '../Home_save_location';
 import Select_Vehicles from '../Select_Vehicles';
 import Add_your_vehicle from '../Add_your_vehicle';
 import Select_date_reschedule from '../Select_date_reschedule';
+import ForgotPasswordScreen from '../screens/forgotpasswordScreen/forgotPasswordScreen';
+import OTPScreen from '../screens/OTPScreen/OTPScreen';
+import ChangePassword from '../screens/changePassword/changePassword';
+import NavigationTop from '../components/navigationTop/navigationTop';
+import HomeScreen from '../screens/homeScreen/homeScreen';
+import Test from '../components/test/test';
+import SavedLocationScreen from '../screens/savedLocationScreen/savedLocationScreen';
+import AddLocationScreen from '../screens/addLocationScreen/addLocationScreen';
+import NotficationScreen from '../screens/notficationScreen/notficationScreen';
+import MyTabs from '../components/test/test';
+import SpecialOffersScreen from '../screens/specialOffers/specialOffersScreen';
+import WashServicesScreen from '../screens/washServicesScreen/WashServicesScreen';
+import ProfileScreen from '../screens/profileScreen/profileScreen';
 
 const Stack = createStackNavigator();
 
 const Stacknav = navigation => {
   return (
-    <Stack.Navigator initialRouteName={'Splash'}>
-      {/* Starting from here  */}
+    <Stack.Navigator
+      screenOptions={{
+        header: props => <NavigationTop {...props} />,
+        cardStyle: {backgroundColor: '#FFFAF2'},
+      }}
+      initialRouteName={'Splash'}>
       <Stack.Screen
         name="Splash"
         component={Splash}
         options={{headerShown: false, gestureEnabled: false}}
       />
-      {/* Login screen  */}
+      <Stack.Screen
+        name="WelcomeScreen"
+        component={WelcomeScreen}
+        options={{headerShown: false, gestureEnabled: false}}
+      />
+      <Stack.Screen name="HomeScreen" component={MyTabs} />
+      <Stack.Screen
+        name="SavedLocationScreen"
+        component={SavedLocationScreen}
+      />
+      <Stack.Screen
+        name="ProfileScreen"
+        component={ProfileScreen}
+      />
+      <Stack.Screen
+        name="specialOffersScreen"
+        component={SpecialOffersScreen}
+      />
+      <Stack.Screen
+        name="WashServicesScreen"
+        component={WashServicesScreen}
+      />
+      <Stack.Screen
+        name="notficationScreen"
+        component={NotficationScreen}
+      />
+      <Stack.Screen name="addLocationScreen" component={AddLocationScreen} />
+      <Stack.Screen
+        name="ForgotPassword"
+        component={ForgotPasswordScreen}
+        options={{headerShown: false, gestureEnabled: false}}
+      />
+      <Stack.Screen
+        name="OTPScreen"
+        component={OTPScreen}
+        options={{headerShown: false, gestureEnabled: false}}
+      />
+      <Stack.Screen
+        name="ChangePassword"
+        component={ChangePassword}
+        options={{headerShown: false, gestureEnabled: false}}
+      />
       <Stack.Screen
         name="Login"
         component={Login}
         options={{headerShown: false, gestureEnabled: false}}
       />
-      {/* forgot password page */}
       <Stack.Screen
         name="Forgot"
         component={Forgot}
         options={{headerShown: false}}
       />
-      {/* Register from here */}
       <Stack.Screen
         name="Signup"
         component={Signup}
         options={{headerShown: false, gestureEnabled: false}}
       />
-      {/* My_Vehicles to see your vehicle*/}
       <Stack.Screen
         name="My_Vehicles"
         component={My_Vehicles}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
-      {/* Edit_Vechicle to edit your vehicle */}
       <Stack.Screen
         name="Edit_Vechicle"
         component={Edit_Vechicle}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
-      {/* Profile to see your profile */}
       <Stack.Screen
         name="Profile"
         component={Profile}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
-      {/* Edit your profile */}
       <Stack.Screen
         name="Edit_Profile"
         component={Edit_Profile}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
-      {/* Saved our location */}
       <Stack.Screen
         name="Saved_Location"
         component={Saved_Location}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
-      {/* My_Wallet to see your amount */}
       <Stack.Screen
         name="My_Wallet"
         component={My_Wallet}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
-      {/* Language */}
       <Stack.Screen
         name="Language"
         component={Language}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
-      {/*Setting is shows more options */}
       <Stack.Screen
         name="Setting"
         component={Setting}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
-      {/* Change your Password  */}
       <Stack.Screen
         name="Change_Password"
         component={Change_Password}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
-      {/*To Contact for help */}
       <Stack.Screen
         name="Contact"
         component={Contact}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
-      {/* Faqs Questions    */}
       <Stack.Screen
         name="Faqs"
         component={Faqs}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
-      {/* Terms about policy  */}
       <Stack.Screen
         name="Terms_about_policy"
         component={Terms_about_policy}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
-      {/* Home */}
       <Stack.Screen
         name="Home"
         component={Home}
-        options={{headerShown: false, gestureEnabled: false}}
+        options={{
+          headerShown: true,
+          gestureEnabled: false,
+        }}
       />
-      {/* My_Bookings */}
       <Stack.Screen
         name="My_Bookings"
         component={My_Bookings}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
-      {/* Bookings_Details */}
       <Stack.Screen
         name="Bookings_Details"
         component={Bookings_Details}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
-      {/* Track_Booking */}
       <Stack.Screen
         name="Track_Booking"
         component={Track_Booking}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
-      {/* Select_Date */}
       <Stack.Screen
         name="Select_Date"
         component={Select_Date}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
-      {/* Success */}
       <Stack.Screen
         name="Success"
         component={Success}
-        options={{headerShown: false, gestureEnabled: false}}
+        options={{headerShown: true, gestureEnabled: false}}
       />
-
-      {/* ------------------------------ Hariom------------------------- */}
-      {/* Otp_verify */}
       <Stack.Screen
         name="Otp_verify"
         component={Otp_verify}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
-      {/* New_password */}
       <Stack.Screen
         name="New_password"
         component={New_password}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
-      {/* Reason_message */}
       <Stack.Screen
         name="Reason_message"
         component={Reason_message}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
-      {/* Delete_success */}
       <Stack.Screen
         name="Delete_success"
         component={Delete_success}
-        options={{headerShown: false, gestureEnabled: false}}
+        options={{headerShown: true, gestureEnabled: false}}
       />
-      {/* Search_Location */}
       <Stack.Screen
         name="Search_Location"
         component={Search_Location}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
-      {/* Notification */}
       <Stack.Screen
         name="Notification"
         component={Notification}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
-      {/* Rate_Now to give rating */}
       <Stack.Screen
         name="Rate_Now"
         component={Rate_Now}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
-      {/* Booking_overview1 */}
       <Stack.Screen
         name="Booking_overview1"
         component={Booking_overview1}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
-      {/* Payment_option */}
       <Stack.Screen
         name="Payment_option"
         component={Payment_option}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
-      {/* Select_Service */}
       <Stack.Screen
         name="Select_Service"
         component={Select_Service}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
-      {/* Service_details */}
       <Stack.Screen
         name="Service_details"
         component={Service_details}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
-      {/* Home_save_location */}
       <Stack.Screen
         name="Home_save_location"
         component={Home_save_location}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
-      {/* Select_Vehicles */}
       <Stack.Screen
         name="Select_Vehicles"
         component={Select_Vehicles}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
-      {/* Add_your_vehicle */}
       <Stack.Screen
         name="Add_your_vehicle"
         component={Add_your_vehicle}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
-      {/* Select_date_reschedule */}
       <Stack.Screen
         name="Select_date_reschedule"
         component={Select_date_reschedule}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
     </Stack.Navigator>
   );
