@@ -5,7 +5,7 @@ import deleteIcon from '../../assets/icons/deleteIcon.png'
 
 export default function LocationCard() {
     return (
-        <View className='flex-row items-center mx-4 my-2 pb-3 justify-between border-b border-[#c3c3c3] bg-red-800'> 
+        <View className='flex-row items-center mx-4 my-2 pb-3 justify-between border-b border-[#c3c3c3]'> 
                 <View className='flex-row items-center gap-5'>
 
                 <View>

@@ -51,6 +51,11 @@ import MyTabs from '../components/test/test';
 import SpecialOffersScreen from '../screens/specialOffers/specialOffersScreen';
 import WashServicesScreen from '../screens/washServicesScreen/WashServicesScreen';
 import ProfileScreen from '../screens/profileScreen/profileScreen';
+import EditProfileScreen from '../screens/editProfileScreen/editProfileScreen';
+import WalletScreen from '../screens/walletScreen/walletScreen';
+import SettingScreen from '../screens/settingScreen/settingScreen';
+import AboutUsScreen from '../screens/aboutUsScreen/aboutUsScreen';
+import ChangePasswordProfile from '../screens/changePasswordProfile/changePasswordProfile';
 
 const Stack = createStackNavigator();
 
@@ -72,14 +77,30 @@ const Stacknav = navigation => {
         component={WelcomeScreen}
         options={{headerShown: false, gestureEnabled: false}}
       />
-      <Stack.Screen name="HomeScreen" component={MyTabs} />
+      <Stack.Screen name="HomeScreen" component={MyTabs} options={{headerShown: false}}/>
       <Stack.Screen
         name="SavedLocationScreen"
         component={SavedLocationScreen}
       />
       <Stack.Screen
-        name="ProfileScreen"
-        component={ProfileScreen}
+        name="MyWallet"
+        component={WalletScreen}
+      />
+      <Stack.Screen
+        name="SettingScreen"
+        component={SettingScreen}
+      />
+      <Stack.Screen
+        name="AboutUsScreen"
+        component={AboutUsScreen}
+      />
+      <Stack.Screen
+        name="ChangePasswordProfile"
+        component={ChangePasswordProfile}
+      />
+      <Stack.Screen
+        name="EditProfileScreen"
+        component={EditProfileScreen}
       />
       <Stack.Screen
         name="specialOffersScreen"

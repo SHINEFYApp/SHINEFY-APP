@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   },
   secondButton: {
     borderColor: 'white',
-    borderWidth: 2,
+    borderWidth: 1,
     backgroundColor: 'transparent',
   },
   text: {

@@ -4,13 +4,16 @@ import SearchInput from '../../components/searchInput/searchInput';
 import SaleBox from '../../components/saleBox/saleBox';
 import {ScrollView} from 'react-native';
 import locationIcon from '../../assets/icons/locationIcon.png';
-
 import WashServicesCard from '../../components/washServicesCard/washServicesCard';
 import MyTabs from '../../components/bottomTabs/bottomTabs';
 import MapComponent from '../../components/mapComponent/mapComponent';
 import NotficationCard from '../../components/notficationCard/notficationCard';
+import AddVehiclePopup from '../../components/addVehiclePopup/addVehiclePopup';
+import Modal from 'react-native-modal';
+
 export default function HomeScreen({navigation}) {
   const [currentLocation, setCurrentLocation] = useState({});
+
 
   return (
     <View className="flex-1 ">
@@ -66,6 +69,7 @@ export default function HomeScreen({navigation}) {
           </ScrollView>
         </View>
       </ScrollView>
+
     </View>
   );
 }

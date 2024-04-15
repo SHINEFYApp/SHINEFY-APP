@@ -3,9 +3,10 @@ import notfiIcon from '../../assets/icons/notifcationIcon.png';
 import saveIcon from '../../assets/icons/savedLocationIcon.png';
 import backIcon from '../../assets/icons/backIcon.png';
 export default function NavigationTop(props) {
+  console.log(props.route)
   function handleTitle() {
     switch (props.route.name) {
-      case 'HomeScreen':
+      case 'Home':
         return 'SHINEFY';
       case 'SavedLocationScreen':
         return 'Saved Location';
@@ -19,9 +20,9 @@ export default function NavigationTop(props) {
   return (
     <View
       className={
-        'flex-row absolute w-full justify-between z-10 p-5 bg-white items-center rounded-b-2xl border-b border-l border-r border-[#C3C3C3]'
+        'flex-row  absolute w-full justify-between z-10 p-5 bg-white items-center rounded-b-2xl border-b border-l border-r border-[#C3C3C3]'
       }>
-      {props.route.name == 'HomeScreen' ? (
+      {props.route.name == 'Home' ? (
         <TouchableOpacity
           onPress={() => {
             props.navigation.navigate('SavedLocationScreen');

@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-import {StyleSheet, TextInput} from 'react-native';
-import {Image, Text, TouchableOpacity, View} from 'react-native-ui-lib';
-import {mobileW} from '../../Provider/utilslib/Utils';
+import React, { useState } from 'react';
+import { StyleSheet, TextInput } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native-ui-lib';
+import { mobileW } from '../../Provider/utilslib/Utils';
 import eyeIcon from '../../assets/icons/eyeIcon.png';
 export default function Input({
   secureTextEntry,
@@ -16,7 +16,7 @@ export default function Input({
   const [isSecure, setIsSecure] = useState(secureTextEntry);
 
   return (
-    <View style={styles.inputStyle} className={'mb-5 flex'}>
+    <View style={styles.inputStyle} className={'mb-5 flex-1'}>
       {icon && (
         <View style={[styles.imageContainer, isBorder && styles.borderStyle]}>
           <Image source={icon} style={styles.image} />

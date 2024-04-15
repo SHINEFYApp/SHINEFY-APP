@@ -12,6 +12,7 @@ import WelcomeScreen from './src/screens/welcomeScreen/welcomeScreen';
 import OTPScreen from './src/screens/OTPScreen/OTPScreen';
 import ForgotPasswordScreen from './src/screens/forgotpasswordScreen/forgotPasswordScreen';
 import MyTabs from './src/components/bottomTabs/bottomTabs';
+import { RecoilRoot } from 'recoil';
 
 
 // import WelcomeScreen from './src/screens/welcomeScreen/welcomeScreen';
@@ -56,6 +57,8 @@ class App extends Component {
     return (
       <GestureHandlerRootView style={{flex: 1}}>
         <NavigationContainer>
+        <RecoilRoot>
+
            <AppProvider {...this.props}>
             <AppConsumer>
               {funcs => {
@@ -65,6 +68,7 @@ class App extends Component {
             </AppConsumer>
             
           </AppProvider>
+          </RecoilRoot>
 
         </NavigationContainer>
       </GestureHandlerRootView>

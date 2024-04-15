@@ -9,7 +9,8 @@ import SettingIcon from '../../assets/icons/profile/setting.png'
 import LanguageIcon from '../../assets/icons/profile/Language.png'
 import pic from '../../assets/icons/profile/pic.png'
 import { ScrollView } from "react-native-gesture-handler";
-export default function ProfileScreen() {
+export default function ProfileScreen({navigation}) {
+   
     return (
         <View className="pt-[80px] px-6">
 
@@ -24,13 +25,13 @@ export default function ProfileScreen() {
             </View>
 
             <ScrollView>
-                <SelectVechileCard icon={userIcon} text={"Edit Profile"}/>
-                <SelectVechileCard icon={locationIcon} text={"Saved Location"}/>
-                <SelectVechileCard icon={walletIcon} text={"My Wallet"}/>
-                <SelectVechileCard icon={packageIcon} text={"Packages"}/>
-                <SelectVechileCard icon={SubIcon} text={"My Subscriptions"}/>
-                <SelectVechileCard icon={SettingIcon} text={"Setting"}/>
-                <SelectVechileCard icon={LanguageIcon} text={"Languages"}/>
+                <SelectVechileCard icon={userIcon} text={"Edit Profile"} screen="EditProfileScreen" navigation={navigation}/>
+                <SelectVechileCard icon={locationIcon} text={"Saved Location"} screen="SavedLocationScreen" navigation={navigation}/>
+                <SelectVechileCard icon={walletIcon} text={"My Wallet"} screen="MyWallet" navigation={navigation}/>
+                <SelectVechileCard icon={packageIcon} text={"Packages"} screen="EditProfileScreen" navigation={navigation}/>
+                <SelectVechileCard icon={SubIcon} text={"My Subscriptions"} screen="EditProfileScreen" navigation={navigation}/>
+                <SelectVechileCard icon={SettingIcon} text={"Setting"} screen="SettingScreen" navigation={navigation}/>
+                <SelectVechileCard icon={LanguageIcon} text={"Languages"} screen="EditProfileScreen" navigation={navigation}/>
             </ScrollView>
         </View>
     )

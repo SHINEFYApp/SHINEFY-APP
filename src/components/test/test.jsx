@@ -22,8 +22,6 @@ const Tab = createBottomTabNavigator();
 
 export default function MyTabs() {
 
-  console.log(profileIcon + "556565")
-
   return (
     <Tab.Navigator
       sceneContainerStyle={{
@@ -34,7 +32,7 @@ export default function MyTabs() {
       screenOptions={{
       
         header: props => <NavigationTop {...props} />,
-        headerShown: false,
+        headerShown: true,
         tabBarStyle: styles.tabBarStyle,
           tabBarShowLabel: false 
       }}>

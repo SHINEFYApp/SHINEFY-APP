@@ -3,7 +3,6 @@ import emptyImg from '../../assets/emptyIMG.png'
 import Button from "../../components/mainButton/Button"
 import LocationCard from "../../components/locationComponentCard/locationComponentCard"
 import { ScrollView } from "react-native-gesture-handler"
-import NotficationCard from "../../components/notficationCard/notficationCard"
 export default function SavedLocationScreen({navigation}) {
     
     const locations = [1]
@@ -21,6 +20,8 @@ export default function SavedLocationScreen({navigation}) {
             </View> :
             <View>
             <ScrollView className="px-2">
+                <LocationCard />
+                <LocationCard />
                 <LocationCard />
                 <LocationCard />
                 <LocationCard />

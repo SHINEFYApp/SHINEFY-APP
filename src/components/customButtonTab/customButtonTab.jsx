@@ -1,14 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import Svg, {Path} from 'react-native-svg';
 import { Image } from 'react-native-ui-lib';
-
+import Modal from 'react-native-modal';
+import AddVehiclePopup from '../addVehiclePopup/addVehiclePopup';
+import { useRecoilState } from 'recoil';
+import addVehiclePopUpState from '../../atoms/addVehiclePopUp/addVehiclePopUp'
 const CustomTabBarButton = props => {
 
-    console.log(props)
+  const [isAddPopUpOpen , setIsAddPopUpOpen] = useState(false)
+
+
+  function handleClosePopUp() {
+    setIsAddPopUpOpen(false)
+  }
+
     return (
     props.float ?
       <View style={styles.btnWrapper}>
+              <Modal
+       avoidKeyboard={true}
+       hasBackdrop={true}
+       isVisible={isAddPopUpOpen}>
+        <AddVehiclePopup closePopUp={handleClosePopUp} nextScreen={props.onPress}/>
+      </Modal>
         <View style={{flexDirection: 'row'}}>
           <View
             style={[
@@ -33,7 +48,7 @@ const CustomTabBarButton = props => {
 
         <TouchableOpacity
           activeOpacity={1}
-          onPress={props.onPress}
+          onPress={()=>setIsAddPopUpOpen(true)}
           style={[styles.activeBtn]}>
           <Text>{props.children}</Text>
         </TouchableOpacity>
