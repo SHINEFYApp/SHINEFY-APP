@@ -1,12 +1,12 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../../screens/homeScreen/homeScreen';
 import BottomTabs from '../bottomTabs/bottomTabs';
 import VehiclesScreen from '../../screens/vehiclesScreen/vehiclesScreen';
 import NavigationTop from '../navigationTop/navigationTop';
 import CustomTabBarButton from '../customButtonTab/customButtonTab';
 import CustomTabBar from '../customTab/customTab';
-import {StyleSheet} from 'react-native';
-import {Image} from 'react-native-ui-lib';
+import { StyleSheet } from 'react-native';
+import { Image } from 'react-native-ui-lib';
 import homeIcon from '../../assets/icons/HomeIcon.png';
 import homeActiveIcon from '../../assets/icons/HomeIconActive.png';
 import vechileIcon from '../../assets/icons/vechileIcon.png';
@@ -18,6 +18,7 @@ import BookingIconActive from '../../assets/icons/BookingIconActive.png';
 import addIcon from '../../assets/icons/Add_roundIcon.png';
 import AddVechileScreen from '../../screens/addVechile/addVechile';
 import ProfileScreen from '../../screens/profileScreen/profileScreen';
+import MyBookingScreen from '../../screens/myBookingScreen/myBookingScreen';
 const Tab = createBottomTabNavigator();
 
 export default function MyTabs() {
@@ -27,14 +28,14 @@ export default function MyTabs() {
       sceneContainerStyle={{
         backgroundColor: '#FFFAF2',
       }}
-      
+
       tabBar={props => <CustomTabBar {...props} />}
       screenOptions={{
-      
+
         header: props => <NavigationTop {...props} />,
         headerShown: true,
         tabBarStyle: styles.tabBarStyle,
-          tabBarShowLabel: false 
+        tabBarShowLabel: false
       }}>
 
       <Tab.Screen
@@ -43,7 +44,7 @@ export default function MyTabs() {
         options={{
           tabBarLabel: 'Home TEST',
           tabBarIcon: () => <Image source={homeIcon} />,
-          tabBarButton: props => <CustomTabBarButton {...props} screenName="Home" activeIcon={homeActiveIcon}/>,
+          tabBarButton: props => <CustomTabBarButton {...props} screenName="Home" activeIcon={homeActiveIcon} />,
         }}
       />
       <Tab.Screen
@@ -51,7 +52,7 @@ export default function MyTabs() {
         component={VehiclesScreen}
         options={{
           tabBarIcon: () => <Image source={vechileIcon} />,
-          tabBarButton: props => <CustomTabBarButton {...props} screenName="Vehicles" activeIcon={vechileActiveIcon}/>,
+          tabBarButton: props => <CustomTabBarButton {...props} screenName="Vehicles" activeIcon={vechileActiveIcon} />,
         }}
       />
       <Tab.Screen
@@ -60,15 +61,15 @@ export default function MyTabs() {
         options={{
           tabBarIcon: () => <Image source={addIcon} />,
           tabBarButton: props => <CustomTabBarButton {...props} float={true} />,
-          tabBarLabel: ()=>{},
+          tabBarLabel: () => { },
         }}
       />
       <Tab.Screen
         name="Bookings"
-        component={HomeScreen}
+        component={MyBookingScreen}
         options={{
           tabBarIcon: () => <Image source={bookingIcon} />,
-          tabBarButton: props => <CustomTabBarButton {...props} screenName="Bookings" activeIcon={BookingIconActive}/>,
+          tabBarButton: props => <CustomTabBarButton {...props} screenName="Bookings" activeIcon={BookingIconActive} />,
         }}
       />
       <Tab.Screen
@@ -76,7 +77,7 @@ export default function MyTabs() {
         component={ProfileScreen}
         options={{
           tabBarIcon: () => <Image source={profileIcon} />,
-          tabBarButton: props => <CustomTabBarButton {...props} screenName= "Profile" activeIcon={profileIconActive}/>,
+          tabBarButton: props => <CustomTabBarButton {...props} screenName="Profile" activeIcon={profileIconActive} />,
         }}
       />
     </Tab.Navigator>

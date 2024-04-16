@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
-import {Image, Text, View} from 'react-native-ui-lib';
+import React, { useState } from 'react';
+import { Image, Text, View } from 'react-native-ui-lib';
 import SearchInput from '../../components/searchInput/searchInput';
 import SaleBox from '../../components/saleBox/saleBox';
-import {ScrollView} from 'react-native';
+import { ScrollView } from 'react-native';
 import locationIcon from '../../assets/icons/locationIcon.png';
 import WashServicesCard from '../../components/washServicesCard/washServicesCard';
 import MyTabs from '../../components/bottomTabs/bottomTabs';
@@ -11,7 +11,7 @@ import NotficationCard from '../../components/notficationCard/notficationCard';
 import AddVehiclePopup from '../../components/addVehiclePopup/addVehiclePopup';
 import Modal from 'react-native-modal';
 
-export default function HomeScreen({navigation}) {
+export default function HomeScreen({ navigation }) {
   const [currentLocation, setCurrentLocation] = useState({});
 
 
@@ -24,7 +24,7 @@ export default function HomeScreen({navigation}) {
         <View>
           <View className="mt-2 flex-row items-center px-4">
             <Text className="text-[#000] text-xl ">Special Offers </Text>
-            <Text className="text-mainColor flex-1 text-right" onPress={()=>{
+            <Text className="text-mainColor flex-1 text-right" onPress={() => {
               navigation.navigate("specialOffersScreen")
             }}>See All</Text>
           </View>
@@ -56,16 +56,16 @@ export default function HomeScreen({navigation}) {
         <View className={'px-4'}>
           <View className="mt-2 flex-row items-center">
             <Text className="text-[#000] text-xl ">Wash Services </Text>
-            <Text className="text-mainColor flex-1 text-right" onPress={()=>{
+            <Text className="text-mainColor flex-1 text-right" onPress={() => {
               navigation.navigate("WashServicesScreen")
             }}>See All</Text>
           </View>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            <WashServicesCard />
-            <WashServicesCard />
-            <WashServicesCard />
-            <WashServicesCard />
-            <WashServicesCard />
+            <WashServicesCard navigation={navigation} id={1} />
+            <WashServicesCard navigation={navigation} id={2} />
+            <WashServicesCard navigation={navigation} id={3} />
+            <WashServicesCard navigation={navigation} id={4} />
+            <WashServicesCard navigation={navigation} id={6} />
           </ScrollView>
         </View>
       </ScrollView>

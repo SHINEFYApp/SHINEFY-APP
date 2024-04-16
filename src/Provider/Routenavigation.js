@@ -56,6 +56,7 @@ import WalletScreen from '../screens/walletScreen/walletScreen';
 import SettingScreen from '../screens/settingScreen/settingScreen';
 import AboutUsScreen from '../screens/aboutUsScreen/aboutUsScreen';
 import ChangePasswordProfile from '../screens/changePasswordProfile/changePasswordProfile';
+import WashServiceDetails from '../screens/washServiceDetails/washServiceDetails';
 
 const Stack = createStackNavigator();
 
@@ -81,6 +82,10 @@ const Stacknav = navigation => {
       <Stack.Screen
         name="SavedLocationScreen"
         component={SavedLocationScreen}
+      />
+      <Stack.Screen
+        name="WashServiceDetails"
+        component={WashServiceDetails}
       />
       <Stack.Screen
         name="MyWallet"
