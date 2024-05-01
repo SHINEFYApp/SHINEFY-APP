@@ -9,8 +9,10 @@ import Modal from 'react-native-modal';
 import ConfirmationPopUp from '../../components/confirmationPopUp/ConfirmationPopUp';
 import { useState } from "react";
 
-export default function VehicleCard () {
+export default function VehicleCard ({car}) {
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+
+    console.log(car)
 
   function handleClosePopUp() {
     setIsPopUpOpen(false);
@@ -22,6 +24,7 @@ export default function VehicleCard () {
         <View  className="w-full relative bg-white rounded-xl p-4 flex-row mb-7" style={style.box}>
              <Modal avoidKeyboard={true} hasBackdrop={true} isVisible={isPopUpOpen}>
         <ConfirmationPopUp
+            itemId={car.vehicle_id}
           closePopUp={handleClosePopUp}
           onConfirm={() => {handleClosePopUp()}}
           heading={'Delete'}
@@ -30,13 +33,13 @@ export default function VehicleCard () {
         />
       </Modal>
             <View className="items-center pr-2 border-r border-[#ccc] mr-5">
-                <Text className="text-xl font-semibold mb-2">Cross over</Text>
+                <Text className="text-xl font-semibold mb-2">{car.vehicle_name[0]}</Text>
                 <Image source={img} />
             </View>
             <View className="gap-2 justify-end w-1/2 mb-3">
                 <View className="flex-row justify-between">
                     <Text className="text-[#888]">PlateNumber:</Text>
-                    <Text>د ق ر 6543</Text>
+                    <Text>{car.plate_number}</Text>
                 </View>
                 <View className="flex-row justify-between">
                     <Text className="text-[#888]">Brand:</Text>
@@ -44,11 +47,14 @@ export default function VehicleCard () {
                 </View>
                 <View className="flex-row justify-between">
                     <Text className="text-[#888]">model:</Text>
-                    <Text>595 SERIES</Text>
+                    <Text>{car.model_name[0]}</Text>
                 </View>
                 <View className="flex-row justify-between">
                     <Text className="text-[#888]">Color:</Text>
-                    <Text>Black</Text>
+                    <View className="flex-row gap-2">
+                        <View className={`w-[20] h-[20] rounded-full`} style={{backgroundColor:car.color_code}}></View>
+                        <Text>Black</Text>
+                    </View>
                 </View>
             </View>
            <TouchableOpacity className="absolute top-3 right-3" onPress={()=>{setIsPopUpOpen(true)}}>

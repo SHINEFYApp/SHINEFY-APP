@@ -3,6 +3,7 @@ import {Image, Text, View ,TouchableOpacity} from 'react-native-ui-lib';
 import Button from '../mainButton/Button';
 
 import closeIcon from '../../assets/icons/closeIcon.png';
+import deleteVehicle from '../../Features/deleteVehicle/deleteVehicle';
 
 export default function ConfirmationPopUp({
   heading,
@@ -11,7 +12,17 @@ export default function ConfirmationPopUp({
   icon,
   buttonTitle,
   closePopUp,
+  itemId
 }) {
+
+  async function deleteItem() {
+      try{
+        deleteVehicle(itemId)
+    }catch(err) {
+        console.log(err)
+    }
+  }
+
   return (
     <View className="bg-white p-5 rounded-lg ">
       <TouchableOpacity className="ml-auto my-2" onPress={closePopUp}>
@@ -22,8 +33,9 @@ export default function ConfirmationPopUp({
       <Button
         buttonColor={'#D04E46'}
         onPress={()=>{
+          deleteItem()
             onConfirm()
-            closePopUp()
+            // closePopUp()
         }}
         Title={buttonTitle}
         icon={icon}

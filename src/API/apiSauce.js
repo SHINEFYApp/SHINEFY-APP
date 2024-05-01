@@ -1,9 +1,19 @@
 import { create } from "apisauce";
-import { config } from "../Provider/configProvider";
+import {Platform} from 'react-native';
+import base64 from 'react-native-base64';
+
 
  const apiSauce = create({
-  baseURL: config.baseURL,
-  headers: { Accept: 'application/vnd.github.v3+json' },
-})
+  baseURL: 'https://shinefy.co/app-test/admin/api',
+  headers: {
+    Authorization: `Basic ${base64.encode(
+      base64.encode('mario') + ':' + base64.encode('carbonell'),
+    )}`,
+    'app-type': Platform.OS,
+    'app-version': '4',
+    'user-type': 'user',
+  },
+});
+
 
 export default apiSauce

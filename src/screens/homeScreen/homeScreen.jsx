@@ -9,24 +9,24 @@ import WashServicesCard from '../../components/washServicesCard/washServicesCard
 import MapComponent from '../../components/mapComponent/mapComponent';
 import { localStorage } from '../../Provider/localStorageProvider';
 import apiSauce from '../../API/apiSauce';
+import getServices from '../../Features/getServices/getServices';
+// import getServices from '../../Features/getServices/getServices';
 export default function HomeScreen({ navigation }) {
   const [currentLocation, setCurrentLocation] = useState({});
-
-  async function getServices () {
-    var user_arr = await localStorage.getItemObject('user_arr');
-    console.log(user_arr.user_id)
-    try {
-    apiSauce
-        .get(`/get_user_vehicle/${user_arr.user_id}/NA`)
-        .then(res => console.log(res.data))
-}catch(err) {
-    console.log(err)
-}
-  }
-
+  const [services , SetServices] = useState([])
+  const [specialOffers , SetSpecialOffers] = useState([])
+  
   useEffect(()=>{
-    getServices ()
-  })
+    const fetchData = async () => {
+    const data =await getServices()
+    console.log(data)
+    SetServices(data.all_service_arr.service_arr)
+    SetSpecialOffers(data.all_service_arr.extra_service_arr)
+  }
+  fetchData()
+  },[])
+
+  console.log(services)
 
   return (
     <View className="flex-1 ">
@@ -46,10 +46,13 @@ export default function HomeScreen({ navigation }) {
             horizontal={true}
             className="pl-3 mt-3"
             showsHorizontalScrollIndicator={false}>
-            <SaleBox />
-            <SaleBox />
-            <SaleBox />
-            <SaleBox />
+              {
+                specialOffers?.map((offer)=>{
+                  return(
+                    <SaleBox offer={offer} />
+                  )
+                })
+              }
           </ScrollView>
         </View>
         <View className={'p-4'}>
@@ -75,11 +78,14 @@ export default function HomeScreen({ navigation }) {
             }}>See All</Text>
           </View>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            <WashServicesCard navigation={navigation} id={1} />
-            <WashServicesCard navigation={navigation} id={2} />
-            <WashServicesCard navigation={navigation} id={3} />
-            <WashServicesCard navigation={navigation} id={4} />
-            <WashServicesCard navigation={navigation} id={6} />
+            {
+              services?.map((service , index)=> {
+                console.log(service)
+                return (
+                  <WashServicesCard navigation={navigation} id={index} service={service}/>
+                )
+              })
+            }
           </ScrollView>
         </View>
       </ScrollView>

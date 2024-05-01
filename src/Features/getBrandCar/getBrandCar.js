@@ -3,16 +3,14 @@ import { apifuntion } from "../../Provider/Apicallingprovider/apiProvider";
 import { config } from "../../Provider/configProvider";
 import { localStorage } from "../../Provider/localStorageProvider";
 
-export default async function getMyVehicles() {
+export default async function getBrand() {
     var user_arr = await localStorage.getItemObject('user_arr');
     let user_id = user_arr.user_id;
     var add_car_arr = await localStorage.getItemObject('add_car_arr');
     try {
-      
-        let res = await apiSauce.get(`/get_user_vehicle/${user_id}/NA`)
-        
+        let res = await apiSauce.get(`/get_add_vehical/${user_id}/`)
         return(res.data)
-}catch(err) {
+    }catch(err) {
     console.log(err)
 }
 //  apifuntion

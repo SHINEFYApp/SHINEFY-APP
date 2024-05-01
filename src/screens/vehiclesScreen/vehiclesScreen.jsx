@@ -3,18 +3,28 @@ import VehicleCard from "../../components/VehicleCard/VehicleCard";
 import { ScrollView } from "react-native-gesture-handler";
 import Button from "../../components/mainButton/Button";
 import emptyImg from '../../assets/emptyVehicle.png'
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import getMyVehicles from "../../Features/getVehicles/getVehicles";
 
 export default function VehiclesScreen() {
     const cars = [1]
 
+    const [myCars , setMyCars] = useState([])
+
+    useEffect(()=>{
+    const fetchData = async () => {
+    const data =await getMyVehicles()
+    console.log(data.vehicle_arr)
+    setMyCars(data.vehicle_arr)
+  }
+  fetchData()
+  },[])
 
     return (
         <View className="pt-[80] px-5 relative flex-1">
         
         {
-            cars.length == 0 ?
+            myCars == "NA" ?
             <View className='flex-1 justify-center items-center p-10'>
                 <Text>No Vehicle Yet</Text>
             <Image source={emptyImg}/>
@@ -24,8 +34,11 @@ export default function VehiclesScreen() {
         </View>
             : 
             <ScrollView>
-                <VehicleCard />
-                <VehicleCard />
+                {myCars?.map((car)=>{
+                    return (
+                        <VehicleCard car={car} />
+                    )
+                })}
             <View>
                 <Button Title={"Add Vehicle"}/>
             </View>

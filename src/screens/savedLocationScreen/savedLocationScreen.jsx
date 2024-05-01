@@ -4,12 +4,13 @@ import Button from "../../components/mainButton/Button"
 import LocationCard from "../../components/locationComponentCard/locationComponentCard"
 import { ScrollView } from "react-native-gesture-handler"
 import getSavedLocation from "../../Features/getSavedLocation/getSavedLocation"
+import getServices from "../../Features/getServices/getServices"
 export default function SavedLocationScreen({navigation}) {
     
     const locations = [1]
     
     getSavedLocation()
-    
+    getServices()
     return(
         <View className="flex-1 pt-[80px]">
             {

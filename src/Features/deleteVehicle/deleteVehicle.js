@@ -1,16 +1,12 @@
 import apiSauce from "../../API/apiSauce";
-import { apifuntion } from "../../Provider/Apicallingprovider/apiProvider";
-import { config } from "../../Provider/configProvider";
 import { localStorage } from "../../Provider/localStorageProvider";
 
-export default async function getMyVehicles() {
+export default async function deleteVehicle(vehicle_id) {
     var user_arr = await localStorage.getItemObject('user_arr');
     let user_id = user_arr.user_id;
     var add_car_arr = await localStorage.getItemObject('add_car_arr');
     try {
-      
-        let res = await apiSauce.get(`/get_user_vehicle/${user_id}/NA`)
-        
+        let res = await apiSauce.get(`/delete_vehicle/${user_id}/${vehicle_id}`) 
         return(res.data)
 }catch(err) {
     console.log(err)
