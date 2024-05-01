@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {ImageBackground, StyleSheet} from 'react-native';
 import {Colors, Text, View} from 'react-native-ui-lib';
 import background from '../../assets/backgroundImage.png';
@@ -6,9 +6,17 @@ import OTPTextInput from 'react-native-otp-textinput';
 import {mobileW} from '../../Provider/utilslib/Utils';
 import Button from '../../components/mainButton/Button';
 import BackButton from '../../components/backButton/backButton';
+import { sendOTP } from '../../Features/verifyOTP/verifyOTP';
+
 
 export default function OTPScreen({navigation, route}) {
-  console.log(route.params);
+  
+  console.log(route.params.phone_number)
+
+  useEffect(()=>{
+    sendOTP(route.params.phone_number)
+  })
+
   return (
     <View className={'flex-1'}>
       <BackButton navigation={navigation} />

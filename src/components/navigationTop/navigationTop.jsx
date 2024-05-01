@@ -12,6 +12,10 @@ export default function NavigationTop(props) {
         return 'Saved Location';
       case 'addLocationScreen':
         return 'Booking Location';
+      case 'ProfileScreen':
+        return 'Profile';
+      case 'AddCar':
+        return 'Add Your Vechile';
       default:
         return props.route.name;
     }

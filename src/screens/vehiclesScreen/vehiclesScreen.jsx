@@ -3,10 +3,11 @@ import VehicleCard from "../../components/VehicleCard/VehicleCard";
 import { ScrollView } from "react-native-gesture-handler";
 import Button from "../../components/mainButton/Button";
 import emptyImg from '../../assets/emptyVehicle.png'
+import { useEffect } from "react";
+import getMyVehicles from "../../Features/getVehicles/getVehicles";
 
 export default function VehiclesScreen() {
     const cars = [1]
-
 
 
     return (

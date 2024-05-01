@@ -1,22 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, Text, View } from 'react-native-ui-lib';
 import SearchInput from '../../components/searchInput/searchInput';
 import SaleBox from '../../components/saleBox/saleBox';
 import { ScrollView } from 'react-native';
 import locationIcon from '../../assets/icons/locationIcon.png';
 import WashServicesCard from '../../components/washServicesCard/washServicesCard';
-import MyTabs from '../../components/bottomTabs/bottomTabs';
-import MapComponent from '../../components/mapComponent/mapComponent';
-import NotficationCard from '../../components/notficationCard/notficationCard';
-import AddVehiclePopup from '../../components/addVehiclePopup/addVehiclePopup';
-import Modal from 'react-native-modal';
 
+import MapComponent from '../../components/mapComponent/mapComponent';
+import { localStorage } from '../../Provider/localStorageProvider';
+import apiSauce from '../../API/apiSauce';
 export default function HomeScreen({ navigation }) {
   const [currentLocation, setCurrentLocation] = useState({});
 
+  async function getServices () {
+    var user_arr = await localStorage.getItemObject('user_arr');
+    console.log(user_arr.user_id)
+    try {
+    apiSauce
+        .get(`/get_user_vehicle/${user_arr.user_id}/NA`)
+        .then(res => console.log(res.data))
+}catch(err) {
+    console.log(err)
+}
+  }
+
+  useEffect(()=>{
+    getServices ()
+  })
 
   return (
     <View className="flex-1 ">
+     
       <ScrollView>
         <View className="p-4 pt-[85px]">
           <SearchInput placeholder={'what are you looking for ?'} />
@@ -69,6 +83,7 @@ export default function HomeScreen({ navigation }) {
           </ScrollView>
         </View>
       </ScrollView>
+ 
 
     </View>
   );

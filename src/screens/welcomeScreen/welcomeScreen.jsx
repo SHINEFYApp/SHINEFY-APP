@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {BackHandler, ImageBackground, KeyboardAvoidingViewComponent, StyleSheet} from 'react-native';
-import {Image, Text, View} from 'react-native-ui-lib';
+import {BackHandler, ImageBackground, KeyboardAvoidingViewBase, StyleSheet} from 'react-native';
+import {Image, KeyboardAwareScrollView, Text, View} from 'react-native-ui-lib';
 import background from '../../assets/backgroundImage.png';
 import Button from '../../components/mainButton/Button';
 import LoginModal from '../../components/auth/login/login';
@@ -8,6 +8,7 @@ import Animated, {useSharedValue, withTiming} from 'react-native-reanimated';
 import SignupModal from '../../components/auth/signup/signup';
 import logo from '../../assets/logo-2.png';
 import Modal from 'react-native-modal';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default function WelcomeScreen({navigation}) {
   const logoScale = useSharedValue(1);
@@ -44,7 +45,7 @@ export default function WelcomeScreen({navigation}) {
   }, [isSignupModalVisivle, isLoginModalVisible, logoScale, logoTranslateY]);
 
   return (
-    <View className="flex-1">
+    <View className="flex-1">      
       <ImageBackground source={background} style={styles.image}>
         <View style={styles.container}>
           <Animated.View

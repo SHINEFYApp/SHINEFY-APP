@@ -12,7 +12,7 @@ import Edit_Profile from '../Edit_Profile';
 import Saved_Location from '../Saved_Location';
 import My_Wallet from '../My_Wallet';
 import Language from '../Language';
-import Setting from '../Setting';
+// import Setting from '../Setting';
 import Change_Password from '../Change_Password';
 import Contact from '../Contact';
 import Faqs from '../Faqs';
@@ -25,7 +25,7 @@ import Select_Date from '../Select_Date';
 import Success from '../Success';
 import Otp_verify from '../Otp_verify';
 import New_password from '../New_password';
-import Reason_message from '../Reason_message';
+// import Reason_message from '../Reason_message';
 import Delete_success from '../Delete_success';
 import Search_Location from '../Search_Location';
 import Notification from '../Notification';
@@ -57,6 +57,14 @@ import SettingScreen from '../screens/settingScreen/settingScreen';
 import AboutUsScreen from '../screens/aboutUsScreen/aboutUsScreen';
 import ChangePasswordProfile from '../screens/changePasswordProfile/changePasswordProfile';
 import WashServiceDetails from '../screens/washServiceDetails/washServiceDetails';
+import AddVehiclesDetails from '../screens/addVehiclesDetails/AddVehiclesDetails';
+import PackageScreen from '../screens/packagesScreen/PackagesScreen';
+import PackageDetailsScreen from '../screens/packageDetailsScreen/packageDetailsScreen';
+import LanguageScreen from '../screens/languageScreen/LanguageScreen';
+import MySubscreptionScreen from '../screens/mySubscreptionScreen/mySubscreptionScreen';
+import PaymentMethod from '../screens/PaymentMethod/PaymentMethodScreen';
+import SelectDateTime from '../screens/selectDate&Time/SelectDateTime';
+import RequestDetails from '../screens/requestDetails/RequestDetails';
 
 const Stack = createStackNavigator();
 
@@ -84,12 +92,41 @@ const Stacknav = navigation => {
         component={SavedLocationScreen}
       />
       <Stack.Screen
-        name="WashServiceDetails"
-        component={WashServiceDetails}
+        name="PackageScreen"
+        component={PackageScreen}
       />
+      <Stack.Screen
+        name="SelectDateTime"
+        component={SelectDateTime}
+      />
+      <Stack.Screen
+        name="PaymentMethod"
+        component={PaymentMethod}
+      />
+      <Stack.Screen
+        name="PackageDetailsScreen"
+        component={PackageDetailsScreen}
+      />
+      <Stack.Screen
+        name="addVehiclesDetails"
+        component={AddVehiclesDetails}
+      />
+      <Stack.Screen
+        name="MySubscreptionScreen"
+        component={MySubscreptionScreen}
+      />
+      <Stack.Screen
+        name="LanguageScreen"
+        component={LanguageScreen}
+      />
+      <Stack.Screen name="WashServiceDetails" component={WashServiceDetails} />
       <Stack.Screen
         name="MyWallet"
         component={WalletScreen}
+      />
+      <Stack.Screen
+        name="RequestDetails"
+        component={RequestDetails}
       />
       <Stack.Screen
         name="SettingScreen"
@@ -185,11 +222,11 @@ const Stacknav = navigation => {
         component={Language}
         options={{headerShown: true}}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         name="Setting"
         component={Setting}
         options={{headerShown: true}}
-      />
+      /> */}
       <Stack.Screen
         name="Change_Password"
         component={Change_Password}
@@ -214,7 +251,7 @@ const Stacknav = navigation => {
         name="Home"
         component={Home}
         options={{
-          headerShown: true,
+          headerShown: false,
           gestureEnabled: false,
         }}
       />
@@ -253,11 +290,11 @@ const Stacknav = navigation => {
         component={New_password}
         options={{headerShown: true}}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         name="Reason_message"
         component={Reason_message}
         options={{headerShown: true}}
-      />
+      /> */}
       <Stack.Screen
         name="Delete_success"
         component={Delete_success}

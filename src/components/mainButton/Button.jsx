@@ -1,16 +1,22 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Text, TouchableOpacity, View } from 'react-native-ui-lib';
-export default function Button({ Title, secondStyle, textColor, onPress, smallButton, buttonColor }) {
+import { Image, Text, TouchableOpacity, View } from 'react-native-ui-lib';
+export default function Button({ Title, secondStyle, textColor, onPress, smallButton, buttonColor , icon}) {
 
   return (
     <View>
       <TouchableOpacity
         onPress={onPress}
         style={[styles.button, secondStyle && styles.secondButton, textColor && { borderColor: textColor }, smallButton && styles.smallButton, buttonColor && { backgroundColor: buttonColor }]}>
+        <View className="flex-row justify-center items-center gap-2">
+        {
+          icon &&
+          <Image source={icon} />
+        }
         <Text style={[styles.text, textColor && { color: textColor }]} className={smallButton && "text-xs"}>
-          {Title}
+           {Title}
         </Text>
+        </View>
       </TouchableOpacity>
     </View >
   );

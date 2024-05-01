@@ -68,7 +68,7 @@ export class AppProvider extends Component {
 
     return (
       <AppContext.Provider value={{...funcs}}>
-        <SafeAreaView style={{flex: 1, backgroundColor: Colors.appColor}}>
+       
           <View style={{flex: 1}}>
             <StatusBar
               hidden={false}
@@ -126,7 +126,6 @@ export class AppProvider extends Component {
               </View>
             )}
           </View>
-        </SafeAreaView>
       </AppContext.Provider>
     );
   }

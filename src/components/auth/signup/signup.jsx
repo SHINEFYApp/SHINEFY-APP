@@ -9,6 +9,7 @@ import {useState} from 'react';
 import signupAuth from '../../../Features/signup/signup';
 
 export default function SignupModal({openLogin , navigation , closeSignup}) {
+  const [isCompany, setIsCompany] = useState(false);
   const [isSelected, setSelection] = useState(false);
 
   const [userData, setUserData] = useState({});
@@ -59,8 +60,24 @@ export default function SignupModal({openLogin , navigation , closeSignup}) {
               });
             }} placeholder={'Email'} icon={phoneIcon} />
         </View>
+        {
+          isCompany &&
+           <View>
+            <Text className="text-green-700 font-bold">
+              Please check if you are an empoyee of an authroize company . Then enter the company's email and check to enjoy unprecedente discounts .
+            </Text>
+            <Text className="text-red-700 my-3">
+              If your Company don't have domain registered please enter company code
+            </Text>
+          <Input onChange={e => {
+              handleUserData({
+                companyCode: e.nativeEvent.text,
+              });
+            }} placeholder={'Company Code (Optional)'} icon={keyIcon} />
+        </View>
+        }
         <View className="flex flex-row items-center gap-2 mb-2">
-          <Checkbox value={isSelected} onValueChange={setSelection} />
+          <Checkbox value={isCompany} onValueChange={setIsCompany} />
           <Text className="font-bold">Company Email?</Text>
         </View>
         <View>

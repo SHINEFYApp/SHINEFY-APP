@@ -5,7 +5,7 @@ import {notification} from '../../Provider/NotificationProvider';
 import {config} from '../../Provider/configProvider';
 import {localStorage} from '../../Provider/localStorageProvider';
 
-export default function signupAuth(data, navigation) {
+export default function signupAuth(data, navigation, closeSignup) {
   console.log(data);
   if (data.checkboxPolicy == false) {
     msgProvider.toast(Lang_chg.acceptTermsPolicy[config.language], 'center');
@@ -41,6 +41,7 @@ export default function signupAuth(data, navigation) {
           };
           localStorage.setItemObject('user_value', user_value);
           localStorage.setItemString('password', data.password);
+          closeSignup()
           navigation.navigate('OTPScreen', {
             check: 1,
             phone_number: data.phone_number,
