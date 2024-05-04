@@ -77,7 +77,7 @@ export default function SettingScreen({ navigation }) {
         />
         <SelectVechileCard
           text={"FAQ's"}
-          screen={'AboutUsScreen'}
+          screen={"FAQ's"}
           navigation={navigation}
           icon={qIcon}
         />
