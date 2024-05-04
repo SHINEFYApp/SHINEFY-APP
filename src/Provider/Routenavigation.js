@@ -65,6 +65,7 @@ import MySubscreptionScreen from '../screens/mySubscreptionScreen/mySubscreption
 import PaymentMethod from '../screens/PaymentMethod/PaymentMethodScreen';
 import SelectDateTime from '../screens/selectDate&Time/SelectDateTime';
 import RequestDetails from '../screens/requestDetails/RequestDetails';
+import ContactUsScreen from '../screens/contactUs/ContactUs';
 
 const Stack = createStackNavigator();
 
@@ -143,6 +144,10 @@ const Stacknav = navigation => {
       <Stack.Screen
         name="EditProfileScreen"
         component={EditProfileScreen}
+      />
+      <Stack.Screen
+        name="Contact Us"
+        component={ContactUsScreen}
       />
       <Stack.Screen
         name="specialOffersScreen"

@@ -1,13 +1,13 @@
 import React from 'react';
-import {ScrollView} from 'react-native-gesture-handler';
-import {View} from 'react-native-ui-lib';
+import { ScrollView } from 'react-native-gesture-handler';
+import { View } from 'react-native-ui-lib';
 import SelectVechileCard from '../../components/selectVechileCard.jsx/selectVechileCard';
 import Button from '../../components/mainButton/Button';
 import AppLogout from '../../Features/logout/Logout';
 import Modal from 'react-native-modal';
 import logoutIcon from '../../assets/icons/logoutIcon.png';
 import ConfirmationPopUp from '../../components/confirmationPopUp/ConfirmationPopUp';
-import {useState} from 'react';
+import { useState } from 'react';
 import deleteIcon from '../../assets/icons/deleteIcon.png'
 import keyIcon from '../../assets/icons/setting/keyIcon.png'
 import aboutIcon from '../../assets/icons/setting/aboutIcon.png'
@@ -20,7 +20,7 @@ import rateIcon from '../../assets/icons/setting/rateIcon.png'
 import shareIcon from '../../assets/icons/setting/shareIcon.png'
 
 
-export default function SettingScreen({navigation}) {
+export default function SettingScreen({ navigation }) {
   const [isPopUpOpenDelete, setIsPopUpOpenDelete] = useState(false);
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
 
@@ -36,7 +36,7 @@ export default function SettingScreen({navigation}) {
       <Modal avoidKeyboard={true} hasBackdrop={true} isVisible={isPopUpOpenDelete}>
         <ConfirmationPopUp
           closePopUp={handleClosePopUpDelete}
-          onConfirm={() => {}}
+          onConfirm={() => { }}
           heading={'Delete Account ?'}
           p={'Are you sure , you want to Delete Account ?'}
           buttonTitle={'Delete'}
@@ -70,10 +70,10 @@ export default function SettingScreen({navigation}) {
         />
         <SelectVechileCard
           text={'Contact Us'}
-          screen={'AboutUsScreen'}
+          screen={'Contact Us'}
           navigation={navigation}
           icon={phoneIcon}
-          
+
         />
         <SelectVechileCard
           text={"FAQ's"}
@@ -100,27 +100,27 @@ export default function SettingScreen({navigation}) {
           icon={aboutIcon}
         />
         <View className="border-t border-[#ccc] pt-3">
-        <SelectVechileCard
-          text={'Rate App'}
-          screen={'AboutUsScreen'}
-          navigation={navigation}
-          arrow
-          icon={rateIcon}
-        />
-        <SelectVechileCard
-          text={'Share App'}
-          screen={'AboutUsScreen'}
-          navigation={navigation}
-          arrow
-          icon={shareIcon}
-        />
-        <SelectVechileCard
-          text={'Delete Account'}
-          navigation={navigation}
-          arrow
-          icon={deleteIcon}
-          Press={()=>{setIsPopUpOpenDelete(true)}}
-        />
+          <SelectVechileCard
+            text={'Rate App'}
+            screen={'AboutUsScreen'}
+            navigation={navigation}
+            arrow
+            icon={rateIcon}
+          />
+          <SelectVechileCard
+            text={'Share App'}
+            screen={'AboutUsScreen'}
+            navigation={navigation}
+            arrow
+            icon={shareIcon}
+          />
+          <SelectVechileCard
+            text={'Delete Account'}
+            navigation={navigation}
+            arrow
+            icon={deleteIcon}
+            Press={() => { setIsPopUpOpenDelete(true) }}
+          />
 
         </View>
         <Button
