@@ -18,6 +18,9 @@ import privateIcon from '../../assets/icons/setting/privateIcon.png'
 import qIcon from '../../assets/icons/setting/qIcon.png'
 import rateIcon from '../../assets/icons/setting/rateIcon.png'
 import shareIcon from '../../assets/icons/setting/shareIcon.png'
+import Share from 'react-native-share';
+import { Shareratepro } from '../../Provider/Sharerateapp';
+
 
 
 export default function SettingScreen({ navigation }) {
@@ -102,17 +105,20 @@ export default function SettingScreen({ navigation }) {
         <View className="border-t border-[#ccc] pt-3">
           <SelectVechileCard
             text={'Rate App'}
-            screen={'AboutUsScreen'}
-            navigation={navigation}
             arrow
             icon={rateIcon}
+            Press={()=>{
+              Shareratepro.Rateusfunction('Shinefy', "https://play.google.com/store/apps/details?id=com.shinefy&hl=en_US&pli=1");
+            }}
           />
           <SelectVechileCard
             text={'Share App'}
-            screen={'AboutUsScreen'}
             navigation={navigation}
             arrow
             icon={shareIcon}
+            Press={()=>{
+              Shareratepro.sharefunction('Shinefy', "/");
+                        }}
           />
           <SelectVechileCard
             text={'Delete Account'}
