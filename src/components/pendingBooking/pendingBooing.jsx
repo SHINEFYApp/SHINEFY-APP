@@ -1,9 +1,8 @@
-import { Text, View } from "react-native-ui-lib";
 import BookingCard from "../BookingCard/bookingCard";
 import { ScrollView } from "react-native-gesture-handler";
 import EmptyBooking from "../emptyBooking/emptyBooking";
 
-export default function PendingBooking() {
+export default function PendingBooking({navigation}) {
     const data = [1]
     return (
         <>
@@ -12,11 +11,12 @@ export default function PendingBooking() {
                     <EmptyBooking />
                     :
                     <ScrollView className="mt-4">
-                        <BookingCard progress={"pending"} ButtonTitle="Cancel" />
-                        <BookingCard progress={"pending"} ButtonTitle="Cancel" />
-                        <BookingCard progress={"pending"} ButtonTitle="Cancel" />
-                        <BookingCard progress={"pending"} ButtonTitle="Cancel" />
-                        <BookingCard progress={"pending"} ButtonTitle="Cancel" />
+                        <BookingCard progress={"pending"} ButtonTitle="Cancel" onPress={()=> navigation.navigate('Cancel Booking')}/>
+                        <BookingCard progress={"pending"} ButtonTitle="Cancel" onPress={()=> navigation.navigate('Cancel Booking')} />
+                        <BookingCard progress={"pending"} ButtonTitle="Cancel" onPress={()=> navigation.navigate('Cancel Booking')} />
+                        <BookingCard progress={"pending"} ButtonTitle="Cancel" onPress={()=> navigation.navigate('Cancel Booking')} />
+                        <BookingCard progress={"pending"} ButtonTitle="Cancel" onPress={()=> navigation.navigate('Cancel Booking')} />
+                        
                     </ScrollView>
 
             }

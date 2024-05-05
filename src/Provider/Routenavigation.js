@@ -67,6 +67,7 @@ import SelectDateTime from '../screens/selectDate&Time/SelectDateTime';
 import RequestDetails from '../screens/requestDetails/RequestDetails';
 import ContactUsScreen from '../screens/contactUs/ContactUs';
 import FAQ from '../screens/FAQ/FAQ';
+import CancelBooking from '../components/cancelBooking/CancelBooking';
 
 const Stack = createStackNavigator();
 
@@ -116,6 +117,10 @@ const Stacknav = navigation => {
       <Stack.Screen
         name="MySubscreptionScreen"
         component={MySubscreptionScreen}
+      />
+      <Stack.Screen
+        name="Cancel Booking"
+        component={CancelBooking}
       />
       <Stack.Screen
         name="LanguageScreen"
