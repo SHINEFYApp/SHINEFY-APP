@@ -3,7 +3,8 @@ import Button from "../mainButton/Button";
 import Img from '../../assets/cardCar.png'
 import timeIcon from '../../assets/icons/timeIcon2.png'
 
-export default function BookingCard({ progress, ButtonTitle }) {
+export default function BookingCard({ progress, ButtonTitle, onPress }) {
+    
     return (
         <View className="bg-white p-3 mb-3">
             <View className="flex-row border-b pb-3 border-[#ccc] mb-3">
@@ -17,7 +18,7 @@ export default function BookingCard({ progress, ButtonTitle }) {
                             <Text className="ml-2">30 min</Text>
                         </View>
                     </View>
-                    <Button Title={ButtonTitle} smallButton buttonColor={progress == "pending" ? "#E15249" : progress == "in progress" ? "#5ABC7B" : null} />
+                    <Button Title={ButtonTitle} smallButton buttonColor={progress == "pending" ? "#E15249" : progress == "in progress" ? "#5ABC7B" : null} onPress={ onPress} />
                 </View>
             </View>
             <View className="flex-row justify-between">

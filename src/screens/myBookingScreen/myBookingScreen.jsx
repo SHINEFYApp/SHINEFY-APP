@@ -7,7 +7,7 @@ import ProgressBooking from "../../components/ProgressBooking/progressBooking";
 import PendingBooking from "../../components/pendingBooking/pendingBooing";
 import CompleteBooking from "../../components/completeBooking/completeBooking";
 
-export default function MyBookingScreen() {
+export default function MyBookingScreen({navigation}) {
 
     const [currentPage, setCurrentPage] = useState("pending")
 
@@ -21,7 +21,7 @@ export default function MyBookingScreen() {
             {
                 currentPage === "pending"
                     ?
-                    <PendingBooking />
+                    <PendingBooking navigation={navigation}/>
                     :
                     currentPage === "in progress"
                         ?
