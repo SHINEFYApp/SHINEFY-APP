@@ -68,6 +68,7 @@ import RequestDetails from '../screens/requestDetails/RequestDetails';
 import ContactUsScreen from '../screens/contactUs/ContactUs';
 import FAQ from '../screens/FAQ/FAQ';
 import CancelBooking from '../components/cancelBooking/CancelBooking';
+import BookingOverview from '../screens/bookingOverview/BookingOverview';
 
 const Stack = createStackNavigator();
 
@@ -101,6 +102,10 @@ const Stacknav = navigation => {
       <Stack.Screen
         name="SelectDateTime"
         component={SelectDateTime}
+      />
+      <Stack.Screen
+        name="Booking Overview"
+        component={BookingOverview}
       />
       <Stack.Screen
         name="PaymentMethod"
