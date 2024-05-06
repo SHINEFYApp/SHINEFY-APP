@@ -5,11 +5,10 @@ import { Image, Text, View } from "react-native-ui-lib";
 import locationMark from '../../assets/icons/bookingOverview/locationMark.png'
 import car from '../../assets/icons/bookingOverview/carImage.png'
 import CrossoverElement from "../../components/bookingOverview/crossoverElement";
-import VehicleCard from "../../components/VehicleCard/VehicleCard";
 import BookingOverviewTextDetails from "../../components/bookingOverview/BookingOverviewTextDetails";
 import Button from "../../components/mainButton/Button";
 
-const BookingOverview = () => {
+const BookingOverview = ({ navigation }) => {
     return <View className={'pt-[90px] px-5'}>
         <ScrollView className={'pb-16'}>
             <View className={'bg-mainColor py-4 w-full rounded'}>
@@ -62,8 +61,18 @@ const BookingOverview = () => {
                     <Button Title={'Apply'} />
                 </View>
             </View>
-            <Button Title={'Confirm Booking'} btnStyle={'font-semibold text-lg'} />
-            <Button Title={'Cancel Booking'} secondStyle={true} textColor={"#dd9923"} btnStyle={'font-semibold text-lg'} />
+            <Button
+                Title={'Confirm Booking'}
+                btnStyle={'font-semibold text-lg'}
+                onPress={() => navigation.navigate('PaymentMethod')}
+            />
+            <Button
+                Title={'Cancel Booking'}
+                secondStyle={true}
+                textColor={"#dd9923"}
+                btnStyle={'font-semibold text-lg'}
+                onPress={() => navigation.navigate('HomeScreen')}
+            />
             <View className={'py-3'}></View>
         </ScrollView>
     </View>

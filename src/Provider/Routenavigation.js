@@ -69,6 +69,7 @@ import ContactUsScreen from '../screens/contactUs/ContactUs';
 import FAQ from '../screens/FAQ/FAQ';
 import CancelBooking from '../components/cancelBooking/CancelBooking';
 import BookingOverview from '../screens/bookingOverview/BookingOverview';
+import AddCard from '../screens/addCard/AddCard';
 
 const Stack = createStackNavigator();
 
@@ -110,6 +111,10 @@ const Stacknav = navigation => {
       <Stack.Screen
         name="PaymentMethod"
         component={PaymentMethod}
+      />
+      <Stack.Screen
+        name="Add Card"
+        component={AddCard}
       />
       <Stack.Screen
         name="PackageDetailsScreen"
