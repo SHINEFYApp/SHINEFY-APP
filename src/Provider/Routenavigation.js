@@ -12,7 +12,6 @@ import Edit_Profile from '../Edit_Profile';
 import Saved_Location from '../Saved_Location';
 import My_Wallet from '../My_Wallet';
 import Language from '../Language';
-// import Setting from '../Setting';
 import Change_Password from '../Change_Password';
 import Contact from '../Contact';
 import Faqs from '../Faqs';
@@ -70,6 +69,7 @@ import FAQ from '../screens/FAQ/FAQ';
 import CancelBooking from '../components/cancelBooking/CancelBooking';
 import BookingOverview from '../screens/bookingOverview/BookingOverview';
 import AddCard from '../screens/addCard/AddCard';
+import ReviewScreen from '../screens/reviewScreen/ReviewScreen';
 
 const Stack = createStackNavigator();
 
@@ -131,6 +131,10 @@ const Stacknav = navigation => {
       <Stack.Screen
         name="Cancel Booking"
         component={CancelBooking}
+      />
+      <Stack.Screen
+        name="Review"
+        component={ReviewScreen}
       />
       <Stack.Screen
         name="LanguageScreen"
@@ -222,7 +226,7 @@ const Stacknav = navigation => {
         component={Edit_Vechicle}
         options={{headerShown: true}}
       />
-      <Stack.Screen
+      <Stack.Screen 
         name="Profile"
         component={Profile}
         options={{headerShown: true}}
