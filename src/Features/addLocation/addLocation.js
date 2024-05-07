@@ -5,37 +5,28 @@ import { config } from "../../Provider/configProvider";
 import { msgProvider } from "../../Provider/Messageconsolevalidationprovider/messageProvider";
 import { apifuntion } from "../../Provider/Apicallingprovider/apiProvider";
 
-export default async function saveBTN() {
+export default async function addLocation(location , name) {
   Keyboard.dismiss();
   let user_arr = await localStorage.getItemObject('user_arr');
   let user_id = user_arr.user_id;
-  let {
-    address,
-    google_address,
-    user_type,
-    google_latitude,
-    google_longitude,
-    status,
-    location_id,
-  } = this.state;
   //---------------------------check for address------------------------
-  if (address.length <= 0) {
+  if (name.length <= 0) {
     msgProvider.toast(Lang_chg.emptyaddress[config.language], 'center');
     return false;
   }
-  if (address.length <= 2) {
+  if (name.length <= 2) {
     msgProvider.toast(Lang_chg.minlenaddress[config.language], 'center');
     return false;
   }
   var data = new FormData();
   data.append('user_type', 1);
-  data.append('status', status);
+  data.append('status', 1);
   data.append('user_id', user_id);
-  data.append('user_location_id', location_id);
-  data.append('name', address);
+  data.append('user_location_id', "NA");
+  data.append('name', name);
   data.append('latitude', location.latitude);
   data.append('longitude', location.longitude);
-  data.append('location', google_address);
+  console.log("test location")
   let url = config.baseURL + 'save_user_location';
   console.log(data);
   apifuntion

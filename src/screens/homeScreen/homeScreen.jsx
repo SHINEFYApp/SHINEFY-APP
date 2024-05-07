@@ -19,14 +19,12 @@ export default function HomeScreen({ navigation }) {
   useEffect(()=>{
     const fetchData = async () => {
     const data =await getServices()
-    console.log(data)
     SetServices(data.all_service_arr.service_arr)
     SetSpecialOffers(data.all_service_arr.extra_service_arr)
   }
   fetchData()
   },[])
 
-  console.log(services)
 
   return (
     <View className="flex-1 ">
@@ -80,7 +78,7 @@ export default function HomeScreen({ navigation }) {
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             {
               services?.map((service , index)=> {
-                console.log(service)
+              
                 return (
                   <WashServicesCard navigation={navigation} id={index} service={service}/>
                 )

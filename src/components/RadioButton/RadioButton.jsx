@@ -5,8 +5,6 @@ import {Text, View} from 'react-native-ui-lib';
 export default function RadioButton({buttons , currentActive , set}) {
   const [activeButton, setActiveButton] = useState(currentActive);
 
-  console.log(buttons[0].title , currentActive)
-
   return (
     <View>
       {buttons.map((button, key) => {

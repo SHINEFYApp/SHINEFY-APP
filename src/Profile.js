@@ -77,7 +77,6 @@ export default class Profile extends Component {
         ),
     );
   }
-
   handleBackPress = () => {
     this.props.navigation.goBack();
     return true;

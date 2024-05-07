@@ -5,7 +5,7 @@ import { Text } from "react-native-ui-lib";
 export default function SelectDateBox({title , selected , onPress}) {
     return(
         <TouchableHighlight onPress={()=>{
-            // console.log("slejkfdf")
+  
             onPress(title)
         }} underlayColor={"white"} className={`bg-white rounded-lg px-3 py-2 m-2  ${title === selected ? "bg-mainColor" : "bg-white"}`} style={title !== selected && style.box}>
             <Text className={`${title === selected && "text-white"}`}>{title}</Text>

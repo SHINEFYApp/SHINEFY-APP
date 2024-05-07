@@ -67,9 +67,13 @@ import RequestDetails from '../screens/requestDetails/RequestDetails';
 import ContactUsScreen from '../screens/contactUs/ContactUs';
 import FAQ from '../screens/FAQ/FAQ';
 import CancelBooking from '../components/cancelBooking/CancelBooking';
+<<<<<<< Updated upstream
 import BookingOverview from '../screens/bookingOverview/BookingOverview';
 import AddCard from '../screens/addCard/AddCard';
 import ReviewScreen from '../screens/reviewScreen/ReviewScreen';
+=======
+import AddVechileScreen from '../screens/addVechile/addVechile';
+>>>>>>> Stashed changes
 
 const Stack = createStackNavigator();
 
@@ -190,6 +194,10 @@ const Stacknav = navigation => {
         name="ForgotPassword"
         component={ForgotPasswordScreen}
         options={{headerShown: false, gestureEnabled: false}}
+      />
+      <Stack.Screen
+        name="updateVehicle"
+        component={AddVechileScreen}
       />
       <Stack.Screen
         name="OTPScreen"

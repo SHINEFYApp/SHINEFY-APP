@@ -17,7 +17,6 @@ export default function LoginModal({openSignup, navigation, closeLogin}) {
     });
   }
 
-  console.log(userData);
 
   return (
     <View className="absolute transition-all right-0 bottom-0 bg-white w-full p-5 rounded-xl">

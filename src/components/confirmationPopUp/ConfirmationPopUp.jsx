@@ -19,7 +19,7 @@ export default function ConfirmationPopUp({
       try{
         deleteVehicle(itemId)
     }catch(err) {
-        console.log(err)
+    
     }
   }
 
@@ -38,7 +38,7 @@ export default function ConfirmationPopUp({
             // closePopUp()
         }}
         Title={buttonTitle}
-        icon={icon}
+        icon={icon && icon}
       />
     </View>
   );

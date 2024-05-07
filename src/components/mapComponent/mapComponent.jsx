@@ -4,10 +4,11 @@ import indectorIcon from '../../assets/icons/mapIndecator.png';
 import { useEffect, useState } from 'react';
 import Input from '../inputs/input';
 import Button from '../mainButton/Button';
+import addLocation from '../../Features/addLocation/addLocation';
 export default function MapComponent({isNewLocation , navigation}) {
 
   const [currentlocation , setCurrentLocation] = useState({"latitude": 29.96073734024412, "latitudeDelta": 0.001162180276701008, "longitude": 31.25663409009576, "longitudeDelta": 0.0006581470370328191})
-
+  const [name , setName] = useState("")
   return (
     <View className="flex-1 relative">
       <MapView
@@ -18,7 +19,7 @@ export default function MapComponent({isNewLocation , navigation}) {
         scrollEnabled={isNewLocation ? true : false}
         className="h-full w-full"
         onRegionChangeComplete={(e)=>{
-          console.log(e)
+         setCurrentLocation(e)
         }}
         g
         region={currentlocation}
@@ -40,8 +41,14 @@ export default function MapComponent({isNewLocation , navigation}) {
         isNewLocation &&
         <View className='absolute bottom-16 mx-5 p-5 rounded-xl bg-[#FFFAF2]'>
           <Text className='text-xl text-center mb-5 font-bold'>Booking Location</Text>
-          <Input placeholder={"Enter Name of Location (Home , Work ,etc...)"} />
-          <Button Title={"Make a Booking"} onPress={()=>{navigation.navigate("RequestDetails")}}/>
+          <Input placeholder={"Enter Name of Location (Home , Work ,etc...)"} onChange={(e)=>{
+          setName(e.nativeEvent.text)
+          }} />
+          <Button Title={"Make a Booking"} onPress={()=>{
+          
+            addLocation(currentlocation , name)
+            // navigation.navigate("RequestDetails")
+          }}/>
         </View>
       }
     </View>

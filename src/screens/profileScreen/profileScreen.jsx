@@ -9,8 +9,22 @@ import SettingIcon from '../../assets/icons/profile/setting.png'
 import LanguageIcon from '../../assets/icons/profile/Language.png'
 import pic from '../../assets/icons/profile/pic.png'
 import { ScrollView } from "react-native-gesture-handler";
+import { useEffect, useState } from "react";
+import getProfile from "../../Features/getProfile/getProfile";
+import { useRecoilState } from "recoil";
+import profileData from "../../atoms/profileData/profileData";
 export default function ProfileScreen({navigation}) {
    
+    const [data , setData] = useRecoilState(profileData)
+    useEffect(()=>{
+        const fetchData = async ()=>{
+          setData(await getProfile())
+        }
+        fetchData()
+    },[])
+
+    console.log(data.f_name)
+
     return (
         <View className="pt-[80px] px-6 ">
 
@@ -19,12 +33,12 @@ export default function ProfileScreen({navigation}) {
                     <Image source={pic} className="p-4 border w-[100] h-[100] rounded-full"/>
                 </View>
                 <View className="items-center ">
-                    <Text className="font-bold text-2xl">Youssif Elhelaly</Text>
-                    <Text>012314567899</Text>
+                    <Text className="font-bold text-2xl">{data?.name}</Text>
+                    <Text>0{data.phone_number}</Text>
                 </View>
             </View>
 
-            <ScrollView className="h-[calc(55vh)]">
+            <ScrollView className="h-[calc(55vh)]" showsVerticalScrollIndicator={false}>
                 <SelectVechileCard icon={userIcon} text={"Edit Profile"} screen="EditProfileScreen" navigation={navigation}/>
                 <SelectVechileCard icon={locationIcon} text={"Saved Location"} screen="SavedLocationScreen" navigation={navigation}/>
                 <SelectVechileCard icon={walletIcon} text={"My Wallet"} screen="MyWallet" navigation={navigation}/>

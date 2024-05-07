@@ -15,7 +15,6 @@ export default function SignupModal({openLogin , navigation , closeSignup}) {
   const [userData, setUserData] = useState({});
 
   function handleUserData(data) {
-    console.log(data)
     setUserData(prev => {
       return {...prev, ...data};
     });

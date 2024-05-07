@@ -4,9 +4,22 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { useState } from "react";
 
 
+<<<<<<< Updated upstream
 export default function SelectVechileCard({ icon, text, screen, navigation, arrow, isSwitch, Press }) {
     function handleNavigate() {
         navigation.navigate(screen, text)
+=======
+export default function SelectVechileCard({ icon, text, screen, navigation , arrow , isSwitch , Press ,screenTitle="",img , brandID }) {
+    function handleNavigate() {
+        if(screenTitle.includes("Model")){
+            if(brandID) {
+                navigation.navigate(screen , screenTitle)
+                
+            }
+        }else {
+            navigation.navigate(screen , screenTitle)
+        }
+>>>>>>> Stashed changes
     }
     const [isEnabled, setIsEnable] = useState(false)
 
@@ -15,8 +28,26 @@ export default function SelectVechileCard({ icon, text, screen, navigation, arro
     }
 
     return (
+<<<<<<< Updated upstream
         <TouchableOpacity onPress={navigation} className="flex-row items-center bg-white px-3 py-5 mb-3 border-[#ccc] border rounded-lg">
             <Image source={icon} className="mr-3" />
+=======
+        <TouchableOpacity onPress={()=>{
+            if(!isSwitch && !Press) {
+                handleNavigate()
+            } else if(Press) {
+                Press()
+            } else {
+                toggleSwitch()
+            }
+             
+        }} className="flex-row items-center bg-white px-3 py-5 mb-3 border-[#ccc] border rounded-lg">
+            <Image source={img ? {uri:`${"https://shinefy.co/app-test/webservice/images/"}${img}`} : icon} className="mr-3"  style={img&&{
+                    width: 50,
+                    height: 50,
+                    resizeMode: 'contain',
+                }} />
+>>>>>>> Stashed changes
             <Text>
                 {text}
             </Text>

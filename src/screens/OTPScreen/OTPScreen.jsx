@@ -11,7 +11,6 @@ import { sendOTP } from '../../Features/verifyOTP/verifyOTP';
 
 export default function OTPScreen({navigation, route}) {
   
-  console.log(route.params.phone_number)
 
   useEffect(()=>{
     sendOTP(route.params.phone_number)

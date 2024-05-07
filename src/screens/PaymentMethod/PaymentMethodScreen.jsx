@@ -8,8 +8,6 @@ export default function PaymentMethod({ navigation }) {
 
     const [activePayment, setActivePayment] = useState(0)
 
-    console.log(activePayment)
-
     const paymentMethodsOptions = [
         {
             id: 1,

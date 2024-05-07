@@ -6,15 +6,15 @@ import emptyImg from '../../assets/emptyVehicle.png'
 import { useEffect, useState } from "react";
 import getMyVehicles from "../../Features/getVehicles/getVehicles";
 
-export default function VehiclesScreen() {
+export default function VehiclesScreen({navigation}) {
     const cars = [1]
 
     const [myCars , setMyCars] = useState([])
+    
 
     useEffect(()=>{
     const fetchData = async () => {
     const data =await getMyVehicles()
-    console.log(data.vehicle_arr)
     setMyCars(data.vehicle_arr)
   }
   fetchData()
@@ -36,11 +36,13 @@ export default function VehiclesScreen() {
             <ScrollView>
                 {myCars?.map((car)=>{
                     return (
-                        <VehicleCard car={car} />
+                        <VehicleCard car={car} navigation={navigation}/>
                     )
                 })}
             <View>
-                <Button Title={"Add Vehicle"}/>
+                <Button Title={"Add Vehicle"} onPress={()=>{
+                    navigation.navigate("AddCar")
+                }}/>
             </View>
             </ScrollView>
         }

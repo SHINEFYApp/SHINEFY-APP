@@ -4,7 +4,7 @@ import WashCar from '../../assets/car-wash-detailing-station.png'
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function SaleBox({offer}) {
-    console.log(offer)
+  
     return (
         <View className={"rounded-xl overflow-hidden min-w-[300px] mr-2 mb-2"}>
             <ImageBackground source={WashCar} className="p-4 relative">

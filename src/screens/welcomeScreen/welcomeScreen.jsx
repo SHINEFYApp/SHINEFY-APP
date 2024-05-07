@@ -37,8 +37,6 @@ export default function WelcomeScreen({navigation}) {
   };
 
   useEffect(() => {
-    console.log(isLoginModalVisible);
-    console.log(isSignupModalVisivle);
     BackHandler.addEventListener('hardwareBackPress', () => {
       BackHandler.exitApp();
     });

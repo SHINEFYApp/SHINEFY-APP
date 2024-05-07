@@ -3,7 +3,7 @@ import notfiIcon from '../../assets/icons/notifcationIcon.png';
 import saveIcon from '../../assets/icons/savedLocationIcon.png';
 import backIcon from '../../assets/icons/backIcon.png';
 export default function NavigationTop(props) {
-  console.log(props.route)
+
   function handleTitle() {
     switch (props.route.name) {
       case 'Home':

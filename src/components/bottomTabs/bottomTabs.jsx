@@ -4,7 +4,7 @@ import { Image, Text, View } from 'react-native-ui-lib';
 import homeIcon from '../../assets/icons/HomeIcon.png'
 
 export default function BottomTabs(props) {
-    console.log(props)
+
   return (
     <>
     

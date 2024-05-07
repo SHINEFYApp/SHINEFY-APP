@@ -5,7 +5,7 @@ import { Image } from 'react-native-ui-lib';
 import Modal from 'react-native-modal';
 import AddVehiclePopup from '../addVehiclePopup/addVehiclePopup';
 import { useRecoilState } from 'recoil';
-import addVehiclePopUpState from '../../atoms/addVehiclePopUp/addVehiclePopUp'
+import addVehiclePopUpState from '../../atoms/addNewCar/addNewCar'
 const CustomTabBarButton = props => {
 
   const [isAddPopUpOpen , setIsAddPopUpOpen] = useState(false)

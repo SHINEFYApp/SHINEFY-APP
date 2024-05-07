@@ -8,10 +8,12 @@ import Modal from 'react-native-modal';
 
 import ConfirmationPopUp from '../../components/confirmationPopUp/ConfirmationPopUp';
 import { useState } from "react";
+import { useRecoilState } from "recoil";
+import updateCar from "../../atoms/currentCar/currentCar";
 
-export default function VehicleCard ({car}) {
+export default function VehicleCard ({car , navigation}) {
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
-
+  const [currentCar , setCurrentCar] = useRecoilState(updateCar)
     console.log(car)
 
   function handleClosePopUp() {
@@ -60,7 +62,10 @@ export default function VehicleCard ({car}) {
            <TouchableOpacity className="absolute top-3 right-3" onPress={()=>{setIsPopUpOpen(true)}}>
             <Image source={deleteIcon}/>
            </TouchableOpacity>
-           <TouchableOpacity className="absolute -bottom-2 pb-0 -right-2 bg-[#FFFAF2] p-2 rounded-tl-3xl" >
+           <TouchableOpacity onPress={()=>{
+            setCurrentCar(car)
+            navigation.navigate("updateVehicle" ,"updateVehicle")
+           }} className="absolute -bottom-2 pb-0 -right-2 bg-[#FFFAF2] p-2 rounded-tl-3xl" >
             <Image source={editIcon} />
            </TouchableOpacity>
         </View>

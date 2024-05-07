@@ -12,9 +12,11 @@ export default function Input({
   className,
   text,
   onChange,
+  value
 }) {
   const [isSecure, setIsSecure] = useState(secureTextEntry);
-
+ 
+  
   return (
     <View style={styles.inputStyle} className={'mb-5 flex-1'}>
       {icon && (
@@ -28,6 +30,8 @@ export default function Input({
         keyboardType={keyboardType}
         placeholder={placeholder}
         onChange={onChange}
+        value={value && value}
+        
         placeholderTextColor={'#C3C3C3'}
         className={'text-black w-full'}
       />
