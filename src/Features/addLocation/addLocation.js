@@ -5,7 +5,27 @@ import { config } from "../../Provider/configProvider";
 import { msgProvider } from "../../Provider/Messageconsolevalidationprovider/messageProvider";
 import { apifuntion } from "../../Provider/Apicallingprovider/apiProvider";
 
+async function getLocationName(location) {
+  console.log(location.latitude)
+  let locationName = await fetch(
+      'https://maps.googleapis.com/maps/api/geocode/json?address=' +
+        location.latitude +
+        ',' +
+        location.longitude +
+        '&key=' +
+        config.mapkey +
+        '&language=' +
+        config.maplanguage,
+    ).then(res => res.json())
+    .then(data => {return (data.results[2].formatted_address)})
+
+    return locationName
+
+}
+
+
 export default async function addLocation(location , name) {
+
   Keyboard.dismiss();
   let user_arr = await localStorage.getItemObject('user_arr');
   let user_id = user_arr.user_id;
@@ -18,14 +38,16 @@ export default async function addLocation(location , name) {
     msgProvider.toast(Lang_chg.minlenaddress[config.language], 'center');
     return false;
   }
+  let status = 1
   var data = new FormData();
   data.append('user_type', 1);
-  data.append('status', 1);
+  data.append('status', status);
   data.append('user_id', user_id);
   data.append('user_location_id', "NA");
   data.append('name', name);
   data.append('latitude', location.latitude);
   data.append('longitude', location.longitude);
+  data.append('location',  await getLocationName(location));
   console.log("test location")
   let url = config.baseURL + 'save_user_location';
   console.log(data);
@@ -40,19 +62,11 @@ export default async function addLocation(location , name) {
             Lang_chg.LocationaddSuccess[config.language],
             'center',
           );
-          setTimeout(() => {
-            this.props.navigation.navigate('Home', {home_status: 1});
-            global.props.hideLoader();
-          }, 500);
         } else {
           msgProvider.toast(
             Lang_chg.LocationUpdateSuccess[config.language],
             'center',
           );
-          setTimeout(() => {
-            this.props.navigation.navigate('Profile');
-            global.props.hideLoader();
-          }, 500);
         }
       } else {
         msgProvider.alert(

@@ -41,7 +41,7 @@ export default function PackageDetailsScreen({navigation, route}) {
             <Text>Vacuum Cleaning</Text>
           </View>
         </View>
-        <Button Title={'Book'} />
+        <Button Title={'Claim'} />
       </View>
     </View>
   );

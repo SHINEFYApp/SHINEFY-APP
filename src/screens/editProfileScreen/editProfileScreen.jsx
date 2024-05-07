@@ -67,8 +67,8 @@ export default function EditProfileScreen({navigation}) {
                         />
                     </View>
                     <Button Title={"UPDATE"} onPress={async()=>{
-                        console.log(navigation.navigate("profileScreen"))
-                    //    await editProfile(newData)
+                        await editProfile(newData)
+                      navigation.navigate("HomeScreen")
                     //    console.log("jhfgjn")
                     }}/>
                 </View>
