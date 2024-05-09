@@ -1,12 +1,12 @@
+import { apifuntion } from "../../Provider/Apicallingprovider/apiProvider";
 import { Lang_chg } from "../../Provider/Language_provider";
 import { msgProvider } from "../../Provider/Messageconsolevalidationprovider/messageProvider";
 import { config } from "../../Provider/configProvider";
 import { localStorage } from "../../Provider/localStorageProvider";
 
-export async function sendOTP(OTP , phoneNumber) {
-  console.log("lol yangm")
+export async function sendOTP(OTP , phoneNumber , userId , navigation) {
   let user_value = await localStorage.getItemObject('user_value');
-
+  
   if (OTP.length <= 0) {
     msgProvider.toast(Lang_chg.Otp_validation[config.language], 'center');
     return false;
@@ -16,19 +16,20 @@ export async function sendOTP(OTP , phoneNumber) {
     return false;
   }
   var data = new FormData();
-  data.append('user_id', user_value.user_id);
+  data.append('user_id', userId);
   data.append('otp', OTP);
   data.append('user_type', 1);
-  data.append('device_type', device_type);
+  data.append('device_type', config.device_type);
   // data.append('player_id', global.player_id_me1);
   // data.append("player_id", player_id_me1)
   data.append('status', 1);
+  console.log("lol yangm")
   var url = config.baseURL + 'otp_verify';
   apifuntion
     .postApi(url, data)
     .then(obj => {
-      console.log(obj)
       if (obj.success == 'true') {
+        navigation.navigate('ChangePassword' , userId)
         if (check == 1) {
           if (obj.notification_arr != 'NA') {
             notification.notification_arr(obj.notification_arr);

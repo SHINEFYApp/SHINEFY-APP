@@ -42,9 +42,8 @@ export default function OTPScreen({navigation, route}) {
             />
             <Button
               Title={'VERIFY'}
-              onPress={() => {
-                sendOTP(otp , route.params.phone_number)
-                // navigation.navigate('ChangePassword');
+              onPress={async () => {
+                await sendOTP(otp , route.params.phone_number , route.params.user_id , navigation)
               }}
             />
             <Text className={'text-center'}>

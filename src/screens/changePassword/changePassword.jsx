@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {ImageBackground, StyleSheet} from 'react-native';
 import {Text, View} from 'react-native-ui-lib';
 import background from '../../assets/backgroundImage.png';
@@ -6,8 +6,11 @@ import keyIcon from '../../assets/icons/Keypng.png';
 import Button from '../../components/mainButton/Button';
 import Input from '../../components/inputs/input';
 import BackButton from '../../components/backButton/backButton';
+import resetPassword from '../../Features/resetPassword/resetPassword';
 
-export default function ChangePassword({navigation}) {
+export default function ChangePassword({navigation , route}) {
+  const [pass , setPass] = useState({})
+
   return (
     <View className={'flex-1'}>
       <BackButton navigation={navigation} />
@@ -26,6 +29,12 @@ export default function ChangePassword({navigation}) {
                 icon={keyIcon}
                 isBorder={true}
                 type={'passowrd'}
+                onChange={(e)=>{
+                  setPass({
+                    ...pass , 
+                    new_password : e.nativeEvent.text
+                  })
+                }}
               />
               <Input
                 secureTextEntry={true}
@@ -33,13 +42,20 @@ export default function ChangePassword({navigation}) {
                 icon={keyIcon}
                 isBorder={true}
                 type={'passowrd'}
+                onChange={(e)=>{
+                  setPass({
+                    ...pass , 
+                    con_password : e.nativeEvent.text
+                  })
+                }}
               />
             </View>
             <View>
               <Button
                 Title={'CHANGE'}
                 onPress={() => {
-                  navigation.navigate('OTPScreen');
+                  resetPassword(pass , route.params)
+                  // navigation.navigate('OTPScreen');
                 }}
               />
             </View>

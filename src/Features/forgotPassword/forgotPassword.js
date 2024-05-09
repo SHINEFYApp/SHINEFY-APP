@@ -5,8 +5,6 @@ import { validationprovider } from "../../Provider/Validation_provider";
 import { config } from "../../Provider/configProvider";
 
 export default async function forgotPassword(navigation , phone_number) {
-    
-    console.log(phone_number)
     //-----------------mobile number--------------------
     if (phone_number.length <= 0) {
         msgProvider.toast(Lang_chg.emptyMobile[config.language], 'center');
@@ -30,6 +28,6 @@ export default async function forgotPassword(navigation , phone_number) {
     let url = config.baseURL + 'forgot_password';
     let res = await apifuntion.postApi(url, data)
     console.log(res)
-    navigation.navigate('OTPScreen', {check: 2 , phone_number});
+    navigation.navigate('OTPScreen', {check: 2 , phone_number , user_id : res.user_id});
 
 }
