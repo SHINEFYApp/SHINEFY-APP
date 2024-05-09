@@ -4,11 +4,11 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { useState } from "react";
 
 
-export default function SelectVechileCard({ icon, text, screen, navigation , arrow , isSwitch , Press ,screenTitle="",img , brandID }) {
+export default function SelectVechileCard({ icon, text, screen, navigation , arrow , isSwitch , Press ,screenTitle="",img , brandID ,isSwitchEnabled ,onChangeSwitch }) {
     function handleNavigate() {
         navigation.navigate(screen, text)
     }
-    const [isEnabled, setIsEnable] = useState(false)
+    const [isEnabled, setIsEnable] = useState(isSwitchEnabled)
 
     function toggleSwitch() {
         setIsEnable(!isEnabled)
@@ -54,6 +54,7 @@ export default function SelectVechileCard({ icon, text, screen, navigation , arr
                     ios_backgroundColor="#DD9923"
                     onColor="#DD9923"
                     value={isEnabled}
+                    onValueChange={onChangeSwitch}
                 />
             }
         </TouchableOpacity>

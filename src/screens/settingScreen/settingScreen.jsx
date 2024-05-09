@@ -20,12 +20,16 @@ import rateIcon from '../../assets/icons/setting/rateIcon.png'
 import shareIcon from '../../assets/icons/setting/shareIcon.png'
 import Share from 'react-native-share';
 import { Shareratepro } from '../../Provider/Sharerateapp';
+import { useRecoilValue } from 'recoil';
+import profileData from '../../atoms/profileData/profileData';
+import notificationStatus from '../../Features/notificationStatus/notificationStatus';
 
 
 
 export default function SettingScreen({ navigation }) {
   const [isPopUpOpenDelete, setIsPopUpOpenDelete] = useState(false);
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+    const data = useRecoilValue(profileData)
 
   function handleClosePopUp() {
     setIsPopUpOpen(false);
@@ -62,8 +66,12 @@ export default function SettingScreen({ navigation }) {
           screen={null}
           navigation={navigation}
           isSwitch
+          isSwitchEnabled={Boolean(data.notification_status)}
           arrow
           icon={notifyIcon}
+          onChangeSwitch={()=>{
+            notificationStatus(data.notification_status)
+          }}
         />
         <SelectVechileCard
           text={'Change Password'}

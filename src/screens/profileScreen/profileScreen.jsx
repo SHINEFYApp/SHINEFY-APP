@@ -21,9 +21,7 @@ export default function ProfileScreen({navigation}) {
           setData(await getProfile())
         }
         fetchData()
-    },[])
-
-    console.log(data.f_name)
+    },[navigation])
 
     return (
         <View className="pt-[80px] px-6 ">
