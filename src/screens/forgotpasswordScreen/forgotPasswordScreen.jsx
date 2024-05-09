@@ -8,7 +8,7 @@ import Input from '../../components/inputs/input';
 import BackButton from '../../components/backButton/backButton';
 import forgotPassword from '../../Features/forgotPassword/forgotPassword';
 export default function ForgotPasswordScreen({navigation}) {
-  const [phoneNumber , setPhoneNumber] = useState("")
+  const [phone_number , setPhoneNumber] = useState("")
   return (
     <View className={'flex-1'}>
       <BackButton navigation={navigation}/>
@@ -35,7 +35,7 @@ export default function ForgotPasswordScreen({navigation}) {
             </View>
             <View>
                 <Button Title={'SENT'} onPress={()=>{
-                  forgotPassword(navigation , phoneNumber)
+                  forgotPassword(navigation , phone_number)
                   // navigation.navigate("OTPScreen")
                 }}/>
             </View>

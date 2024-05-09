@@ -30,6 +30,6 @@ export default async function forgotPassword(navigation , phone_number) {
     let url = config.baseURL + 'forgot_password';
     let res = await apifuntion.postApi(url, data)
     console.log(res)
-    navigation.navigate('OTPScreen', {check: 2});
+    navigation.navigate('OTPScreen', {check: 2 , phone_number});
 
 }

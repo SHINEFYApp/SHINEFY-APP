@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {ImageBackground, StyleSheet} from 'react-native';
 import {Colors, Text, View} from 'react-native-ui-lib';
 import background from '../../assets/backgroundImage.png';
@@ -10,11 +10,8 @@ import { sendOTP } from '../../Features/verifyOTP/verifyOTP';
 
 
 export default function OTPScreen({navigation, route}) {
-  
+  const [otp , setOTP] = useState("")
 
-  useEffect(()=>{
-    sendOTP(route.params.phone_number)
-  })
 
   return (
     <View className={'flex-1'}>
@@ -39,11 +36,15 @@ export default function OTPScreen({navigation, route}) {
               tintColor="#ccc"
               offTintColor="#ccc"
               keyboardType={'number-pad'}
+              handleTextChange={(text)=>{
+                setOTP(text)
+              }}
             />
             <Button
               Title={'VERIFY'}
               onPress={() => {
-                navigation.navigate('ChangePassword');
+                sendOTP(otp , route.params.phone_number)
+                // navigation.navigate('ChangePassword');
               }}
             />
             <Text className={'text-center'}>
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     backgroundColor: Colors.whiteColor,
-    color: Colors.main_font,
+    color: "black",
     height: (mobileW * 10) / 100,
     fontSize: (mobileW * 4.2) / 100,
     width: (mobileW * 10) / 100,

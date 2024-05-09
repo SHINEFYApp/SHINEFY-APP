@@ -12,7 +12,7 @@ export default function MyBookingScreen({ navigation }) {
     const [data , setData] = useState([])
     const [currentPage, setCurrentPage] = useState("pending")
 
-    console.log(data?.pending_booking , "a7a")
+    console.log(data?.pending_booking )
 
     useEffect(()=>{
         let fetchData = async ()=>{

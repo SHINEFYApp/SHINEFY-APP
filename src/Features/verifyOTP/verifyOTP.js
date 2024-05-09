@@ -4,6 +4,7 @@ import { config } from "../../Provider/configProvider";
 import { localStorage } from "../../Provider/localStorageProvider";
 
 export async function sendOTP(OTP , phoneNumber) {
+  console.log("lol yangm")
   let user_value = await localStorage.getItemObject('user_value');
 
   if (OTP.length <= 0) {
@@ -19,13 +20,14 @@ export async function sendOTP(OTP , phoneNumber) {
   data.append('otp', OTP);
   data.append('user_type', 1);
   data.append('device_type', device_type);
-  data.append('player_id', global.player_id_me1);
+  // data.append('player_id', global.player_id_me1);
   // data.append("player_id", player_id_me1)
   data.append('status', 1);
   var url = config.baseURL + 'otp_verify';
   apifuntion
     .postApi(url, data)
     .then(obj => {
+      console.log(obj)
       if (obj.success == 'true') {
         if (check == 1) {
           if (obj.notification_arr != 'NA') {
