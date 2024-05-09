@@ -7,12 +7,15 @@ import Modal from 'react-native-modal';
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useState } from "react";
 import deleteLocation from "../../Features/deleteLocation/deleteLocation";
-export default function LocationCard({location }) {
+export default function LocationCard({location, navigation }) {
     console.log(location.user_location_id)
     const [isPopUpOpenDelete , setIsPopUpOpenDelete] = useState(false)
     return (
-        <View className='flex-row items-center mx-4 my-2 pb-3 justify-between border-b border-[#c3c3c3]'> 
-             <Modal avoidKeyboard={true} hasBackdrop={true} isVisible={isPopUpOpenDelete}>
+        <TouchableOpacity onPress={()=>{
+            navigation.navigate("RequestDetails" , location)
+        }}> 
+            <View className='flex-row items-center mx-4 my-2 pb-3 justify-between border-b border-[#c3c3c3]'>
+            <Modal avoidKeyboard={true} hasBackdrop={true} isVisible={isPopUpOpenDelete}>
         <ConfirmationPopUp
           closePopUp={()=>{
             setIsPopUpOpenDelete(false)
@@ -25,8 +28,8 @@ export default function LocationCard({location }) {
           p={`Are you sure , you want to Delete ${location.user_address_name} Location ? `}
           buttonTitle={'Delete'}
         />
-      </Modal>
-                <View className='flex-row items-center gap-5'>
+            </Modal>
+            <View className='flex-row items-center gap-5'>
 
                 <View>
                     <Image source={locationIcon}/>
@@ -35,14 +38,15 @@ export default function LocationCard({location }) {
                     <Text className="font-bold text-lg">{location.user_address_name}</Text>
                     <Text>{location.location.length > 45 ? location.location.split(" ").slice(0 , 8).join(" ") + "....." : location.location}</Text>
                 </View>
-                </View>
-                <View className="flex-row gap-2">
+            </View>
+            <View className="flex-row gap-2">
                     <TouchableOpacity onPress={()=>{
                         setIsPopUpOpenDelete(true)
                     }} source={editIcon}>
                         <Image source={deleteIcon}/>
                     </TouchableOpacity>
-                </View>
             </View>
+            </View>
+        </TouchableOpacity>
     )
 }

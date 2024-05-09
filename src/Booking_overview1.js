@@ -384,19 +384,19 @@ export default class Booking_overview1 extends Component {
     var data = new FormData();
     data.append('user_id', user_arr.user_id);
     data.append('vehicle_id', vehicle_data.vehicle_id);
-    data.append('free_status', slot_data.free_status);
+    data.append('free_status', slot_data.free_status); // false=0 true=1 is Free
     data.append('service_id', service_data.service_id);
     data.append('service_price', service_data.service_price);
     data.append('extra_service_id', extra_id);
     data.append('extra_service_price', all_service_data.extra_service_amount);
     data.append('sub_total', all_service_data.subTotal);
-    data.append('vat_amount', vat_data.amount);
-    data.append('vat_per', vat_data.commission_amt);
-    data.append('service_boy_id', slot_data.service_boy_id);
+    data.append('vat_amount', vat_data.amount); //no validation 
+    data.append('vat_per', vat_data.commission_amt);// no valiation 
+    data.append('service_boy_id', slot_data.service_boy_id); 
     data.append('total_price', this.state.bookingPrice);
     data.append('coupan_id', discount_arr.coupan_id);
     data.append('discount_amount', discount_arr.dis_amount);
-    data.append('service_time', all_service_data.totalServiceTime);
+    data.append('service_time', all_service_data.totalServiceTime);// selected srvice time + extra service time 
     data.append('address_loc', location_data.location);
     data.append('latitude', location_data.latitude);
     data.append('longitude', location_data.longitude);
@@ -408,6 +408,8 @@ export default class Booking_overview1 extends Component {
     data.append('wallet_amount', this.state.redemwallet);
     data.append('online_amount', this.state.netpay);
     let url = config.baseURL + 'create_booking';
+
+    console.log(data , "dataaa booking")
 
     this.setState({loading: false});
     if (err == 'noNetwork') {

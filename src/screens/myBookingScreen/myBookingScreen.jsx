@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet, Touchable, TouchableHighlight } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Text, View } from "react-native-ui-lib";
@@ -6,11 +6,23 @@ import EmptyBooking from "../../components/emptyBooking/emptyBooking";
 import ProgressBooking from "../../components/ProgressBooking/progressBooking";
 import PendingBooking from "../../components/pendingBooking/pendingBooing";
 import CompleteBooking from "../../components/completeBooking/completeBooking";
+import getBookking from "../../Features/getBooking/getBooking";
 
 export default function MyBookingScreen({ navigation }) {
-
+    const [data , setData] = useState([])
     const [currentPage, setCurrentPage] = useState("pending")
 
+    console.log(data?.pending_booking , "a7a")
+
+    useEffect(()=>{
+        let fetchData = async ()=>{
+            let data = await getBookking()
+            console.log(data.booking_arr)
+            setData(data.booking_arr)
+        } 
+        fetchData()
+    },[currentPage])
+    
     return (
         <View className="pt-[80] px-5 flex-1">
             <View className="bg-[#FFFAF2] py-3 px-8 flex-row justify-between rounded-xl" style={style.tabStyle}>
@@ -20,8 +32,9 @@ export default function MyBookingScreen({ navigation }) {
             </View>
             {
                 currentPage === "pending"
-                    ?
-                    <PendingBooking navigation={navigation} />
+                    ? 
+                     <PendingBooking bookings={data?.pending_booking} navigation={navigation}/>
+                        
                     :
                     currentPage === "in progress"
                         ?

@@ -116,7 +116,7 @@ const Stacknav = navigation => {
         component={PaymentMethod}
       />
       <Stack.Screen
-        name="Add Card"
+        name="AddCardScreen"
         component={AddCard}
       />
       <Stack.Screen

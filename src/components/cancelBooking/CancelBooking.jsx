@@ -3,8 +3,9 @@ import { TextInput, TouchableHighlight } from "react-native-gesture-handler";
 import { Image, Text, View } from "react-native-ui-lib";
 import messageIcon from '../../assets/icons/ContactUs/message.png'
 import Button from "../mainButton/Button";
+import cancelBooking from "../../Features/cancelBooking/cancelBooking";
 
-const CancelBooking = () => {
+const CancelBooking = ({route}) => {
     const [activeButton, setActiveButton] = useState();
     const options = [
         {
@@ -24,6 +25,7 @@ const CancelBooking = () => {
             title: 'Other'
         }
     ]
+    console.log(route.params.book_id)
     return <View className={'mt-[90px] mx-5'}>
         <Text className={'text-[#818181] mb-4'}>Please select the reason for cancellations:</Text>
         {options.map((button, key) => {
@@ -33,12 +35,12 @@ const CancelBooking = () => {
                     underlayColor={"transparent"}
                     key={key}
                     onPress={() => {
-                        setActiveButton(button.id);
+                        setActiveButton(button.title);
                     }}
                 >
                     <View className="flex-row gap-4 items-center">
                         <View
-                            className={`w-[25] h-[25] border border-mainColor  rounded ${activeButton === button.id && 'bg-mainColor'
+                            className={`w-[25] h-[25] border border-mainColor  rounded ${activeButton === button.title && 'bg-mainColor'
                                 }`}
                         />
                         <Text className={'font-bold text-lg'}>{button.title}</Text>
@@ -66,6 +68,10 @@ const CancelBooking = () => {
             <Button
                 Title={'Cancel Booking'}
                 btnStyle={'text-lg'}
+                onPress={async ()=>{
+                    let res = await cancelBooking(route.params.book_id , activeButton)
+                    console.log(res)
+                }}
             />
         </View>
     </View>;

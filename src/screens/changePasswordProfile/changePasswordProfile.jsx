@@ -1,6 +1,7 @@
-import { View } from "react-native-ui-lib";
+import { Text, View } from "react-native-ui-lib";
 import Input from "../../components/inputs/input";
 import keyIcon from '../../assets/icons/Keypng.png';
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function ChangePasswordProfile() {
     return (
@@ -14,6 +15,11 @@ export default function ChangePasswordProfile() {
                     isBorder={true}
                     type={'passowrd'}
                 />
+                <TouchableOpacity onPress={()=>{
+                    console.log("a7la msa")
+                }}>
+                    <Text className="text-mainColor ml-auto mb-3">Forget password ?</Text>
+                </TouchableOpacity>
                 <Input
                     secureTextEntry={true}
                     placeholder={'New Password'}

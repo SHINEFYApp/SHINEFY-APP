@@ -23,7 +23,6 @@ async function getLocationName(location) {
 
 }
 
-
 export default async function addLocation(location , name) {
 
   Keyboard.dismiss();

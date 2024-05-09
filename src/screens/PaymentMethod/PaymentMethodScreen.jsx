@@ -40,7 +40,7 @@ export default function PaymentMethod({ navigation }) {
                 </View>
                 <View>
                     <Text>Credit & Debit Card</Text>
-                    <SelectVechileCard text={"Add Card"} navigation={() => navigation.navigate('Add Card')} />
+                    <SelectVechileCard text={"Add Card"} navigation={navigation} screen={"AddCardScreen"}/>
 
                 </View>
                 <View>

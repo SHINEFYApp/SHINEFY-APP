@@ -5,6 +5,7 @@ import Button from "../../components/mainButton/Button";
 import emptyImg from '../../assets/emptyVehicle.png'
 import { useEffect, useState } from "react";
 import getMyVehicles from "../../Features/getVehicles/getVehicles";
+import { localStorage } from "../../Provider/localStorageProvider";
 
 export default function VehiclesScreen({navigation}) {
     const cars = [1]
@@ -15,6 +16,7 @@ export default function VehiclesScreen({navigation}) {
     useEffect(()=>{
     const fetchData = async () => {
     const data =await getMyVehicles()
+    localStorage.setItemObject('userCars', data.vehicle_arr);
     setMyCars(data.vehicle_arr)
   }
   fetchData()

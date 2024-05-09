@@ -21,6 +21,7 @@ export default function HomeScreen({ navigation }) {
     const data =await getServices()
     SetServices(data.all_service_arr.service_arr)
     SetSpecialOffers(data.all_service_arr.extra_service_arr)
+    localStorage.setItemObject("services" , data.all_service_arr)
   }
   fetchData()
   },[])
@@ -87,8 +88,6 @@ export default function HomeScreen({ navigation }) {
           </ScrollView>
         </View>
       </ScrollView>
- 
-
     </View>
   );
 }

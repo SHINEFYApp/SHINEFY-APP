@@ -6,7 +6,6 @@ import Input from '../inputs/input';
 import Button from '../mainButton/Button';
 import addLocation from '../../Features/addLocation/addLocation';
 export default function MapComponent({isNewLocation , navigation}) {
-
   const [currentlocation , setCurrentLocation] = useState({"latitude": 29.96073734024412, "latitudeDelta": 0.001162180276701008, "longitude": 31.25663409009576, "longitudeDelta": 0.0006581470370328191})
   const [name , setName] = useState("")
   return (
@@ -47,7 +46,6 @@ export default function MapComponent({isNewLocation , navigation}) {
           <Button Title={"Make a Booking"} onPress={()=>{
           
             addLocation(currentlocation , name)
-            // navigation.navigate("RequestDetails")
           }}/>
         </View>
       }

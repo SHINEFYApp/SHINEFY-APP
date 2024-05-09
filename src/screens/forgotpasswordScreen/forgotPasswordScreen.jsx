@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {ImageBackground, StyleSheet} from 'react-native';
 import {Text, View} from 'react-native-ui-lib';
 import background from '../../assets/backgroundImage.png';
@@ -6,7 +6,9 @@ import phoneIcon from '../../assets/icons/phoneIcon.png';
 import Button from '../../components/mainButton/Button';
 import Input from '../../components/inputs/input';
 import BackButton from '../../components/backButton/backButton';
+import forgotPassword from '../../Features/forgotPassword/forgotPassword';
 export default function ForgotPasswordScreen({navigation}) {
+  const [phoneNumber , setPhoneNumber] = useState("")
   return (
     <View className={'flex-1'}>
       <BackButton navigation={navigation}/>
@@ -25,11 +27,16 @@ export default function ForgotPasswordScreen({navigation}) {
                 icon={phoneIcon}
                 text={'+20'}
                 isBorder={true}
+                onChange={(e)=>{
+           
+                  setPhoneNumber(e.nativeEvent.text)
+                }}
               />
             </View>
             <View>
                 <Button Title={'SENT'} onPress={()=>{
-                  navigation.navigate("OTPScreen")
+                  forgotPassword(navigation , phoneNumber)
+                  // navigation.navigate("OTPScreen")
                 }}/>
             </View>
           </View>

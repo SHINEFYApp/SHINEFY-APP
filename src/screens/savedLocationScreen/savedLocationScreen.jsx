@@ -36,21 +36,15 @@ export default function SavedLocationScreen({navigation}) {
                 {
                     data?.map((location)=>{
                         return (
-                            <LocationCard location={location}/>
+                            <LocationCard location={location} navigation={navigation}/>
                         )
                     })
                 }
                 <Button onPress={()=>{
-                    
-                    navigation.navigate("addLocationScreen")
+                    navigation.navigate("addLocationScreen")    
                 }} Title={"Add New Location"} secondStyle={true} textColor={"#DD9923"}/>
-            
-
             </ScrollView>
-
                 </View>
-            
-            
             }
         </View>
     )

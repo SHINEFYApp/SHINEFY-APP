@@ -4,7 +4,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { useState } from "react";
 
 
-export default function SelectVechileCard({ icon, text, screen, navigation, arrow, isSwitch, Press }) {
+export default function SelectVechileCard({ icon, text, screen, navigation , arrow , isSwitch , Press ,screenTitle="",img , brandID }) {
     function handleNavigate() {
         navigation.navigate(screen, text)
     }
@@ -14,8 +14,28 @@ export default function SelectVechileCard({ icon, text, screen, navigation, arro
         setIsEnable(!isEnabled)
     }
 
+       function handleNavigate() {
+        if(screenTitle.includes("Model")){
+            if(brandID) {
+                navigation.navigate(screen , screenTitle)
+                
+            }
+        }else {
+            navigation.navigate(screen , screenTitle)
+        }
+    }
+    
     return (
-        <TouchableOpacity onPress={handleNavigate} className="flex-row items-center bg-white px-3 py-5 mb-3 border-[#ccc] border rounded-lg">
+        <TouchableOpacity onPress={()=>{
+            if(!isSwitch && !Press) {
+                handleNavigate()
+            } else if(Press) {
+                Press()
+            } else {
+                toggleSwitch()
+            }
+             
+        }} className="flex-row items-center bg-white px-3 py-5 mb-3 border-[#ccc] border rounded-lg">
             <Image source={icon} className="mr-3" />
             <Text>
                 {text}
