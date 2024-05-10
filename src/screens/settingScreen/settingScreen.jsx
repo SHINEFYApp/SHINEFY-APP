@@ -23,6 +23,7 @@ import { Shareratepro } from '../../Provider/Sharerateapp';
 import { useRecoilValue } from 'recoil';
 import profileData from '../../atoms/profileData/profileData';
 import notificationStatus from '../../Features/notificationStatus/notificationStatus';
+import deleteAccount from '../../Features/deleteAccount/deleteAccount';
 
 
 
@@ -43,7 +44,7 @@ export default function SettingScreen({ navigation }) {
       <Modal avoidKeyboard={true} hasBackdrop={true} isVisible={isPopUpOpenDelete}>
         <ConfirmationPopUp
           closePopUp={handleClosePopUpDelete}
-          onConfirm={() => { }}
+          onConfirm={() => {deleteAccount()}}
           heading={'Delete Account ?'}
           p={'Are you sure , you want to Delete Account ?'}
           buttonTitle={'Delete'}
@@ -66,7 +67,7 @@ export default function SettingScreen({ navigation }) {
           screen={null}
           navigation={navigation}
           isSwitch
-          isSwitchEnabled={Boolean(data.notification_status)}
+          isSwitchEnabled={Boolean(data?.notification_status)}
           arrow
           icon={notifyIcon}
           onChangeSwitch={()=>{

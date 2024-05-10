@@ -32,7 +32,7 @@ export default function ProfileScreen({navigation}) {
                 </View>
                 <View className="items-center ">
                     <Text className="font-bold text-2xl">{data?.name}</Text>
-                    <Text>0{data.phone_number}</Text>
+                    <Text>0{data?.phone_number}</Text>
                 </View>
             </View>
 
