@@ -44,6 +44,7 @@ export default function ProfileScreen({navigation}) {
                 <SelectVechileCard icon={SubIcon} text={"My Subscriptions"} screen="MySubscreptionScreen" navigation={navigation}/>
                 <SelectVechileCard icon={SettingIcon} text={"Setting"} screen="SettingScreen" navigation={navigation}/>
                 <SelectVechileCard icon={LanguageIcon} text={"Languages"} screen="LanguageScreen" navigation={navigation}/>
+                <View className={'mb-16'} />
             </ScrollView>
         </View>
     )

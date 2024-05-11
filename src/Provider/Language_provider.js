@@ -156,7 +156,7 @@ class Language_provider {
   emptyConfirmNewPWD = [
     'Please enter confirm new password',
     'الرجاء إدخال تأكيد كلمة المرور الجديدة',
-  ];
+  ]; 
   // For Confirm Password
   emptyConfirmPWD = [
     'Please enter confirm password',

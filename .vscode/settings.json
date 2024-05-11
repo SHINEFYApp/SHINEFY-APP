@@ -1,3 +1,7 @@
 {
-  "jest.enable": false
+  "jest.enable": false,
+  "cSpell.words": [
+    "Subscreption",
+    "Vechile"
+  ]
 }

@@ -7,7 +7,7 @@ import AppLogout from '../../Features/logout/Logout';
 import Modal from 'react-native-modal';
 import logoutIcon from '../../assets/icons/logoutIcon.png';
 import ConfirmationPopUp from '../../components/confirmationPopUp/ConfirmationPopUp';
-import { useState } from 'react';
+import { useState } from 'react'; 
 import deleteIcon from '../../assets/icons/deleteIcon.png'
 import keyIcon from '../../assets/icons/setting/keyIcon.png'
 import aboutIcon from '../../assets/icons/setting/aboutIcon.png'
@@ -24,6 +24,8 @@ import { useRecoilValue } from 'recoil';
 import profileData from '../../atoms/profileData/profileData';
 import notificationStatus from '../../Features/notificationStatus/notificationStatus';
 import deleteAccount from '../../Features/deleteAccount/deleteAccount';
+import { Lang_chg } from '../../Provider/Language_provider';
+import { config } from '../../Provider/configProvider';
 
 
 
@@ -45,9 +47,9 @@ export default function SettingScreen({ navigation }) {
         <ConfirmationPopUp
           closePopUp={handleClosePopUpDelete}
           onConfirm={() => {deleteAccount()}}
-          heading={'Delete Account ?'}
-          p={'Are you sure , you want to Delete Account ?'}
-          buttonTitle={'Delete'}
+          heading={Lang_chg.delete_acc_title[config.language]}
+          p={Lang_chg.delete_acc_msg[config.language]}
+          buttonTitle={Lang_chg.titleDelete[config.language]}
           icon={logoutIcon}
         />
       </Modal>
@@ -55,15 +57,15 @@ export default function SettingScreen({ navigation }) {
         <ConfirmationPopUp
           closePopUp={handleClosePopUp}
           onConfirm={() => AppLogout(navigation)}
-          heading={'Logout'}
-          p={'Are you sure , you want to logout ?'}
-          buttonTitle={'LOG OUT'}
+          heading={Lang_chg.logout_txt[config.language]}
+          p={Lang_chg.msgConfirmTextLogoutMsg[config.language]}
+          buttonTitle={Lang_chg.logout1_txt[config.language]}
           icon={logoutIcon}
         />
       </Modal>
       <ScrollView>
         <SelectVechileCard
-          text={'Notfication'}
+          text={Lang_chg.notification_txt[config.language]}
           screen={null}
           navigation={navigation}
           isSwitch
@@ -75,45 +77,45 @@ export default function SettingScreen({ navigation }) {
           }}
         />
         <SelectVechileCard
-          text={'Change Password'}
+          text={Lang_chg.changepassword_txt[config.language]}
           screen={'ChangePasswordProfile'}
           navigation={navigation}
           icon={keyIcon}
         />
         <SelectVechileCard
-          text={'Contact Us'}
+          text={Lang_chg.contactus_txt[config.language]}
           screen={'Contact Us'}
           navigation={navigation}
           icon={phoneIcon}
 
         />
         <SelectVechileCard
-          text={"FAQ's"}
+          text={Lang_chg.faqs_txt[config.language]}
           screen={"FAQ's"}
           navigation={navigation}
           icon={qIcon}
         />
         <SelectVechileCard
-          text={'Terms & Conditions'}
+          text={Lang_chg.tearmsetting[config.language]}
           screen={'AboutUsScreen'}
           navigation={navigation}
           icon={fileIcon}
         />
         <SelectVechileCard
-          text={'Privacy Policy'}
+          text={Lang_chg.privacy[config.language]}
           screen={'AboutUsScreen'}
           navigation={navigation}
           icon={privateIcon}
         />
         <SelectVechileCard
-          text={'About Us'}
+          text={Lang_chg.about_us[config.language]}
           screen={'AboutUsScreen'}
           navigation={navigation}
           icon={aboutIcon}
         />
         <View className="border-t border-[#ccc] pt-3">
           <SelectVechileCard
-            text={'Rate App'}
+            text={Lang_chg.rate_txt[config.language]}
             arrow
             icon={rateIcon}
             Press={()=>{
@@ -121,7 +123,7 @@ export default function SettingScreen({ navigation }) {
             }}
           />
           <SelectVechileCard
-            text={'Share App'}
+            text={Lang_chg.share_txt[config.language]}
             navigation={navigation}
             arrow
             icon={shareIcon}
@@ -130,7 +132,7 @@ export default function SettingScreen({ navigation }) {
                         }}
           />
           <SelectVechileCard
-            text={'Delete Account'}
+            text={Lang_chg.delete_acc_title[config.language]}
             navigation={navigation}
             arrow
             icon={deleteIcon}
@@ -143,7 +145,7 @@ export default function SettingScreen({ navigation }) {
           onPress={() => {
             setIsPopUpOpen(true);
           }}
-          Title={'LOG OUT'}
+          Title={Lang_chg.logout1_txt[config.language]}
           icon={logoutIcon}
         />
       </ScrollView>

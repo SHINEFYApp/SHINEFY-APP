@@ -2,6 +2,7 @@ import { Image, Switch, Text, View } from "react-native-ui-lib";
 import arrowIcon from '../../assets/icons/arrowIcon.png'
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useState } from "react";
+import { config } from "../../Provider/configProvider";
 
 
 export default function SelectVechileCard({ icon, text, screen, navigation , arrow , isSwitch , Press ,screenTitle="",img , brandID ,isSwitchEnabled ,onChangeSwitch }) {
@@ -42,7 +43,7 @@ export default function SelectVechileCard({ icon, text, screen, navigation , arr
             </Text>
             {
                 !arrow &&
-                <Image source={arrowIcon} className="ml-auto" />
+                <Image source={arrowIcon} className={`ml-auto ${config.language === 0 ? '' : 'rotate-180'}`} />
             }
             {
 
