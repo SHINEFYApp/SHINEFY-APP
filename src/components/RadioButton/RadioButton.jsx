@@ -2,7 +2,7 @@ import React, {useEffect, useState } from 'react';
 import {TouchableHighlight} from 'react-native-gesture-handler';
 import {Image, Text, View} from 'react-native-ui-lib';
 
-export default function RadioButton({buttons , currentActive , set}) {
+export default function RadioButton({buttons , currentActive , set , onPress}) {
   const [activeButton, setActiveButton] = useState(currentActive);
 
   useEffect(()=>{
@@ -20,8 +20,11 @@ export default function RadioButton({buttons , currentActive , set}) {
           underlayColor={"white"}
             key={key}
             onPress={() => {
+              if(onPress) {
+                onPress(key)
+              }
               setActiveButton(button.title);
-              set(button.title)
+              // set(button.id)
             }}>
               <View className="flex-row justify-between items-center">
               <View className="flex-row items-center gap-2">
