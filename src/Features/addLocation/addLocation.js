@@ -18,7 +18,6 @@ async function getLocationName(location) {
         config.maplanguage,
     ).then(res => res.json())
     .then(data => {return (data.results[2].formatted_address)})
-
     return locationName
 
 }

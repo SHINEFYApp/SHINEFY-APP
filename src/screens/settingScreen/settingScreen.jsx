@@ -30,7 +30,7 @@ import deleteAccount from '../../Features/deleteAccount/deleteAccount';
 export default function SettingScreen({ navigation }) {
   const [isPopUpOpenDelete, setIsPopUpOpenDelete] = useState(false);
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
-    const data = useRecoilValue(profileData)
+  const data = useRecoilValue(profileData)
 
   function handleClosePopUp() {
     setIsPopUpOpen(false);

@@ -85,7 +85,7 @@ export default function AddVechileScreen({navigation , route}) {
         // setIsPopUpOpen(true)
         setIsPopUpOpen(await addVehicle(newCar))
         setNewCar({})
-        navigation.navigate('Vehicles')
+        navigation.navigate('HomeScreen')
         
       }} />
     </View>

@@ -14,7 +14,7 @@ import bookingDetailsAtom from "../../atoms/bookingDetails/bookingDetails.atom";
 import { msgProvider } from "../../Provider/Messageconsolevalidationprovider/messageProvider";
 
 export default function RequestDetails({ navigation , route }) {
-    console.log(route.params)
+
     const [selectMain, setSelectMain] = useState("")
     const [selectLocation, setSelectLocation] = useState("")
     const [cars , setCars] = useState([])
@@ -27,7 +27,10 @@ export default function RequestDetails({ navigation , route }) {
             setServices(await localStorage.getItemObject('services'))
         }
         setBookingDetails({
-            location :route.params, 
+            ...bookingDetails,
+            address_loc : route.params.location, 
+            longitude : route.params.longitude,
+            latitude : route.params.latitude ,
         })
         fetchData()
 
@@ -66,7 +69,11 @@ export default function RequestDetails({ navigation , route }) {
                         <SelectVehicle car={car} selected={selectCar} onPress={()=>{
                             setBookingDetails({
                                 ...bookingDetails , 
-                                car
+                                vehicle_id : car.vehicle_id,
+                                  extraData : {
+                                    ...bookingDetails?.extraData,
+                                    car
+                                }
                             })
                             setSelectCars(car.vehicle_id)
                         }} />
@@ -87,7 +94,13 @@ export default function RequestDetails({ navigation , route }) {
                         setSelectMain(id)
                         setBookingDetails({
                                 ...bookingDetails , 
-                                mainSevice : service
+                                service_id : service.service_id ,
+                                service_price : service.service_price ,
+                                service_time : service.service_time,
+                                extraData : {
+                                    ...bookingDetails?.extraData,
+                                    service
+                                }
                             })
                     }} />
                   )
@@ -118,9 +131,9 @@ export default function RequestDetails({ navigation , route }) {
                     <Text className="font-bold text-xl">200 EGP</Text>
                 </View>
                 <Button Title={"continue"} smallButton onPress={() => {
-                    if(!bookingDetails["car"]) {
+                    if(!bookingDetails["vehicle_id"]) {
                         msgProvider.toast("Please Select Car", 'center');
-                    } else if(!bookingDetails["mainSevice"]) {
+                    } else if(!bookingDetails["service_id"]) {
                         msgProvider.toast("Please Select Service", 'center');
                     }else {
                         navigation.navigate('SelectDateTime')

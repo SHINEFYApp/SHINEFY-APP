@@ -7,8 +7,7 @@ import Modal from 'react-native-modal';
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useState } from "react";
 import deleteLocation from "../../Features/deleteLocation/deleteLocation";
-export default function LocationCard({location, navigation }) {
-    console.log(location.user_location_id)
+export default function LocationCard({location, navigation}) {
     const [isPopUpOpenDelete , setIsPopUpOpenDelete] = useState(false)
     return (
         <TouchableOpacity onPress={()=>{
@@ -22,7 +21,6 @@ export default function LocationCard({location, navigation }) {
           }}
           onConfirm={async() => {
               await deleteLocation(location.user_location_id)
-              console.log("hjdgsf")
           }}
           heading={'Delete Location ?'}
           p={`Are you sure , you want to Delete ${location.user_address_name} Location ? `}

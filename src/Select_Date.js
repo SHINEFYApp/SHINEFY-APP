@@ -258,10 +258,11 @@ export default class Select_Date extends Component {
       user_id +
       '/' +
       amount;
-    if (all_slots == null) {
+      if (all_slots == null) {
       apifuntion
         .getApi(url, page)
         .then(obj => {
+
           if (obj.success == 'true') {
             localStorage.setItemObject('all_slots', obj.slots_arr);
             localStorage.setItemObject('user_arr', obj.user_details);

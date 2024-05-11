@@ -149,6 +149,10 @@ const Stacknav = navigation => {
         component={WalletScreen}
       />
       <Stack.Screen
+        name="AddCar"
+        component={AddVechileScreen}
+      />
+      <Stack.Screen
         name="RequestDetails"
         component={RequestDetails}
       />
