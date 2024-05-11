@@ -44,6 +44,7 @@ const BookingOverview = ({ navigation }) => {
                     title={'services'}
                     value={bookingDetails.extraData.service.service_name[config.language]}
                     price={`${bookingDetails.extraData.service.service_price} EGP`} />
+                <View className={'flex bg-[#C3C3C3] w-[80%] h-[1px] items-center my-5 mx-auto justify-center'}></View>
             </View>
             <View className={'bg-mainColor py-4 w-full rounded mt-4 flex flex-row justify-between px-4'}>
                 <Text className={'font-bold text-center text-lg'}>Total Service Charge</Text>
