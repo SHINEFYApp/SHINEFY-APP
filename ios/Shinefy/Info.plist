@@ -62,13 +62,17 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<false/>
-		<key>NSAllowsLocalNetworking</key>
-		<true/>
-	</dict>
+<key>NSAppTransportSecurity</key>
+<dict>
+  <key>NSExceptionDomains</key>
+    <dict>
+       <key>localhost</key>
+      <dict>
+        <key>NSExceptionAllowsInsecureHTTPLoads</key>
+        <true/>
+     </dict>
+    </dict>
+</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Shinefy would like to access your Camera for App Profile Photo Uploading. Your photos wont be shared without your permission.It is safe and secure.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
