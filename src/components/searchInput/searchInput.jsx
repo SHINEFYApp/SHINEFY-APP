@@ -1,13 +1,26 @@
 import {Image, View} from 'react-native-ui-lib';
 import searchIcon from '../../assets/icons/searchIcon.png';
-import { TextInput } from 'react-native';
-export default function SearchInput({placeholder , onChange}) {
+import {TextInput} from 'react-native';
+import {config} from '../../Provider/configProvider';
+export default function SearchInput({placeholder, onChange}) {
   return (
-    <View  className={"bg-white border border-[#c3c3c3] px-4 flex-row overflow-hidden items-center rounded-xl"}>
+    <View
+      className={
+        'bg-white border border-[#c3c3c3] px-4 flex-row overflow-hidden items-center rounded-xl'
+      }>
       <Image source={searchIcon} />
-      <TextInput placeholderTextColor={"#c3c3c3"} placeholder={placeholder} className={"w-full px-3 text-black"} onChange={(e)=>{
-        onChange(e.nativeEvent.text)
-      }} />
+      <TextInput
+        placeholderTextColor={'#c3c3c3'}
+        placeholder={placeholder}
+        className={`w-full px-3 text-black h-9 ${
+          config.language === 0
+            ? 'placeholder:text-left text-left'
+            : 'placeholder:text-right text-right'
+        }`}
+        onChange={e => {
+          onChange(e.nativeEvent.text);
+        }}
+      />
     </View>
   );
 }

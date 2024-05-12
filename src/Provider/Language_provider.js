@@ -565,6 +565,7 @@ class Language_provider {
   coupon_txt = ['Coupon Applied', 'تم تطبيق الكوبون'];
   wallet_txt = ['Wallet Applied', 'تطبيق المحفظة'];
   wallet = ['Wallet', 'محفظة'];
+  wallet_balance = ['Wallet Blance', 'ميزانية المحفظة'];
   use_wallet = ['Use wallet', 'استخدام المحفظة'];
   use_wallet_title = ['Enter wallet amount', 'ادخل القيمة المراد استخدامها'];
 
@@ -772,6 +773,11 @@ class Language_provider {
   delete_location = ['Delete Location ?', 'حذف الموقع ؟']
   delete_location_confirmation = ['Are you sure , you want to Delete', 'هل أنت متأكد أنك تريد حذف']
   wash_location = ['Car Wash Location', 'مكان غسيل السيارات']
+
+  what_looking_for_placholder = ['What are you looking for ?', 'ما الذي تبحث عنه ؟']
+  special_offers = ['Special Offers', 'عروض خاصة']
+  see_all = ['See All', 'عرض الكل']
+  location_text = ['Location', 'الموقع']
 
 }
 export const Lang_chg = new Language_provider();
