@@ -1,13 +1,20 @@
 import {Image, Text, View} from 'react-native-ui-lib';
 import MapView, {Marker} from 'react-native-maps';
 import indectorIcon from '../../assets/icons/mapIndecator.png';
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 import Input from '../inputs/input';
 import Button from '../mainButton/Button';
 import addLocation from '../../Features/addLocation/addLocation';
-export default function MapComponent({isNewLocation , navigation}) {
-  const [currentlocation , setCurrentLocation] = useState({"latitude": 29.96073734024412, "latitudeDelta": 0.001162180276701008, "longitude": 31.25663409009576, "longitudeDelta": 0.0006581470370328191})
-  const [name , setName] = useState("")
+import {Lang_chg} from '../../Provider/Language_provider';
+import {config} from '../../Provider/configProvider';
+export default function MapComponent({isNewLocation, navigation}) {
+  const [currentlocation, setCurrentLocation] = useState({
+    latitude: 29.96073734024412,
+    latitudeDelta: 0.001162180276701008,
+    longitude: 31.25663409009576,
+    longitudeDelta: 0.0006581470370328191,
+  });
+  const [name, setName] = useState('');
   return (
     <View className="flex-1 relative">
       <MapView
@@ -17,38 +24,43 @@ export default function MapComponent({isNewLocation , navigation}) {
         maxZoomLevel={30}
         scrollEnabled={isNewLocation ? true : false}
         className="h-full w-full"
-        onRegionChangeComplete={(e)=>{
-         setCurrentLocation(e)
+        onRegionChangeComplete={e => {
+          setCurrentLocation(e);
         }}
         g
         region={currentlocation}
         cameraZoomRange={15}>
-          {
-            !isNewLocation &&
-        <Marker
-          draggable
-          coordinate={currentlocation}>
-          <Image source={indectorIcon}/>
-        </Marker>
-          }
+        {!isNewLocation && (
+          <Marker draggable coordinate={currentlocation}>
+            <Image source={indectorIcon} />
+          </Marker>
+        )}
       </MapView>
-      {
-        isNewLocation &&
-        <Image source={indectorIcon} className="absolute w-10 h-10 top-1/2 left-1/2 -mt-10 -ml-5"/>
-      }
-      {
-        isNewLocation &&
-        <View className='absolute bottom-16 mx-5 p-5 rounded-xl bg-[#FFFAF2]'>
-          <Text className='text-xl text-center mb-5 font-bold'>Booking Location</Text>
-          <Input placeholder={"Enter Name of Location (Home , Work ,etc...)"} onChange={(e)=>{
-          setName(e.nativeEvent.text)
-          }} />
-          <Button Title={"Make a Booking"} onPress={()=>{
-          
-            addLocation(currentlocation , name)
-          }}/>
+      {isNewLocation && (
+        <Image
+          source={indectorIcon}
+          className="absolute w-10 h-10 top-1/2 left-1/2 -mt-10 -ml-5"
+        />
+      )}
+      {isNewLocation && (
+        <View className="absolute bottom-16 mx-5 p-5 rounded-xl bg-[#FFFAF2]">
+          <Text className="text-xl text-center mb-5 font-bold">
+            {Lang_chg.booking_location[config.language]}
+          </Text>
+          <Input
+            placeholder={Lang_chg.confirm_booking_location[config.language]}
+            onChange={e => {
+              setName(e.nativeEvent.text);
+            }}
+          />
+          <Button
+            Title={Lang_chg.confirm_booking[config.language]}
+            onPress={() => {
+              addLocation(currentlocation, name);
+            }}
+          />
         </View>
-      }
+      )}
     </View>
   );
 }

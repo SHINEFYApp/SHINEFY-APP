@@ -436,8 +436,10 @@ class Language_provider {
   editvechile_txt = ['Edit My Vehicle', 'تعديل سيارتي'];
   selectcategory_txt = ['Select Category', 'اختر الفئة'];
   selectmake_txt = ['Select Brand', 'اختر الماركة'];
+  brand_txt = ['Brand', 'الماركة'];
   hyundai2_txt = ['Hyundai', 'هيونداي'];
   selectmodel_txt = ['Select Model', 'حدد الطراز'];
+  model_txt = [' Model', ' الطراز'];
   selectcolor_txt = ['Select Color', 'إختر اللون'];
   enterplatenumber_txt = ['Enter Plate Number', 'أدخل رقم اللوحة'];
   update_txt = ['Update', 'تحديث'];
@@ -589,6 +591,7 @@ class Language_provider {
     'I am not able due to some urgent work sorry for the inconvenience.',
     'أنا غير قادر بسبب بعض الأعمال العاجلة ,آسف للإزعاج.',
   ];
+  cancelBooking_txt = ['Cancel Booking', 'إلغاء الحجز'];
   cancelservice_txt = ['Cancel Service', 'إلغاء الخدمة'];
   submit1_txt = ['Submit', 'تقديم'];
   selectdate_txt = ['Select Date', 'حدد تاريخ'];
@@ -650,6 +653,8 @@ class Language_provider {
     'تم إلغاء حجزك بنجاح',
   ];
   msgReportSend = ['Report sent successfully', 'تم إرسال التقرير بنجاح'];
+  booking_location = ['Booking Loction', 'موقع الحجز'];
+  booking_placeholder = ['Enter Name of Location (Home , Work ,etc...)', 'أدخل اسم الموقع (المنزل، العمل، الخ...)'];
   confirm_booking = ['Confirm Booking', 'تأكيد الحجز'];
   confirm_booking_location = [
     'Confirm Booking Location ?',
@@ -662,6 +667,7 @@ class Language_provider {
   Apply = ['Apply', 'تطبيق'];
   Payment_Option = ['Payment Options', 'خيارت الدفع'];
   debit_credit_card = ['Debit/Credit Card', 'بطاقة الخصم / الائتمان'];
+  add_card = ['Add Card', 'اضافة بطاقة '];
   select_payment_method = ['Select Payment Method', 'اختار طريقة الدفع'];
   select_payment_method_for_bills = [
     'Select Payment Method for Paying bills',
@@ -696,6 +702,7 @@ class Language_provider {
   note_txt = ['Note', 'ملحوظة'];
   Details = ['Details', 'تفاصيل'];
   save_location = ['Save Location', 'حفظ الموقع'];
+  add_location = ['Add Location', 'اضافه الموقع'];
   SelectVehicles = ['Select Vehicles', 'حدد السيارات'];
   add_your_vehicle = ['Add Your Vehicle', 'أضف سيارتك'];
   vehicle_added_success_msg = [
@@ -738,6 +745,10 @@ class Language_provider {
     'Payment fail ,please try again',
     'فشل الدفع ، يرجى المحاولة مرة أخرى',
   ];
+  add_card = ['Add Card' , 'اضف بطاقة']
+  paypal = ['Paypal' , 'ياي بال']
+  apple_pay = ['Apple Pay' , 'ابل باي']
+  google_pay = ['Google Pay' , 'جوجل باي']
   deactivate = ['deactivate', 'تعطيل'];
   Remove = ['Remove', 'إزالة'];
   waiting_time_slot = ['Waiting', 'Waiting'];
@@ -754,5 +765,13 @@ class Language_provider {
 //-------------------------------------my subscriptions----------------------//
 
   mySubscriptions= ['My Subscriptions', 'اشتراكاتي']
+
+  //-------------------------------------Saved Location----------------------//
+
+  add_new_location = ['Add New Location', 'اضافه موقع جديد']
+  delete_location = ['Delete Location ?', 'حذف الموقع ؟']
+  delete_location_confirmation = ['Are you sure , you want to Delete', 'هل أنت متأكد أنك تريد حذف']
+  wash_location = ['Car Wash Location', 'مكان غسيل السيارات']
+
 }
 export const Lang_chg = new Language_provider();
