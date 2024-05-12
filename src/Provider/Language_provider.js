@@ -344,7 +344,7 @@ class Language_provider {
   Home = ['Home', 'الرئيسية'];
   Message = ["You don't have an account?", 'ليس لديك حساب؟'];
   Signup = ['Signup', ' التسجيل  '];
-  Forgot_password = ['Forgot Password?', 'هل نسيت كلمةالمرور'];
+  Forgot_password = ['Forgot Password?', 'هل نسيت كلمةالمرور؟'];
   Login_guest = ['Login as a guest', 'تسجيل الدخول كضيف'];
   New_password_placeholder = ['New Password', 'كلمة المرور الجديدة'];
   confirm_password_placeholder = [
@@ -748,5 +748,11 @@ class Language_provider {
     'The current password and password must be different',
     'يجب أن تكون كلمة المرور وكلمة المرور الحالية مختلفتين',
   ];
+
+  packages =['Packages', 'الحزم']
+
+//-------------------------------------my subscriptions----------------------//
+
+  mySubscriptions= ['My Subscriptions', 'اشتراكاتي']
 }
 export const Lang_chg = new Language_provider();

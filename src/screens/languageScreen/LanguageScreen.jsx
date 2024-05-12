@@ -2,22 +2,30 @@ import React from 'react';
 import {View} from 'react-native-ui-lib';
 import RadioButton from '../../components/RadioButton/RadioButton';
 import changeLanguage from '../../Features/changeLanguage/changeLanguage';
+import {Lang_chg} from '../../Provider/Language_provider';
+import {config} from '../../Provider/configProvider';
 
 export default function LanguageScreen() {
   const radioButtons = [
     {
       id: 0,
-      title: 'English',
+      title: Lang_chg.english_txt[config.language],
     },
     {
       id: 1,
-      title: 'Arabic',
+      title: Lang_chg.arabic_txt[config.language],
     },
   ];
 
+  console.log(config.language);
+
   return (
     <View className="mt-[80] p-5">
-      <RadioButton buttons={radioButtons} currentActive={2} onPress={changeLanguage}/>
+      <RadioButton
+        buttons={radioButtons}
+        currentActive={config.language}
+        onPress={changeLanguage}
+      />
     </View>
   );
 }

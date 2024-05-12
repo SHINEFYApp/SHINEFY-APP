@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { StyleSheet, TextInput } from 'react-native';
-import { Image, Text, TouchableOpacity, View } from 'react-native-ui-lib';
-import { mobileW } from '../../Provider/utilslib/Utils';
+import React, {useState} from 'react';
+import {StyleSheet, TextInput} from 'react-native';
+import {Image, Text, TouchableOpacity, View} from 'react-native-ui-lib';
+import {config, mobileW} from '../../Provider/utilslib/Utils';
 import eyeIcon from '../../assets/icons/eyeIcon.png';
 export default function Input({
   secureTextEntry,
@@ -12,11 +12,10 @@ export default function Input({
   className,
   text,
   onChange,
-  value
+  value,
 }) {
   const [isSecure, setIsSecure] = useState(secureTextEntry);
- 
-  
+
   return (
     <View style={styles.inputStyle} className={'mb-5 flex-1'}>
       {icon && (
@@ -31,9 +30,12 @@ export default function Input({
         placeholder={placeholder}
         onChange={onChange}
         value={value && value}
-        
         placeholderTextColor={'#C3C3C3'}
-        className={'text-black w-full'}
+        className={`text-black w-full ${
+          config.language === 0
+            ? 'placeholder:text-left'
+            : 'placeholder:text-right'
+        }`}
       />
       {secureTextEntry && (
         <TouchableOpacity
