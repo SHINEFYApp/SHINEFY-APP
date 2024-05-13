@@ -13,7 +13,7 @@ export default async function getMyVehicles() {
         
         return(res.data)
 }catch(err) {
-    console.log(err)
+
 }
 //  apifuntion
 //         .getApi(url)

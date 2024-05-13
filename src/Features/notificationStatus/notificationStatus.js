@@ -3,7 +3,7 @@ import { config } from "../../Provider/configProvider";
 import { localStorage } from "../../Provider/localStorageProvider";
 
 export default async function notificationStatus(state) {
-    console.log("fjkhdn")
+  
         var send_status = 0;
     if (state== true) {
       send_status = 2;
@@ -22,7 +22,7 @@ export default async function notificationStatus(state) {
     apifuntion
       .getApi(url)
       .then(obj => {
-        console.log(obj)
+       
         if (obj.success == 'true') {
           var user_arr = obj.user_details;
           localStorage.setItemObject('user_arr', user_arr);

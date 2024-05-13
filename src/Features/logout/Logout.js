@@ -15,7 +15,7 @@ export default async function AppLogout(navigation) {
     localStorage.setItemObject('languagecathc', languagecathc);
     localStorage.setItemObject('languagesetenglish', languagesetenglish);
     navigation.navigate('WelcomeScreen');
-    console.log(navigation)
+
   if (login_type == 'facebook') {
     LoginManager.logOut();
     localStorage.clear();

@@ -36,7 +36,7 @@ export default function RequestDetails({navigation, route}) {
     fetchData();
   }, []);
 
-  console.log(bookingDetails);
+
 
   const data = [
     {key: '1', value: 'Mobiles', disabled: true},

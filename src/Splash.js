@@ -203,7 +203,7 @@ export default class Splash extends Component {
     // let data2= await localStorage.getItemObject('socialdata');
     let result = user_details;
     if (user_details != null) {
-      this.props.navigation.navigate('HomeScreen', {home_status: 1});
+      this.props.navigation.navigate('Home', {home_status: 1});
     } else {
       this.props.navigation.navigate('WelcomeScreen');
     }

@@ -23,7 +23,7 @@ export async function sendOTP(OTP , phoneNumber , userId , navigation) {
   // data.append('player_id', global.player_id_me1);
   // data.append("player_id", player_id_me1)
   data.append('status', 1);
-  console.log("lol yangm")
+
   var url = config.baseURL + 'otp_verify';
   apifuntion
     .postApi(url, data)

@@ -11,7 +11,7 @@ export default async function getBrand() {
         let res = await apiSauce.get(`/get_add_vehical/${user_id}/`)
         return(res.data)
     }catch(err) {
-    console.log(err)
+   
 }
 //  apifuntion
 //         .getApi(url)

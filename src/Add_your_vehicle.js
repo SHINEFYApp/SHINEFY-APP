@@ -397,8 +397,7 @@ export default class Add_your_vehicle extends Component {
     apifuntion
       .postApi(url, data)
       .then(obj => {
-        console.log(data)
-        console.log(obj)
+  
         if (obj.success == 'true') {
           localStorage.removeItem('saved_vehicle_arr');
           localStorage.removeItem('user_home_data');

@@ -17,7 +17,7 @@ const useCoordinateToAddress = (mapRef, location, forceFetch) => {
           if (!forceFetch) {
             setAddress(null);
           }
-          console.log(error);
+      
         }
       }
     })();

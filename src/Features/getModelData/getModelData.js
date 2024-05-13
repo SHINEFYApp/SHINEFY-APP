@@ -10,6 +10,5 @@ export default async function getModelData(branId) {
     let res = await apiSauce.get(`/get_modal_data/${branId}/`);
     return res.data;
   } catch (err) {
-    console.log(err);
   }
 }

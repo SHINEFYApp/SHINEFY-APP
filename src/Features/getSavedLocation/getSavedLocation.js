@@ -11,6 +11,5 @@ export default async function getSavedLocation(){
         let res = await apiSauce.get(`/get_user_saved_location/${user_id}`)
         return(res.data.saved_location_arr)
 }catch(err) {
-    console.log(err)
 }
 }

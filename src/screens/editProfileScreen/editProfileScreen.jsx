@@ -18,7 +18,6 @@ export default function EditProfileScreen({navigation}) {
     phone_number: data.phone_number,
     email: data.email,
   });
-  console.log(newData);
   return (
     <View className="pt-[80] px-8 flex-1">
       <View className="my-10">
@@ -74,7 +73,7 @@ export default function EditProfileScreen({navigation}) {
             onPress={async () => {
               await editProfile(newData);
               navigation.navigate('HomeScreen');
-              //    console.log("jhfgjn")
+          
             }}
           />
         </View>

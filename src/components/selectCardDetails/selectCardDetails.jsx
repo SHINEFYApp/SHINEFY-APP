@@ -4,7 +4,7 @@ import addNewCar from "../../atoms/addNewCar/addNewCar";
 
 export default function SelectCardDetails({title , img , color ,active, id , onPress , keyObj , ele}) {
     const [newCar , setNewCar] = useRecoilState(addNewCar)
-    console.log(ele)
+
     return(
         <View className={`p-3 border border-[#ccc] rounded-lg w-[45%] mb-[10%] ${active==id &&"bg-mainColor"}`}>
             <TouchableOpacity onPress={()=>{

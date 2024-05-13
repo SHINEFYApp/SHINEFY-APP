@@ -6,7 +6,7 @@ import { msgProvider } from "../../Provider/Messageconsolevalidationprovider/mes
 import { apifuntion } from "../../Provider/Apicallingprovider/apiProvider";
 
 async function getLocationName(location) {
-  console.log(location.latitude)
+
   let locationName = await fetch(
       'https://maps.googleapis.com/maps/api/geocode/json?address=' +
         location.latitude +
@@ -46,9 +46,9 @@ export default async function addLocation(location , name) {
   data.append('latitude', location.latitude);
   data.append('longitude', location.longitude);
   data.append('location',  await getLocationName(location));
-  console.log("test location")
+
   let url = config.baseURL + 'save_user_location';
-  console.log(data);
+
   apifuntion
     .postApi(url, data)
     .then(obj => {

@@ -27,7 +27,6 @@ const CancelBooking = ({route}) => {
       title: Lang_chg.other_reason[config.language],
     },
   ];
-  console.log(route.params.book_id);
   return (
     <View className={'mt-[90px] mx-5'}>
       <Text className={'text-[#818181] mb-4'}>
@@ -76,7 +75,7 @@ const CancelBooking = ({route}) => {
           btnStyle={'text-lg'}
           onPress={async () => {
             let res = await cancelBooking(route.params.book_id, activeButton);
-            console.log(res);
+   
           }}
         />
       </View>

@@ -11,7 +11,7 @@ export default function SavedLocationScreen({navigation}) {
   const [data, setData] = useState([]);
   const locations = [1];
 
-  console.log(data);
+  
 
   useEffect(() => {
     const fetchData = async () => {

@@ -4,7 +4,7 @@ import { localStorage } from "../../Provider/localStorageProvider";
 import AppLogout from "../logout/Logout";
 
 export default async function deleteAccount() {
-    console.log("kfhjb")
+
     let user_arr = await localStorage.getItemObject('user_arr');
     let user_id = user_arr.user_id;
     var data = new FormData();
@@ -15,7 +15,7 @@ export default async function deleteAccount() {
     apifuntion
       .postApi(url, data)
       .then(obj => {
-        console.log(obj)
+   
         if (obj.success == 'true') {
           AppLogout();
         } else {

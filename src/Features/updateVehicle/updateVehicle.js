@@ -19,14 +19,13 @@ user_id:user_id,
     fd.append("color_id" , currentCar.car_color.color_id)
     fd.append("plate_number" ,currentCar.plate_number )
     fd.append("user_id" , user_id)
-    console.log(fd)
+
 
     var add_car_arr = await localStorage.getItemObject('add_car_arr');
     try {
         let res = await apiSauce.post(`/update_vehicle`,{"_parts" : fd._parts}) 
-        console.log(res.data)
+    
         return(res.data)
 }catch(err) {
-    console.log(err)
 }
 }

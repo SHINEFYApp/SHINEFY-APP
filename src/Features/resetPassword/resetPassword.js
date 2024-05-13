@@ -60,11 +60,10 @@ export default async function resetPassword(data , user_id){
     fd.append('new_password', data.new_password);
     fd.append('user_id', user_id);
     let url = config.baseURL + 'set_fogot_password';
-    console.log("data")
+   
     apifuntion
       .postApi(url, fd)
       .then(obj => {
-        console.log(obj)
         if (obj.success == 'true') {
           msgProvider.toast(
             Lang_chg.successUpdatePass[config.language],

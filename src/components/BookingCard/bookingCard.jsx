@@ -6,7 +6,6 @@ import {config} from '../../Provider/configProvider';
 import {Lang_chg} from '../../Provider/Language_provider';
 
 export default function BookingCard({progress, ButtonTitle, navigation, book}) {
-  console.log(book);
 
   return (
     <View className="bg-white p-3 mb-3">
@@ -48,7 +47,7 @@ export default function BookingCard({progress, ButtonTitle, navigation, book}) {
                     book_id: book.booking_id,
                   });
                 } else if (progress == 'completed_booking') {
-                  navigation.navigate('Review', {book_id: book.booking_id});
+                  navigation.navigate('Review', {book_id: book.booking_id , service_boy_id : book.service_boy_id});
                 }
               }}
             />

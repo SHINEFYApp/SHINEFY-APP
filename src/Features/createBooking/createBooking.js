@@ -51,11 +51,9 @@ import { localStorage } from "../../Provider/localStorageProvider";
     // data.append('wallet_amount', this.state.redemwallet);
     // data.append('online_amount', this.state.netpay);
     let url = config.baseURL + 'create_booking';
-    console.log(bookingDetails)
-    console.log(data)
+  
     apifuntion.postApi(url , data)
     .then((obj)=>{
-      console.log(obj)
       if (err == 'noNetwork') {
         msgProvider.alert(
           Lang_chg.msgTitleNoNetwork[config.language],

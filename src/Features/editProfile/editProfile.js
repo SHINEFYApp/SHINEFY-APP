@@ -11,8 +11,8 @@ export default editProfile = async (data) =>{
     fd.append('email', data.email);
     fd.append('phone_number', data.phone_number)
     fd.append('user_type', 1)
-    console.log("ghhf")
+
     let url = config.baseURL + 'edit_profile';
     const res = await apifuntion.postApi(url , fd)
-    console.log(res)
+
 }
