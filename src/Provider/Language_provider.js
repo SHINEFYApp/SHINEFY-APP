@@ -342,7 +342,7 @@ class Language_provider {
   //===========static text change
   password_placeholder = ['Password', 'كلمة المرور'];
   email_placeholder = ['Email', 'البريد الإلكتروني'];
-  Home = ['Home', 'الرئيسية'];
+  Home = ['SHINEFY', 'الرئيسية'];
   Message = ["You don't have an account?", 'ليس لديك حساب؟'];
   Signup = ['Signup', ' التسجيل  '];
   Forgot_password = ['Forgot Password?', 'هل نسيت كلمةالمرور؟'];
@@ -450,7 +450,7 @@ class Language_provider {
   asimsheikh1_txt = ['+20 0837920271', '+20 0837920271'];
   asimsheikh2_txt = ['Asimsheikh@gmail.com', 'Asimsheikh@gmail.com'];
   editprofile_txt = ['Edit Profile', 'تعديل الملف الشخصي'];
-  savedlocation_txt = ['Saved Location', 'الموقع المحفوظ'];
+  savedlocation_txt = ['Saved Location', 'المواقع المحفوظة'];
   delete_acc_title = ['Delete Account?', 'حذف الحساب؟'];
   delete_acc_msg = [
     'Are You Sure, You Want to Delete Account',

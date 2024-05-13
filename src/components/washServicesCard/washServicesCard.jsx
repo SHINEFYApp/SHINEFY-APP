@@ -8,7 +8,7 @@ export default function WashServicesCard({page, navigation, id, service}) {
   return (
     <TouchableHighlight
       onPress={() => {
-        navigation.navigate('WashServiceDetails', {id: service.service_id});
+        navigation.navigate('WashServiceDetails', {id: service.service_id , name : service.service_name});
       }}
       className={`h-[152px] w-full overflow-hidden rounded-lg mr-2 ${
         page ? 'w-full' : 'w-[125px]'

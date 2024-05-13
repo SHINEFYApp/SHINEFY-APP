@@ -8,10 +8,11 @@ import {config} from '../../Provider/configProvider';
 import {Lang_chg} from '../../Provider/Language_provider';
 export default function WashServiceDetails({navigation, route}) {
   const [data, setData] = useState({});
-
+  
   useEffect(() => {
     let fetchData = async () => {
       setData(await getServiceDetails(route.params.id));
+
     };
     fetchData();
   }, []);
