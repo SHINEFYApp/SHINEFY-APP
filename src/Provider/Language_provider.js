@@ -783,5 +783,9 @@ class Language_provider {
   claim = ['Claim', 'طلب']
   wash_services = ['Wash Services', 'خدمات الغسيل']
   mins = ['Mins', 'دقائق']
+  no_vehicles_yet = ['No Vechicle Yet', 'لا توجد سيارة حتى الآن']
+  update_vechile = ['Update Vechile', 'تعديل السيارة']
+  sure_to_delete_car = ['Are you sure , you want to delete your car ?' , 'هل أنت متأكد أنك تريد حذف سيارتك؟']
+
 }
 export const Lang_chg = new Language_provider();
