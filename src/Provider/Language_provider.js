@@ -190,6 +190,7 @@ class Language_provider {
     'Please enter valid coupan code.',
     'برجاءإدخال رمز صالح للكوبون',
   ];
+  accepted_txt = ['Accepted', "تم الموافقة عليه"]
   //phone no===============
   emptyMobile = ['Please enter Phone number', 'برجاء إدخال رقم الهاتف'];
   MobileMinLength = [
@@ -690,7 +691,7 @@ class Language_provider {
   worker_nature_txt2 = ['asked for accepted tips?', 'طلب إكرامية أو قبلها؟'];
   istxt = ['Is', 'هو'];
   your_review = ['Your Review', 'مراجعتك'];
-  edit_vehicle_head = ['Edit Vehicle', 'تعديل السيارة'];
+  edit_vehicle_head = ['Edit Vehicle', 'تعديل السيارة']
   Select_service = ['Select Service', 'اختر الخدمة'];
   select_main_service = ['Select Main Service', 'حدد الخدمة الرئيسية'];
   select_extra_service = ['Select Extra Service', 'حدد خدمة اضافية'];
