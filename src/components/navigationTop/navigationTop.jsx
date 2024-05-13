@@ -2,8 +2,9 @@ import {Image, Text, TouchableOpacity, View} from 'react-native-ui-lib';
 import notfiIcon from '../../assets/icons/notifcationIcon.png';
 import saveIcon from '../../assets/icons/savedLocationIcon.png';
 import backIcon from '../../assets/icons/backIcon.png';
+import {Lang_chg} from '../../Provider/Language_provider';
+import {config} from '../../Provider/configProvider';
 export default function NavigationTop(props) {
-
   function handleTitle() {
     switch (props.route.name) {
       case 'Home':
@@ -38,7 +39,10 @@ export default function NavigationTop(props) {
           onPress={() => {
             props.navigation.goBack();
           }}>
-          <Image source={backIcon} />
+          <Image
+            source={backIcon}
+            className={config.language === 0 ? '' : 'rotate-180'}
+          />
         </TouchableOpacity>
       )}
 
@@ -46,14 +50,15 @@ export default function NavigationTop(props) {
         onPress={() => {
           props.navigation.navigate('HomeScreen');
         }}>
-        <Text>home</Text>
+        <Text>{Lang_chg.home1_txt[config.language]}</Text>
       </TouchableOpacity>
       <View>
         <Text className="font-extrabold text-xl">{handleTitle()}</Text>
       </View>
-      <TouchableOpacity onPress={()=>{
-        props.navigation.navigate("notficationScreen")
-      }}>
+      <TouchableOpacity
+        onPress={() => {
+          props.navigation.navigate('notficationScreen');
+        }}>
         <Image source={notfiIcon} />
       </TouchableOpacity>
     </View>

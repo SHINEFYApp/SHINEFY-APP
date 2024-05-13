@@ -778,6 +778,10 @@ class Language_provider {
   special_offers = ['Special Offers', 'عروض خاصة']
   see_all = ['See All', 'عرض الكل']
   location_text = ['Location', 'الموقع']
-
+  limited_time = ['limited time!', 'وقت محدود!']
+  up_to = ['Up To', 'يصل الي']
+  claim = ['Claim', 'طلب']
+  wash_services = ['Wash Services', 'خدمات الغسيل']
+  mins = ['Mins', 'دقائق']
 }
 export const Lang_chg = new Language_provider();

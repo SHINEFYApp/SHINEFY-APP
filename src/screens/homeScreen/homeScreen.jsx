@@ -63,7 +63,9 @@ export default function HomeScreen({navigation}) {
             <View className="flex-row items-center justify-between">
               <View className="flex-row items-center">
                 <Image className="w-10 h-6" source={locationIcon} />
-                <Text className="font-bold text-lg">Location</Text>
+                <Text className="font-bold text-lg">
+                  {Lang_chg.location_text[config.language]}
+                </Text>
               </View>
               <Text>Cairo,Egypt</Text>
             </View>
@@ -75,13 +77,15 @@ export default function HomeScreen({navigation}) {
         </View>
         <View className={'px-4'}>
           <View className="mt-2 flex-row items-center">
-            <Text className="text-[#000] text-xl ">Wash Services </Text>
+            <Text className="text-[#000] text-xl ">
+              {Lang_chg.wash_services[config.language]}
+            </Text>
             <Text
               className="text-mainColor flex-1 text-right"
               onPress={() => {
                 navigation.navigate('WashServicesScreen');
               }}>
-              See All
+              {Lang_chg.see_all[config.language]}
             </Text>
           </View>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
