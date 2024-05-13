@@ -190,6 +190,7 @@ class Language_provider {
     'Please enter valid coupan code.',
     'برجاءإدخال رمز صالح للكوبون',
   ];
+  accepted_txt = ['Accepted', "تم الموافقة عليه"]
   //phone no===============
   emptyMobile = ['Please enter Phone number', 'برجاء إدخال رقم الهاتف'];
   MobileMinLength = [
@@ -587,7 +588,12 @@ class Language_provider {
   ontheway_txt = ['On the way', 'في الطريق'];
   arrive_txt = ['Arrived', 'وصل'];
   startwashing_txt = ['Started washing', 'ابدأ الغسيل'];
-  Cancellation_Reason = ['Cancellation Reason', 'سبب الإلغاء'];
+  Cancellation_Reason = ['Please select the reason for cancellation', 'الرجاء تحديد سبب الإلغاء'];
+  change_in_plans = ['Change in plans', 'التغيير في الخطط'];
+  unexpected_words = ['Unexpected Words', 'كلمات غير متوقعة'];
+  personal_reason = ['Personal Reason', 'سبب شخصي'];
+  other_reason = ['Other', 'سبب آخر'];
+  write_reason = ['Enter Your Reason', 'أدخل السبب الخاص بك'];
   Cancellation_Reason_details = [
     'I am not able due to some urgent work sorry for the inconvenience.',
     'أنا غير قادر بسبب بعض الأعمال العاجلة ,آسف للإزعاج.',
@@ -690,13 +696,16 @@ class Language_provider {
   worker_nature_txt2 = ['asked for accepted tips?', 'طلب إكرامية أو قبلها؟'];
   istxt = ['Is', 'هو'];
   your_review = ['Your Review', 'مراجعتك'];
-  edit_vehicle_head = ['Edit Vehicle', 'تعديل السيارة'];
+  edit_vehicle_head = ['Edit Vehicle', 'تعديل السيارة']
   Select_service = ['Select Service', 'اختر الخدمة'];
   select_main_service = ['Select Main Service', 'حدد الخدمة الرئيسية'];
   select_extra_service = ['Select Extra Service', 'حدد خدمة اضافية'];
   back_safety = ['Back Safety', 'العودة بسلامة'];
   backone = ['Back', 'عودة'];
   Most_ordered = ['Most Ordered', 'الأكثر طلبًا'];
+  order_id = ['Order ID', 'كود الطلب'];
+  order_date = ['Order Date', 'تاريخ الطلب'];
+  total_payment = ['Total Payment', 'اجمالي الدفع'];
   Interior_deodorizing = ['Interior deodorizing', 'إزالة الروائح الداخلية'];
   your_services = ['Your Services', 'خدماتك'];
   add_note_to_book = ['Add note to Book', 'أضف ملاحظة إلى الحجز'];
