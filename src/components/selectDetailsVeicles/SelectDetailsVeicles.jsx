@@ -10,13 +10,16 @@ import {useEffect, useMemo, useState} from 'react';
 import getModelData from '../../Features/getModelData/getModelData';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import addNewCar from '../../atoms/addNewCar/addNewCar';
+import updateCar from "../../atoms/currentCar/currentCar";
+
 import {config} from '../../Provider/configProvider';
 export default function SelectDetailsVeicles({title}) {
   const [data, setDate] = useState([]);
-  const [currentActive, setCurrentActive] = useState();
+  const currentCar = useRecoilValue(updateCar)
+  const [currentActive , setCurrentActive] = useState()
   const [search, setSearch] = useState('');
-  const [newCar, setNewCar] = useRecoilState(addNewCar);
-  console.log('newCar');
+    const [newCar , setNewCar] = useRecoilState(addNewCar) 
+   
   function handleTitleData() {
     switch (title) {
       case 'Select Brand':
@@ -70,16 +73,13 @@ export default function SelectDetailsVeicles({title}) {
       </View>
       {title.includes('Plate') ? (
         <View className="h-[80]">
-          <Input
-            placeholder={'Enter Your Plate Number Car'}
-            onChange={e => {
-              console.log(newCar);
-              setNewCar({
-                ...newCar,
-                plate_number: e.nativeEvent.text,
-              });
-            }}
-          />
+          <Input placeholder={'Enter Your Plate Number Car'} onChange={(e)=>{
+            console.log(newCar)
+            setNewCar({
+              ...newCar , 
+              plate_number : e.nativeEvent.text
+            })
+          }}/>
         </View>
       ) : (
         <>

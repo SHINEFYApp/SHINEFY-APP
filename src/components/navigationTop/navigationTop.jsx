@@ -46,14 +46,14 @@ export default function NavigationTop(props) {
         </TouchableOpacity>
       )}
 
-      <TouchableOpacity
+      {/* <TouchableOpacity
         onPress={() => {
           props.navigation.navigate('HomeScreen');
         }}>
-        <Text>{Lang_chg.home1_txt[config.language]}</Text>
-      </TouchableOpacity>
+        <Text>home</Text>
+      </TouchableOpacity> */}
       <View>
-        <Text className="font-extrabold text-xl">{handleTitle()}</Text>
+        <Text className="font-extrabold text-xl text-center w-full">{handleTitle()}</Text>
       </View>
       <TouchableOpacity
         onPress={() => {

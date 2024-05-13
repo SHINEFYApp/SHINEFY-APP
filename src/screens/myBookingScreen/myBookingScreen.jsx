@@ -10,9 +10,7 @@ import getBookking from "../../Features/getBooking/getBooking";
 
 export default function MyBookingScreen({ navigation }) {
     const [data , setData] = useState([])
-    const [currentPage, setCurrentPage] = useState("pending")
-
-    console.log(data?.pending_booking )
+    const [currentPage, setCurrentPage] = useState("pending_booking")
 
     useEffect(()=>{
         let fetchData = async ()=>{
@@ -26,23 +24,23 @@ export default function MyBookingScreen({ navigation }) {
     return (
         <View className="pt-[80] px-5 flex-1">
             <View className="bg-[#FFFAF2] py-3 px-8 flex-row justify-between rounded-xl" style={style.tabStyle}>
-                <TouchableOpacity onPress={() => { setCurrentPage("pending") }}><Text className={currentPage == "pending" && "text-mainColor font-bold"}>Pending</Text></TouchableOpacity>
-                <TouchableOpacity onPress={() => { setCurrentPage("in progress") }}><Text className={currentPage == "in progress" && "text-mainColor font-bold"}>In Progess</Text></TouchableOpacity>
-                <TouchableOpacity onPress={() => { setCurrentPage("complete") }}><Text className={currentPage == "complete" && "text-mainColor font-bold"}>Complete</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => { setCurrentPage("pending_booking") }}><Text className={currentPage == "pending_booking" && "text-mainColor font-bold"}>Pending</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => { setCurrentPage("inprogress_booking") }}><Text className={currentPage == "inprogress_booking" && "text-mainColor font-bold"}>In Progess</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => { setCurrentPage("completed_booking") }}><Text className={currentPage == "completed_booking" && "text-mainColor font-bold"}>Complete</Text></TouchableOpacity>
             </View>
-            {
+            <PendingBooking currentPage={currentPage} bookings={data} navigation={navigation}/>
+            {/* {
                 currentPage === "pending"
                     ? 
-                     <PendingBooking bookings={data?.pending_booking} navigation={navigation}/>
                         
                     :
                     currentPage === "in progress"
                         ?
-                        <ProgressBooking />
+                        <ProgressBooking bookings={data?.pending_booking} navigation={navigation}/>
                         :
-                        <CompleteBooking navigation={navigation} />
+                        <CompleteBooking navigation={navigation} bookings={data?.pending_booking}/>
 
-            }
+            } */}
         </View>
     )
 }

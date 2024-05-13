@@ -2,19 +2,19 @@ import BookingCard from "../BookingCard/bookingCard";
 import { ScrollView } from "react-native-gesture-handler";
 import EmptyBooking from "../emptyBooking/emptyBooking";
 
-export default function PendingBooking({navigation , bookings}) {
+export default function PendingBooking({navigation , bookings ,currentPage}) {
     
     return (
         <>
             {
-                bookings?.length == 0 ?
+                bookings[currentPage]?.length == 0 ?
                     <EmptyBooking />
                     :
                     <ScrollView className="mt-4">
                         {
-                            bookings?.map((book)=>{
+                            bookings[currentPage]?.map((book)=>{
                                 return (      
-                                    <BookingCard book={book} progress={"pending"} ButtonTitle="Cancel" onPress={()=> navigation.navigate('Cancel Booking' , {book_id : book.booking_id})}/>
+                                    <BookingCard book={book} progress={currentPage} ButtonTitle={currentPage== "inprogress_booking" ? "Accepted" : currentPage == "completed_booking" ? "Review" : "Cancel"} navigation={navigation}/>
                                 )
                             })
                         }

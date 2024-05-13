@@ -4,7 +4,7 @@ import Img from '../../assets/cardCar.png'
 import timeIcon from '../../assets/icons/timeIcon2.png'
 import { config } from "../../Provider/configProvider";
 
-export default function BookingCard({ progress, ButtonTitle, onPress , book}) {
+export default function BookingCard({ progress, ButtonTitle, navigation , book}) {
     
     console.log(book)
 
@@ -14,7 +14,7 @@ export default function BookingCard({ progress, ButtonTitle, onPress , book}) {
                 <Image source={Img} />
                 <View className="flex-row justify-between ml-4 flex-1">
                     <View className="gap-2 mt-2">
-                        <Text className={`text-xs text-center p-1 rounded-full ${progress == "pending" ? "text-[#E15249] bg-[#E1524945]" : progress == "in progress" ? "text-[#5ABC7B] bg-[#5ABC7B45]" : null}`}>
+                        <Text className={`text-xs text-center p-1 rounded-full ${progress == "pending_booking" ? "text-[#E15249] bg-[#E1524945]" : progress == "inprogress_booking" ? "text-[#5ABC7B] bg-[#5ABC7B45]" : null}`}>
                             {book.service_name[config.language]}
                         </Text>
                         <Text className="font-bold">Rapid Shine Auto Spa</Text>
@@ -23,7 +23,14 @@ export default function BookingCard({ progress, ButtonTitle, onPress , book}) {
                             <Text className="ml-2">30 min</Text>
                         </View>
                     </View>
-                    <Button Title={ButtonTitle} smallButton buttonColor={progress == "pending" ? "#E15249" : progress == "in progress" ? "#5ABC7B" : null} onPress={onPress} />
+                    <Button Title={ButtonTitle} smallButton buttonColor={progress == "pending_booking" ? "#E15249" : progress == "inprogress_booking" ? "#5ABC7B" : null} onPress={()=> {
+                       if(progress == "pending_booking"){
+                           navigation.navigate('Cancel Booking' , {book_id : book.booking_id})
+                        } else if (progress == "completed_booking") {
+                            navigation.navigate('Review' , {book_id : book.booking_id})
+                        }
+                       }
+                    } />
                 </View>
             </View>
             <View className="flex-row justify-between">

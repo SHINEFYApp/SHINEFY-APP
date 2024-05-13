@@ -15,7 +15,8 @@ import addVehicle from '../../Features/addVehicle/addVehicle';
 import updateVehicle from '../../Features/updateVehicle/updateVehicle';
 import {config} from '../../Provider/configProvider';
 import {Lang_chg} from '../../Provider/Language_provider';
-export default function AddVechileScreen({navigation, route}) {
+import updateCar from "../../atoms/currentCar/currentCar";
+export default function AddVechileScreen({navigation , route}) {
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   const currentCar = useRecoilValue(updateCar);
   console.log(currentCar);
