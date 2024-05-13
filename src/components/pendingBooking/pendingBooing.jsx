@@ -12,6 +12,7 @@ export default function PendingBooking({navigation, bookings, currentPage}) {
       ) : (
         <ScrollView className="mt-4">
           {bookings[currentPage]?.map(book => {
+            console.log(book)
             return (
               <BookingCard
                 book={book}

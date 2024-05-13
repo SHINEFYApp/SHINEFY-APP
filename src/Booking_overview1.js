@@ -408,7 +408,7 @@ export default class Booking_overview1 extends Component {
     data.append('online_amount', this.state.netpay);
     let url = config.baseURL + 'create_booking';
 
-    console.log(data , "dataaa booking")
+
 
     this.setState({loading: false});
     if (err == 'noNetwork') {

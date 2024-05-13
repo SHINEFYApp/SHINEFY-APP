@@ -6,7 +6,7 @@ import {config} from '../../Provider/configProvider';
 import {localStorage} from '../../Provider/localStorageProvider';
 
 export default function signupAuth(data, navigation, closeSignup) {
-  console.log(data);
+
   if (data.checkboxPolicy == false) {
     msgProvider.toast(Lang_chg.acceptTermsPolicy[config.language], 'center');
     return false;
@@ -23,13 +23,12 @@ export default function signupAuth(data, navigation, closeSignup) {
   formData.append('social_type', data.social_type);
   formData.append('password', data.password);
 
-  console.log(formData);
+
 
   let url = config.baseURL + 'signup';
   apifuntion
     .postApi(url, formData)
     .then(obj => {
-      console.log(obj);
       if (obj.success == 'true') {
         localStorage.setItemObject('user_arr', obj.user_details);
         if ('app' == 'app') {

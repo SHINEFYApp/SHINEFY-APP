@@ -19,8 +19,7 @@ import updateCar from "../../atoms/currentCar/currentCar";
 export default function AddVechileScreen({navigation , route}) {
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   const currentCar = useRecoilValue(updateCar);
-  console.log(currentCar);
-  console.log(route.params);
+
   function handleClosePopUp() {
     setIsPopUpOpen(false);
   }

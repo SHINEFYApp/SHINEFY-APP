@@ -19,7 +19,7 @@ export default async function contactUs(data) {
         msgProvider.toast(Lang_chg.validEmail[config.language], 'center');
         return false;
     }
-    console.log(data)
+
     //-------------------------Message-------------------------
     if (data.message.trim().length <= 0) {
         msgProvider.toast(Lang_chg.emptyMessage[config.language], 'center');
@@ -42,5 +42,5 @@ export default async function contactUs(data) {
     fd.append('message', data.message);
     let url = config.baseURL + 'contact_us';
     let res  = await apifuntion.postApi(url, fd)
-    console.log(msgProvider.toast(res.msg[config.language], 'center'))
+  msgProvider.toast(res.msg[config.language], 'center')
 }

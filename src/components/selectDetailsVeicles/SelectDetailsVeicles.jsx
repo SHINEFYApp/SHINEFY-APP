@@ -74,7 +74,6 @@ export default function SelectDetailsVeicles({title}) {
       {title.includes('Plate') ? (
         <View className="h-[80]">
           <Input placeholder={'Enter Your Plate Number Car'} onChange={(e)=>{
-            console.log(newCar)
             setNewCar({
               ...newCar , 
               plate_number : e.nativeEvent.text

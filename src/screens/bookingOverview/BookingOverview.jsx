@@ -104,8 +104,7 @@ const BookingOverview = ({navigation}) => {
           <View className={'w-[25%]'}>
             <Button Title={Lang_chg.Apply[config.language]} onPress={async()=>{
               let res = await applyCoupon(bookingDetails.extraData.service.service_price , coupon.couponName)
-              console.log("jgjm")
-              console.log(res)
+          
               setCoupon({
                 ...coupon , 
                 dis_amount : res.dis_amount,

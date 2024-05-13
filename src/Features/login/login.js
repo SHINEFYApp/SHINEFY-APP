@@ -13,18 +13,18 @@ export default function loginAuth(data, navigation, closeLoginModal) {
   formData.append('login_type', 'app');
   formData.append('user_type', 1);
 
-  console.log(formData);
+
   let url = config.baseURL + 'Login';
   apifuntion
     .postApi(url, formData)
     .then(obj => {
-      console.log(obj);
+     
       if (obj.success == 'true') {
         closeLoginModal();
         var user_arr = obj.user_details;
         let user_id = user_arr.user_id;
         let otp_verify = user_arr.otp_verify;
-        console.log(otp_verify);
+   
         let admin_status = user_arr.admin_status;
         let user_value = {
           user_id: user_id,
@@ -39,7 +39,7 @@ export default function loginAuth(data, navigation, closeLoginModal) {
         localStorage.setItemObject('user_pass', user_value.password);
 
         if (otp_verify == 0) {
-          console.log('doneeee otp');
+    
           navigation.navigate('OTPScreen', {
             check: 1,
             phone_number: user_value.phone_number,
@@ -78,7 +78,7 @@ export default function loginAuth(data, navigation, closeLoginModal) {
       }
     })
     .catch(err => {
-      console.log(err);
+   
 
       this.setState({loading: false});
       if (err == 'noNetwork') {

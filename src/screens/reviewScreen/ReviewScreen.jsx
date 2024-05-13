@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { Image } from "react-native-ui-lib";
 import reviewImage from '../../assets/reviewImage.png';
@@ -8,10 +8,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import messageIcon from '../../assets/icons/ContactUs/message.png'
 import Button from "../../components/mainButton/Button";
+import setServiceBoyData from "../../Features/reviewBooking/serviceBoyData";
+import { reviewBooking } from "../../Features/reviewBooking/reviewBooking";
 
-const ReviewScreen = () => {
+const ReviewScreen = ({route}) => {
+    console.log(route.params.book_id)
     const [userRating, setUserRating] = useState(0);
-
     return <>
         <Image source={reviewImage} className={'w-[100vw] h-[320px]'} />
         <View className={'relative h-full'}>
@@ -51,7 +53,9 @@ const ReviewScreen = () => {
                     </View>
                 </View>
                 <View className={'mt-12'}>
-                    <Button Title={'Submit'} btnStyle={'font-bold text-lg'} />
+                    <Button Title={'Submit'} btnStyle={'font-bold text-lg'} onPress={()=>{
+                        reviewBooking({booking_id : route.params.book_id , rating :  userRating , service_boy_id : route.params.service_boy_id})
+                    }}/>
                 </View>
             </View>
         </View>

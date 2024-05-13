@@ -9,7 +9,7 @@ export default async function deleteVehicle(vehicle_id) {
         let res = await apiSauce.get(`/delete_vehicle/${user_id}/${vehicle_id}`) 
         return(res.data)
 }catch(err) {
-    console.log(err)
+  
 }
 //  apifuntion
 //         .getApi(url)

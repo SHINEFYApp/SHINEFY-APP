@@ -1,32 +1,22 @@
 import { apifuntion } from "../../Provider/Apicallingprovider/apiProvider";
+import { Lang_chg } from "../../Provider/Language_provider";
+import { msgProvider } from "../../Provider/Messageconsolevalidationprovider/messageProvider";
 import { config } from "../../Provider/configProvider";
-import { localStorage } from "../../Provider/localStorageProvider";
 
-const deleteLocation = async (locationId) => {
-   
-    let user_arr = await localStorage.getItemObject('user_arr');
-    let user_id = user_arr.user_id;
-    var url = config.baseURL + 'delete_location/' + user_id + '/' + locationId;
-
+export default async function setServiceBoyData(service_boy_id, booking_id) {
+    var url = config.baseURL + 'getServiceBoy/' + service_boy_id;
     apifuntion
-    .getApi(url)
-    .then(obj => {
+      .getApi(url)
+      .then(obj => {
         if (obj.success == 'true') {
-          setTimeout(() => {
-            global.props.hideLoader();
-          }, 500);
-          this.setState({location_arr: obj.saved_location_arr});
-          localStorage.setItemObject(
-            'saved_location_arr',
-            obj.saved_location_arr,
-          );
+          console.log(obj)
         } else {
-          if (obj.account_active_status == 'deactivate') {
+          if (obj.account_active_status[0] == 'deactivate') {
             config.checkUserDeactivate(this.props.navigation);
             return false;
           }
 
-          if (obj.acount_delete_status == 'deactivate') {
+          if (obj.acount_delete_status[0] == 'deactivate') {
             config.checkUserDelete(this.props.navigation);
             return false;
           }
@@ -41,15 +31,16 @@ const deleteLocation = async (locationId) => {
             Lang_chg.noNetwork[config.language],
             false,
           );
+          return false;
         } else {
           msgProvider.alert(
             Lang_chg.msgTitleServerNotRespond[config.language],
             Lang_chg.serverNotRespond[config.language],
             false,
           );
+          return false;
         }
       });
   };
 
-
-  export default deleteLocation
+;

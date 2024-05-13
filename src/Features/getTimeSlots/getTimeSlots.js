@@ -26,9 +26,7 @@ export default async function getTimeSlots(data) {
       '/' +
       amount;
       let res = await apifuntion.getApi(url, 0)
-      console.log(sortDate(date))
-      console.log(date)
-      console.log(res.slots_arr.date_slots)
+
       return res.slots_arr.date_slots
         // .then(obj => {
         //   console.log(obj.slots_arr.date_slots.slot_arr)

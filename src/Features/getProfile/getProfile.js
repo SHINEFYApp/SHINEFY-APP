@@ -6,7 +6,6 @@ import { localStorage } from "../../Provider/localStorageProvider";
 const getProfile = async () => {
     let userdata = await localStorage.getItemObject('user_arr');
     let url = config.baseURL + 'get_profile?user_id=' + userdata.user_id;
-    console.log(`/get_profile?user_id=${userdata.user_id}`)
 
     const res = await apiSauce.get(`/get_profile?user_id=${userdata.user_id}`)
     return res.data.user_details

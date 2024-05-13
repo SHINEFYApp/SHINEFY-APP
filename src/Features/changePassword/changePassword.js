@@ -89,7 +89,7 @@ export default async function changePassword(data) {
     var user_arr = await localStorage.getItemObject('user_arr');
     var user_id = user_arr.user_id;
     var fd = new FormData();
-    console.log("kjndf")
+
     fd.append('old_password', data.old_password);
     fd.append('new_password', data.new_password);
     fd.append('user_type', 1);
@@ -98,7 +98,7 @@ export default async function changePassword(data) {
     apifuntion
       .postApi(url, fd)
       .then(obj => {
-        console.log(obj)
+
         if (obj.success == 'true') {
           var user_arr = obj.user_details;
           localStorage.setItemObject('user_arr', obj.user_details);

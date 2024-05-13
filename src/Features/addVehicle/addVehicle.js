@@ -24,11 +24,11 @@ user_id:user_id,
     let url = config.baseURL + 'add_vehicle';
     
     var add_car_arr = await localStorage.getItemObject('add_car_arr');
-    console.log("work")
+
     try {
         let res = await apifuntion.postApi(url, fd) 
         return(res.success)
 }catch(err) {
-    console.log(err)
+
 }
 }
