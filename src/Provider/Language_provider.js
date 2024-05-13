@@ -588,7 +588,12 @@ class Language_provider {
   ontheway_txt = ['On the way', 'في الطريق'];
   arrive_txt = ['Arrived', 'وصل'];
   startwashing_txt = ['Started washing', 'ابدأ الغسيل'];
-  Cancellation_Reason = ['Cancellation Reason', 'سبب الإلغاء'];
+  Cancellation_Reason = ['Please select the reason for cancellation', 'الرجاء تحديد سبب الإلغاء'];
+  change_in_plans = ['Change in plans', 'التغيير في الخطط'];
+  unexpected_words = ['Unexpected Words', 'كلمات غير متوقعة'];
+  personal_reason = ['Personal Reason', 'سبب شخصي'];
+  other_reason = ['Other', 'سبب آخر'];
+  write_reason = ['Enter Your Reason', 'أدخل السبب الخاص بك'];
   Cancellation_Reason_details = [
     'I am not able due to some urgent work sorry for the inconvenience.',
     'أنا غير قادر بسبب بعض الأعمال العاجلة ,آسف للإزعاج.',
@@ -698,6 +703,9 @@ class Language_provider {
   back_safety = ['Back Safety', 'العودة بسلامة'];
   backone = ['Back', 'عودة'];
   Most_ordered = ['Most Ordered', 'الأكثر طلبًا'];
+  order_id = ['Order ID', 'كود الطلب'];
+  order_date = ['Order Date', 'تاريخ الطلب'];
+  total_payment = ['Total Payment', 'اجمالي الدفع'];
   Interior_deodorizing = ['Interior deodorizing', 'إزالة الروائح الداخلية'];
   your_services = ['Your Services', 'خدماتك'];
   add_note_to_book = ['Add note to Book', 'أضف ملاحظة إلى الحجز'];

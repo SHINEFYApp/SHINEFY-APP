@@ -3,6 +3,7 @@ import Button from '../mainButton/Button';
 import Img from '../../assets/cardCar.png';
 import timeIcon from '../../assets/icons/timeIcon2.png';
 import {config} from '../../Provider/configProvider';
+import {Lang_chg} from '../../Provider/Language_provider';
 
 export default function BookingCard({progress, ButtonTitle, navigation, book}) {
   console.log(book);
@@ -26,42 +27,45 @@ export default function BookingCard({progress, ButtonTitle, navigation, book}) {
             <Text className="font-bold">Rapid Shine Auto Spa</Text>
             <View className="flex-row items-center">
               <Image source={timeIcon} />
-              <Text className="ml-2">30 min</Text>
+              <Text className="ml-2">30 {Lang_chg.mins[config.language]}</Text>
             </View>
           </View>
-          <Button
-            Title={ButtonTitle}
-            smallButton
-            buttonColor={
-              progress == 'pending_booking'
-                ? '#E15249'
-                : progress == 'inprogress_booking'
-                ? '#5ABC7B'
-                : null
-            }
-            onPress={() => {
-              if (progress == 'pending_booking') {
-                navigation.navigate('Cancel Booking', {
-                  book_id: book.booking_id,
-                });
-              } else if (progress == 'completed_booking') {
-                navigation.navigate('Review', {book_id: book.booking_id});
+
+          <View className={'mt-1'}>
+            <Button
+              Title={ButtonTitle}
+              smallButton
+              buttonColor={
+                progress == 'pending_booking'
+                  ? '#E15249'
+                  : progress == 'inprogress_booking'
+                  ? '#5ABC7B'
+                  : null
               }
-            }}
-          />
+              onPress={() => {
+                if (progress == 'pending_booking') {
+                  navigation.navigate('Cancel Booking', {
+                    book_id: book.booking_id,
+                  });
+                } else if (progress == 'completed_booking') {
+                  navigation.navigate('Review', {book_id: book.booking_id});
+                }
+              }}
+            />
+          </View>
         </View>
       </View>
       <View className="flex-row justify-between">
         <View className="gap-2">
-          <Text>Order ID</Text>
+          <Text>{Lang_chg.order_id[config.language]}</Text>
           <Text>{book.booking_no}</Text>
         </View>
         <View className="gap-2">
-          <Text>Order Date</Text>
+          <Text>{Lang_chg.order_date[config.language]}</Text>
           <Text>{book.booking_date}</Text>
         </View>
         <View className="gap-2">
-          <Text>Total Payment</Text>
+          <Text>{Lang_chg.total_payment[config.language]}</Text>
           <Text>500 EGY</Text>
         </View>
       </View>
