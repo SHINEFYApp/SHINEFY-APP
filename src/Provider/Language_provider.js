@@ -706,6 +706,7 @@ class Language_provider {
   add_location = ['Add Location', 'اضافه الموقع'];
   SelectVehicles = ['Select Vehicles', 'حدد السيارات'];
   add_your_vehicle = ['Add Your Vehicle', 'أضف سيارتك'];
+  wash_fast_popup = ['Wash Fast , with SHINEFY', 'اغسل سيارتك بسرعة باستخدام شاينفي'];
   vehicle_added_success_msg = [
     'Your vehicle added successfully',
     'تم إضافة سيارتك بنجاح',
