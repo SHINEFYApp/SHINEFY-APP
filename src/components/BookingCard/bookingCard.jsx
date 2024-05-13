@@ -34,7 +34,7 @@ export default function BookingCard({progress, ButtonTitle, navigation, book}) {
           <View className={'mt-1'}>
             <Button
               Title={ButtonTitle}
-              smallButton
+              smallButton={true}
               buttonColor={
                 progress == 'pending_booking'
                   ? '#E15249'

@@ -18,9 +18,9 @@ export default function PendingBooking({navigation, bookings, currentPage}) {
                 progress={currentPage}
                 ButtonTitle={
                   currentPage == 'inprogress_booking'
-                    ? 'Accepted'
+                    ? Lang_chg.accepted_txt[config.language]
                     : currentPage == 'completed_booking'
-                    ? 'Review'
+                    ? Lang_chg.review_txt[config.language]
                     : Lang_chg.cancel[config.language]
                 }
                 navigation={navigation}

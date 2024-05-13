@@ -582,8 +582,6 @@ class Language_provider {
     'هل تريد الخروج من التطبيق؟',
   ];
   serviceboy_txt = ['Service Boy', 'سيرفس بوي'];
-  //  No_Txt=['No']
-  //  yes_txt=['Yes']
   trackyourbooking_txt = ['Track Your Booking', 'تتبع الحجز الخاص بك'];
   ontheway_txt = ['On the way', 'في الطريق'];
   arrive_txt = ['Arrived', 'وصل'];
@@ -695,7 +693,11 @@ class Language_provider {
   worker_nature_txt = ['Does', 'هل'];
   worker_nature_txt2 = ['asked for accepted tips?', 'طلب إكرامية أو قبلها؟'];
   istxt = ['Is', 'هو'];
+  review_txt = ['Review', 'تقييم'];
   your_review = ['Your Review', 'مراجعتك'];
+  your_rating = ['Your Overall rating of this progress', 'تقييمك العام لهذا التقدم'];
+  detailed_review= ['Add Detailed Review', 'إضافة مراجعة مفصلة'];
+  enter_here= ['Enter Here', 'اكتب هنا'];
   edit_vehicle_head = ['Edit Vehicle', 'تعديل السيارة']
   Select_service = ['Select Service', 'اختر الخدمة'];
   select_main_service = ['Select Main Service', 'حدد الخدمة الرئيسية'];
