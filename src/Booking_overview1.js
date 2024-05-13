@@ -236,7 +236,6 @@ export default class Booking_overview1 extends Component {
     data.append('coupan_code', coupan_code);
     data.append('vat_amount', vat_amount);
     let url = config.baseURL + 'apply_coupan';
-
     apifuntion
       .postApi(url, data)
       .then(obj => {

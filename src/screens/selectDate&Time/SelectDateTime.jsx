@@ -35,7 +35,7 @@ export default function SelectDateTime({navigation}) {
       }
       setBookingDetails({
         ...bookingDetails,
-        booking_date: date.toLocaleDateString().split('/').join('-'),
+        booking_date: sortDate(date.toLocaleDateString()),
       });
     } else if (selectedDate == Lang_chg.tomorrow_txt[config.language]) {
       if (isCustomDate) {
@@ -43,15 +43,13 @@ export default function SelectDateTime({navigation}) {
       }
       setBookingDetails({
         ...bookingDetails,
-        booking_date: date
-          .toLocaleDateString(date.setDate(date.getDate() + 1))
-          .split('/')
-          .join('-'),
+        booking_date: sortDate(date
+          .toLocaleDateString(date.setDate(date.getDate() + 1)))
       });
     } else {
       setBookingDetails({
         ...bookingDetails,
-        booking_date: selectedDate.split('/').join('-'),
+        booking_date: sortDate(selectedDate),
       });
     }
   }
@@ -60,6 +58,7 @@ export default function SelectDateTime({navigation}) {
     setBookingDetails({
       ...bookingDetails,
       booking_time: selectedTime,
+      area_id : slots.area_id
     });
   }
 
@@ -125,7 +124,7 @@ export default function SelectDateTime({navigation}) {
       <View>
         <Text>{Lang_chg.selecttime1_txt[config.language]}</Text>
         <View className="flex-row  flex-wrap">
-          {slots?.map(slot => {
+          {slots?.slot_arr?.map(slot => {
             return (
               <SelectDateBox
                 title={slot.time}

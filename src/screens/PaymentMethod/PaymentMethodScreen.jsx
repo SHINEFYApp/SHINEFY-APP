@@ -13,9 +13,12 @@ import packageIcon from '../../assets/icons/profile/package.png';
 import walletIcon from '../../assets/icons/profile/wallet.png';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
+import { useRecoilState } from 'recoil';
+import bookingDetailsAtom from '../../atoms/bookingDetails/bookingDetails.atom';
+import cashBooking from '../../Features/createBooking/createBooking';
 export default function PaymentMethod({navigation}) {
   const [activePayment, setActivePayment] = useState(0);
-
+  const [bookingDetails , setBookingDetails] = useRecoilState(bookingDetailsAtom)
   const paymentMethodsOptions = [
     {
       id: 1,
@@ -48,7 +51,13 @@ export default function PaymentMethod({navigation}) {
               },
             ]}
             currentActive={activePayment}
-            set={setActivePayment}
+            set={(activeElement)=>{
+              setBookingDetails({
+                ...bookingDetails ,
+                payment_method:1
+              })
+              setActivePayment(activeElement)
+            }}
           />
         </View>
         <View>
@@ -91,7 +100,9 @@ export default function PaymentMethod({navigation}) {
             set={setActivePayment}
           />
         </View>
-        <Button Title={Lang_chg.Confirm[config.language]} />
+        <Button Title={Lang_chg.Confirm[config.language]} onPress={()=>{
+          cashBooking(bookingDetails)
+        }}/>
       </ScrollView>
     </View>
   );
