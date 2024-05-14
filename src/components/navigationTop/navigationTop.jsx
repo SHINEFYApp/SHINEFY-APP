@@ -5,17 +5,17 @@ import backIcon from '../../assets/icons/backIcon.png';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 export default function NavigationTop(props) {
-  console.log(props.route)
+  console.log(props.route);
   function handleTitle() {
     switch (props.route.name) {
       case 'Home':
         return Lang_chg.Home[config.language];
       case 'SavedLocationScreen':
-       return Lang_chg.savedlocation_txt[config.language];
+        return Lang_chg.savedlocation_txt[config.language];
       case 'addLocationScreen':
-          return Lang_chg.booking_location[config.language];
+        return Lang_chg.booking_location[config.language];
       case 'ProfileScreen':
-          return Lang_chg.profile_txt[config.language];
+        return Lang_chg.profile_txt[config.language];
       case 'Bookings':
         return Lang_chg.mybookings_txt[config.language];
       case 'AddCar':
@@ -27,7 +27,7 @@ export default function NavigationTop(props) {
       case 'notficationScreen':
         return Lang_chg.notification_txt[config.language];
       default:
-        return props.route.params ? props.route.params.name[config.language] :props.route.name  ;
+        return;
     }
   }
 
@@ -62,7 +62,9 @@ export default function NavigationTop(props) {
         <Text>home</Text>
       </TouchableOpacity>
       <View>
-        <Text className="font-extrabold text-xl text-center w-full">{handleTitle()}</Text>
+        <Text className="font-extrabold text-xl text-center w-full">
+          {handleTitle()}
+        </Text>
       </View>
       <TouchableOpacity
         onPress={() => {
