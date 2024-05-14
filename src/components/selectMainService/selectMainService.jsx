@@ -8,7 +8,6 @@ import img from '../../assets/extraService.png';
 import globalStyle from '../../assets/globalStyle';
 import {config} from '../../Provider/configProvider';
 export default function SelectMainService({selected, service, onPress}) {
-
   return (
     <TouchableHighlight
       underlayColor={'white'}

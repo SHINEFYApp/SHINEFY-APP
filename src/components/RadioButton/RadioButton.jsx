@@ -22,8 +22,8 @@ export default function RadioButton({buttons, currentActive, set, onPress}) {
                 onPress(key);
               }
               setActiveButton(button.title);
-              if(set) {
-                set(button.title)
+              if (set) {
+                set(button.title);
               }
             }}>
             <View className="flex-row justify-between items-center">

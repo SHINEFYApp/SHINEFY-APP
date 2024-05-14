@@ -17,8 +17,6 @@ export default function LanguageScreen() {
     },
   ];
 
-
-
   return (
     <View className="mt-[80] p-5">
       <RadioButton

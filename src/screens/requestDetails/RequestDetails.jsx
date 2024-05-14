@@ -36,8 +36,6 @@ export default function RequestDetails({navigation, route}) {
     fetchData();
   }, []);
 
-
-
   const data = [
     {key: '1', value: 'Mobiles', disabled: true},
     {key: '2', value: 'Appliances'},
@@ -50,32 +48,32 @@ export default function RequestDetails({navigation, route}) {
 
   return (
     <ScrollView>
-      <ScrollView className="pt-[80px] pr-5 overflow-y-scroll h-fit">
+      <ScrollView className="h-fit pt-[80px] w-[90%] mx-auto">
         <View>
           <Text className="text-xl mb-3">
             {Lang_chg.wash_location[config.language]}
           </Text>
-          <View
-            className={
-              'bg-white py-4 px-3 w-full rounded my-2 flex flex-row items-center overflow-hidden'
-            }>
-            <Image source={locationMark} className={'w-6 h-6 mr-4'} />
-            <Text className={'font-bold text-lg mr-2'}>
-              {config.language === 0 ? 'Location' : 'الموقع'}:
-            </Text>
-            <Text className={'text-mainColor'}>
-              {route.params.location.length > 45
-                ? route.params.location.split(' ').slice(0, 6).join(' ') +
-                  '.....'
-                : route.params.location}
-            </Text>
-          </View>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <View
+              className={
+                'bg-white py-4 px-3 w-full rounded my-2 flex flex-row items-center overflow-hidden'
+              }>
+              <Image source={locationMark} className={'w-6 h-6 mr-4'} />
+              <Text className={'font-bold text-lg mr-2'}>
+                {config.language === 0 ? 'Location' : 'الموقع'}:
+              </Text>
+              <Text className={'text-mainColor'}>{route.params.location}</Text>
+            </View>
+          </ScrollView>
         </View>
         <View>
-          <Text className="text-xl mb-3">
+          <Text className="text-xl mb-3 mt-2">
             {Lang_chg.SelectVehicles[config.language]}
           </Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            className={'py-3 overflow-visible'}>
             {cars?.map(car => {
               return (
                 <SelectVehicle
@@ -99,7 +97,7 @@ export default function RequestDetails({navigation, route}) {
           </ScrollView>
         </View>
         <View>
-          <Text className="text-xl mb-3">
+          <Text className="text-xl mb-3 mt-2">
             {Lang_chg.select_main_service[config.language]}
           </Text>
           {services?.service_arr?.map(service => {
@@ -125,7 +123,7 @@ export default function RequestDetails({navigation, route}) {
           })}
         </View>
         <View>
-          <Text className="text-xl mb-3">
+          <Text className="text-xl my-3">
             {Lang_chg.select_extra_service[config.language]}
           </Text>
           {services?.extra_service_arr?.map(extra => {

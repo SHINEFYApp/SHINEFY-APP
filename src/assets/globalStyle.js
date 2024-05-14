@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 export default globalStyle = StyleSheet.create({
     boxShadow: {
-        shadowColor: "#dd9923",
+        shadowColor: 'rgba(221, 153, 35, 0.3)',
         shadowOffset: {
           width: 8,
           height: 4,

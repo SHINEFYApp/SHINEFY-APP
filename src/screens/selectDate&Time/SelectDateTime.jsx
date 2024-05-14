@@ -18,7 +18,7 @@ import getTimeSlots from '../../Features/getTimeSlots/getTimeSlots';
 import sortDate from '../../utlites/sortDate';
 
 export default function SelectDateTime({navigation}) {
-  const [date, setDate] = useState('today');
+  const [date, setDate] = useState(Lang_chg.today_txt[config.language]);
   const [time, setTime] = useState('');
   const [isCustomDate, setIsCustomDate] = useState(false);
   const [slots, setSlots] = useState([]);
@@ -43,8 +43,9 @@ export default function SelectDateTime({navigation}) {
       }
       setBookingDetails({
         ...bookingDetails,
-        booking_date: sortDate(date
-          .toLocaleDateString(date.setDate(date.getDate() + 1)))
+        booking_date: sortDate(
+          date.toLocaleDateString(date.setDate(date.getDate() + 1)),
+        ),
       });
     } else {
       setBookingDetails({
@@ -58,7 +59,7 @@ export default function SelectDateTime({navigation}) {
     setBookingDetails({
       ...bookingDetails,
       booking_time: selectedTime,
-      area_id : slots.area_id
+      area_id: slots.area_id,
     });
   }
 
@@ -72,16 +73,22 @@ export default function SelectDateTime({navigation}) {
   return (
     <View className="pt-[80] px-5 relative h-full">
       <View>
-        <Text>{Lang_chg.Selectdatetime_txt[config.language]}</Text>
+        <Text className={'font-semibold my-3'}>
+          {Lang_chg.Selectdatetime_txt[config.language]}
+        </Text>
         <View className="flex-row justify-between">
           <SelectDateBox
             title={Lang_chg.today_txt[config.language]}
-            onPress={handleSelectDate}
+            onPress={() =>
+              handleSelectDate(Lang_chg.today_txt[config.language])
+            }
             selected={date}
           />
           <SelectDateBox
             title={Lang_chg.tomorrow_txt[config.language]}
-            onPress={handleSelectDate}
+            onPress={() =>
+              handleSelectDate(Lang_chg.tomorrow_txt[config.language])
+            }
             selected={date}
           />
           <SelectDateBox
@@ -122,7 +129,9 @@ export default function SelectDateTime({navigation}) {
         )}
       </View>
       <View>
-        <Text>{Lang_chg.selecttime1_txt[config.language]}</Text>
+        <Text className={'mt-3 font-semibold'}>
+          {Lang_chg.selecttime1_txt[config.language]}
+        </Text>
         <View className="flex-row  flex-wrap">
           {slots?.slot_arr?.map(slot => {
             return (
@@ -162,7 +171,7 @@ export default function SelectDateTime({navigation}) {
 
 const style = StyleSheet.create({
   box: {
-    shadowColor: '#dd9923',
+    shadowColor: 'rgba(221, 153, 35, 0.3)',
     shadowOffset: {
       width: 8,
       height: 4,
