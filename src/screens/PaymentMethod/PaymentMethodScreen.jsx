@@ -13,12 +13,14 @@ import packageIcon from '../../assets/icons/profile/package.png';
 import walletIcon from '../../assets/icons/profile/wallet.png';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
-import { useRecoilState } from 'recoil';
+import {useRecoilState} from 'recoil';
 import bookingDetailsAtom from '../../atoms/bookingDetails/bookingDetails.atom';
 import cashBooking from '../../Features/createBooking/createBooking';
+
 export default function PaymentMethod({navigation}) {
   const [activePayment, setActivePayment] = useState(0);
-  const [bookingDetails , setBookingDetails] = useRecoilState(bookingDetailsAtom)
+  const [bookingDetails, setBookingDetails] =
+    useRecoilState(bookingDetailsAtom);
   const paymentMethodsOptions = [
     {
       id: 1,
@@ -41,7 +43,9 @@ export default function PaymentMethod({navigation}) {
     <View className="pt-[80] px-5">
       <ScrollView>
         <View>
-          <Text>{Lang_chg.cash_txt[config.language]}</Text>
+          <Text className={'mb-2 font-semibold'}>
+            {Lang_chg.cash_txt[config.language]}
+          </Text>
           <RadioButton
             buttons={[
               {
@@ -51,17 +55,19 @@ export default function PaymentMethod({navigation}) {
               },
             ]}
             currentActive={activePayment}
-            set={(activeElement)=>{
+            set={activeElement => {
               setBookingDetails({
-                ...bookingDetails ,
-                payment_method:1
-              })
-              setActivePayment(activeElement)
+                ...bookingDetails,
+                payment_method: 1,
+              });
+              setActivePayment(activeElement);
             }}
           />
         </View>
         <View>
-          <Text>{Lang_chg.packages[config.language]}</Text>
+          <Text className={'mt-4 mb-3 font-semibold'}>
+            {Lang_chg.packages[config.language]}
+          </Text>
           <SelectVechileCard
             text={Lang_chg.packages[config.language]}
             navigation={navigation}
@@ -69,7 +75,9 @@ export default function PaymentMethod({navigation}) {
           />
         </View>
         <View>
-          <Text>{Lang_chg.wallet_txt[config.language]}</Text>
+          <Text className={'mt-4 mb-3 font-semibold'}>
+            {Lang_chg.wallet_txt[config.language]}
+          </Text>
           <RadioButton
             buttons={[
               {
@@ -83,7 +91,9 @@ export default function PaymentMethod({navigation}) {
           />
         </View>
         <View>
-          <Text>{Lang_chg.debit_credit_card[config.language]}</Text>
+          <Text className={'mt-4 mb-3 font-semibold'}>
+            {Lang_chg.debit_credit_card[config.language]}
+          </Text>
           <SelectVechileCard
             text={Lang_chg.add_card[config.language]}
             navigation={navigation}
@@ -92,7 +102,9 @@ export default function PaymentMethod({navigation}) {
           />
         </View>
         <View>
-          <Text>{Lang_chg.Payment_Option[config.language]}</Text>
+          <Text className={'mt-4 mb-3 font-semibold'}>
+            {Lang_chg.Payment_Option[config.language]}
+          </Text>
 
           <RadioButton
             buttons={paymentMethodsOptions}
@@ -100,9 +112,12 @@ export default function PaymentMethod({navigation}) {
             set={setActivePayment}
           />
         </View>
-        <Button Title={Lang_chg.Confirm[config.language]} onPress={()=>{
-          cashBooking(bookingDetails)
-        }}/>
+        <Button
+          Title={Lang_chg.Confirm[config.language]}
+          onPress={() => {
+            cashBooking(bookingDetails);
+          }}
+        />
       </ScrollView>
     </View>
   );

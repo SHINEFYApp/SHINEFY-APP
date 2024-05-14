@@ -157,8 +157,8 @@ export default function SelectDateTime({navigation}) {
           onPress={() => {
             if (!bookingDetails.booking_date) {
               msgProvider.toast('Please Select Date', 'center');
-            } else if (!bookingDetails.booking_time) {
-              msgProvider.toast('Please Select Time', 'center');
+              // } else if (!bookingDetails.booking_time) {
+              //   msgProvider.toast('Please Select Time', 'center');
             } else {
               navigation.navigate('Booking Overview');
             }

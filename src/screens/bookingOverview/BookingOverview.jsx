@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {TextInput} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Image, Text, View} from 'react-native-ui-lib';
@@ -19,7 +19,7 @@ const BookingOverview = ({navigation}) => {
   const [bookingDetails, setBookingDetails] =
     useRecoilState(bookingDetailsAtom);
   let date = new Date(reverseSortDate(bookingDetails.booking_date));
-  const [coupon , setCoupon] = useState()
+  const [coupon, setCoupon] = useState();
 
   return (
     <View className={'pt-[90px] px-5'}>
@@ -33,16 +33,20 @@ const BookingOverview = ({navigation}) => {
             , {bookingDetails.booking_time}
           </Text>
         </View>
-        <View
-          className={
-            'bg-white py-4 px-3 w-full rounded mt-4 flex flex-row items-center'
-          }>
-          <Image source={locationMark} className={'w-6 h-6 mr-4'} />
-          <Text className={'font-bold text-lg mr-2'}>
-            {config.language === 0 ? 'Location' : 'الموقع'}:
-          </Text>
-          <Text className={'text-mainColor'}>{bookingDetails.address_loc}</Text>
-        </View>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <View
+            className={
+              'bg-white py-4 px-3 w-full rounded mt-4 flex flex-row items-center mb-6'
+            }>
+            <Image source={locationMark} className={'w-6 h-6 mr-4'} />
+            <Text className={'font-bold text-lg mr-2'}>
+              {config.language === 0 ? 'Location' : 'الموقع'}:
+            </Text>
+            <Text className={'text-mainColor'}>
+              {bookingDetails.address_loc}
+            </Text>
+          </View>
+        </ScrollView>
         <SelectVehicle car={bookingDetails.extraData.car} />
         <View className={'mt-4 py-2 px-8 w-full bg-white rounded-lg'}>
           <BookingOverviewTextDetails
@@ -56,22 +60,19 @@ const BookingOverview = ({navigation}) => {
             className={
               'flex bg-[#C3C3C3] w-[80%] h-[1px] items-center my-5 mx-auto justify-center'
             }></View>
-            {
-              coupon?.couponName != "" && coupon &&
-  <>
+          {coupon?.couponName != '' && coupon && (
+            <>
               <BookingOverviewTextDetails
-            title={'Coupon'}
-            value={
-              coupon.couponName
-            }
-            price={`-${coupon?.dis_amount} EGP`}
-            />
-          <View
-            className={
-              'flex bg-[#C3C3C3] w-[80%] h-[1px] items-center my-5 mx-auto justify-center'
-            }></View>
+                title={'Coupon'}
+                value={coupon.couponName}
+                price={`-${coupon?.dis_amount} EGP`}
+              />
+              <View
+                className={
+                  'flex bg-[#C3C3C3] w-[80%] h-[1px] items-center my-5 mx-auto justify-center'
+                }></View>
             </>
-            }
+          )}
         </View>
         <View
           className={
@@ -80,7 +81,9 @@ const BookingOverview = ({navigation}) => {
           <Text className={'font-bold text-center text-lg'}>
             {Lang_chg.totalservicecharges_txt[config.language]}
           </Text>
-          <Text className={'font-bold text-center text-lg'}>{coupon?.total_amount} EGP</Text>
+          <Text className={'font-bold text-center text-lg'}>
+            {coupon?.total_amount} EGP
+          </Text>
         </View>
         <View
           className={
@@ -94,28 +97,34 @@ const BookingOverview = ({navigation}) => {
             }`}
             placeholder={Lang_chg.enter_promo_code[config.language]}
             placeholderTextColor={'#C3C3C3'}
-            onChange={(e)=>{
+            onChange={e => {
               setCoupon({
-                ...coupon ,
-                couponName : e.nativeEvent.text
-              })
+                ...coupon,
+                couponName: e.nativeEvent.text,
+              });
             }}
           />
           <View className={'w-[25%]'}>
-            <Button Title={Lang_chg.Apply[config.language]} onPress={async()=>{
-              let res = await applyCoupon(bookingDetails.extraData.service.service_price , coupon.couponName)
-          
-              setCoupon({
-                ...coupon , 
-                dis_amount : res.dis_amount,
-                total_amount : res.total_amount
-              })
-              setBookingDetails({
-                ...bookingDetails , 
-                coupon_id : res.coupan_id,
-                discount_amount : res.dis_amount
-              })
-            }} />
+            <Button
+              Title={Lang_chg.Apply[config.language]}
+              onPress={async () => {
+                let res = await applyCoupon(
+                  bookingDetails.extraData.service.service_price,
+                  coupon.couponName,
+                );
+
+                setCoupon({
+                  ...coupon,
+                  dis_amount: res.dis_amount,
+                  total_amount: res.total_amount,
+                });
+                setBookingDetails({
+                  ...bookingDetails,
+                  coupon_id: res.coupan_id,
+                  discount_amount: res.dis_amount,
+                });
+              }}
+            />
           </View>
         </View>
         <Button

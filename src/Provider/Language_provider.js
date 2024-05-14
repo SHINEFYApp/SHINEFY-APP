@@ -673,6 +673,10 @@ class Language_provider {
   Payment_Option = ['Payment Options', 'خيارت الدفع'];
   debit_credit_card = ['Debit/Credit Card', 'بطاقة الخصم / الائتمان'];
   add_card = ['Add Card', 'اضافة بطاقة '];
+  card_holder = ['Card Holder Name', 'اسم حامل البطاقة'];
+  card_number = ['Card Number', 'رقم البطاقة '];
+  expiry_date = ['Expiry Date', 'تاريخ الانتهاء'];
+
   select_payment_method = ['Select Payment Method', 'اختار طريقة الدفع'];
   select_payment_method_for_bills = [
     'Select Payment Method for Paying bills',
@@ -714,6 +718,7 @@ class Language_provider {
   note_txt = ['Note', 'ملحوظة'];
   Details = ['Details', 'تفاصيل'];
   save_location = ['Save Location', 'حفظ الموقع'];
+  save_card = ['Save Card', 'حفظ الكارت'];
   add_location = ['Add Location', 'اضافه الموقع'];
   SelectVehicles = ['Select Vehicles', 'حدد السيارات'];
   add_your_vehicle = ['Add Your Vehicle', 'أضف سيارتك'];
