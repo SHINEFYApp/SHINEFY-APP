@@ -343,7 +343,7 @@ class Language_provider {
   password_placeholder = ['Password', 'كلمة المرور'];
   email_placeholder = ['Email', 'البريد الإلكتروني'];
   Home = ['SHINEFY', 'الرئيسية'];
-  Message = ["You don't have an account?", 'ليس لديك حساب؟'];
+  Message = ["Don't have an account?", 'ليس لديك حساب؟'];
   Signup = ['Signup', ' التسجيل  '];
   Forgot_password = ['Forgot Password?', 'هل نسيت كلمةالمرور؟'];
   Login_guest = ['Login as a guest', 'تسجيل الدخول كضيف'];
@@ -353,7 +353,10 @@ class Language_provider {
     'تأكيد كلمة المرور الجديدة',
   ];
   name_placeholder = ['Enter Name', 'أدخل الاسم'];
+  company_email_txt = ['Company Email?', 'بريد الشركة الالكتروني؟'];
   Message_signup_page = ['Already have an account ?', 'هل لديك حساب ؟'];
+  accept_all_terms = ['I accept all Terms & Conditions and Privacy', 'أوافق على جميع الشروط والأحكام والخصوصية'];
+  dont_receive_otp = ['Don’t receive the OTP?', 'ألم تتلق كلمة المرور لمرة واحدة (OTP)؟'];
   verifyEmail = ['Corporate email?', 'البريد الكتروني تابع لشركة؟'];
   verifyEmailDesc = [
     "Please check if you are an employee of an authorized company. Then enter the company's email and check to enjoy unprecedented discounts.",
@@ -378,7 +381,7 @@ class Language_provider {
   password = ['Password', 'كلمة المرور'];
   confirmpassword = ['Confirm Password', 'تأكيد كلمة المرور'];
   remember = ['Remember me', 'تذكرنى'];
-  forgot = ['Forgot Password?', 'هل نسيت كلمة السر؟'];
+  Forgot_password_2 = ['Forgot Password', 'هل نسيت كلمة السر'];
   mobile_placeholder = ['Email', 'البريد الإلكتروني'];
   categories = ['Categories', 'فئات'];
   view = ['View All', 'عرض الكل'];
@@ -387,11 +390,17 @@ class Language_provider {
   daily = ['Daily', 'اليومي'];
   week = ['Weekly', 'أسبوعي'];
   month = ['Monthly', 'شهريا'];
-  login = ['LOGIN', 'تسجيل الدخول'];
+  login = ['Login To SHINEFY', 'تسجيل الدخول '];
+  create_new_account = ['Create New Account', ' انشاء حساب جديد'];
+  continue_agreement = ['By Continuing, you agree to our', 'من خلال الاستمرار، فإنك توافق على لدينا'];
+  content_policy = ['Conent Policy', 'شروط الخدمة'];
+  privacy_policy = ['Privacy Policy', 'سياسة الخصوصية'];
+  terms_of_service = ['Terms Of Service', 'سياسة المحتوى'];
   login1 = ['Login', 'تسجيل الدخول'];
   signup = ['SIGNUP', 'سجل الآن'];
   mobile = ['Mobile', 'الموبيل'];
-  otp_verification = ['OTP Verification', 'التحقق من الرمز الري لمرة واحدة'];
+  Back = ['Back', 'عودة'];
+  otp_verification = ['OTP Verification', 'التحقق من الرمز'];
   otp_verification_msg = [
     'Please type the verification code sent to you',
     'الرجاء كتابة رمز التحقق المرسل إليك',
@@ -416,10 +425,9 @@ class Language_provider {
   update = ['Save & Update', '"حفظ وتحديث'];
   block = ['Block', 'إخفاء'];
   report = ['Report', 'تقرير'];
-  send = ['Sent', 'أرسلت'];
+  send = ['Send', 'أرسل'];
   doyou = ["Don't have an account ?", 'ليس لديك حساب؟'];
   already = ['Already have an account ?', 'هل لديك حساب بالفعل؟'];
-
   // ---------------Atul Texts--------------
   //===========14-03-2022------------
   myvehicles_txt = ['My Vehicles', 'سياراتي'];
@@ -557,6 +565,7 @@ class Language_provider {
   navigatelocation_txt = ['Navigate Location', 'انتقل للموقع'];
   cardetails_txt = ['Your Car Details', 'تفاصيل سيارتك'];
   extraservice_txt = ['Extra Services', 'خدمات إضافية'];
+  other_services = ['Other Services', 'خدمات اخري'];
   //==========================26/03/2022,atul texts
   subtotal_txt = ['Sub Total', 'المجموع الفرعي'];
   subTotal = ['Subtotal', 'المجموع الفرعي'];
@@ -803,6 +812,7 @@ class Language_provider {
   no_vehicles_yet = ['No Vechicle Yet', 'لا توجد سيارة حتى الآن']
   update_vechile = ['Update Vechile', 'تعديل السيارة']
   sure_to_delete_car = ['Are you sure , you want to delete your car ?' , 'هل أنت متأكد أنك تريد حذف سيارتك؟']
+  welcome_back = ['Welcome Back', 'مرحبًا بعودتك']
 
 }
 export const Lang_chg = new Language_provider();

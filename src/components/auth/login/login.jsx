@@ -7,6 +7,8 @@ import phoneIcon from '../../../assets/icons/phoneIcon.png';
 import keyIcon from '../../../assets/icons/Keypng.png';
 import loginAuth from '../../../Features/login/login';
 import {useState} from 'react';
+import {Lang_chg} from '../../../Provider/Language_provider';
+import {config} from '../../../Provider/configProvider';
 
 export default function LoginModal({openSignup, navigation, closeLogin}) {
   const [userData, setUserData] = useState({});
@@ -17,13 +19,12 @@ export default function LoginModal({openSignup, navigation, closeLogin}) {
     });
   }
 
-
   return (
     <View className="absolute transition-all right-0 bottom-0 bg-white w-full p-5 rounded-xl">
       <View className="pb-5 relative">
         <View>
           <Text className={'text-3xl font-bold text-center p-5'}>
-            Welcome Back
+            {Lang_chg.welcome_back[config.language]}
           </Text>
         </View>
         <View>
@@ -34,7 +35,7 @@ export default function LoginModal({openSignup, navigation, closeLogin}) {
               });
             }}
             keyboardType={'numeric'}
-            placeholder={'Mobile'}
+            placeholder={Lang_chg.mobile_txt[config.language]}
             icon={phoneIcon}
             text={'+20'}
             isBorder={true}
@@ -46,7 +47,7 @@ export default function LoginModal({openSignup, navigation, closeLogin}) {
               });
             }}
             secureTextEntry={true}
-            placeholder={'Password'}
+            placeholder={Lang_chg.password_placeholder[config.language]}
             icon={keyIcon}
             isBorder={true}
             type={'passowrd'}
@@ -55,7 +56,7 @@ export default function LoginModal({openSignup, navigation, closeLogin}) {
         <View className="my-10">
           <Button
             textColor={'#fff'}
-            Title={'LOGIN'}
+            Title={Lang_chg.login[config.language]}
             onPress={() => {
               loginAuth(userData, navigation, closeLogin);
             }}
@@ -66,14 +67,14 @@ export default function LoginModal({openSignup, navigation, closeLogin}) {
               closeLogin();
             }}
             className="underline text-center">
-            Forgot Password?
+            {Lang_chg.Forgot_password[config.language]}
           </Text>
         </View>
         <View>
           <Text className="text-center">
-            Don't have an account?{' '}
+            {Lang_chg.Message[config.language]}{' '}
             <Text className="underline text-mainColor" onPress={openSignup}>
-              Signup
+              {Lang_chg.signup[config.language]}
             </Text>{' '}
           </Text>
         </View>

@@ -8,7 +8,7 @@ import {config} from '../../Provider/configProvider';
 
 export default function PackageCard({navigation}) {
   return (
-    <View className="bg-white p-3 rounded-xl m-2" style={style.box}>
+    <View className="bg-white py-4 px-5 rounded-xl m-2" style={style.box}>
       <View className="flex-row mb-3">
         <Image source={Img} />
         <View className="flex-row justify-between ml-4 flex-1">
@@ -24,7 +24,9 @@ export default function PackageCard({navigation}) {
             </View>
             <View className="flex-row items-center">
               <Image source={timeIcon} />
-              <Text className="ml-2">5 Other Services</Text>
+              <Text className="ml-2">
+                5 {Lang_chg.other_services[config.language]}
+              </Text>
             </View>
             <View className="flex-row items-center">
               <Image source={timeIcon} />
@@ -49,7 +51,7 @@ export default function PackageCard({navigation}) {
 
 const style = StyleSheet.create({
   box: {
-    shadowColor: '#dd9923',
+    shadowColor: 'rgba(221, 153, 35, 0.3)',
     shadowOffset: {
       width: 8,
       height: 4,

@@ -15,7 +15,7 @@ const ReviewScreen = () => {
   const [userRating, setUserRating] = useState(0);
 
   return (
-    <View className={'h-[1000px]'}>
+    <View className={' relative h-full'}>
       <ScrollView>
         <Image source={reviewImage} className={'w-[100vw] h-[320px]'} />
         <View className={'relative h-full'}>
