@@ -10,10 +10,10 @@ export default function SelectDateBox({title, selected, onPress}) {
       }}
       underlayColor={'white'}
       className={`bg-white rounded-lg px-3 py-2 m-2  ${
-        title === selected ? 'bg-mainColor' : 'bg-white'
+        title === selected || selected === true ? 'bg-mainColor' : 'bg-white'
       }`}
       style={title !== selected && style.box}>
-      <Text className={`${title === selected && 'text-white'}`}>{title}</Text>
+      <Text className={`${title === selected || selected === true ? 'text-white' : 'text-black'}`}>{title}</Text>
     </TouchableHighlight>
   );
 }

@@ -49,9 +49,10 @@ export default async function addLocation(location , name) {
 
   let url = config.baseURL + 'save_user_location';
 
-  apifuntion
-    .postApi(url, data)
-    .then(obj => {
+    try {
+
+    let obj = await apifuntion.postApi(url, data)
+
       if (obj.success == 'true') {
         localStorage.removeItem('saved_location_arr');
         localStorage.setItemObject('user_arr', obj.user_details);
@@ -66,6 +67,7 @@ export default async function addLocation(location , name) {
             'center',
           );
         }
+        return obj.success
       } else {
         msgProvider.alert(
           Lang_chg.information[config.language],
@@ -82,8 +84,7 @@ export default async function addLocation(location , name) {
         }
         return false;
       }
-    })
-    .catch(err => {
+    }catch(err) {
       if (err == 'noNetwork') {
         msgProvider.alert(
           Lang_chg.msgTitleNoNetwork[config.language],
@@ -99,5 +100,7 @@ export default async function addLocation(location , name) {
         );
         return false;
       }
-    });
+
+    }
+
 }

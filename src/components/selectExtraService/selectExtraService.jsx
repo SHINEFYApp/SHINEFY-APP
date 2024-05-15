@@ -4,7 +4,11 @@ import {Image, Text, View} from 'react-native-ui-lib';
 import img from '../../assets/extraService.png';
 import globalStyle from '../../assets/globalStyle';
 import {config} from '../../Provider/configProvider';
+import { useRecoilState } from 'recoil';
+import bookingDetailsAtom from '../../atoms/bookingDetails/bookingDetails.atom';
+import { msgProvider } from '../../Provider/Messageconsolevalidationprovider/messageProvider';
 export default function SelectExtraService({extraService}) {
+  const [bookingDetails, setBookingDetails] = useRecoilState(bookingDetailsAtom)
   const [counter, setCounter] = useState(0);
   return (
     <View
@@ -33,7 +37,11 @@ export default function SelectExtraService({extraService}) {
             <TouchableOpacity
               className="bg-[#DD992345] items-center px-2 rounded-md"
               onPress={() => {
-                setCounter(counter + 1);
+                if (!bookingDetails['service_id']) {
+                  msgProvider.toast('Please Select Main service to Select Extra Service', 'center');     
+                }else {
+                  setCounter(counter + 1);
+                }
               }}>
               <Text className="font-semibold text-xl">+</Text>
             </TouchableOpacity>

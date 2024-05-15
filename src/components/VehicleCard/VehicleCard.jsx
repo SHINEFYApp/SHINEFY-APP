@@ -12,6 +12,7 @@ import {useRecoilState} from 'recoil';
 import updateCar from '../../atoms/currentCar/currentCar';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
+import deleteVehicle from '../../Features/deleteVehicle/deleteVehicle';
 
 export default function VehicleCard({car, navigation}) {
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
@@ -29,7 +30,8 @@ export default function VehicleCard({car, navigation}) {
         <ConfirmationPopUp
           itemId={car.vehicle_id}
           closePopUp={handleClosePopUp}
-          onConfirm={() => {
+          onConfirm={async() => {
+            await deleteVehicle(car,vehicle_id)
             handleClosePopUp();
           }}
           heading={Lang_chg.delete[config.language]}

@@ -47,7 +47,7 @@ export default function SelectDateTime({navigation}) {
           date.toLocaleDateString(date.setDate(date.getDate() + 1)),
         ),
       });
-    } else {
+    } else if (selectedDate != "") {
       setBookingDetails({
         ...bookingDetails,
         booking_date: sortDate(selectedDate),
@@ -68,6 +68,7 @@ export default function SelectDateTime({navigation}) {
       setSlots(await getTimeSlots(bookingDetails));
     };
     fetchDate();
+    setTime("")
   }, [date]);
 
   return (
@@ -95,8 +96,9 @@ export default function SelectDateTime({navigation}) {
             title={Lang_chg.Selectdatetime_txt[config.language]}
             onPress={() => {
               setIsCustomDate(true);
+              setDate("")
             }}
-            selected={date}
+            selected={isCustomDate}
           />
         </View>
         {isCustomDate && (

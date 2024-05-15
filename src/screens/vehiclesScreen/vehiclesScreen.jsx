@@ -1,9 +1,9 @@
 import {Image, Text, View} from 'react-native-ui-lib';
 import VehicleCard from '../../components/VehicleCard/VehicleCard';
-import {ScrollView} from 'react-native-gesture-handler';
+import {RefreshControl, ScrollView} from 'react-native-gesture-handler';
 import Button from '../../components/mainButton/Button';
 import emptyImg from '../../assets/emptyVehicle.png';
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import getMyVehicles from '../../Features/getVehicles/getVehicles';
 import {localStorage} from '../../Provider/localStorageProvider';
 import {Lang_chg} from '../../Provider/Language_provider';
@@ -13,7 +13,14 @@ export default function VehiclesScreen({navigation}) {
   const cars = [1];
 
   const [myCars, setMyCars] = useState([]);
+ const [refreshing, setRefreshing] = useState(false);
 
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  }, []);
   useEffect(() => {
     const fetchData = async () => {
       const data = await getMyVehicles();
@@ -21,7 +28,7 @@ export default function VehiclesScreen({navigation}) {
       setMyCars(data.vehicle_arr);
     };
     fetchData();
-  }, []);
+  }, [refreshing]);
 
   return (
     <View className="pt-[80] px-5 relative flex-1">
@@ -34,7 +41,9 @@ export default function VehiclesScreen({navigation}) {
           </View>
         </View>
       ) : (
-        <ScrollView>
+        <ScrollView refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
           {myCars?.map(car => {
             return <VehicleCard car={car} navigation={navigation} />;
           })}

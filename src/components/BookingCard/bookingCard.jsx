@@ -61,7 +61,7 @@ export default function BookingCard({progress, ButtonTitle, navigation, book}) {
         </View>
         <View className="gap-2">
           <Text>{Lang_chg.order_date[config.language]}</Text>
-          <Text>{book.booking_date}</Text>
+          <Text>{book.createtime.split(",")[0]}</Text>
         </View>
         <View className="gap-2">
           <Text>{Lang_chg.total_payment[config.language]}</Text>

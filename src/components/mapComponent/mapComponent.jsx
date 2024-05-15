@@ -55,8 +55,9 @@ export default function MapComponent({isNewLocation, navigation}) {
           />
           <Button
             Title={Lang_chg.confirm_booking[config.language]}
-            onPress={() => {
-              addLocation(currentlocation, name);
+            onPress={async () => {
+              let res = await addLocation(currentlocation, name);
+              res && navigation.goBack()
             }}
           />
         </View>

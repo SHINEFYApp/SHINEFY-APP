@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {TextInput} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Image, Text, View} from 'react-native-ui-lib';
@@ -20,6 +20,17 @@ const BookingOverview = ({navigation}) => {
     useRecoilState(bookingDetailsAtom);
   let date = new Date(reverseSortDate(bookingDetails.booking_date));
   const [coupon, setCoupon] = useState();
+
+  useEffect(()=>{
+   if(coupon?.couponName == "") { 
+      setCoupon()
+       setBookingDetails({
+                  ...bookingDetails,
+                  coupon_id: "NA",
+                  discount_amount: "NA",
+                });
+   }
+  },[coupon])
 
   return (
     <View className={'pt-[90px] px-5'}>
@@ -65,7 +76,7 @@ const BookingOverview = ({navigation}) => {
               <BookingOverviewTextDetails
                 title={'Coupon'}
                 value={coupon.couponName}
-                price={`-${coupon?.dis_amount} EGP`}
+                price={`-${coupon.dis_amount }`}
               />
               <View
                 className={
@@ -82,7 +93,7 @@ const BookingOverview = ({navigation}) => {
             {Lang_chg.totalservicecharges_txt[config.language]}
           </Text>
           <Text className={'font-bold text-center text-lg'}>
-            {coupon?.total_amount} EGP
+            {coupon?.total_amount ? coupon?.total_amount :bookingDetails.extraData.service.service_price} EGP
           </Text>
         </View>
         <View

@@ -2,11 +2,11 @@ import { apifuntion } from "../../Provider/Apicallingprovider/apiProvider";
 import { config } from "../../Provider/configProvider";
 import { localStorage } from "../../Provider/localStorageProvider";
 
- export default async function cashBooking (bookingDetails) {
-    var vehicle_data = await localStorage.getItemObject('booking_vehicle_arr');
-    var location_data = await localStorage.getItemObject('location_arr');
-    var all_service_data = await localStorage.getItemObject(
-      'booking_service_arr',
+ export default async function cashBooking (bookingDetails , navigation) {
+   var vehicle_data = await localStorage.getItemObject('booking_vehicle_arr');
+   var location_data = await localStorage.getItemObject('location_arr');
+   var all_service_data = await localStorage.getItemObject(
+     'booking_service_arr',
     );
     // let service_data = all_service_data.service_data;
     // var extra_service_all_id = [];
@@ -35,15 +35,15 @@ import { localStorage } from "../../Provider/localStorageProvider";
       // data.append('vat_per', vat_data.commission_amt);// no v/aliation 
       // data.append('service_boy_id', slot_data.service_boy_id); 
       data.append('total_price', bookingDetails.total_amount ? bookingDetails.total_amount : bookingDetails.service_price );
-    data.append('coupan_id', bookingDetails.coupan_id ? bookingDetails.coupan_id : "NA");
-    data.append('discount_amount', bookingDetails.dis_amount ?  bookingDetails.dis_amount : "NA");
-    data.append('service_time', bookingDetails.service_time);// selected srvice time + extra service time 
-    data.append('address_loc', bookingDetails.address_loc);
-    data.append('latitude', bookingDetails.latitude);
-    data.append('longitude', bookingDetails.longitude);
-    
-    let newDate = bookingDetails.booking_date.split('-')
-    data.append('booking_date', `${newDate[1]}-${newDate[0]}-${newDate[2]}`);
+      data.append('coupan_id', bookingDetails.coupan_id ? bookingDetails.coupan_id : "NA");
+      data.append('discount_amount', bookingDetails.dis_amount ?  bookingDetails.dis_amount : "NA");
+      data.append('service_time', bookingDetails.service_time);// selected srvice time + extra service time 
+      data.append('address_loc', bookingDetails.address_loc);
+      data.append('latitude', bookingDetails.latitude);
+      data.append('longitude', bookingDetails.longitude);
+      
+      let newDate = bookingDetails.booking_date.split('-')
+    data.append('booking_date', `${newDate[0]}-${newDate[1]}-${newDate[2]}`);
     data.append('booking_time', bookingDetails.booking_time);
     data.append('area_id', bookingDetails.area_id);
     data.append('note', bookingDetails.notes ? bookingDetails.notes : "NA"  );
@@ -51,9 +51,11 @@ import { localStorage } from "../../Provider/localStorageProvider";
     // data.append('wallet_amount', this.state.redemwallet);
     // data.append('online_amount', this.state.netpay);
     let url = config.baseURL + 'create_booking';
-  
+    
     apifuntion.postApi(url , data)
     .then((obj)=>{
+      console.log(obj)
+      navigation.navigate("HomeScreen")
       if (err == 'noNetwork') {
         msgProvider.alert(
           Lang_chg.msgTitleNoNetwork[config.language],

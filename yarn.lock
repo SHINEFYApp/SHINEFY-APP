@@ -3278,6 +3278,7 @@ __metadata:
     react-native-dropdown-select-list: "npm:^2.0.5"
     react-native-fbsdk-next: "npm:^12.1.4"
     react-native-gesture-handler: "npm:^2.15.0"
+    react-native-get-location: "npm:^4.0.1"
     react-native-hide-with-keyboard: "npm:^1.2.1"
     react-native-htmlview: "npm:^0.17.0"
     react-native-image-crop-picker: "npm:^0.40.3"
@@ -9656,6 +9657,15 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 10c0/7c06fa62bc11810f048b68a6b25da288808f9399067507d61b8e0a3b5f7a4bd632f25e3baab0f00857588eece5edfdf7eb40dbb07af54aa8fe557a8bf5b728e3
+  languageName: node
+  linkType: hard
+
+"react-native-get-location@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "react-native-get-location@npm:4.0.1"
+  peerDependencies:
+    react-native: ">=0.60"
+  checksum: 10c0/72efe1caff06c5b0b946bb5498e1d0003e93da661e67684185c2092d3a551f6a2f06d96f398c973aabd76044735daee9317ce67f1be3ae0fd15ec739bdbc4f44
   languageName: node
   linkType: hard
 

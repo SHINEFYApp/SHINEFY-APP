@@ -26,6 +26,8 @@ export default function NavigationTop(props) {
         return Lang_chg.editvechile_txt[config.language];
       case 'notficationScreen':
         return Lang_chg.notification_txt[config.language];
+      case 'SelectDateTime':
+        return Lang_chg.Selectdatetime_txt[config.language];
       default:
         return;
     }

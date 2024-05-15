@@ -47,8 +47,9 @@ export default function RequestDetails({navigation, route}) {
   ];
 
   return (
-    <ScrollView>
-      <ScrollView className="h-fit pt-[80px] w-[90%] mx-auto">
+    <>
+    <View className=" pt-[80px] flex-1">
+      <ScrollView className="px-2 w-[95%] flex-1 mx-auto">
         <View>
           <Text className="text-xl mb-3">
             {Lang_chg.wash_location[config.language]}
@@ -131,7 +132,9 @@ export default function RequestDetails({navigation, route}) {
           })}
         </View>
       </ScrollView>
-      <View className="flex-row bg-white justify-between absolute bottom-0 w-full rounded-t-3xl p-5">
+      
+    </View>
+ <View className="flex-row bg-white justify-between  w-full rounded-t-3xl p-5">
         <View>
           <Text className="text-md">{Lang_chg.subTotal[config.language]}</Text>
           <Text className="font-bold text-xl">200 EGP</Text>
@@ -150,6 +153,7 @@ export default function RequestDetails({navigation, route}) {
           }}
         />
       </View>
-    </ScrollView>
+    </>
+
   );
 }
