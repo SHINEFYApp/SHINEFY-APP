@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {ImageBackground, StyleSheet} from 'react-native';
 import {Colors, Text, View} from 'react-native-ui-lib';
 import background from '../../assets/backgroundImage.png';
 import OTPTextInput from 'react-native-otp-textinput';
-import {mobileW} from '../../Provider/utilslib/Utils';
+import {Lang_chg, config, mobileW} from '../../Provider/utilslib/Utils';
 import Button from '../../components/mainButton/Button';
 import BackButton from '../../components/backButton/backButton';
-import { sendOTP } from '../../Features/verifyOTP/verifyOTP';
-
+import {sendOTP} from '../../Features/verifyOTP/verifyOTP';
 
 export default function OTPScreen({navigation, route}) {
-  const [otp , setOTP] = useState("")
-
+  const [otp, setOTP] = useState('');
 
   return (
     <View className={'flex-1'}>
@@ -20,13 +18,18 @@ export default function OTPScreen({navigation, route}) {
         <View style={styles.container}>
           <View className="bg-white rounded-lg w-full p-5 ">
             <Text className="font-bold text-2xl text-center">
-              OTP Verfication
+              {Lang_chg.otp_verification[config.language]}
             </Text>
             <View>
               <Text className="text-center mt-2 text-xs">
-                Please type the verification code sent to you
+                {Lang_chg.otp_verification_msg[config.language]}
               </Text>
-              <Text className="text-center mb-2">+20 {route.params.phone_number} <Text className="underline font-bold">Back</Text></Text>
+              <Text className="text-center mb-2">
+                +20 {route.params.phone_number}{' '}
+                <Text className="underline font-bold">
+                  {Lang_chg.Back[config.language]}
+                </Text>
+              </Text>
             </View>
             <OTPTextInput
               containerStyle={styles.textInputContainer}
@@ -36,19 +39,26 @@ export default function OTPScreen({navigation, route}) {
               tintColor="#ccc"
               offTintColor="#ccc"
               keyboardType={'number-pad'}
-              handleTextChange={(text)=>{
-                setOTP(text)
+              handleTextChange={text => {
+                setOTP(text);
               }}
             />
             <Button
-              Title={'VERIFY'}
+              Title={Lang_chg.verify[config.language]}
               onPress={async () => {
-                await sendOTP(otp , route.params.phone_number , route.params.user_id , navigation)
+                await sendOTP(
+                  otp,
+                  route.params.phone_number,
+                  route.params.user_id,
+                  navigation,
+                );
               }}
             />
             <Text className={'text-center'}>
-              Don’t receive the OTP?{' '}
-              <Text className={'text-mainColor underline'}>Resend</Text>
+              {Lang_chg.dont_receive_otp[config.language]}{' '}
+              <Text className={'text-mainColor underline'}>
+                {Lang_chg.resend_text[config.language]}
+              </Text>
             </Text>
           </View>
         </View>
@@ -83,7 +93,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     backgroundColor: Colors.whiteColor,
-    color: "black",
+    color: 'black',
     height: (mobileW * 10) / 100,
     fontSize: (mobileW * 4.2) / 100,
     width: (mobileW * 10) / 100,
