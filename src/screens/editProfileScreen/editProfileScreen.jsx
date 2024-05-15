@@ -9,7 +9,9 @@ import profileData from '../../atoms/profileData/profileData';
 import {useState} from 'react';
 import editProfile from '../../Features/editProfile/editProfile';
 import {Lang_chg} from '../../Provider/Language_provider';
+import editIcon from '../../assets/icons/editIconVehicle.png';
 import {config} from '../../Provider/configProvider';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 export default function EditProfileScreen({navigation}) {
   const data = useRecoilValue(profileData);
   const [newData, setNewData] = useState({
@@ -18,15 +20,28 @@ export default function EditProfileScreen({navigation}) {
     phone_number: data.phone_number,
     email: data.email,
   });
+
+  async function updateProfilePic() {
+    // let image = await DocumentPicker.Picker({
+    //   multi
+    // })
+  }
+
   return (
     <View className="pt-[80] px-8 flex-1">
       <View className="my-10">
-        <View className="items-center relative border-2 border-mainColor w-[110px] p-1 rounded-full mx-auto">
-          <Image
-            source={pic}
-            className="p-4 border w-[100] h-[100] rounded-full"
-          />
-        </View>
+        <TouchableOpacity onPress={updateProfilePic}>
+
+          <View className="items-center relative border-2 border-mainColor w-[110px] p-1 rounded-full mx-auto">
+            <Image
+              source={pic}
+              className="p-4 border w-[100] h-[100] rounded-full"
+              />
+            <View className="bg-mainColor absolute -right-3 -top-2 rounded-full">
+              <Image source={editIcon}/>
+            </View>
+          </View>
+        </TouchableOpacity>
       </View>
       <View className="relative h-full">
         <View className="absolute w-full">

@@ -33,6 +33,7 @@
     "react-native-calendar-picker": "^8.0.1",
     "react-native-countdown-component": "^2.7.1",
     "react-native-dashed-line": "^1.1.0",
+    "react-native-document-picker": "^9.2.0",
     "react-native-dropdown-select-list": "^2.0.5",
     "react-native-fbsdk-next": "^12.1.4",
     "react-native-gesture-handler": "^2.15.0",
