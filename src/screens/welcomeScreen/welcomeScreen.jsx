@@ -1,5 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {BackHandler, ImageBackground, KeyboardAvoidingViewBase, StyleSheet} from 'react-native';
+import {
+  BackHandler,
+  ImageBackground,
+  KeyboardAvoidingViewBase,
+  StyleSheet,
+} from 'react-native';
 import {Image, KeyboardAwareScrollView, Text, View} from 'react-native-ui-lib';
 import background from '../../assets/backgroundImage.png';
 import Button from '../../components/mainButton/Button';
@@ -8,7 +13,9 @@ import Animated, {useSharedValue, withTiming} from 'react-native-reanimated';
 import SignupModal from '../../components/auth/signup/signup';
 import logo from '../../assets/logo-2.png';
 import Modal from 'react-native-modal';
-import { ScrollView } from 'react-native-gesture-handler';
+import {ScrollView} from 'react-native-gesture-handler';
+import {Lang_chg} from '../../Provider/Language_provider';
+import {config} from '../../Provider/configProvider';
 
 export default function WelcomeScreen({navigation}) {
   const logoScale = useSharedValue(1);
@@ -43,7 +50,7 @@ export default function WelcomeScreen({navigation}) {
   }, [isSignupModalVisivle, isLoginModalVisible, logoScale, logoTranslateY]);
 
   return (
-    <View className="flex-1">      
+    <View className="flex-1">
       <ImageBackground source={background} style={styles.image}>
         <View style={styles.container}>
           <Animated.View
@@ -55,28 +62,28 @@ export default function WelcomeScreen({navigation}) {
           <View width={'100%'}>
             <Button
               onPress={handleLoginPress}
-              Title={'Login To SHINEFY'}
+              Title={Lang_chg.login[config.language]}
               textColor={'black'}
             />
             <Button
               onPress={handleSignupPress}
-              Title={'Create New Account'}
+              Title={Lang_chg.create_new_account[config.language]}
               secondStyle={true}
             />
           </View>
           <View className="absolute bottom-5">
             <Text className="text-white z-1 text-center">
-              By Continuing, you agree to our
+              {Lang_chg.continue_agreement[config.language]}
             </Text>
             <View className="flex flex-row gap-2 mt-1">
               <Text className="z-1 text-white text-center underline">
-                Terms of Service
+                {Lang_chg.terms_of_service[config.language]}
               </Text>
               <Text className="z-1 text-white text-center underline">
-                Privacy Policy
+                {Lang_chg.privacy_policy[config.language]}
               </Text>
               <Text className="z-1 text-white text-center underline">
-                Content Policy
+                {Lang_chg.content_policy[config.language]}
               </Text>
             </View>
           </View>
@@ -104,7 +111,11 @@ export default function WelcomeScreen({navigation}) {
             isVisible={isSignupModalVisivle}
             onBackdropPress={handleCloseSignup}
             onBackButtonPress={handleCloseSignup}>
-            <SignupModal closeSignup={handleCloseSignup} navigation={navigation} openLogin={handleLoginPress} />
+            <SignupModal
+              closeSignup={handleCloseSignup}
+              navigation={navigation}
+              openLogin={handleLoginPress}
+            />
           </Modal>
         </View>
       </ImageBackground>
