@@ -2,21 +2,29 @@ import {Image, Text, View} from 'react-native-ui-lib';
 import emptyImg from '../../assets/emptyIMG.png';
 import Button from '../../components/mainButton/Button';
 import LocationCard from '../../components/locationComponentCard/locationComponentCard';
-import {ScrollView} from 'react-native-gesture-handler';
+import {RefreshControl, ScrollView} from 'react-native-gesture-handler';
 import getSavedLocation from '../../Features/getSavedLocation/getSavedLocation';
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 export default function SavedLocationScreen({navigation}) {
   const [data, setData] = useState([]);
   const locations = [1];
+    const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
       setData(await getSavedLocation());
     };
     fetchData();
-  }, []);
+  }, [refreshing]);
 
   return (
     <View className="flex-1 pt-[80px]">
@@ -36,7 +44,10 @@ export default function SavedLocationScreen({navigation}) {
         </View>
       ) : (
         <View>
-          <ScrollView className="px-2">
+          <ScrollView className="px-2"
+          refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+          >
             {data?.map(location => {
               return (
                 <LocationCard location={location} navigation={navigation} />

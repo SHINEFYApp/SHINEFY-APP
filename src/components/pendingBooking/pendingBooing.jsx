@@ -26,10 +26,11 @@ export default function PendingBooking({navigation, bookings, currentPage}) {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
         >
-          {bookings[currentPage]?.map(book => {
+          {bookings[currentPage]?.map((book , index) => {
             console.log(book)
             return (
               <BookingCard
+                key={book.booking_id}
                 book={book}
                 progress={currentPage}
                 ButtonTitle={

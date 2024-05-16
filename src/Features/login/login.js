@@ -18,13 +18,11 @@ export default function loginAuth(data, navigation, closeLoginModal) {
   apifuntion
     .postApi(url, formData)
     .then(obj => {
-     
       if (obj.success == 'true') {
         closeLoginModal();
         var user_arr = obj.user_details;
         let user_id = user_arr.user_id;
         let otp_verify = user_arr.otp_verify;
-   
         let admin_status = user_arr.admin_status;
         let user_value = {
           user_id: user_id,
@@ -46,20 +44,20 @@ export default function loginAuth(data, navigation, closeLoginModal) {
           });
           return false;
         }
-        if (this.state.passwordhide == true) {
-          localStorage.setItemString('remember_email', data.phone_number);
-          localStorage.setItemString('remember_password', data.password);
-          localStorage.setItemString('remember_me', 'yes');
-        } else {
-          this.setState({
-            passwordhide: false,
-            phone_number: '',
-            password: '',
-          });
-        }
+        // if (this.state.passwordhide == true) {
+        //   localStorage.setItemString('remember_email', data.phone_number);
+        //   localStorage.setItemString('remember_password', data.password);
+        //   localStorage.setItemString('remember_me', 'yes');
+        // } else {
+        //   this.setState({
+        //     passwordhide: false,
+        //     phone_number: '',
+        //     password: '',
+        //   });
+        // }
         localStorage.setItemString('password', data.password);
         localStorage.setItemString('email', data.phone_number);
-        navigation.navigate('Home', {home_status: 1});
+        navigation.navigate('HomeScreen', {home_status: 1});
       } else {
         setTimeout(() => {
           if (obj?.msg) {

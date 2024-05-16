@@ -21,6 +21,8 @@ const BookingOverview = ({navigation}) => {
   let date = new Date(reverseSortDate(bookingDetails.booking_date));
   const [coupon, setCoupon] = useState();
 
+  console.log(bookingDetails)
+
   useEffect(()=>{
    if(coupon?.couponName == "") { 
       setCoupon()

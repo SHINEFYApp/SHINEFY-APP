@@ -15,13 +15,15 @@ const ReviewScreen = () => {
   const [userRating, setUserRating] = useState(0);
 
   return (
-    <View className={' relative h-full'}>
+    <View className={'flex-1'}>
       <ScrollView>
         <Image source={reviewImage} className={'w-[100vw] h-[320px]'} />
         <View className={'relative h-full'}>
+        </View>
+      </ScrollView>
           <View
             className={
-              'w-full bg-white px-4 py-10 rounded-[50px] h-full absolute top-[-30px]'
+              'w-full bg-white px-4 py-10 rounded-t-[50px] flex-1 absolute bottom-[0px]'
             }>
             <View className={'pl-5 w-fit'}>
               <Text
@@ -84,8 +86,6 @@ const ReviewScreen = () => {
               />
             </View>
           </View>
-        </View>
-      </ScrollView>
     </View>
   );
 };

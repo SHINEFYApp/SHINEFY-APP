@@ -22,9 +22,7 @@ export default function EditProfileScreen({navigation}) {
   });
 
   async function updateProfilePic() {
-    // let image = await DocumentPicker.Picker({
-    //   multi
-    // })
+    const result = await launchImageLibrary();
   }
 
   return (

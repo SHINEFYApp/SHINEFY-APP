@@ -2,8 +2,9 @@ import { apifuntion } from "../../Provider/Apicallingprovider/apiProvider";
 import { Lang_chg } from "../../Provider/Language_provider";
 import { msgProvider } from "../../Provider/Messageconsolevalidationprovider/messageProvider";
 import { config } from "../../Provider/configProvider";
+import AppLogout from "../logout/Logout";
 
-export default async function resetPassword(data , user_id){
+export default async function resetPassword(data , user_id , navigation){
     //--------------------new password------------------
     if (data.new_password.indexOf(' ') != -1) {
         msgProvider.toast(Lang_chg.PasswordSpace[config.language], 'center');
@@ -69,7 +70,7 @@ export default async function resetPassword(data , user_id){
             Lang_chg.successUpdatePass[config.language],
             'center',
           );
-          this.props.navigation.navigate('Login');
+          AppLogout(navigation)
         }
       })
       .catch(err => {
@@ -81,11 +82,11 @@ export default async function resetPassword(data , user_id){
           );
           return false;
         } else {
-          msgProvider.alert(
-            Lang_chg.msgTitleServerNotRespond[config.language],
-            Lang_chg.serverNotRespond[config.language],
-            false,
-          );
+          // msgProvider.alert(
+          //   Lang_chg.msgTitleServerNotRespond[config.language],
+          //   Lang_chg.serverNotRespond[config.language],
+          //   false,
+          // );
           return false;
         }
       });

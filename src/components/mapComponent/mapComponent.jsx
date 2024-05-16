@@ -7,6 +7,7 @@ import Button from '../mainButton/Button';
 import addLocation from '../../Features/addLocation/addLocation';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
+import Geolocation from '@react-native-community/geolocation';
 export default function MapComponent({isNewLocation, navigation}) {
   const [currentlocation, setCurrentLocation] = useState({
     latitude: 29.96073734024412,
@@ -14,6 +15,11 @@ export default function MapComponent({isNewLocation, navigation}) {
     longitude: 31.25663409009576,
     longitudeDelta: 0.0006581470370328191,
   });
+
+  useEffect(()=>{
+    Geolocation.getCurrentPosition()
+  },[])
+
   const [name, setName] = useState('');
   return (
     <View className="flex-1 relative">

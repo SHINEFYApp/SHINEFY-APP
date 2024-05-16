@@ -40,11 +40,11 @@ export async function sendOTP(OTP , phoneNumber , userId , navigation) {
           this.props.navigation.navigate('New_password');
         }
       } else {
-        msgProvider.alert(
-          Lang_chg.information[config.language],
-          obj.msg[config.language],
-          false,
-        );
+        // msgProvider.alert(
+        //   Lang_chg.information[config.language],
+        //   obj.msg[config.language],
+        //   false,
+        // );
         if (obj.account_active_status == 'deactivate') {
           config.checkUserDeactivate(this.props.navigation);
           return false;
@@ -60,11 +60,11 @@ export async function sendOTP(OTP , phoneNumber , userId , navigation) {
           false,
         );
       } else {
-        msgProvider.alert(
-          Lang_chg.msgTitleServerNotRespond[config.language],
-          Lang_chg.serverNotRespond[config.language],
-          false,
-        );
+        // msgProvider.alert(
+        //   Lang_chg.msgTitleServerNotRespond[config.language],
+        //   Lang_chg.serverNotRespond[config.language],
+        //   false,
+        // );
       }
     });
 }

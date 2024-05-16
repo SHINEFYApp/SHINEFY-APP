@@ -37,7 +37,9 @@ export default function VehiclesScreen({navigation}) {
           <Text>{Lang_chg.no_vehicles_yet[config.language]}</Text>
           <Image source={emptyImg} />
           <View className="w-full mt-10">
-            <Button Title={Lang_chg.addvechicle_txt[config.language]} />
+            <Button Title={Lang_chg.addvechicle_txt[config.language]}  onPress={() => {
+                navigation.navigate('AddCar');
+              }}/>
           </View>
         </View>
       ) : (

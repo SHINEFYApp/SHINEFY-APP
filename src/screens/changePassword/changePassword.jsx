@@ -54,7 +54,7 @@ export default function ChangePassword({navigation , route}) {
               <Button
                 Title={'CHANGE'}
                 onPress={() => {
-                  resetPassword(pass , route.params)
+                  resetPassword(pass , route.params , navigation)
                   // navigation.navigate('OTPScreen');
                 }}
               />
