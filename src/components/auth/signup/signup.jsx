@@ -1,5 +1,5 @@
 import React from 'react';
-import {Checkbox, Text, View} from 'react-native-ui-lib';
+import {Checkbox, KeyboardAwareScrollView, Text, View} from 'react-native-ui-lib';
 import Input from '../../inputs/input';
 import Button from '../../mainButton/Button';
 import phoneIcon from '../../../assets/icons/phoneIcon.png';
@@ -24,8 +24,10 @@ export default function SignupModal({openLogin, navigation, closeSignup}) {
   }
 
   return (
-    <View className="absolute transition-all right-0 -bottom-5 bg-white w-full p-5 rounded-xl">
-      <ScrollView>
+
+
+    <View className="absolute transition-all right-0 -bottom-5 bg-white w-full p-5 rounded-xl h-full">
+      <KeyboardAwareScrollView>
         <View className="pb-5 relative">
           <View>
             <Text className={'text-3xl font-bold text-center p-5'}>
@@ -150,7 +152,9 @@ export default function SignupModal({openLogin, navigation, closeSignup}) {
             </Text>
           </View>
         </View>
-      </ScrollView>
+      </KeyboardAwareScrollView>
     </View>
+
+
   );
 }

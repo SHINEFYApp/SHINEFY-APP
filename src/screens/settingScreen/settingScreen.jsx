@@ -59,7 +59,10 @@ export default function SettingScreen({navigation}) {
       <Modal avoidKeyboard={true} hasBackdrop={true} isVisible={isPopUpOpen}>
         <ConfirmationPopUp
           closePopUp={handleClosePopUp}
-          onConfirm={() => AppLogout(navigation)}
+          onConfirm={async () => {
+            AppLogout(navigation)
+            handleClosePopUp()
+          }}
           heading={Lang_chg.logout_txt[config.language]}
           p={Lang_chg.msgConfirmTextLogoutMsg[config.language]}
           buttonTitle={Lang_chg.logout1_txt[config.language]}

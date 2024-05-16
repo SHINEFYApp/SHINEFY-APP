@@ -105,18 +105,24 @@ export default function WelcomeScreen({navigation}) {
               openSignup={handleSignupPress}
             />
           </Modal>
+          
+
           <Modal
             avoidKeyboard={true}
             hasBackdrop={false}
             isVisible={isSignupModalVisivle}
             onBackdropPress={handleCloseSignup}
             onBackButtonPress={handleCloseSignup}>
+          
             <SignupModal
               closeSignup={handleCloseSignup}
               navigation={navigation}
               openLogin={handleLoginPress}
-            />
+              />
+             
           </Modal>
+          
+
         </View>
       </ImageBackground>
     </View>
