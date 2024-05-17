@@ -39,6 +39,8 @@ export default function PaymentMethod({navigation}) {
     },
   ];
 
+
+
   return (
     <View className="pt-[80] px-5">
       <ScrollView>
@@ -115,7 +117,8 @@ export default function PaymentMethod({navigation}) {
         <Button
           Title={Lang_chg.Confirm[config.language]}
           onPress={() => {
-            cashBooking(bookingDetails , navigation);
+            // cashBooking(bookingDetails , navigation);
+            google_pay()
           }}
         />
       </ScrollView>

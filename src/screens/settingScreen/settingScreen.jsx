@@ -26,10 +26,12 @@ import notificationStatus from '../../Features/notificationStatus/notificationSt
 import deleteAccount from '../../Features/deleteAccount/deleteAccount';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
+import RateModal from '@pankod/react-native-store-rating/dist/index'
 
 export default function SettingScreen({navigation}) {
   const [isPopUpOpenDelete, setIsPopUpOpenDelete] = useState(false);
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+  const [isPopUpRate, setIsPopUpRate] = useState(false);
   const data = useRecoilValue(profileData);
 
   function handleClosePopUp() {
@@ -41,6 +43,38 @@ export default function SettingScreen({navigation}) {
 
   return (
     <View className="pt-[80] px-5">
+      <RateModal
+			    modalTitle="Rate our app"
+				rateBtnText={'Rate'}
+				cancelBtnText={'Cancel'}
+				totalStarCount={5}
+				defaultStars={5}
+				isVisible={isPopUpRate}
+				sendBtnText={'Send'}
+				commentPlaceholderText={'Placeholder text'}
+        playStoreUrl='https://play.google.com/store/apps/details?id=com.shinefy&hl=en_US&pli=1'
+				emptyCommentErrorMessage={'Empty comment error message'}
+				iTunesStoreUrl={'https://apps.apple.com/eg/app/shinefy/id1619736170'}
+				isModalOpen={isPopUpRate}
+				storeRedirectThreshold={3}
+        onSendReview={()=>{
+          console.log("rating")
+        }}
+        sendContactUsForm={()=>{
+          setIsPopUpRate(false)
+        }}
+				style={{
+					paddingHorizontal: 30,
+				}}
+				onStarSelected={(e) => {
+					console.log('change rating', e);
+				}}
+				onClosed={() => {
+					console.log('pressed cancel button...')
+						setIsPopUpRate(false)
+				}}
+				
+			/>
       <Modal
         avoidKeyboard={true}
         hasBackdrop={true}
@@ -124,10 +158,11 @@ export default function SettingScreen({navigation}) {
             arrow
             icon={rateIcon}
             Press={() => {
-              Shareratepro.Rateusfunction(
-                'Shinefy',
-                'https://play.google.com/store/apps/details?id=com.shinefy&hl=en_US&pli=1',
-              );
+              setIsPopUpRate(true)
+              // Shareratepro.Rateusfunction(
+              //   'Shinefy',
+              //   'https://play.google.com/store/apps/details?id=com.shinefy&hl=en_US&pli=1',
+              // );
             }}
           />
           <SelectVechileCard

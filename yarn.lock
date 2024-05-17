@@ -2178,6 +2178,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@pankod/react-native-store-rating@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@pankod/react-native-store-rating@npm:1.2.0"
+  dependencies:
+    lodash.times: "npm:^4.3.2"
+    react-native-ratings: "npm:^6.5.0"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+    react-native-ratings: ^4.1.0
+  checksum: 10c0/003f446718dc127c404a67872a90a01b7fb3b039367ba62ef9acaeb2032156ec453cceaced38f993d8b71d813fb1e1d559a5903f497c66a44a94e2b9eb875c0f
+  languageName: node
+  linkType: hard
+
 "@pkgjs/parseargs@npm:^0.11.0":
   version: 0.11.0
   resolution: "@pkgjs/parseargs@npm:0.11.0"
@@ -3236,6 +3250,7 @@ __metadata:
     "@babel/core": "npm:^7.20.0"
     "@babel/preset-env": "npm:^7.20.0"
     "@babel/runtime": "npm:^7.20.0"
+    "@pankod/react-native-store-rating": "npm:^1.2.0"
     "@react-native-async-storage/async-storage": "npm:^1.22.3"
     "@react-native-community/blur": "npm:^4.4.0"
     "@react-native-community/datetimepicker": "patch:@react-native-community/datetimepicker@npm%3A7.6.2#~/.yarn/patches/@react-native-community-datetimepicker-npm-7.6.2-8985f28201.patch"
@@ -3289,6 +3304,7 @@ __metadata:
     react-native-open-maps: "npm:^0.4.3"
     react-native-otp-textinput: "npm:^1.1.5"
     react-native-push-notification: "npm:^8.1.1"
+    react-native-ratings: "npm:^8.1.0"
     react-native-reanimated: "npm:^3.8.1"
     react-native-restart: "npm:^0.0.27"
     react-native-safe-area-context: "npm:^4.9.0"
@@ -7810,7 +7826,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.0.0, lodash@npm:^4.17.13, lodash@npm:^4.17.21":
+"lodash.times@npm:^4.3.2":
+  version: 4.3.2
+  resolution: "lodash.times@npm:4.3.2"
+  checksum: 10c0/57a31fab8750fe0a03e1b0ca042cb7f05c125b22a546f5156a4b642966c7ac49ea9ffee462beaffb93a47a4516cdb08b2c0fe280e37b7e1c14840ec94c9aa7ca
+  languageName: node
+  linkType: hard
+
+"lodash@npm:^4.0.0, lodash@npm:^4.17.13, lodash@npm:^4.17.15, lodash@npm:^4.17.21, lodash@npm:^4.17.4":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: 10c0/d8cbea072bb08655bb4c989da418994b073a608dffa608b09ac04b43a791b12aeae7cd7ad919aa4c925f33b48490b5cfe6c1f71d827956071dae2e7bb3a6b74c
@@ -9790,6 +9813,30 @@ __metadata:
     "@react-native-community/push-notification-ios": ^1.10.1
     react-native: ">=0.33"
   checksum: 10c0/d215a17ce815c65e6a77b1b61ce4e929deead8b969a5133baa5e2b903381b822422d9bbba1cd2c57e36e8aa9a1789c788e47be9fcbc86f6315c6a9de64398c40
+  languageName: node
+  linkType: hard
+
+"react-native-ratings@npm:^6.5.0":
+  version: 6.5.0
+  resolution: "react-native-ratings@npm:6.5.0"
+  dependencies:
+    lodash: "npm:^4.17.4"
+    prop-types: "npm:^15.5.10"
+  peerDependencies:
+    react: ^16.0.0
+  checksum: 10c0/6a9009dd3e98dfa2910847b61efb4538a3dcb8f0fb5d7d41d3ced465dce8b57df91d9613888f725f4cc64215ade8471ebf278fff55ea41142629f9474ea7932d
+  languageName: node
+  linkType: hard
+
+"react-native-ratings@npm:^8.1.0":
+  version: 8.1.0
+  resolution: "react-native-ratings@npm:8.1.0"
+  dependencies:
+    lodash: "npm:^4.17.15"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/e1b3d20a92025705cc5a3cc47e04e74c71ba0ab1621398b87334a9d6fa4714a051f0d05f7358e1dab81c3a0c6501f255ac345af17df952c458238e7e6b5de233
   languageName: node
   linkType: hard
 

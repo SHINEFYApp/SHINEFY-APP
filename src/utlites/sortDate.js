@@ -1,5 +1,4 @@
 export default function sortDate(date){
-
     let newDate = date.split('/')
    return `${newDate[1]}-${newDate[0]}-${newDate[2]}`
 }
