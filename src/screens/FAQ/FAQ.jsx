@@ -1,17 +1,38 @@
-import React from "react";
-import { Text, View } from "react-native-ui-lib";
+import React, { useEffect, useState } from "react";
+import { ScrollBar, Text, View } from "react-native-ui-lib";
 import FAOComponent from "../../components/FAO/FAOComponent";
+import setFAQS from "../../Features/getFAQs/getFAQs";
+import { Lang_chg } from "../../Provider/Language_provider";
+import { config } from "../../Provider/configProvider";
+import { ScrollView } from "react-native-gesture-handler";
 
 const FAQ = () => {
+
+    const [data , setData] = useState([])
+
+    useEffect(()=>{
+        const fetchData = async ()=>{
+            let res = await setFAQS()
+            setData(res)
+        }
+        fetchData()
+    },[])
+
     return <View className={'mt-[90px] mx-5'}>
-        <FAOComponent
-            question={'1-How to book an appointment?'}
-            content={'How to book: 1- Add your car 2-Choose your location 3-Choose date and time 4-Choose services 5-Check your booking 6- Choose payment method 7-Confirm your booking'}
-        />
-        <FAOComponent
-            question={'2-How to book an appointment?'}
-            content={'How to book: 1- Add your car 2-Choose your location 3-Choose date and time 4-Choose services 5-Check your booking 6- Choose payment method 7-Confirm your booking'}
-        />
+        <ScrollView>
+        {
+            data?.map((faq , index)=>{
+                console.log(faq)
+                return (
+                    <FAOComponent
+                    question={`${index + 1}-${faq.question[config.language]}`}
+                    content={faq.answer[config.language]}
+                    />
+                    
+                )
+            })
+        }
+        </ScrollView> 
     </View>;
 };
 

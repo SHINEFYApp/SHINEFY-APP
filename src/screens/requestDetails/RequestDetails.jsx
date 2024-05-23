@@ -13,6 +13,7 @@ import bookingDetailsAtom from '../../atoms/bookingDetails/bookingDetails.atom';
 import {msgProvider} from '../../Provider/Messageconsolevalidationprovider/messageProvider';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
+import SubTotalBooking from '../../components/subTotalBooking/SubTotalBooking';
 
 export default function RequestDetails({navigation, route}) {
   const [selectMain, setSelectMain] = useState('');
@@ -20,8 +21,7 @@ export default function RequestDetails({navigation, route}) {
   const [cars, setCars] = useState([]);
   const [selectCar, setSelectCars] = useState();
   const [services, setServices] = useState();
-  const [bookingDetails, setBookingDetails] =
-    useRecoilState(bookingDetailsAtom);
+  const [bookingDetails, setBookingDetails] = useRecoilState(bookingDetailsAtom);
   useEffect(() => {
     let fetchData = async () => {
       setCars(await localStorage.getItemObject('userCars'));
@@ -132,17 +132,7 @@ export default function RequestDetails({navigation, route}) {
           })}
         </View>
       </ScrollView>
-      
-    </View>
- <View className="flex-row bg-white justify-between  w-full rounded-t-3xl p-5">
-        <View>
-          <Text className="text-md">{Lang_chg.subTotal[config.language]}</Text>
-          <Text className="font-bold text-xl">200 EGP</Text>
-        </View>
-        <Button
-          Title={Lang_chg.continue[config.language]}
-          smallButton
-          onPress={() => {
+      <SubTotalBooking Press={() => {
             if (!bookingDetails['vehicle_id']) {
               msgProvider.toast('Please Select Car', 'center');
             } else if (!bookingDetails['service_id']) {
@@ -150,9 +140,9 @@ export default function RequestDetails({navigation, route}) {
             } else {
               navigation.navigate('SelectDateTime');
             }
-          }}
-        />
-      </View>
+          }}/>
+    </View>
+
     </>
 
   );

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {TextInput} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Image, Text, View} from 'react-native-ui-lib';
@@ -13,15 +13,22 @@ import {reverseSortDate} from '../../utlites/sortDate';
 import {config} from '../../Provider/configProvider';
 import SelectVehicle from '../../components/selectVehicle/SelectVehicle';
 import {Lang_chg} from '../../Provider/Language_provider';
+import subTotalAtom from "../../atoms/subTotal/subTotal.atom";
 import applyCoupon from '../../Features/applyCoupon/applyCoupon';
 
-const BookingOverview = ({navigation}) => {
+const BookingOverview = ({navigation,route}) => {
   const [bookingDetails, setBookingDetails] =
     useRecoilState(bookingDetailsAtom);
   let date = new Date(reverseSortDate(bookingDetails.booking_date));
   const [coupon, setCoupon] = useState();
-
-  console.log(bookingDetails)
+  const extraServiceData = useMemo(()=>{
+    let extraData = []  
+    for (let key in bookingDetails?.extraData?.extraServices) {
+      extraData.push( bookingDetails?.extraData?.extraServices[key])
+     }
+     return extraData
+  },[]) 
+  console.log(extraServiceData , "rfoijdfokgpndfjgn")
 
   useEffect(()=>{
    if(coupon?.couponName == "") { 
@@ -33,6 +40,12 @@ const BookingOverview = ({navigation}) => {
                 });
    }
   },[coupon])
+  useEffect(()=>{
+    setBookingDetails({
+                  ...bookingDetails,
+                 total_amount : route.params.price
+                });
+  },[])
 
   return (
     <View className={'pt-[90px] px-5'}>
@@ -61,7 +74,7 @@ const BookingOverview = ({navigation}) => {
           </View>
         </ScrollView>
         <SelectVehicle car={bookingDetails.extraData.car} />
-        <View className={'mt-4 py-2 px-8 w-full bg-white rounded-lg'}>
+        <View className={'mt-4 py-2 px-6 w-full bg-white rounded-lg'}>
           <BookingOverviewTextDetails
             title={'services'}
             value={
@@ -73,6 +86,23 @@ const BookingOverview = ({navigation}) => {
             className={
               'flex bg-[#C3C3C3] w-[80%] h-[1px] items-center my-5 mx-auto justify-center'
             }></View>
+            {
+              extraServiceData.map((extraService)=>{
+                return (
+                   <>
+              <BookingOverviewTextDetails
+                title={""}
+                value={extraService.extra_service_name[config.language]}
+                price={` ${extraService.quantity} X ${extraService.extra_service_price} = ${extraService.quantity * extraService.extra_service_price}EGP`}
+              />
+              <View
+                className={
+                  'flex bg-[#C3C3C3] w-[80%] h-[1px] items-center my-5 mx-auto justify-center'
+                }></View>
+            </>
+                )
+              })
+            }
           {coupon?.couponName != '' && coupon && (
             <>
               <BookingOverviewTextDetails
@@ -95,7 +125,7 @@ const BookingOverview = ({navigation}) => {
             {Lang_chg.totalservicecharges_txt[config.language]}
           </Text>
           <Text className={'font-bold text-center text-lg'}>
-            {coupon?.total_amount ? coupon?.total_amount :bookingDetails.extraData.service.service_price} EGP
+            {coupon?.total_amount ? coupon?.total_amount :bookingDetails.total_amount} EGP
           </Text>
         </View>
         <View
@@ -122,7 +152,7 @@ const BookingOverview = ({navigation}) => {
               Title={Lang_chg.Apply[config.language]}
               onPress={async () => {
                 let res = await applyCoupon(
-                  bookingDetails.extraData.service.service_price,
+                  bookingDetails.total_amount,
                   coupon.couponName,
                 );
 

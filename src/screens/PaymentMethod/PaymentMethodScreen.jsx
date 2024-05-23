@@ -117,8 +117,8 @@ export default function PaymentMethod({navigation}) {
         <Button
           Title={Lang_chg.Confirm[config.language]}
           onPress={() => {
-            // cashBooking(bookingDetails , navigation);
-            google_pay()
+            cashBooking(bookingDetails , navigation);
+            // google_pay()
           }}
         />
       </ScrollView>

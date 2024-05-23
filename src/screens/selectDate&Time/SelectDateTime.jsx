@@ -16,6 +16,7 @@ import bookingDetailsAtom from '../../atoms/bookingDetails/bookingDetails.atom';
 import {useRecoilState} from 'recoil';
 import getTimeSlots from '../../Features/getTimeSlots/getTimeSlots';
 import sortDate from '../../utlites/sortDate';
+import SubTotalBooking from '../../components/subTotalBooking/SubTotalBooking';
 
 export default function SelectDateTime({navigation}) {
   const [date, setDate] = useState(Lang_chg.today_txt[config.language]);
@@ -146,26 +147,17 @@ export default function SelectDateTime({navigation}) {
           })}
         </View>
       </View>
-      <View className="flex-row bg-white justify-between absolute bottom-0 right-0 w-[100vw] rounded-t-3xl p-5">
-        <View>
-          <Text className="text-md">
-            {Lang_chg.subtotal_txt[config.language]}
-          </Text>
-          <Text className="font-bold text-xl">200 EGP</Text>
-        </View>
-        <Button
-          Title={Lang_chg.continue[config.language]}
-          smallButton
-          onPress={() => {
+      <View className="flex-row bg-white justify-between absolute bottom-0 right-0 w-[100vw] rounded-t-3xl">
+       <SubTotalBooking Press={(subtotal) => {
             if (!bookingDetails.booking_date) {
               msgProvider.toast('Please Select Date', 'center');
               // } else if (!bookingDetails.booking_time) {
               //   msgProvider.toast('Please Select Time', 'center');
             } else {
-              navigation.navigate('Booking Overview');
+              navigation.navigate('Booking Overview' , {price:subtotal});
             }
-          }}
-        />
+          }}/>
+      
       </View>
     </View>
   );

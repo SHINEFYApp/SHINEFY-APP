@@ -7,9 +7,28 @@ import {config} from '../../Provider/configProvider';
 import { useRecoilState } from 'recoil';
 import bookingDetailsAtom from '../../atoms/bookingDetails/bookingDetails.atom';
 import { msgProvider } from '../../Provider/Messageconsolevalidationprovider/messageProvider';
+import calcSubTotal from '../../utlites/calcSubTotal';
 export default function SelectExtraService({extraService}) {
   const [bookingDetails, setBookingDetails] = useRecoilState(bookingDetailsAtom)
   const [counter, setCounter] = useState(0);
+
+  function handleExtraService(quan) {
+   
+      setBookingDetails({
+        
+                      ...bookingDetails , 
+                      extraData : {
+                        ...bookingDetails.extraData ,
+                        extraServices :{
+                          ...bookingDetails.extraData.extraServices ,
+                          [extraService.extra_service_name[0]] : {
+                            ...extraService ,
+                            quantity : quan
+                          }
+                        } 
+                      }
+      })
+  }
   return (
     <View
       className="bg-white rounded-lg p-2 flex-row mb-3"
@@ -29,6 +48,20 @@ export default function SelectExtraService({extraService}) {
               onPress={() => {
                 if (counter != 0) {
                   setCounter(counter - 1);
+                  if (counter - 1!= 0) {
+                    handleExtraService(counter - 1)
+                  } else {
+                      setBookingDetails({
+                      ...bookingDetails , 
+                      extraData : {
+                        ...bookingDetails.extraData ,
+                        extraServices :{
+                          ...bookingDetails.extraData.extraServices ,
+                          [extraService.extra_service_name[0]] : null
+                        } 
+                      }
+                    })
+                  }
                 }
               }}>
               <Text className="font-semibold text-xl">-</Text>
@@ -41,6 +74,7 @@ export default function SelectExtraService({extraService}) {
                   msgProvider.toast('Please Select Main service to Select Extra Service', 'center');     
                 }else {
                   setCounter(counter + 1);
+                  handleExtraService(counter + 1)
                 }
               }}>
               <Text className="font-semibold text-xl">+</Text>

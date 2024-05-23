@@ -6,13 +6,17 @@ import PackageCard from '../../components/packageCard/packageCard';
 import getServices from '../../Features/getServices/getServices';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
+import getPackages from '../../Features/getPackages/getPackages';
 
 export default function MySubscreptionScreen({navigation}) {
   const [specialOffers, SetSpecialOffers] = useState([]);
+  const [packages, setPackages] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await getServices();
+      const packages = await getPackages()
+      setPackages(packages.packages)
       SetSpecialOffers(data.all_service_arr.extra_service_arr);
       localStorage.setItemObject('services', data.all_service_arr);
     };
@@ -60,15 +64,16 @@ export default function MySubscreptionScreen({navigation}) {
           horizontal={true}
           className="pl-3 mt-3"
           showsHorizontalScrollIndicator={false}>
+            {
+              packages.map((pack)=>{
+                return (
+                  
           <View className="w-[350px]">
-            <PackageCard navigation={navigation} />
+            <PackageCard pack={pack} navigation={navigation} />
           </View>
-          <View className="w-[350px]">
-            <PackageCard navigation={navigation} />
-          </View>
-          <View className="w-[350px]">
-            <PackageCard navigation={navigation} />
-          </View>
+                )   
+              })
+            }
         </ScrollView>
       </View>
     </View>
