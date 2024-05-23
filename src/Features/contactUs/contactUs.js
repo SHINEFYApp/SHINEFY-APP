@@ -5,7 +5,7 @@ import { validationprovider } from "../../Provider/Validation_provider";
 import { config } from "../../Provider/configProvider";
 import { localStorage } from "../../Provider/localStorageProvider";
 
-export default async function contactUs(data) {
+export default async function contactUs(data,navigation) {
     var user_arr = await localStorage.getItemObject('user_arr');
     if (data.email.trim().length <= 0) {
         msgProvider.toast(Lang_chg.emptyEmail[config.language], 'center');
@@ -42,5 +42,6 @@ export default async function contactUs(data) {
     fd.append('message', data.message);
     let url = config.baseURL + 'contact_us';
     let res  = await apifuntion.postApi(url, fd)
+    navigation.navigate("HomeScreen")
   msgProvider.toast(res.msg[config.language], 'center')
 }

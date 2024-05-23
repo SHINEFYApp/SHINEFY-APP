@@ -28,8 +28,42 @@ export default function NavigationTop(props) {
         return Lang_chg.notification_txt[config.language];
       case 'SelectDateTime':
         return Lang_chg.Selectdatetime_txt[config.language];
+      case 'EditProfileScreen':
+        return Lang_chg.editprofile_txt[config.language];
+      case 'MyWallet':
+        return Lang_chg.mywallet_txt[config.language];
+      case 'PackageScreen':
+        return Lang_chg.packages[config.language];
+      case 'MySubscreptionScreen':
+        return Lang_chg.mySubscriptions[config.language];
+      case 'SettingScreen':
+        return Lang_chg.Setting[config.language];
+      case 'ChangePasswordProfile':
+        return Lang_chg.password1_txt[config.language];
+      case "FAQ's":
+        return Lang_chg.faqs_txt[config.language];
+      case "AboutUsScreen":
+        return Lang_chg.about_txt[config.language];
+      case "LanguageScreen":
+        return Lang_chg.language_change[config.language];
+      case "addVehiclesDetails":
+        return Lang_chg.cardetails_txt[config.language];
+      case "Contact Us":
+        return Lang_chg.contactus_txt[config.language];
+      case "Cancel Booking":
+        return Lang_chg.cancelBooking_txt[config.language];
+      case "Review":
+        return Lang_chg.review_txt[config.language];
+      case "RequestDetails":
+        return Lang_chg.Booking_request[config.language];
+      case "Booking Overview":
+        return Lang_chg.Booking_overview[config.language];
+      case "PaymentMethod":
+        return Lang_chg.select_payment_method[config.language];
+      case "WashServiceDetails":
+        return Lang_chg.wash_services[config.language];
       default:
-        return;
+        return props.route.name;
     }
   }
 

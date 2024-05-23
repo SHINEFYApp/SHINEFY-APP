@@ -675,6 +675,7 @@ class Language_provider {
     'تأكيد موقع الحجز؟',
   ];
   Booking_overview = ['Booking Overview', 'مراجعة تفاصيل الحجز'];
+  Booking_request = ['Request Details', 'تفاصيل طلبك'];
   enter_promo_code = ['Enter Promo Code', 'إدخال الكوبون'];
   Book = ['Book', 'احجز'];
   waiting = ['Waiting', 'انتظار'];

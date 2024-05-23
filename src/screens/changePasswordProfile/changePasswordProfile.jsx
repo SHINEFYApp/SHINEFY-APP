@@ -71,7 +71,7 @@ export default function ChangePasswordProfile({navigation}) {
         <Button
           Title={Lang_chg.password1_txt[config.language]}
           onPress={() => {
-            changePassword(pass);
+            changePassword(pass,navigation);
             // navigation.navigate("OTPScreen")
           }}
         />

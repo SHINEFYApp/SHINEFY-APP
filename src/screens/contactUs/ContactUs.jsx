@@ -10,7 +10,7 @@ import contactUs from '../../Features/contactUs/contactUs';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 
-const ContactUsScreen = () => {
+const ContactUsScreen = ({navigation}) => {
   [message, setMessage] = useState({});
 
   return (
@@ -64,7 +64,7 @@ const ContactUsScreen = () => {
           Title={Lang_chg.submit1_txt[config.language]}
           btnStyle={'text-lg'}
           onPress={() => {
-            contactUs(message);
+            contactUs(message,navigation);
           }}
         />
       </View>

@@ -4,7 +4,7 @@ import { msgProvider } from "../../Provider/Messageconsolevalidationprovider/mes
 import { config } from "../../Provider/configProvider";
 import { localStorage } from "../../Provider/localStorageProvider";
 
-export default async function changePassword(data) {
+export default async function changePassword(data,navigation) {
     //--------------------old password------------------
     if (data.old_password.indexOf(' ') != -1) {
         msgProvider.toast(Lang_chg.PasswordSpace[config.language], 'center');
@@ -100,6 +100,8 @@ export default async function changePassword(data) {
       .then(obj => {
 
         if (obj.success == 'true') {
+          navigation.navigate("HomeScreen")
+
           var user_arr = obj.user_details;
           localStorage.setItemObject('user_arr', obj.user_details);
           localStorage.setItemString('password', data.new_password);
