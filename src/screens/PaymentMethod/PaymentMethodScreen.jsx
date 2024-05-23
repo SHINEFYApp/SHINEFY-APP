@@ -92,7 +92,7 @@ export default function PaymentMethod({navigation}) {
             set={setActivePayment}
           />
         </View>
-        <View>
+        {/* <View>
           <Text className={'mt-4 mb-3 font-semibold'}>
             {Lang_chg.debit_credit_card[config.language]}
           </Text>
@@ -102,18 +102,18 @@ export default function PaymentMethod({navigation}) {
             screen={'AddCardScreen'}
             icon={creditIcon}
           />
-        </View>
-        <View>
+        </View> */}
+        {/* <View>
           <Text className={'mt-4 mb-3 font-semibold'}>
             {Lang_chg.Payment_Option[config.language]}
-          </Text>
+          </Text> */}
 
-          <RadioButton
+          {/* <RadioButton
             buttons={paymentMethodsOptions}
             currentActive={activePayment}
             set={setActivePayment}
-          />
-        </View>
+          /> */}
+        {/* </View> */}
         <Button
           Title={Lang_chg.Confirm[config.language]}
           onPress={() => {
