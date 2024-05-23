@@ -66,7 +66,7 @@ export default function PaymentMethod({navigation}) {
             }}
           />
         </View>
-        <View>
+        {/* <View>
           <Text className={'mt-4 mb-3 font-semibold'}>
             {Lang_chg.packages[config.language]}
           </Text>
@@ -91,7 +91,7 @@ export default function PaymentMethod({navigation}) {
             currentActive={activePayment}
             set={setActivePayment}
           />
-        </View>
+        </View> */}
         {/* <View>
           <Text className={'mt-4 mb-3 font-semibold'}>
             {Lang_chg.debit_credit_card[config.language]}
