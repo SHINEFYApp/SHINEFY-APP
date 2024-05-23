@@ -4,9 +4,19 @@ import NotficationCard from '../../components/notficationCard/notficationCard';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
+import { useEffect, useState } from 'react';
+import getNotification from '../../Features/getNotfication/getNotfication';
 
 export default function NotficationScreen() {
-  const notfi = [1];
+  const [notfi , setNotfi] = useState([]);
+
+  useEffect(()=>{
+    const fetchData = async()=>{
+     let res  = await getNotification()
+      setNotfi(res.notification_arr)
+    } 
+    fetchData()
+  },[])
 
   return (
     <View className="flex-1 pt-[80px]">
@@ -16,32 +26,29 @@ export default function NotficationScreen() {
         </View>
       )}
       <ScrollView>
-        <View className="mt-2 flex-row items-center px-4">
+        {/* <View className="mt-2 flex-row items-center px-4">
           <Text className="text-[#000] text-xl ">
             {Lang_chg.today_txt[config.language]}
           </Text>
           <Text className="text-mainColor flex-1 text-right">
             {Lang_chg.see_all[config.language]}
           </Text>
-        </View>
-        <NotficationCard />
-        <NotficationCard />
-        <NotficationCard />
-        <NotficationCard />
-        <View className="mt-2 flex-row items-center px-4">
+        </View> */}
+        {
+          notfi.map((notfi)=>{
+            return (
+              <NotficationCard notfi={notfi} />
+            )
+          })
+        }
+        {/* <View className="mt-2 flex-row items-center px-4">
           <Text className="text-[#000] text-xl ">
             {Lang_chg.today_txt[config.language]}
           </Text>
           <Text className="text-mainColor flex-1 text-right">
             {Lang_chg.see_all[config.language]}
           </Text>
-        </View>
-        <NotficationCard />
-        <NotficationCard />
-        <NotficationCard />
-        <NotficationCard />
-        <NotficationCard />
-        <NotficationCard />
+        </View> */}
       </ScrollView>
     </View>
   );

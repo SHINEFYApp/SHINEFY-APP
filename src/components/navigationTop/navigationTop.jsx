@@ -91,12 +91,12 @@ export default function NavigationTop(props) {
         </TouchableOpacity>
       )}
 
-      <TouchableOpacity
+      {/* <TouchableOpacity
         onPress={() => {
           props.navigation.navigate('HomeScreen');
         }}>
         <Text>home</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <View>
         <Text className="font-extrabold text-xl text-center w-full">
           {handleTitle()}
