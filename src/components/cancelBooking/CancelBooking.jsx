@@ -8,8 +8,8 @@ import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 
 const CancelBooking = ({route}) => {
-  const [activeButton, setActiveButton] = useState("");
-  const [reason , setReason] = useState("")
+  const [activeButton, setActiveButton] = useState('');
+  const [reason, setReason] = useState('');
   const options = [
     {
       id: 1,
@@ -28,8 +28,6 @@ const CancelBooking = ({route}) => {
       title: Lang_chg.other_reason[config.language],
     },
   ];
-
-  console.log(activeButton)
   return (
     <View className={'mt-[90px] mx-5'}>
       <Text className={'text-[#818181] mb-4'}>
@@ -56,35 +54,39 @@ const CancelBooking = ({route}) => {
         );
       })}
 
-    {
-      activeButton == Lang_chg.other_reason[config.language] &&
+      {activeButton == Lang_chg.other_reason[config.language] && (
         <View
           className={
             'bg-transparent border border-[#c3c3c3] px-4 flex-row overflow-hidden items-start rounded-xl mt-5'
           }>
           <Image source={messageIcon} className={'w-[25px] h-[25px] mt-2'} />
-          
+
           <TextInput
             placeholderTextColor={'#000'}
             placeholder={Lang_chg.write_reason[config.language]}
             className={`w-full px-3 text-[#818181] h-[110px] ${
-            config.language === 0 ? 'text-left' : 'text-right'
+              config.language === 0 ? 'text-left' : 'text-right'
             }`}
-            onChange={(e)=>{
-              setReason(e.nativeEvent.text)
+            onChange={e => {
+              setReason(e.nativeEvent.text);
             }}
-          multiline={true}
-          numberOfLines={10}
-          style={{height: 200, textAlignVertical: 'top'}}
+            multiline={true}
+            numberOfLines={10}
+            style={{height: 200, textAlignVertical: 'top'}}
           />
-      </View>
-        } 
+        </View>
+      )}
       <View className={'mt-5'}>
         <Button
           Title={Lang_chg.cancelBooking_txt[config.language]}
           btnStyle={'text-lg'}
           onPress={async () => {
-            let res = await cancelBooking(route.params.book_id, activeButton == Lang_chg.other_reason[config.language] ? reason : activeButton);
+            let res = await cancelBooking(
+              route.params.book_id,
+              activeButton == Lang_chg.other_reason[config.language]
+                ? reason
+                : activeButton,
+            );
           }}
         />
       </View>

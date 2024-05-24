@@ -15,10 +15,10 @@ import addVehicle from '../../Features/addVehicle/addVehicle';
 import updateVehicle from '../../Features/updateVehicle/updateVehicle';
 import {config} from '../../Provider/configProvider';
 import {Lang_chg} from '../../Provider/Language_provider';
-import updateCar from "../../atoms/currentCar/currentCar";
-export default function AddVechileScreen({navigation , route}) {
+import updateCar from '../../atoms/currentCar/currentCar';
+export default function AddVechileScreen({navigation, route}) {
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
-  const [currentCar , setCurrentCar] = useRecoilState(updateCar);
+  const [currentCar, setCurrentCar] = useRecoilState(updateCar);
 
   function handleClosePopUp() {
     setIsPopUpOpen(false);
@@ -36,15 +36,15 @@ export default function AddVechileScreen({navigation , route}) {
         return 'car_color';
     }
   }
-  
-  useEffect(()=>{
-    if (route.params =='updateVehicle') {
+
+  useEffect(() => {
+    if (route.params == 'updateVehicle') {
       setNewCar({
-        ...currentCar ,
-        carID : currentCar.vehicle_id
-      })
+        ...currentCar,
+        carID: currentCar.vehicle_id,
+      });
     }
-  },[])
+  }, []);
 
   return (
     <View className="pt-[80px] px-4">
@@ -85,9 +85,9 @@ export default function AddVechileScreen({navigation , route}) {
             ? newCar[handleTitleData('Brand')][handleTitleData('Brand')][
                 config.language
               ]
-            :  currentCar.make_name
-            ? currentCar.make_name[config.language] :
-             Lang_chg.selectmake_txt[config.language]
+            : currentCar.make_name
+            ? currentCar.make_name[config.language]
+            : Lang_chg.selectmake_txt[config.language]
         }`}
         icon={brandIcon}
         img={
@@ -118,9 +118,9 @@ export default function AddVechileScreen({navigation , route}) {
             ? newCar[handleTitleData('Color')][handleTitleData('Color')][
                 config.language
               ]
-            :  currentCar.color_name
-            ? currentCar.color_name[config.language] :
-             Lang_chg.selectcolor_txt[config.language]
+            : currentCar.color_name
+            ? currentCar.color_name[config.language]
+            : Lang_chg.selectcolor_txt[config.language]
         }`}
         icon={colorIcon}
         img={
@@ -132,10 +132,13 @@ export default function AddVechileScreen({navigation , route}) {
       />
       <SelectVechileCard
         screenTitle={'Plate Number'}
-        text={ newCar.plate_number
+        text={
+          newCar.plate_number
             ? newCar.plate_number
-            :  currentCar.plate_number
-            ? currentCar.plate_number :Lang_chg.platenumber_txt[config.language]}
+            : currentCar.plate_number
+            ? currentCar.plate_number
+            : Lang_chg.platenumber_txt[config.language]
+        }
         icon={`${plateIcon}`}
         screen={'addVehiclesDetails'}
         navigation={navigation}
@@ -148,8 +151,7 @@ export default function AddVechileScreen({navigation , route}) {
         }`}
         onPress={async () => {
           if (route.params == 'updateVehicle') {
-            console.log(route.params)
-            await updateVehicle(newCar)
+            await updateVehicle(newCar);
           } else {
             setIsPopUpOpen(await addVehicle(newCar));
           }

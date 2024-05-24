@@ -15,9 +15,7 @@ class Pushnotificationredirection {
 
     PushNotification.configure({
       // (optional) Called when Token is generated (iOS and Android)
-      onRegister: function (token) {
-        console.log('FCMTOKEN:', token);
-      },
+      onRegister: function (token) {},
 
       // (required) Called when a remote is received or opened, or local notification is opened
       onNotification: function (notification) {

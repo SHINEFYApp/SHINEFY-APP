@@ -6,9 +6,6 @@ import {config} from '../../Provider/configProvider';
 import {Lang_chg} from '../../Provider/Language_provider';
 
 export default function BookingCard({progress, ButtonTitle, navigation, book}) {
-
-  console.log(book)
-
   return (
     <View className="bg-white p-3 mb-3">
       <View className="flex-row border-b pb-3 border-[#ccc] mb-3">
@@ -49,7 +46,10 @@ export default function BookingCard({progress, ButtonTitle, navigation, book}) {
                     book_id: book.booking_id,
                   });
                 } else if (progress == 'completed_booking') {
-                  navigation.navigate('Review', {book_id: book.booking_id , service_boy_id : book.service_boy_id});
+                  navigation.navigate('Review', {
+                    book_id: book.booking_id,
+                    service_boy_id: book.service_boy_id,
+                  });
                 }
               }}
             />
@@ -63,7 +63,7 @@ export default function BookingCard({progress, ButtonTitle, navigation, book}) {
         </View>
         <View className="gap-2">
           <Text>{Lang_chg.order_date[config.language]}</Text>
-          <Text>{book.createtime.split(",")[0]}</Text>
+          <Text>{book.createtime.split(',')[0]}</Text>
         </View>
         <View className="gap-2">
           <Text>{Lang_chg.total_payment[config.language]}</Text>

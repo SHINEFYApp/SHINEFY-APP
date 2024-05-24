@@ -1,9 +1,8 @@
-import { apifuntion } from "../../Provider/Apicallingprovider/apiProvider";
-import { Lang_chg } from "../../Provider/Language_provider";
-import { msgProvider } from "../../Provider/Messageconsolevalidationprovider/messageProvider";
-import { config } from "../../Provider/configProvider";
-import { localStorage } from "../../Provider/localStorageProvider";
-
+import {apifuntion} from '../../Provider/Apicallingprovider/apiProvider';
+import {Lang_chg} from '../../Provider/Language_provider';
+import {msgProvider} from '../../Provider/Messageconsolevalidationprovider/messageProvider';
+import {config} from '../../Provider/configProvider';
+import {localStorage} from '../../Provider/localStorageProvider';
 
 export async function reviewBooking(data) {
   if (data.rating <= 0) {
@@ -24,7 +23,6 @@ export async function reviewBooking(data) {
   apifuntion
     .postApi(url, fd)
     .then(obj => {
-      console.log(obj)
       if (obj.success == 'true') {
         if (obj.notification_arr != 'NA') {
           notification.notification_arr_schedule(obj.notification_arr);
@@ -45,7 +43,7 @@ export async function reviewBooking(data) {
         msgProvider.alert(
           Lang_chg.information[config.language],
           obj.msg[config.language],
-          false
+          false,
         );
         return false;
       }
@@ -55,14 +53,14 @@ export async function reviewBooking(data) {
         msgProvider.alert(
           Lang_chg.msgTitleNoNetwork[config.language],
           Lang_chg.noNetwork[config.language],
-          false
+          false,
         );
         return false;
       } else {
         msgProvider.alert(
           Lang_chg.msgTitleServerNotRespond[config.language],
           Lang_chg.serverNotRespond[config.language],
-          false
+          false,
         );
         return false;
       }

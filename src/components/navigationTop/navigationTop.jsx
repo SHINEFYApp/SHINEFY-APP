@@ -5,7 +5,6 @@ import backIcon from '../../assets/icons/backIcon.png';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 export default function NavigationTop(props) {
-  console.log(props.route);
   function handleTitle() {
     switch (props.route.name) {
       case 'Home':
@@ -42,25 +41,25 @@ export default function NavigationTop(props) {
         return Lang_chg.password1_txt[config.language];
       case "FAQ's":
         return Lang_chg.faqs_txt[config.language];
-      case "AboutUsScreen":
+      case 'AboutUsScreen':
         return Lang_chg.about_txt[config.language];
-      case "LanguageScreen":
+      case 'LanguageScreen':
         return Lang_chg.language_change[config.language];
-      case "addVehiclesDetails":
+      case 'addVehiclesDetails':
         return Lang_chg.cardetails_txt[config.language];
-      case "Contact Us":
+      case 'Contact Us':
         return Lang_chg.contactus_txt[config.language];
-      case "Cancel Booking":
+      case 'Cancel Booking':
         return Lang_chg.cancelBooking_txt[config.language];
-      case "Review":
+      case 'Review':
         return Lang_chg.review_txt[config.language];
-      case "RequestDetails":
+      case 'RequestDetails':
         return Lang_chg.Booking_request[config.language];
-      case "Booking Overview":
+      case 'Booking Overview':
         return Lang_chg.Booking_overview[config.language];
-      case "PaymentMethod":
+      case 'PaymentMethod':
         return Lang_chg.select_payment_method[config.language];
-      case "WashServiceDetails":
+      case 'WashServiceDetails':
         return Lang_chg.wash_services[config.language];
       default:
         return props.route.name;

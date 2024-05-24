@@ -10,13 +10,22 @@ import logo from '../../assets/logo-2.png';
 import Modal from 'react-native-modal';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
-
+import {localStorage} from '../../Provider/utilslib/Utils';
 export default function WelcomeScreen({navigation}) {
   const logoScale = useSharedValue(1);
   const logoTranslateY = useSharedValue(0);
   const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
   const [isSignupModalVisivle, setIsSignupModalVisivle] = useState(false);
 
+  useEffect(() => {
+    const getIsLoggedIn = async () => {
+      const user_details = await localStorage.getItemObject('user_arr');
+      if (user_details != null) {
+        navigation.replace('HomeScreen', {home_status: 1});
+      }
+    };
+    getIsLoggedIn();
+  });
   const handleLoginPress = () => {
     logoScale.value = withTiming(1);
     logoTranslateY.value = withTiming(0);

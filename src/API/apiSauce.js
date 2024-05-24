@@ -1,9 +1,8 @@
-import { create } from "apisauce";
+import {create} from 'apisauce';
 import {Platform} from 'react-native';
 import base64 from 'react-native-base64';
 
-
- const apiSauce = create({
+const apiSauce = create({
   baseURL: 'https://shinefy.co/app-test/admin/api',
   headers: {
     Authorization: `Basic ${base64.encode(
@@ -15,5 +14,4 @@ import base64 from 'react-native-base64';
   },
 });
 
-
-export default apiSauce
+export default apiSauce;

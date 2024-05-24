@@ -1,4 +1,5 @@
 import {Image, Text, View} from 'react-native-ui-lib';
+import React from 'react';
 import SelectVechileCard from '../../components/selectVechileCard.jsx/selectVechileCard';
 import userIcon from '../../assets/icons/profile/user.png';
 import locationIcon from '../../assets/icons/profile/location.png';
@@ -24,14 +25,20 @@ export default function ProfileScreen({navigation}) {
     fetchData();
   }, [navigation]);
 
-  console.log(data)
-
   return (
     <View className="pt-[80px] px-6 ">
       <View className="my-10 ">
         <View className="items-center relative border-2 border-mainColor w-[110px] p-1 rounded-full mx-auto">
           <Image
-            source={pic ? pic : {uri:`${"https://shinefy.co/app-test/webservice/images/"}${data.img}`}}
+            source={
+              pic
+                ? pic
+                : {
+                    uri: `${'https://shinefy.co/app-test/webservice/images/'}${
+                      data.img
+                    }`,
+                  }
+            }
             className="p-4 border w-[100] h-[100] rounded-full"
           />
         </View>

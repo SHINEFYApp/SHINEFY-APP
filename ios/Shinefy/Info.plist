@@ -62,22 +62,20 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-<key>NSAppTransportSecurity</key>
-<dict>
-  <key>NSExceptionDomains</key>
-    <dict>
-       <key>localhost</key>
-      <dict>
-        <key>NSExceptionAllowsInsecureHTTPLoads</key>
-        <true/>
-     </dict>
-    </dict>
-</dict>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>localhost</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Shinefy would like to access your Camera for App Profile Photo Uploading. Your photos wont be shared without your permission.It is safe and secure.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
-	<key>NSLocationWhenInUseUsageDescription - 2</key>
 	<string>Shinefy App  would like to access your location for address and near by users, it is safe and secure.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Shinefy would like to access your Microphone for vedio recording. Your vedio won&apos;t be shared without your permission.It is safe and secure.</string>

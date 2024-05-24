@@ -1,5 +1,7 @@
 import {Image, Text, View} from 'react-native-ui-lib';
-import MapView, {Marker} from 'react-native-maps';
+import React from 'react';
+import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
+import GetLocation from 'react-native-get-location';
 import indectorIcon from '../../assets/icons/mapIndecator.png';
 import {useEffect, useState} from 'react';
 import Input from '../inputs/input';
@@ -7,37 +9,46 @@ import Button from '../mainButton/Button';
 import addLocation from '../../Features/addLocation/addLocation';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
-import Geolocation from '@react-native-community/geolocation';
+
 export default function MapComponent({isNewLocation, navigation}) {
-  const [currentlocation, setCurrentLocation] = useState({
+  const [region, setRegion] = useState({
     latitude: 29.96073734024412,
     latitudeDelta: 0.001162180276701008,
     longitude: 31.25663409009576,
     longitudeDelta: 0.0006581470370328191,
   });
 
-  useEffect(()=>{
-    Geolocation.getCurrentPosition()
-  },[])
+  useEffect(() => {
+    const getLocation = async () => {
+      const location = await GetLocation.getCurrentPosition({
+        enableHighAccuracy: true,
+        timeout: 60000,
+      });
+      setRegion(r => ({
+        ...r,
+        latitude: location.latitude,
+        longitude: location.longitude,
+      }));
+    };
+    getLocation();
+  }, []);
 
   const [name, setName] = useState('');
   return (
     <View className="flex-1 relative">
       <MapView
         customMapStyle={mapStyle}
-        provider="google"
-        minZoomLevel={0}
-        maxZoomLevel={30}
-        scrollEnabled={isNewLocation ? true : false}
+        provider={PROVIDER_GOOGLE}
+        scrollEnabled
         className="h-full w-full"
         onRegionChangeComplete={e => {
-          setCurrentLocation(e);
+          setRegion(e);
         }}
         g
-        region={currentlocation}
+        region={region}
         cameraZoomRange={15}>
         {!isNewLocation && (
-          <Marker draggable coordinate={currentlocation}>
+          <Marker draggable coordinate={region}>
             <Image source={indectorIcon} />
           </Marker>
         )}
@@ -62,8 +73,8 @@ export default function MapComponent({isNewLocation, navigation}) {
           <Button
             Title={Lang_chg.confirm_booking[config.language]}
             onPress={async () => {
-              let res = await addLocation(currentlocation, name);
-              res && navigation.goBack()
+              let res = await addLocation(region, name);
+              res && navigation.goBack();
             }}
           />
         </View>

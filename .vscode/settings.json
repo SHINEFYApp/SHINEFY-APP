@@ -1,7 +1,9 @@
 {
   "jest.enable": false,
-  "cSpell.words": [
-    "Subscreption",
-    "Vechile"
-  ]
+  "cSpell.words": ["Subscreption", "Vechile"],
+  "eslint.format.enable": true,
+  "eslint.run": "onSave",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint"
 }

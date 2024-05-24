@@ -13,39 +13,38 @@ import {reverseSortDate} from '../../utlites/sortDate';
 import {config} from '../../Provider/configProvider';
 import SelectVehicle from '../../components/selectVehicle/SelectVehicle';
 import {Lang_chg} from '../../Provider/Language_provider';
-import subTotalAtom from "../../atoms/subTotal/subTotal.atom";
+import subTotalAtom from '../../atoms/subTotal/subTotal.atom';
 import applyCoupon from '../../Features/applyCoupon/applyCoupon';
 
-const BookingOverview = ({navigation,route}) => {
+const BookingOverview = ({navigation, route}) => {
   const [bookingDetails, setBookingDetails] =
     useRecoilState(bookingDetailsAtom);
   let date = new Date(reverseSortDate(bookingDetails.booking_date));
   const [coupon, setCoupon] = useState();
-  const extraServiceData = useMemo(()=>{
-    let extraData = []  
+  const extraServiceData = useMemo(() => {
+    let extraData = [];
     for (let key in bookingDetails?.extraData?.extraServices) {
-      extraData.push( bookingDetails?.extraData?.extraServices[key])
-     }
-     return extraData
-  },[]) 
-  console.log(extraServiceData , "rfoijdfokgpndfjgn")
+      extraData.push(bookingDetails?.extraData?.extraServices[key]);
+    }
+    return extraData;
+  }, []);
 
-  useEffect(()=>{
-   if(coupon?.couponName == "") { 
-      setCoupon()
-       setBookingDetails({
-                  ...bookingDetails,
-                  coupon_id: "NA",
-                  discount_amount: "NA",
-                });
-   }
-  },[coupon])
-  useEffect(()=>{
+  useEffect(() => {
+    if (coupon?.couponName == '') {
+      setCoupon();
+      setBookingDetails({
+        ...bookingDetails,
+        coupon_id: 'NA',
+        discount_amount: 'NA',
+      });
+    }
+  }, [coupon]);
+  useEffect(() => {
     setBookingDetails({
-                  ...bookingDetails,
-                 total_amount : route.params.price
-                });
-  },[])
+      ...bookingDetails,
+      total_amount: route.params.price,
+    });
+  }, []);
 
   return (
     <View className={'pt-[90px] px-5'}>
@@ -85,35 +84,40 @@ const BookingOverview = ({navigation,route}) => {
           <View
             className={
               'flex bg-[#C3C3C3] w-[80%] h-[1px] items-center my-5 mx-auto justify-center'
-            }></View>
-            {
-              extraServiceData.map((extraService)=>{
-                return (
-                   <>
-              <BookingOverviewTextDetails
-                title={""}
-                value={extraService.extra_service_name[config.language]}
-                price={` ${extraService.quantity} X ${extraService.extra_service_price} = ${extraService.quantity * extraService.extra_service_price}EGP`}
-              />
-              <View
-                className={
-                  'flex bg-[#C3C3C3] w-[80%] h-[1px] items-center my-5 mx-auto justify-center'
-                }></View>
-            </>
-                )
-              })
             }
+          />
+          {extraServiceData.map(extraService => {
+            return (
+              <>
+                <BookingOverviewTextDetails
+                  title={''}
+                  value={extraService.extra_service_name[config.language]}
+                  price={` ${extraService.quantity} X ${
+                    extraService.extra_service_price
+                  } = ${
+                    extraService.quantity * extraService.extra_service_price
+                  }EGP`}
+                />
+                <View
+                  className={
+                    'flex bg-[#C3C3C3] w-[80%] h-[1px] items-center my-5 mx-auto justify-center'
+                  }
+                />
+              </>
+            );
+          })}
           {coupon?.couponName != '' && coupon && (
             <>
               <BookingOverviewTextDetails
                 title={'Coupon'}
                 value={coupon.couponName}
-                price={`-${coupon.dis_amount }`}
+                price={`-${coupon.dis_amount}`}
               />
               <View
                 className={
                   'flex bg-[#C3C3C3] w-[80%] h-[1px] items-center my-5 mx-auto justify-center'
-                }></View>
+                }
+              />
             </>
           )}
         </View>
@@ -125,7 +129,10 @@ const BookingOverview = ({navigation,route}) => {
             {Lang_chg.totalservicecharges_txt[config.language]}
           </Text>
           <Text className={'font-bold text-center text-lg'}>
-            {coupon?.total_amount ? coupon?.total_amount :bookingDetails.total_amount} EGP
+            {coupon?.total_amount
+              ? coupon?.total_amount
+              : bookingDetails.total_amount}{' '}
+            EGP
           </Text>
         </View>
         <View
@@ -182,7 +189,7 @@ const BookingOverview = ({navigation,route}) => {
           btnStyle={'font-semibold text-lg'}
           onPress={() => navigation.navigate('HomeScreen')}
         />
-        <View className={'py-3'}></View>
+        <View className={'py-3'} />
       </ScrollView>
     </View>
   );

@@ -1,6 +1,6 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import React from 'react';
 import HomeScreen from '../../screens/homeScreen/homeScreen';
-import BottomTabs from '../bottomTabs/bottomTabs';
 import VehiclesScreen from '../../screens/vehiclesScreen/vehiclesScreen';
 import NavigationTop from '../navigationTop/navigationTop';
 import CustomTabBarButton from '../customButtonTab/customButtonTab';
