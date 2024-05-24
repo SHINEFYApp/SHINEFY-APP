@@ -1,4 +1,5 @@
 import {Image, Text, View} from 'react-native-ui-lib';
+import React from 'react';
 import VehicleCard from '../../components/VehicleCard/VehicleCard';
 import {RefreshControl, ScrollView} from 'react-native-gesture-handler';
 import Button from '../../components/mainButton/Button';
@@ -10,10 +11,8 @@ import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 
 export default function VehiclesScreen({navigation}) {
-  const cars = [1];
-
   const [myCars, setMyCars] = useState([]);
- const [refreshing, setRefreshing] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -37,17 +36,27 @@ export default function VehiclesScreen({navigation}) {
           <Text>{Lang_chg.no_vehicles_yet[config.language]}</Text>
           <Image source={emptyImg} />
           <View className="w-full mt-10">
-            <Button Title={Lang_chg.addvechicle_txt[config.language]}  onPress={() => {
+            <Button
+              Title={Lang_chg.addvechicle_txt[config.language]}
+              onPress={() => {
                 navigation.navigate('AddCar');
-              }}/>
+              }}
+            />
           </View>
         </View>
       ) : (
-        <ScrollView refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }>
+        <ScrollView
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }>
           {myCars?.map(car => {
-            return <VehicleCard car={car} navigation={navigation} />;
+            return (
+              <VehicleCard
+                key={car.vehicle_id}
+                car={car}
+                navigation={navigation}
+              />
+            );
           })}
           <View>
             <Button

@@ -1,8 +1,9 @@
 import {Image, View} from 'react-native-ui-lib';
+import React from 'react';
 import searchIcon from '../../assets/icons/searchIcon.png';
 import {TextInput} from 'react-native';
 import {config} from '../../Provider/configProvider';
-export default function SearchInput({placeholder, onChange}) {
+export default function SearchInput({placeholder, onChange, value}) {
   return (
     <View
       className={
@@ -10,6 +11,7 @@ export default function SearchInput({placeholder, onChange}) {
       }>
       <Image source={searchIcon} />
       <TextInput
+        value={value}
         placeholderTextColor={'#c3c3c3'}
         placeholder={placeholder}
         className={`w-full px-3 text-black h-9 ${
@@ -17,8 +19,8 @@ export default function SearchInput({placeholder, onChange}) {
             ? 'placeholder:text-left text-left'
             : 'placeholder:text-right text-right'
         }`}
-        onChange={e => {
-          onChange(e.nativeEvent.text);
+        onChangeText={text => {
+          onChange(text);
         }}
       />
     </View>

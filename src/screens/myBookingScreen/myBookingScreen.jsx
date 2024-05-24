@@ -1,12 +1,9 @@
-import {useEffect, useState} from 'react';
-import {StyleSheet, Touchable, TouchableHighlight} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {Text, View} from 'react-native-ui-lib';
-import EmptyBooking from '../../components/emptyBooking/emptyBooking';
-import ProgressBooking from '../../components/ProgressBooking/progressBooking';
-import PendingBooking from '../../components/pendingBooking/pendingBooing';
-import CompleteBooking from '../../components/completeBooking/completeBooking';
-import getBookking from '../../Features/getBooking/getBooking';
+import Bookings from '../../components/Bookings/Bookings';
+import getBooking from '../../Features/getBooking/getBooking';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 
@@ -16,8 +13,8 @@ export default function MyBookingScreen({navigation}) {
 
   useEffect(() => {
     let fetchData = async () => {
-      let data = await getBookking();
-    
+      let data = await getBooking();
+      console.log(data.booking_arr);
       setData(data.booking_arr);
     };
     fetchData();
@@ -34,7 +31,7 @@ export default function MyBookingScreen({navigation}) {
           }}>
           <Text
             className={
-              currentPage == 'pending_booking' && 'text-mainColor font-bold'
+              currentPage === 'pending_booking' && 'text-mainColor font-bold'
             }>
             {Lang_chg.pending_txt[config.language]}
           </Text>
@@ -45,7 +42,7 @@ export default function MyBookingScreen({navigation}) {
           }}>
           <Text
             className={
-              currentPage == 'inprogress_booking' && 'text-mainColor font-bold'
+              currentPage === 'inprogress_booking' && 'text-mainColor font-bold'
             }>
             {Lang_chg.inprogress_txt[config.language]}
           </Text>
@@ -56,29 +53,17 @@ export default function MyBookingScreen({navigation}) {
           }}>
           <Text
             className={
-              currentPage == 'completed_booking' && 'text-mainColor font-bold'
+              currentPage === 'completed_booking' && 'text-mainColor font-bold'
             }>
             {Lang_chg.complete_txt[config.language]}
           </Text>
         </TouchableOpacity>
       </View>
-      <PendingBooking
+      <Bookings
         currentPage={currentPage}
         bookings={data}
         navigation={navigation}
       />
-      {/* {
-                currentPage === "pending"
-                    ? 
-                        
-                    :
-                    currentPage === "in progress"
-                        ?
-                        <ProgressBooking bookings={data?.pending_booking} navigation={navigation}/>
-                        :
-                        <CompleteBooking navigation={navigation} bookings={data?.pending_booking}/>
-
-            } */}
     </View>
   );
 }

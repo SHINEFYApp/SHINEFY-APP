@@ -11,12 +11,12 @@ import {localStorage} from '../../Provider/localStorageProvider';
 import getServices from '../../Features/getServices/getServices';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
+import {set} from 'date-fns';
 // import getServices from '../../Features/getServices/getServices';
 export default function HomeScreen({navigation}) {
-  const [currentLocation, setCurrentLocation] = useState({});
   const [services, SetServices] = useState([]);
   const [specialOffers, SetSpecialOffers] = useState([]);
-
+  const [searchText, setSearchText] = useState('');
   useEffect(() => {
     const fetchData = async () => {
       const data = await getServices();
@@ -32,6 +32,8 @@ export default function HomeScreen({navigation}) {
       <View className="p-4 pt-[85px]">
         <SearchInput
           placeholder={Lang_chg.what_looking_for_placholder[config.language]}
+          onChange={t => setSearchText(t)}
+          value={searchText}
         />
       </View>
       <View>
@@ -52,7 +54,7 @@ export default function HomeScreen({navigation}) {
           className="pl-3 mt-3"
           showsHorizontalScrollIndicator={false}>
           {specialOffers?.map(offer => {
-            return <SaleBox key={offer.id} offer={offer} />;
+            return <SaleBox key={offer.extra_service_id} offer={offer} />;
           })}
         </ScrollView>
       </View>
@@ -90,7 +92,7 @@ export default function HomeScreen({navigation}) {
           {services?.map((service, index) => {
             return (
               <WashServicesCard
-                key={service.id}
+                key={service.service_id}
                 navigation={navigation}
                 id={index}
                 service={service}
