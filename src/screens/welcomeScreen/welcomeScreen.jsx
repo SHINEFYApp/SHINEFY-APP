@@ -1,11 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {
-  BackHandler,
-  ImageBackground,
-  KeyboardAvoidingViewBase,
-  StyleSheet,
-} from 'react-native';
-import {Image, KeyboardAwareScrollView, Text, View} from 'react-native-ui-lib';
+import {BackHandler, ImageBackground, StyleSheet} from 'react-native';
+import {Image, Text, View} from 'react-native-ui-lib';
 import background from '../../assets/backgroundImage.png';
 import Button from '../../components/mainButton/Button';
 import LoginModal from '../../components/auth/login/login';
@@ -13,7 +8,6 @@ import Animated, {useSharedValue, withTiming} from 'react-native-reanimated';
 import SignupModal from '../../components/auth/signup/signup';
 import logo from '../../assets/logo-2.png';
 import Modal from 'react-native-modal';
-import {ScrollView} from 'react-native-gesture-handler';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 
@@ -89,8 +83,7 @@ export default function WelcomeScreen({navigation}) {
           </View>
           <Modal
             isVisible={isLoginModalVisible}
-            hasBackdrop={false}
-            avoidKeyboard={true}
+            hasBackdrop
             onBackdropPress={() => {
               setIsLoginModalVisible(false);
             }}
@@ -105,24 +98,18 @@ export default function WelcomeScreen({navigation}) {
               openSignup={handleSignupPress}
             />
           </Modal>
-          
 
           <Modal
-            avoidKeyboard={true}
-            hasBackdrop={false}
+            hasBackdrop
             isVisible={isSignupModalVisivle}
             onBackdropPress={handleCloseSignup}
             onBackButtonPress={handleCloseSignup}>
-          
             <SignupModal
               closeSignup={handleCloseSignup}
               navigation={navigation}
               openLogin={handleLoginPress}
-              />
-             
+            />
           </Modal>
-          
-
         </View>
       </ImageBackground>
     </View>

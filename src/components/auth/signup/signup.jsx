@@ -1,5 +1,10 @@
 import React from 'react';
-import {Checkbox, KeyboardAwareScrollView, Text, View} from 'react-native-ui-lib';
+import {
+  Checkbox,
+  KeyboardAwareScrollView,
+  Text,
+  View,
+} from 'react-native-ui-lib';
 import Input from '../../inputs/input';
 import Button from '../../mainButton/Button';
 import phoneIcon from '../../../assets/icons/phoneIcon.png';
@@ -9,7 +14,6 @@ import {useState} from 'react';
 import signupAuth from '../../../Features/signup/signup';
 import {Lang_chg} from '../../../Provider/Language_provider';
 import {config} from '../../../Provider/configProvider';
-import {ScrollView} from 'react-native-gesture-handler';
 
 export default function SignupModal({openLogin, navigation, closeSignup}) {
   const [isCompany, setIsCompany] = useState(false);

@@ -1,6 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 
-import {Text, View} from 'react-native-ui-lib';
+import {Text, View, KeyboardAwareScrollView} from 'react-native-ui-lib';
 import Input from '../../inputs/input';
 import Button from '../../mainButton/Button';
 import phoneIcon from '../../../assets/icons/phoneIcon.png';
@@ -20,7 +20,8 @@ export default function LoginModal({openSignup, navigation, closeLogin}) {
   }
 
   return (
-    <View className="absolute transition-all right-0 bottom-0 bg-white w-full p-5 rounded-xl">
+    <View className="transition-all right-0 bottom-0 bg-white w-full p-5 rounded-xl">
+      <KeyboardAwareScrollView>
       <View className="pb-5 relative">
         <View>
           <Text className={'text-3xl font-bold text-center p-5'}>
@@ -79,6 +80,7 @@ export default function LoginModal({openSignup, navigation, closeLogin}) {
           </Text>
         </View>
       </View>
+      </KeyboardAwareScrollView>
     </View>
   );
 }
