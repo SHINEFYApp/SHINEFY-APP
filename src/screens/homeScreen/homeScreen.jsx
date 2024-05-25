@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {Image, Text, View} from 'react-native-ui-lib';
+import {Image, Text, View, KeyboardAwareScrollView} from 'react-native-ui-lib';
+import {ScrollView} from 'react-native';
 import SearchInput from '../../components/searchInput/searchInput';
 import SaleBox from '../../components/saleBox/saleBox';
-import {ScrollView} from 'react-native';
 import locationIcon from '../../assets/icons/locationIcon.png';
 import WashServicesCard from '../../components/washServicesCard/washServicesCard';
 
@@ -11,8 +11,7 @@ import {localStorage} from '../../Provider/localStorageProvider';
 import getServices from '../../Features/getServices/getServices';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
-import {set} from 'date-fns';
-// import getServices from '../../Features/getServices/getServices';
+
 export default function HomeScreen({navigation}) {
   const [services, SetServices] = useState([]);
   const [specialOffers, SetSpecialOffers] = useState([]);
@@ -28,7 +27,7 @@ export default function HomeScreen({navigation}) {
   }, []);
 
   return (
-    <>
+    <KeyboardAwareScrollView>
       <View className="p-4 pt-[85px]">
         <SearchInput
           placeholder={Lang_chg.what_looking_for_placholder[config.language]}
@@ -50,9 +49,9 @@ export default function HomeScreen({navigation}) {
           </Text>
         </View>
         <ScrollView
-          horizontal={true}
-          className="pl-3 mt-3"
-          showsHorizontalScrollIndicator={false}>
+          horizontal
+          className="px-3 mt-3"
+          showsHorizontalScrollIndicator>
           {specialOffers?.map(offer => {
             return <SaleBox key={offer.extra_service_id} offer={offer} />;
           })}
@@ -88,7 +87,10 @@ export default function HomeScreen({navigation}) {
             {Lang_chg.see_all[config.language]}
           </Text>
         </View>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+        <ScrollView
+          className="px-3 mt-3"
+          horizontal
+          showsHorizontalScrollIndicator>
           {services?.map((service, index) => {
             return (
               <WashServicesCard
@@ -101,6 +103,6 @@ export default function HomeScreen({navigation}) {
           })}
         </ScrollView>
       </View>
-    </>
+    </KeyboardAwareScrollView>
   );
 }

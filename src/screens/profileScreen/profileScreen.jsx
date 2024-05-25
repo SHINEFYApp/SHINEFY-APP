@@ -23,10 +23,10 @@ export default function ProfileScreen({navigation}) {
       setData(await getProfile());
     };
     fetchData();
-  }, [navigation]);
+  }, []);
 
   return (
-    <View className="pt-[80px] px-6 ">
+    <ScrollView className="px-10 mt-10">
       <View className="my-10 ">
         <View className="items-center relative border-2 border-mainColor w-[110px] p-1 rounded-full mx-auto">
           <Image
@@ -47,54 +47,48 @@ export default function ProfileScreen({navigation}) {
           <Text>0{data?.phone_number}</Text>
         </View>
       </View>
-
-      <ScrollView
-        className="h-[calc(55vh)]"
-        showsVerticalScrollIndicator={false}>
-        <SelectVechileCard
-          icon={userIcon}
-          text={Lang_chg.editprofile_txt[config.language]}
-          screen="EditProfileScreen"
-          navigation={navigation}
-        />
-        <SelectVechileCard
-          icon={locationIcon}
-          text={Lang_chg.savedlocation[config.language]}
-          screen="SavedLocationScreen"
-          navigation={navigation}
-        />
-        <SelectVechileCard
-          icon={walletIcon}
-          text={Lang_chg.mywallet_txt[config.language]}
-          screen="MyWallet"
-          navigation={navigation}
-        />
-        <SelectVechileCard
-          icon={packageIcon}
-          text={Lang_chg.packages[config.language]}
-          screen="PackageScreen"
-          navigation={navigation}
-        />
-        <SelectVechileCard
-          icon={SubIcon}
-          text={Lang_chg.mySubscriptions[config.language]}
-          screen="MySubscreptionScreen"
-          navigation={navigation}
-        />
-        <SelectVechileCard
-          icon={SettingIcon}
-          text={Lang_chg.setting_txt[config.language]}
-          screen="SettingScreen"
-          navigation={navigation}
-        />
-        <SelectVechileCard
-          icon={LanguageIcon}
-          text={Lang_chg.language_txt[config.language]}
-          screen="LanguageScreen"
-          navigation={navigation}
-        />
-        <View className={'mb-16'} />
-      </ScrollView>
-    </View>
+      <SelectVechileCard
+        icon={userIcon}
+        text={Lang_chg.editprofile_txt[config.language]}
+        screen="EditProfileScreen"
+        navigation={navigation}
+      />
+      <SelectVechileCard
+        icon={locationIcon}
+        text={Lang_chg.savedlocation[config.language]}
+        screen="SavedLocationScreen"
+        navigation={navigation}
+      />
+      <SelectVechileCard
+        icon={walletIcon}
+        text={Lang_chg.mywallet_txt[config.language]}
+        screen="MyWallet"
+        navigation={navigation}
+      />
+      <SelectVechileCard
+        icon={packageIcon}
+        text={Lang_chg.packages[config.language]}
+        screen="PackageScreen"
+        navigation={navigation}
+      />
+      <SelectVechileCard
+        icon={SubIcon}
+        text={Lang_chg.mySubscriptions[config.language]}
+        screen="MySubscreptionScreen"
+        navigation={navigation}
+      />
+      <SelectVechileCard
+        icon={SettingIcon}
+        text={Lang_chg.setting_txt[config.language]}
+        screen="SettingScreen"
+        navigation={navigation}
+      />
+      <SelectVechileCard
+        icon={LanguageIcon}
+        text={Lang_chg.language_txt[config.language]}
+        screen="LanguageScreen"
+        navigation={navigation}
+      />
+    </ScrollView>
   );
 }

@@ -3290,7 +3290,6 @@ __metadata:
     react-native-calendar-picker: "npm:^8.0.1"
     react-native-countdown-component: "npm:^2.7.1"
     react-native-dashed-line: "npm:^1.1.0"
-    react-native-document-picker: "npm:^9.2.0"
     react-native-dropdown-select-list: "npm:^2.0.5"
     react-native-fbsdk-next: "npm:^12.1.4"
     react-native-gesture-handler: "npm:^2.15.0"
@@ -9645,22 +9644,6 @@ __metadata:
   version: 1.1.0
   resolution: "react-native-dashed-line@npm:1.1.0"
   checksum: 10c0/001e116d2b444749da6fe821d1ad7792f4d9fa8fa91192447a54afa89d65934b0ccd64dd8a94bb0212265adc631245c428927dde07c1d46cc05b6f7b7af8c15b
-  languageName: node
-  linkType: hard
-
-"react-native-document-picker@npm:^9.2.0":
-  version: 9.2.0
-  resolution: "react-native-document-picker@npm:9.2.0"
-  dependencies:
-    invariant: "npm:^2.2.4"
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-    react-native-windows: "*"
-  peerDependenciesMeta:
-    react-native-windows:
-      optional: true
-  checksum: 10c0/7d8f2725abbd588f15e230bf2f1a5c8dc38a4978239e6b745cd1f6ab90768596a0ca140ee3ca0ee26c9c8d0ecb8ab399084e135a4a2f2322173147d13205a063
   languageName: node
   linkType: hard
 

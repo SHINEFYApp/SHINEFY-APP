@@ -156,7 +156,7 @@ class Language_provider {
   emptyConfirmNewPWD = [
     'Please enter confirm new password',
     'الرجاء إدخال تأكيد كلمة المرور الجديدة',
-  ]; 
+  ];
   // For Confirm Password
   emptyConfirmPWD = [
     'Please enter confirm password',
@@ -190,7 +190,7 @@ class Language_provider {
     'Please enter valid coupan code.',
     'برجاءإدخال رمز صالح للكوبون',
   ];
-  accepted_txt = ['Accepted', "تم الموافقة عليه"]
+  accepted_txt = ['Accepted', 'تم الموافقة عليه'];
   //phone no===============
   emptyMobile = ['Please enter Phone number', 'برجاء إدخال رقم الهاتف'];
   MobileMinLength = [
@@ -355,8 +355,14 @@ class Language_provider {
   name_placeholder = ['Enter Name', 'أدخل الاسم'];
   company_email_txt = ['Company Email?', 'بريد الشركة الالكتروني؟'];
   Message_signup_page = ['Already have an account ?', 'هل لديك حساب ؟'];
-  accept_all_terms = ['I accept all Terms & Conditions and Privacy', 'أوافق على جميع الشروط والأحكام والخصوصية'];
-  dont_receive_otp = ['Don’t receive the OTP?', 'ألم تتلق كلمة المرور لمرة واحدة (OTP)؟'];
+  accept_all_terms = [
+    'I accept all Terms & Conditions and Privacy',
+    'أوافق على جميع الشروط والأحكام والخصوصية',
+  ];
+  dont_receive_otp = [
+    'Don’t receive the OTP?',
+    'ألم تتلق كلمة المرور لمرة واحدة (OTP)؟',
+  ];
   verifyEmail = ['Corporate email?', 'البريد الكتروني تابع لشركة؟'];
   verifyEmailDesc = [
     "Please check if you are an employee of an authorized company. Then enter the company's email and check to enjoy unprecedented discounts.",
@@ -392,7 +398,10 @@ class Language_provider {
   month = ['Monthly', 'شهريا'];
   login = ['Login To SHINEFY', 'تسجيل الدخول '];
   create_new_account = ['Create New Account', ' انشاء حساب جديد'];
-  continue_agreement = ['By Continuing, you agree to our', 'من خلال الاستمرار، فإنك توافق على لدينا'];
+  continue_agreement = [
+    'By Continuing, you agree to our',
+    'من خلال الاستمرار، فإنك توافق على لدينا',
+  ];
   content_policy = ['Conent Policy', 'شروط الخدمة'];
   privacy_policy = ['Privacy Policy', 'سياسة الخصوصية'];
   terms_of_service = ['Terms Of Service', 'سياسة المحتوى'];
@@ -595,7 +604,10 @@ class Language_provider {
   ontheway_txt = ['On the way', 'في الطريق'];
   arrive_txt = ['Arrived', 'وصل'];
   startwashing_txt = ['Started washing', 'ابدأ الغسيل'];
-  Cancellation_Reason = ['Please select the reason for cancellation', 'الرجاء تحديد سبب الإلغاء'];
+  Cancellation_Reason = [
+    'Please select the reason for cancellation',
+    'الرجاء تحديد سبب الإلغاء',
+  ];
   change_in_plans = ['Change in plans', 'التغيير في الخطط'];
   unexpected_words = ['Unexpected Words', 'كلمات غير متوقعة'];
   personal_reason = ['Personal Reason', 'سبب شخصي'];
@@ -668,7 +680,10 @@ class Language_provider {
   ];
   msgReportSend = ['Report sent successfully', 'تم إرسال التقرير بنجاح'];
   booking_location = ['Booking Loction', 'موقع الحجز'];
-  booking_placeholder = ['Enter Name of Location (Home , Work ,etc...)', 'أدخل اسم الموقع (المنزل، العمل، الخ...)'];
+  booking_placeholder = [
+    'Enter Name of Location (Home , Work ,etc...)',
+    'أدخل اسم الموقع (المنزل، العمل، الخ...)',
+  ];
   confirm_booking = ['Confirm Booking', 'تأكيد الحجز'];
   confirm_booking_location = [
     'Confirm Booking Location ?',
@@ -709,10 +724,13 @@ class Language_provider {
   istxt = ['Is', 'هو'];
   review_txt = ['Review', 'تقييم'];
   your_review = ['Your Review', 'مراجعتك'];
-  your_rating = ['Your Overall rating of this progress', 'تقييمك العام لهذا التقدم'];
-  detailed_review= ['Add Detailed Review', 'إضافة مراجعة مفصلة'];
-  enter_here= ['Enter Here', 'اكتب هنا']
-  edit_vehicle_head = ['Edit Vehicle', 'تعديل السيارة']
+  your_rating = [
+    'Your Overall rating of this progress',
+    'تقييمك العام لهذا التقدم',
+  ];
+  detailed_review = ['Add Detailed Review', 'إضافة مراجعة مفصلة'];
+  enter_here = ['Enter Here', 'اكتب هنا'];
+  edit_vehicle_head = ['Edit Vehicle', 'تعديل السيارة'];
   Select_service = ['Select Service', 'اختر الخدمة'];
   select_main_service = ['Select Main Service', 'حدد الخدمة الرئيسية'];
   select_extra_service = ['Select Extra Service', 'حدد خدمة اضافية'];
@@ -732,7 +750,10 @@ class Language_provider {
   add_location = ['Add Location', 'اضافه الموقع'];
   SelectVehicles = ['Select Vehicles', 'حدد السيارات'];
   add_your_vehicle = ['Add Your Vehicle', 'أضف سيارتك'];
-  wash_fast_popup = ['Wash Fast , with SHINEFY', 'اغسل سيارتك بسرعة باستخدام شاينفي'];
+  wash_fast_popup = [
+    'Wash Fast , with SHINEFY',
+    'اغسل سيارتك بسرعة باستخدام شاينفي',
+  ];
   vehicle_added_success_msg = [
     'Your vehicle added successfully',
     'تم إضافة سيارتك بنجاح',
@@ -773,10 +794,10 @@ class Language_provider {
     'Payment fail ,please try again',
     'فشل الدفع ، يرجى المحاولة مرة أخرى',
   ];
-  add_card = ['Add Card' , 'اضف بطاقة']
-  paypal = ['Paypal' , 'ياي بال']
-  apple_pay = ['Apple Pay' , 'ابل باي']
-  google_pay = ['Google Pay' , 'جوجل باي']
+  add_card = ['Add Card', 'اضف بطاقة'];
+  paypal = ['Paypal', 'ياي بال'];
+  apple_pay = ['Apple Pay', 'ابل باي'];
+  google_pay = ['Google Pay', 'جوجل باي'];
   deactivate = ['deactivate', 'تعطيل'];
   Remove = ['Remove', 'إزالة'];
   waiting_time_slot = ['Waiting', 'Waiting'];
@@ -788,32 +809,40 @@ class Language_provider {
     'يجب أن تكون كلمة المرور وكلمة المرور الحالية مختلفتين',
   ];
 
-  packages =['Packages', 'الحزم']
+  packages = ['Packages', 'الحزم'];
 
-//-------------------------------------my subscriptions----------------------//
+  //-------------------------------------my subscriptions----------------------//
 
-  mySubscriptions= ['My Subscriptions', 'اشتراكاتي']
+  mySubscriptions = ['My Subscriptions', 'اشتراكاتي'];
 
   //-------------------------------------Saved Location----------------------//
 
-  add_new_location = ['Add New Location', 'اضافه موقع جديد']
-  delete_location = ['Delete Location ?', 'حذف الموقع ؟']
-  delete_location_confirmation = ['Are you sure , you want to Delete', 'هل أنت متأكد أنك تريد حذف']
-  wash_location = ['Car Wash Location', 'مكان غسيل السيارات']
+  add_new_location = ['Add New Location', 'اضافه موقع جديد'];
+  delete_location = ['Delete Location ?', 'حذف الموقع ؟'];
+  delete_location_confirmation = [
+    'Are you sure , you want to Delete',
+    'هل أنت متأكد أنك تريد حذف',
+  ];
+  wash_location = ['Car Wash Location', 'مكان غسيل السيارات'];
 
-  what_looking_for_placholder = ['What are you looking for ?', 'ما الذي تبحث عنه ؟']
-  special_offers = ['Special Offers', 'عروض خاصة']
-  see_all = ['See All', 'عرض الكل']
-  location_text = ['Location', 'الموقع']
-  limited_time = ['limited time!', 'وقت محدود!']
-  up_to = ['Up To', 'يصل الي']
-  claim = ['Claim', 'طلب']
-  wash_services = ['Wash Services', 'خدمات الغسيل']
-  mins = ['Mins', 'دقائق']
-  no_vehicles_yet = ['No Vechicle Yet', 'لا توجد سيارة حتى الآن']
-  update_vechile = ['Update Vechile', 'تعديل السيارة']
-  sure_to_delete_car = ['Are you sure , you want to delete your car ?' , 'هل أنت متأكد أنك تريد حذف سيارتك؟']
-  welcome_back = ['Welcome Back', 'مرحبًا بعودتك']
-
+  what_looking_for_placholder = [
+    'What are you looking for ?',
+    'ما الذي تبحث عنه ؟',
+  ];
+  special_offers = ['Special Offers', 'عروض خاصة'];
+  see_all = ['See All', 'عرض الكل'];
+  location_text = ['Location', 'الموقع'];
+  limited_time = ['limited time!', 'وقت محدود!'];
+  up_to = ['Up To', 'يصل الي'];
+  claim = ['Claim', 'طلب'];
+  wash_services = ['Wash Services', 'خدمات الغسيل'];
+  mins = ['Mins', 'دقائق'];
+  no_vehicles_yet = ['No Vechicle Yet', 'لا توجد سيارة حتى الآن'];
+  update_vechile = ['Update Vechile', 'تعديل السيارة'];
+  sure_to_delete_car = [
+    'Are you sure , you want to delete your car ?',
+    'هل أنت متأكد أنك تريد حذف سيارتك؟',
+  ];
+  welcome_back = ['Welcome Back', 'مرحبًا بعودتك'];
 }
 export const Lang_chg = new Language_provider();

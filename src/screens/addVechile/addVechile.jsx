@@ -1,4 +1,5 @@
-import {Text, View} from 'react-native-ui-lib';
+import {KeyboardAwareScrollView, View} from 'react-native-ui-lib';
+import React from 'react';
 import SelectVechileCard from '../../components/selectVechileCard.jsx/selectVechileCard';
 import categoryIcon from '../../assets/icons/categoryIcon.png';
 import brandIcon from '../../assets/icons/brandIcon.png';
@@ -10,7 +11,7 @@ import Modal from 'react-native-modal';
 import {useEffect, useState} from 'react';
 import SuccessAddVehicle from '../../components/successAddVehicle/successAddVehicle';
 import addNewCar from '../../atoms/addNewCar/addNewCar';
-import {useRecoilState, useRecoilValue} from 'recoil';
+import {useRecoilState} from 'recoil';
 import addVehicle from '../../Features/addVehicle/addVehicle';
 import updateVehicle from '../../Features/updateVehicle/updateVehicle';
 import {config} from '../../Provider/configProvider';
@@ -38,7 +39,7 @@ export default function AddVechileScreen({navigation, route}) {
   }
 
   useEffect(() => {
-    if (route.params == 'updateVehicle') {
+    if (route.params === 'updateVehicle') {
       setNewCar({
         ...currentCar,
         carID: currentCar.vehicle_id,
@@ -47,7 +48,7 @@ export default function AddVechileScreen({navigation, route}) {
   }, []);
 
   return (
-    <View className="pt-[80px] px-4">
+    <KeyboardAwareScrollView className="pt-[80px] px-4">
       <Modal
         swipeDirection={'down'}
         onSwipeMove={handleClosePopUp}
@@ -158,9 +159,9 @@ export default function AddVechileScreen({navigation, route}) {
           setIsPopUpOpen(true);
           setNewCar({});
           setCurrentCar({});
-          navigation.navigate('HomeScreen');
+          navigation.back();
         }}
       />
-    </View>
+    </KeyboardAwareScrollView>
   );
 }

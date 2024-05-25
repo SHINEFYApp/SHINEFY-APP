@@ -1,4 +1,5 @@
-import {Image, Text, View} from 'react-native-ui-lib';
+import {Image, KeyboardAwareScrollView, View} from 'react-native-ui-lib';
+import React from 'react';
 import pic from '../../assets/icons/profile/pic.png';
 import Input from '../../components/inputs/input';
 import userIcon from '../../assets/icons/userIcon.png';
@@ -11,12 +12,12 @@ import editProfile from '../../Features/editProfile/editProfile';
 import {Lang_chg} from '../../Provider/Language_provider';
 import editIcon from '../../assets/icons/editIconVehicle.png';
 import {config} from '../../Provider/configProvider';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {TouchableOpacity} from 'react-native';
+
 export default function EditProfileScreen({navigation}) {
   const data = useRecoilValue(profileData);
   const [newData, setNewData] = useState({
-    firstname: data.f_name,
-    lastname: data.l_name,
+    name: data.name,
     phone_number: data.phone_number,
     email: data.email,
   });
@@ -26,71 +27,56 @@ export default function EditProfileScreen({navigation}) {
   }
 
   return (
-    <View className="pt-[80] px-8 flex-1">
-      <View className="my-10">
-        <TouchableOpacity onPress={updateProfilePic}>
-
-          <View className="items-center relative border-2 border-mainColor w-[110px] p-1 rounded-full mx-auto">
-            <Image
-              source={pic}
-              className="p-4 border w-[100] h-[100] rounded-full"
+    <KeyboardAwareScrollView>
+      <View className="pt-[80] px-8 flex-1">
+        <View className="my-10">
+          <TouchableOpacity onPress={updateProfilePic}>
+            <View className="items-center relative border-2 border-mainColor w-[110px] p-1 rounded-full mx-auto">
+              <Image
+                source={pic}
+                className="p-4 border w-[100] h-[100] rounded-full"
               />
-            <View className="bg-mainColor absolute -right-3 -top-2 rounded-full">
-              <Image source={editIcon}/>
+              <View className="bg-mainColor absolute -right-3 -top-2 rounded-full">
+                <Image source={editIcon} />
+              </View>
             </View>
-          </View>
-        </TouchableOpacity>
-      </View>
-      <View className="relative h-full">
-        <View className="absolute w-full">
-          <View className="flex-row gap-4">
-            <View className={'flex-1'}>
+          </TouchableOpacity>
+        </View>
+        <View className="relative h-full">
+          <View className="w-full">
+            <View>
               <Input
-                placeholder={data.f_name}
+                value={newData.name}
                 icon={userIcon}
                 onChange={e => {
-                  setNewData({
-                    ...newData,
-                    firstname: e.nativeEvent.text,
-                  });
+                  setNewData(d => ({
+                    ...d,
+                    name: e.nativeEvent.text,
+                  }));
                 }}
               />
             </View>
-            <View className={'flex-1'}>
+
+            <View>
+              <Input value={data.email} icon={phoneIcon} />
+            </View>
+            <View>
               <Input
-                placeholder={data.l_name}
-                icon={userIcon}
-                onChange={e => {
-                  setNewData({
-                    ...newData,
-                    lastname: e.nativeEvent.text,
-                  });
-                }}
+                placeholder={`${data.phone_number}`}
+                icon={phoneIcon}
+                text={'+20'}
+                isBorder
               />
             </View>
-          </View>
-
-          <View>
-            <Input value={data.email} icon={phoneIcon} />
-          </View>
-          <View>
-            <Input
-              value={`${data.phone_number}`}
-              icon={phoneIcon}
-              text={'+20'}
-              isBorder={true}
+            <Button
+              Title={Lang_chg.editprofile_txt[config.language]}
+              onPress={async () => {
+                await editProfile(newData);
+              }}
             />
           </View>
-          <Button
-            Title={Lang_chg.editprofile_txt[config.language]}
-            onPress={async () => {
-              await editProfile(newData);
-              navigation.navigate('HomeScreen');
-          
-            }}
-          />
         </View>
       </View>
-    </View>
+    </KeyboardAwareScrollView>
   );
 }

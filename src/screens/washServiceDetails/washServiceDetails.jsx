@@ -1,4 +1,5 @@
 import {Image, Text, View} from 'react-native-ui-lib';
+import React from 'react';
 import img from '../../assets/detailsCar.png';
 import timeIcon from '../../assets/icons/timeIcon.png';
 import Button from '../../components/mainButton/Button';
@@ -6,19 +7,19 @@ import {useEffect, useState} from 'react';
 import getServiceDetails from '../../Features/getServiceDetails/getServiceDetails';
 import {config} from '../../Provider/configProvider';
 import {Lang_chg} from '../../Provider/Language_provider';
+import {KeyboardAwareScrollView} from 'react-native-ui-lib';
 export default function WashServiceDetails({navigation, route}) {
   const [data, setData] = useState({});
-  
+
   useEffect(() => {
     let fetchData = async () => {
       setData(await getServiceDetails(route.params.id));
-
     };
     fetchData();
   }, []);
 
   return (
-    <View className="flex-1">
+    <KeyboardAwareScrollView className="flex-1">
       <Image source={img} className="w-full" />
       <View className="bg-white flex-1 rounded-3xl px-5 py-10 -mt-2 justify-between">
         <View>
@@ -27,7 +28,7 @@ export default function WashServiceDetails({navigation, route}) {
               {data &&
                 data[
                   `${
-                    config.language == 0
+                    config.language === 0
                       ? 'service_name'
                       : 'service_name_arabic'
                   }`
@@ -37,7 +38,7 @@ export default function WashServiceDetails({navigation, route}) {
               {data &&
                 data[
                   `${
-                    config.language == 0
+                    config.language === 0
                       ? 'service_label'
                       : 'service_label_arabic'
                   }`
@@ -65,7 +66,7 @@ export default function WashServiceDetails({navigation, route}) {
               {
                 data[
                   `${
-                    config.language == 0
+                    config.language === 0
                       ? 'service_description'
                       : 'service_description_arabic'
                   }`
@@ -84,6 +85,6 @@ export default function WashServiceDetails({navigation, route}) {
         </View>
         <Button Title={Lang_chg.Book[config.language]} />
       </View>
-    </View>
+    </KeyboardAwareScrollView>
   );
 }

@@ -1,4 +1,4 @@
-import {Alert, ToastAndroid, Platform} from 'react-native';
+import {Alert} from 'react-native';
 import Toast from 'react-native-simple-toast';
 //--------------------------- Message Provider Start -----------------------
 class messageFunctionsProviders {

@@ -1,4 +1,5 @@
 import {Image, TouchableOpacity, View} from 'react-native-ui-lib';
+import React from 'react';
 import leftArrow from '../../assets/icons/leftArrow.png';
 import {config} from '../../Provider/configProvider';
 export default function BackButton({navigation}) {
