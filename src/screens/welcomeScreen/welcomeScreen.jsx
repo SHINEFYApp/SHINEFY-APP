@@ -5,7 +5,7 @@ import background from '../../assets/backgroundImage.png';
 import Button from '../../components/mainButton/Button';
 import LoginModal from '../../components/auth/login/login';
 import Animated, {useSharedValue, withTiming} from 'react-native-reanimated';
-import SignupModal from '../../components/auth/signup/signup';
+import SignUpModal from '../../components/auth/signup/signup';
 import logo from '../../assets/logo-2.png';
 import Modal from 'react-native-modal';
 import {Lang_chg} from '../../Provider/Language_provider';
@@ -15,7 +15,7 @@ export default function WelcomeScreen({navigation}) {
   const logoScale = useSharedValue(1);
   const logoTranslateY = useSharedValue(0);
   const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
-  const [isSignupModalVisivle, setIsSignupModalVisivle] = useState(false);
+  const [isSignupModalVisivle, setIsSignupModalVisible] = useState(false);
 
   useEffect(() => {
     const getIsLoggedIn = async () => {
@@ -27,30 +27,31 @@ export default function WelcomeScreen({navigation}) {
     getIsLoggedIn();
   });
   const handleLoginPress = () => {
+    setIsSignupModalVisible(false);
     logoScale.value = withTiming(1);
     logoTranslateY.value = withTiming(0);
-    setIsLoginModalVisible(true);
-    setIsSignupModalVisivle(false);
+    setTimeout(() => setIsLoginModalVisible(true), 500);
   };
 
   const handleSignupPress = () => {
-    setIsSignupModalVisivle(true);
     setIsLoginModalVisible(false);
     logoScale.value = withTiming(0.6);
     logoTranslateY.value = withTiming(-150);
+    setTimeout(() => setIsSignupModalVisible(true), 500);
   };
 
   const handleCloseSignup = () => {
     logoScale.value = withTiming(1);
     logoTranslateY.value = withTiming(0);
-    setIsSignupModalVisivle(false);
+    setIsSignupModalVisible(false);
   };
 
   useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', () => {
       BackHandler.exitApp();
     });
-  }, [isSignupModalVisivle, isLoginModalVisible, logoScale, logoTranslateY]);
+    return BackHandler.removeEventListener('hardwareBackPress');
+  }, []);
 
   return (
     <View className="flex-1">
@@ -113,7 +114,7 @@ export default function WelcomeScreen({navigation}) {
             isVisible={isSignupModalVisivle}
             onBackdropPress={handleCloseSignup}
             onBackButtonPress={handleCloseSignup}>
-            <SignupModal
+            <SignUpModal
               closeSignup={handleCloseSignup}
               navigation={navigation}
               openLogin={handleLoginPress}
