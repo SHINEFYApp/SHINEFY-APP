@@ -1,4 +1,5 @@
-import {Image, Switch, Text, View} from 'react-native-ui-lib';
+import {Image, Switch, Text} from 'react-native-ui-lib';
+import React from 'react';
 import arrowIcon from '../../assets/icons/arrowIcon.png';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useState} from 'react';

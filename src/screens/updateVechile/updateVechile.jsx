@@ -18,8 +18,7 @@ import {config} from '../../Provider/configProvider';
 import {Lang_chg} from '../../Provider/Language_provider';
 import updateCar from '../../atoms/currentCar/currentCar';
 import myCarsList, {fetchMyCars} from '../../atoms/carsList/myCarsList';
-
-export default function AddVechileScreen({navigation, route}) {
+export default function UpdateVechileScreen({navigation, route, params}) {
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   const [currentCar, setCurrentCar] = useRecoilState(updateCar);
   const setMyCarsList = useSetRecoilState(myCarsList);
@@ -27,8 +26,6 @@ export default function AddVechileScreen({navigation, route}) {
   function handleClosePopUp() {
     setIsPopUpOpen(false);
   }
-
-  const [newCar, setNewCar] = useRecoilState(addNewCar);
 
   function handleTitleData(title) {
     switch (title) {
@@ -41,14 +38,10 @@ export default function AddVechileScreen({navigation, route}) {
     }
   }
 
-  const createVehicle = async () => {
+  const createOrUpdateVehicle = async () => {
     if (route.params === 'updateVehicle') {
-      await updateVehicle(newCar);
-    } else {
-      await addVehicle(newCar);
-    }
+      await updateVehicle(currentCar);
     setIsPopUpOpen(true);
-    setNewCar({});
     setCurrentCar({});
     fetchMyCars(setMyCarsList);
     setTimeout(() => {
@@ -68,22 +61,12 @@ export default function AddVechileScreen({navigation, route}) {
       </Modal>
       <SelectVechileCard
         screenTitle={'Select Category'}
-        text={`${
-          newCar[handleTitleData('Category')]
-            ? newCar[handleTitleData('Category')][handleTitleData('Category')][
-                config.language
-              ]
-            : currentCar.vehicle_name
+        text={`${currentCar.vehicle_name
             ? currentCar.vehicle_name[config.language]
             : Lang_chg.selectcategory_txt[config.language]
         }`}
         icon={categoryIcon}
-        img={
-          newCar[handleTitleData('Category')]
-            ? newCar[handleTitleData('Category')][
-                `${handleTitleData('Category')}_image`
-              ]
-            : currentCar.vehicle_image && currentCar.vehicle_image
+        img={currentCar.vehicle_image && currentCar.vehicle_image
         }
         screen={'addVehiclesDetails'}
         navigation={navigation}
@@ -159,7 +142,7 @@ export default function AddVechileScreen({navigation, route}) {
             ? Lang_chg.update_vechile[config.language]
             : Lang_chg.addvechicle_txt[config.language]
         }`}
-        onPress={createVehicle}
+        onPress={createOrUpdateVehicle}
       />
     </KeyboardAwareScrollView>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, Text, View ,TouchableOpacity} from 'react-native-ui-lib';
+import {Image, Text, View, TouchableOpacity} from 'react-native-ui-lib';
 import Button from '../mainButton/Button';
 
 import closeIcon from '../../assets/icons/closeIcon.png';
@@ -12,15 +12,12 @@ export default function ConfirmationPopUp({
   icon,
   buttonTitle,
   closePopUp,
-  itemId
+  itemId,
 }) {
-
   async function deleteItem() {
-      try{
-        deleteVehicle(itemId)
-    }catch(err) {
-    
-    }
+    try {
+      deleteVehicle(itemId);
+    } catch (err) {}
   }
 
   return (
@@ -32,10 +29,10 @@ export default function ConfirmationPopUp({
       <Text className="text-center my-8 text-lg">{p}</Text>
       <Button
         buttonColor={'#D04E46'}
-        onPress={()=>{
-          deleteItem()
-            onConfirm()
-            // closePopUp()
+        onPress={() => {
+          deleteItem();
+          onConfirm();
+          closePopUp();
         }}
         Title={buttonTitle}
         icon={icon && icon}

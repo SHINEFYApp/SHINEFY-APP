@@ -1,4 +1,5 @@
 import {Image, Text, TouchableOpacity, View} from 'react-native-ui-lib';
+import React from 'react';
 import notfiIcon from '../../assets/icons/notifcationIcon.png';
 import saveIcon from '../../assets/icons/savedLocationIcon.png';
 import backIcon from '../../assets/icons/backIcon.png';
@@ -89,13 +90,6 @@ export default function NavigationTop(props) {
           />
         </TouchableOpacity>
       )}
-
-      {/* <TouchableOpacity
-        onPress={() => {
-          props.navigation.navigate('HomeScreen');
-        }}>
-        <Text>home</Text>
-      </TouchableOpacity> */}
       <View>
         <Text className="font-extrabold text-xl text-center w-full">
           {handleTitle()}

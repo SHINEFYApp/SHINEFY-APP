@@ -6,7 +6,7 @@ export default function BackButton({navigation}) {
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation.goBack();
+        navigation.pop();
       }}
       className={
         'h-[30px] w-[30px] rounded-full left-4 top-4 items-center justify-center border-[#ccc] border absolute z-10'

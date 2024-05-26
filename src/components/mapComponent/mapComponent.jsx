@@ -41,10 +41,7 @@ export default function MapComponent({isNewLocation, navigation}) {
         provider={PROVIDER_GOOGLE}
         scrollEnabled
         className="h-full w-full"
-        onRegionChangeComplete={e => {
-          setRegion(e);
-        }}
-        g
+        onRegionChangeComplete={setRegion}
         region={region}
         cameraZoomRange={15}>
         {!isNewLocation && (

@@ -5,7 +5,7 @@ import React from 'react';
 export default function AddLocationScreen({navigation}) {
   return (
     <View className="flex-1">
-      <MapComponent isNewLocation={true} navigation={navigation} />
+      <MapComponent isNewLocation navigation={navigation} />
     </View>
   );
 }

@@ -1,23 +1,24 @@
 import {Image, Text, TouchableOpacity, View} from 'react-native-ui-lib';
-import transparentSquare from '../../assets/icons/TransparentSquare.png';
+import React from 'react';
 import editIcon from '../../assets/icons/editIconVehicle.png';
 import deleteIcon from '../../assets/icons/deleteIcon.png';
-import {ImageBackground, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import img from '../../assets/vehicleCard.png';
 import Modal from 'react-native-modal';
 
 import ConfirmationPopUp from '../../components/confirmationPopUp/ConfirmationPopUp';
 import {useState} from 'react';
-import {useRecoilState} from 'recoil';
+import {useSetRecoilState} from 'recoil';
 import updateCar from '../../atoms/currentCar/currentCar';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 import deleteVehicle from '../../Features/deleteVehicle/deleteVehicle';
+import myCarsList, {fetchMyCars} from '../../atoms/carsList/myCarsList';
 
 export default function VehicleCard({car, navigation}) {
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
-  const [currentCar, setCurrentCar] = useRecoilState(updateCar);
-
+  const setUpdateCar = useSetRecoilState(updateCar);
+  const setMyCarsList = useSetRecoilState(myCarsList);
   function handleClosePopUp() {
     setIsPopUpOpen(false);
   }
@@ -26,13 +27,16 @@ export default function VehicleCard({car, navigation}) {
     <View
       className="w-full relative bg-white rounded-xl p-4 flex-row mb-7"
       style={style.box}>
-      <Modal avoidKeyboard={true} hasBackdrop={true} isVisible={isPopUpOpen}>
+      <Modal avoidKeyboard hasBackdrop isVisible={isPopUpOpen}>
         <ConfirmationPopUp
           itemId={car.vehicle_id}
           closePopUp={handleClosePopUp}
-          onConfirm={async() => {
-            await deleteVehicle(car,vehicle_id)
-            handleClosePopUp();
+          onConfirm={async () => {
+            await deleteVehicle(car, car.vehicle_id);
+            fetchMyCars(setMyCarsList);
+            setTimeout(() => {
+              handleClosePopUp();
+            }, 1000);
           }}
           heading={Lang_chg.delete[config.language]}
           p={Lang_chg.sure_to_delete_car[config.language]}
@@ -70,8 +74,9 @@ export default function VehicleCard({car, navigation}) {
           </Text>
           <View className="flex-row gap-2">
             <View
-              className={`w-[20] h-[20] rounded-full`}
-              style={{backgroundColor: car.color_code}}></View>
+              className={'w-[20] h-[20] rounded-full'}
+              style={{backgroundColor: car.color_code}}
+            />
             <Text>{car.color_name[config.language]}</Text>
           </View>
         </View>
@@ -85,8 +90,8 @@ export default function VehicleCard({car, navigation}) {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
-          setCurrentCar(car);
-          navigation.navigate('updateVehicle', 'updateVehicle');
+          setUpdateCar(car);
+          navigation.push('updateVehicle', 'updateVehicle');
         }}
         className="absolute -bottom-2 pb-0 -right-2 bg-[#FFFAF2] p-2 rounded-tl-3xl">
         <Image source={editIcon} />

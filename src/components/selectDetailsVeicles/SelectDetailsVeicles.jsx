@@ -10,16 +10,16 @@ import {useEffect, useMemo, useState} from 'react';
 import getModelData from '../../Features/getModelData/getModelData';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import addNewCar from '../../atoms/addNewCar/addNewCar';
-import updateCar from "../../atoms/currentCar/currentCar";
+import updateCar from '../../atoms/currentCar/currentCar';
 
 import {config} from '../../Provider/configProvider';
 export default function SelectDetailsVeicles({title}) {
   const [data, setDate] = useState([]);
-  const currentCar = useRecoilValue(updateCar)
-  const [currentActive , setCurrentActive] = useState()
+  const currentCar = useRecoilValue(updateCar);
+  const [currentActive, setCurrentActive] = useState();
   const [search, setSearch] = useState('');
-    const [newCar , setNewCar] = useRecoilState(addNewCar) 
-   
+  const [newCar, setNewCar] = useRecoilState(addNewCar);
+
   function handleTitleData() {
     switch (title) {
       case 'Select Brand':
@@ -67,18 +67,21 @@ export default function SelectDetailsVeicles({title}) {
     }
   }, []);
   return (
-    <View className={'bg-white p-4 rounded border border-[#ccc] rounded-lg'}>
+    <View className={'bg-white p-4 border border-[#ccc] rounded-lg'}>
       <View>
         <Text className="text-xl font-bold text-center mb-4">{title}</Text>
       </View>
       {title.includes('Plate') ? (
         <View className="h-[80]">
-          <Input placeholder={'Enter Your Plate Number Car'} onChange={(e)=>{
-            setNewCar({
-              ...newCar , 
-              plate_number : e.nativeEvent.text
-            })
-          }}/>
+          <Input
+            placeholder={'Enter Your Plate Number Car'}
+            onChange={e => {
+              setNewCar({
+                ...newCar,
+                plate_number: e.nativeEvent.text,
+              });
+            }}
+          />
         </View>
       ) : (
         <>
@@ -89,9 +92,11 @@ export default function SelectDetailsVeicles({title}) {
             <View className="flex-row flex-wrap justify-between">
               <FlatList
                 data={searchResult}
+                numColumns={2}
                 renderItem={({index, item: ele}) => {
                   return (
                     <SelectCardDetails
+                      key={ele.id}
                       onPress={() => {
                         setCurrentActive(index);
                       }}
@@ -101,7 +106,6 @@ export default function SelectDetailsVeicles({title}) {
                       keyObj={
                         title.includes('Model') ? 'modal' : handleTitleData()
                       }
-                      key={index}
                       title={
                         title.includes('Model')
                           ? ele.modal[0]
@@ -119,13 +123,6 @@ export default function SelectDetailsVeicles({title}) {
                   );
                 }}
               />
-              {/* {searchResult.map((ele , index) => {
-                return (
-                  
-                    
-                  
-                );
-              })} */}
             </View>
           </ScrollView>
         </>
