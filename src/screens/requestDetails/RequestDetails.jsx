@@ -142,7 +142,7 @@ export default function RequestDetails({navigation, route}) {
             } else if (!bookingDetails.service_id) {
               msgProvider.toast('Please Select Service', 'center');
             } else {
-              navigation.navigate('SelectDateTime');
+              navigation.push('SelectDateTime');
             }
           }}
         />

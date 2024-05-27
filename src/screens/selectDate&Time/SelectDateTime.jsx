@@ -154,7 +154,7 @@ export default function SelectDateTime({navigation}) {
               // } else if (!bookingDetails.booking_time) {
               //   msgProvider.toast('Please Select Time', 'center');
             } else {
-              navigation.navigate('Booking Overview' , {price:subtotal});
+              navigation.push('Booking Overview' , {price:subtotal});
             }
           }}/>
       

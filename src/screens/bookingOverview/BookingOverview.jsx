@@ -180,14 +180,14 @@ const BookingOverview = ({navigation, route}) => {
         <Button
           Title={Lang_chg.confirm_booking[config.language]}
           btnStyle={'font-semibold text-lg'}
-          onPress={() => navigation.navigate('PaymentMethod')}
+          onPress={() => navigation.push('PaymentMethod')}
         />
         <Button
           Title={Lang_chg.cancelBooking_txt[config.language]}
           secondStyle={true}
           textColor={'#dd9923'}
           btnStyle={'font-semibold text-lg'}
-          onPress={() => navigation.navigate('HomeScreen')}
+          onPress={() => navigation.push('HomeScreen')}
         />
         <View className={'py-3'} />
       </ScrollView>
