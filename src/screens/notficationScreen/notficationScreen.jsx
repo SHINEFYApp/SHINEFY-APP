@@ -4,52 +4,33 @@ import NotficationCard from '../../components/notficationCard/notficationCard';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 import getNotification from '../../Features/getNotfication/getNotfication';
+import {FlatList} from 'react-native';
 
 export default function NotficationScreen() {
-  const [notfi , setNotfi] = useState([]);
+  const [notfi, setNotfi] = useState([]);
 
-  useEffect(()=>{
-    const fetchData = async()=>{
-     let res  = await getNotification()
-      setNotfi(res.notification_arr)
-    } 
-    fetchData()
-  },[])
+  useEffect(() => {
+    const fetchData = async () => {
+      let res = await getNotification();
+      setNotfi(res.notification_arr);
+    };
+    fetchData();
+  }, []);
 
   return (
     <View className="flex-1 pt-[80px]">
-      {!notfi.length && (
-        <View className="w-full items-center p-10">
-          <Image source={emptyImg} />
-        </View>
-      )}
-      <ScrollView>
-        {/* <View className="mt-2 flex-row items-center px-4">
-          <Text className="text-[#000] text-xl ">
-            {Lang_chg.today_txt[config.language]}
-          </Text>
-          <Text className="text-mainColor flex-1 text-right">
-            {Lang_chg.see_all[config.language]}
-          </Text>
-        </View> */}
-        {
-          notfi.map((notfi)=>{
-            return (
-              <NotficationCard notfi={notfi} />
-            )
-          })
+      <FlatList
+        ListEmptyComponent={
+          <View className="w-full items-center p-10">
+            <Image source={emptyImg} />
+          </View>
         }
-        {/* <View className="mt-2 flex-row items-center px-4">
-          <Text className="text-[#000] text-xl ">
-            {Lang_chg.today_txt[config.language]}
-          </Text>
-          <Text className="text-mainColor flex-1 text-right">
-            {Lang_chg.see_all[config.language]}
-          </Text>
-        </View> */}
-      </ScrollView>
+        data={notfi}
+        keyExtractor={item => item.notification_message_id}
+        renderItem={({item}) => <NotficationCard notfi={item} />}
+      />
     </View>
   );
 }

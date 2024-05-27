@@ -1,3 +1,4 @@
+import React from 'react';
 import {Image, Text, View} from 'react-native-ui-lib';
 import locationIcon from '../../assets/icons/currenLocation.png';
 import editIcon from '../../assets/icons/editIcon.png';
@@ -9,8 +10,14 @@ import {useState} from 'react';
 import deleteLocation from '../../Features/deleteLocation/deleteLocation';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
+import myLocationList, {
+  fetchMyLoaction,
+} from '../../atoms/locationList/myLocationList';
+import {useSetRecoilState} from 'recoil';
 export default function LocationCard({location, navigation}) {
   const [isPopUpOpenDelete, setIsPopUpOpenDelete] = useState(false);
+  const setLocationList = useSetRecoilState(myLocationList);
+
   return (
     <TouchableOpacity
       onPress={() => {
@@ -27,6 +34,7 @@ export default function LocationCard({location, navigation}) {
             }}
             onConfirm={async () => {
               await deleteLocation(location.user_location_id);
+              fetchMyLoaction(setLocationList);
             }}
             heading={Lang_chg.delete_location[config.language]}
             p={`${Lang_chg.delete_location_confirmation[config.language]} ${

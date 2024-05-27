@@ -60,7 +60,7 @@ export default function PaymentMethod({navigation}) {
             set={activeElement => {
               setBookingDetails({
                 ...bookingDetails,
-                payment_method: 1,
+                payment_method: 0,
               });
               setActivePayment(activeElement);
             }}

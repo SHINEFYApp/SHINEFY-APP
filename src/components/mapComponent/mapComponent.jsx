@@ -9,6 +9,8 @@ import Button from '../mainButton/Button';
 import addLocation from '../../Features/addLocation/addLocation';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
+import myLocationList, { fetchMyLoaction } from '../../atoms/locationList/myLocationList';
+import { useSetRecoilState } from 'recoil';
 
 export default function MapComponent({isNewLocation, navigation}) {
   const [region, setRegion] = useState({
@@ -17,6 +19,7 @@ export default function MapComponent({isNewLocation, navigation}) {
     longitude: 31.25663409009576,
     longitudeDelta: 0.0006581470370328191,
   });
+  const setLocationList = useSetRecoilState(myLocationList);
 
   useEffect(() => {
     const getLocation = async () => {
@@ -71,6 +74,8 @@ export default function MapComponent({isNewLocation, navigation}) {
             Title={Lang_chg.confirm_booking[config.language]}
             onPress={async () => {
               let res = await addLocation(region, name);
+              fetchMyLoaction(setLocationList);
+              
               res && navigation.goBack();
             }}
           />

@@ -1,4 +1,6 @@
 import {apifuntion} from '../../Provider/Apicallingprovider/apiProvider';
+import {Lang_chg} from '../../Provider/Language_provider';
+import {msgProvider} from '../../Provider/Messageconsolevalidationprovider/messageProvider';
 import {config} from '../../Provider/configProvider';
 import {localStorage} from '../../Provider/localStorageProvider';
 
@@ -68,9 +70,12 @@ export default async function cashBooking(bookingDetails, navigation) {
   // data.append('online_amount', this.state.netpay);
   let url = config.baseURL + 'create_booking';
 
-  apifuntion.postApi(url, data).then(obj => {
-    navigation.navigate('HomeScreen');
-    if (err == 'noNetwork') {
+  try {
+    apifuntion.postApi(url, data).then(obj => {
+      navigation.navigate('HomeScreen');
+    });
+  } catch (err) {
+    if (err === 'noNetwork') {
       msgProvider.alert(
         Lang_chg.msgTitleNoNetwork[config.language],
         Lang_chg.noNetwork[config.language],
@@ -83,5 +88,5 @@ export default async function cashBooking(bookingDetails, navigation) {
         false,
       );
     }
-  });
+  }
 }

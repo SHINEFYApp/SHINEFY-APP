@@ -5,6 +5,7 @@ import { config } from "../../Provider/configProvider";
 
 export default function NotficationCard({notfi}) {
     
+    console.log(notfi)
     
     return (
         <View className="flex-row items-center mx-4 my-2 pb-3 relative border-b border-[#c3c3c3]">
