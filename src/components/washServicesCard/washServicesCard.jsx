@@ -4,7 +4,6 @@ import {Text} from 'react-native-ui-lib';
 import img from '../../assets/carWashing.png';
 import {TouchableHighlight} from 'react-native-gesture-handler';
 import {config} from '../../Provider/configProvider';
-
 export default function WashServicesCard({page, navigation, service}) {
   return (
     <TouchableHighlight

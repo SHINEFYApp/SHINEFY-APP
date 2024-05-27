@@ -17,11 +17,17 @@ export default function LanguageScreen() {
     },
   ];
 
+  console.log(config.language)
+
   return (
     <View className="mt-[80] p-5">
       <RadioButton
         buttons={radioButtons}
-        currentActive={config.language == 0 ? Lang_chg.english_txt[config.language] :Lang_chg.arabic_txt[config.language]}
+        currentActive={
+          config.language == 0
+            ? Lang_chg.english_txt[config.language]
+            : Lang_chg.arabic_txt[config.language]
+        }
         onPress={changeLanguage}
       />
     </View>

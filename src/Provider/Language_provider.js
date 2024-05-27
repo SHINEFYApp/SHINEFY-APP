@@ -43,7 +43,7 @@ class Language_provider {
   language_set = async languagem => {
     // var item = await AsyncStorage.getItem('language');
     // localStorage.setItemObject('language', 1)
-    if (languagem == 0) {
+    if (languagem === 0) {
       I18nManager.forceRTL(false);
       I18nManager.allowRTL(false);
       config.textalign = 'left';
@@ -60,7 +60,7 @@ class Language_provider {
       // config.textRotate='right'
       config.inverted = true;
       localStorage.setItemObject('language', 1);
-      localStorage.setItemObject('languagecathc', 0);
+      localStorage.setItemObject('languagecathc');
       config.language = 1;
     }
 
