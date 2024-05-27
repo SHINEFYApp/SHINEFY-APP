@@ -27,7 +27,6 @@ export default function SavedLocationScreen({navigation}) {
     fetchMyLoaction(setLocationList);
   }, [refreshing]);
 
-  console.log(locationList);
 
   return (
     <View className="flex-1 pt-[80px]">

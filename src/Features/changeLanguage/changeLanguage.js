@@ -3,7 +3,6 @@ import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 
 export default function changeLanguage(value) {
-  console.log(value);
   Alert.alert(
     Lang_chg.language_change[config.language],
     Lang_chg.Lang_change_msg[config.language],

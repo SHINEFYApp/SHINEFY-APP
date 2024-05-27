@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Image, Text, View, KeyboardAwareScrollView} from 'react-native-ui-lib';
-import {ScrollView} from 'react-native';
+import {FlatList, ScrollView} from 'react-native';
 import SearchInput from '../../components/searchInput/searchInput';
 import SaleBox from '../../components/saleBox/saleBox';
 import locationIcon from '../../assets/icons/locationIcon.png';
@@ -87,7 +87,20 @@ export default function HomeScreen({navigation}) {
             {Lang_chg.see_all[config.language]}
           </Text>
         </View>
-        <ScrollView
+        <FlatList 
+          data={services.concat(specialOffers)}
+          horizontal={true}
+          renderItem={({item ,index})=>(
+              <WashServicesCard
+                // key={item.service_id}
+                navigation={navigation}
+                id={index}
+                keyObj=""
+                service={item}
+              />
+          )}
+        />
+        {/* <ScrollView
           className="px-3 mt-3"
           horizontal
           showsHorizontalScrollIndicator>
@@ -101,7 +114,7 @@ export default function HomeScreen({navigation}) {
               />
             );
           })}
-        </ScrollView>
+        </ScrollView> */}
       </View>
     </KeyboardAwareScrollView>
   );
