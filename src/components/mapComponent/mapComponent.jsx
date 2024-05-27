@@ -19,14 +19,24 @@ export default function MapComponent({isNewLocation, navigation}) {
     longitude: 31.25663409009576,
     longitudeDelta: 0.0006581470370328191,
   });
+  const [newLocation, setNewLocation] = useState({
+    latitude: 29.96073734024412,
+    latitudeDelta: 0.001162180276701008,
+    longitude: 31.25663409009576,
+    longitudeDelta: 0.0006581470370328191,
+  });
   const setLocationList = useSetRecoilState(myLocationList);
 
   useEffect(() => {
     const getLocation = async () => {
       const location = await GetLocation.getCurrentPosition({
         enableHighAccuracy: true,
-        timeout: 60000,
       });
+      setNewLocation(r=>({
+        ...r,
+        latitude: location.latitude,
+        longitude: location.longitude,
+      }))
       setRegion(r => ({
         ...r,
         latitude: location.latitude,
@@ -36,17 +46,19 @@ export default function MapComponent({isNewLocation, navigation}) {
     getLocation();
   }, []);
 
+
+
   const [name, setName] = useState('');
   return (
     <View className="flex-1 relative">
       <MapView
         customMapStyle={mapStyle}
         provider={PROVIDER_GOOGLE}
-        scrollEnabled
+        // scrollEnabled
         className="h-full w-full"
-        onRegionChangeComplete={setRegion}
+        onRegionChangeComplete={setNewLocation}
         region={region}
-        cameraZoomRange={15}>
+        cameraZoomRange={50}>
         {!isNewLocation && (
           <Marker draggable coordinate={region}>
             <Image source={indectorIcon} />
@@ -73,9 +85,8 @@ export default function MapComponent({isNewLocation, navigation}) {
           <Button
             Title={Lang_chg.confirm_booking[config.language]}
             onPress={async () => {
-              let res = await addLocation(region, name);
+              let res = await addLocation(newLocation, name);
               fetchMyLoaction(setLocationList);
-              
               res && navigation.goBack();
             }}
           />
