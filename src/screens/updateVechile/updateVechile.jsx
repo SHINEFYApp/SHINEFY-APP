@@ -8,11 +8,9 @@ import modelIcon from '../../assets/icons/modelIcon.png';
 import colorIcon from '../../assets/icons/colorCarIcon.png';
 import Button from '../../components/mainButton/Button';
 import Modal from 'react-native-modal';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import SuccessAddVehicle from '../../components/successAddVehicle/successAddVehicle';
-import addNewCar from '../../atoms/addNewCar/addNewCar';
 import {useRecoilState, useSetRecoilState} from 'recoil';
-import addVehicle from '../../Features/addVehicle/addVehicle';
 import updateVehicle from '../../Features/updateVehicle/updateVehicle';
 import {config} from '../../Provider/configProvider';
 import {Lang_chg} from '../../Provider/Language_provider';
@@ -39,8 +37,7 @@ export default function UpdateVechileScreen({navigation, route, params}) {
   }
 
   const createOrUpdateVehicle = async () => {
-    if (route.params === 'updateVehicle') {
-      await updateVehicle(currentCar);
+    await updateVehicle(currentCar);
     setIsPopUpOpen(true);
     setCurrentCar({});
     fetchMyCars(setMyCarsList);
@@ -61,13 +58,13 @@ export default function UpdateVechileScreen({navigation, route, params}) {
       </Modal>
       <SelectVechileCard
         screenTitle={'Select Category'}
-        text={`${currentCar.vehicle_name
+        text={`${
+          currentCar.vehicle_name
             ? currentCar.vehicle_name[config.language]
             : Lang_chg.selectcategory_txt[config.language]
         }`}
         icon={categoryIcon}
-        img={currentCar.vehicle_image && currentCar.vehicle_image
-        }
+        img={currentCar.vehicle_image && currentCar.vehicle_image}
         screen={'addVehiclesDetails'}
         navigation={navigation}
       />

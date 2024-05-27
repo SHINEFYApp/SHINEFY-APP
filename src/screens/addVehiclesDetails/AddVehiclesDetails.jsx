@@ -1,4 +1,5 @@
 import {View} from 'react-native-ui-lib';
+import React from 'react';
 import SelectDetailsVeicles from '../../components/selectDetailsVeicles/SelectDetailsVeicles';
 import Button from '../../components/mainButton/Button';
 

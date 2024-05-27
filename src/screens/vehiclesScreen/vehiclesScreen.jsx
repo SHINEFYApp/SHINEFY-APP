@@ -7,10 +7,14 @@ import {useEffect} from 'react';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 import {FlatList} from 'react-native';
-import {useRecoilState} from 'recoil';
+import {useRecoilState, useSetRecoilState} from 'recoil';
 import myCarsList, {fetchMyCars} from '../../atoms/carsList/myCarsList';
+import addNewCar from '../../atoms/addNewCar/addNewCar';
+import updateCar from '../../atoms/currentCar/currentCar';
 
 export default function VehiclesScreen({navigation}) {
+  const setNewCar = useSetRecoilState(addNewCar);
+  const setUpdateCar = useSetRecoilState(updateCar);
   const [myCars, setMyCarsList] = useRecoilState(myCarsList);
   useEffect(() => {
     fetchMyCars(setMyCarsList);
@@ -30,6 +34,8 @@ export default function VehiclesScreen({navigation}) {
             <Button
               Title={Lang_chg.addvechicle_txt[config.language]}
               onPress={() => {
+                setUpdateCar({});
+                setNewCar({});
                 navigation.push('AddCar');
               }}
             />

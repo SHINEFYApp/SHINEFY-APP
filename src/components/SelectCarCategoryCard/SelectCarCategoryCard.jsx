@@ -1,18 +1,14 @@
 import {Image, Text, TouchableOpacity, View} from 'react-native-ui-lib';
 import React from 'react';
-import {useRecoilState} from 'recoil';
-import addNewCar from '../../atoms/addNewCar/addNewCar';
 
 export default function SelectCarCategoryCard({
   title,
   img,
   color,
   active,
-  keyObj,
-  idKey,
   ele,
+  onPress,
 }) {
-  const [newCar, setNewCar] = useRecoilState(addNewCar);
   return (
     <View
       className={`p-3 mx-2 border border-[#ccc] rounded-lg w-[45%] mb-[10%] ${
@@ -20,10 +16,10 @@ export default function SelectCarCategoryCard({
       }`}>
       <TouchableOpacity
         onPress={() => {
-          setNewCar({
+          onPress({
             ...newCar,
-            [keyObj]: ele,
-            [idKey]: ele[idKey],
+            car_category: ele,
+            car_category_id: ele.car_category_id,
           });
         }}>
         <View className="items-center">

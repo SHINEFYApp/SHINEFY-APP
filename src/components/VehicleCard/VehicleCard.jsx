@@ -14,9 +14,11 @@ import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 import deleteVehicle from '../../Features/deleteVehicle/deleteVehicle';
 import myCarsList, {fetchMyCars} from '../../atoms/carsList/myCarsList';
+import addNewCar from '../../atoms/addNewCar/addNewCar';
 
 export default function VehicleCard({car, navigation}) {
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+  const setNewCar = useSetRecoilState(addNewCar);
   const setUpdateCar = useSetRecoilState(updateCar);
   const setMyCarsList = useSetRecoilState(myCarsList);
   function handleClosePopUp() {
@@ -91,6 +93,7 @@ export default function VehicleCard({car, navigation}) {
       <TouchableOpacity
         onPress={() => {
           setUpdateCar(car);
+          setNewCar(car);
           navigation.push('updateVehicle', 'updateVehicle');
         }}
         className="absolute -bottom-2 pb-0 -right-2 bg-[#FFFAF2] p-2 rounded-tl-3xl">

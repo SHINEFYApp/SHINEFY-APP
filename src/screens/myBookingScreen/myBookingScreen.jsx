@@ -14,7 +14,6 @@ export default function MyBookingScreen({navigation}) {
   useEffect(() => {
     let fetchData = async () => {
       let data = await getBooking();
-      console.log(data.booking_arr);
       setData(data.booking_arr);
     };
     fetchData();

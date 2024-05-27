@@ -34,6 +34,7 @@ import AddCard from '../screens/addCard/AddCard';
 import ReviewScreen from '../screens/reviewScreen/ReviewScreen';
 
 import AddVechileScreen from '../screens/addVechile/addVechile';
+import CarPlateNumberScreen from '../screens/CarPlateNumberScreen';
 
 const Stack = createStackNavigator();
 
@@ -69,6 +70,11 @@ const Stacknav = navigation => {
         component={PackageDetailsScreen}
       />
       <Stack.Screen name="addVehiclesDetails" component={AddVehiclesDetails} />
+      <Stack.Screen
+        name="CarPlateNumberScreen"
+        component={CarPlateNumberScreen}
+        title="Car Plate Number"
+      />
       <Stack.Screen
         name="MySubscreptionScreen"
         component={MySubscreptionScreen}

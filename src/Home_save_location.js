@@ -191,9 +191,7 @@ export default class Home_save_location extends Component {
               localStorage.setItemString('permission', 'denied');
               that.getalldata(position);
             }
-          } catch (err) {
-            console.warn(err);
-          }
+          } catch (err) {}
         }
         requestLocationPermission();
       }

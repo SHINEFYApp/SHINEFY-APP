@@ -41,18 +41,23 @@ export default function AddVechileScreen({navigation, route}) {
     }
   }
 
-  const createVehicle = async () => {
+  const createOrUpdateVehicle = async () => {
     if (route.params === 'updateVehicle') {
+      setNewCar(cC => ({
+        ...cC,
+        carID: currentCar.vehicle_id,
+      }));
       await updateVehicle(newCar);
     } else {
       await addVehicle(newCar);
     }
     setIsPopUpOpen(true);
-    setNewCar({});
-    setCurrentCar({});
+
     fetchMyCars(setMyCarsList);
     setTimeout(() => {
       setIsPopUpOpen(false);
+      setNewCar({});
+      setCurrentCar({});
       navigation.goBack();
     }, 1000);
   };
@@ -159,7 +164,7 @@ export default function AddVechileScreen({navigation, route}) {
             ? Lang_chg.update_vechile[config.language]
             : Lang_chg.addvechicle_txt[config.language]
         }`}
-        onPress={createVehicle}
+        onPress={createOrUpdateVehicle}
       />
     </KeyboardAwareScrollView>
   );

@@ -235,9 +235,7 @@ export default class Change_password extends Component {
               localStorage.setItemString('permission', 'denied');
               that.getalldata(position);
             }
-          } catch (err) {
-            console.warn(err);
-          }
+          } catch (err) {}
         }
         requestLocationPermission();
       }

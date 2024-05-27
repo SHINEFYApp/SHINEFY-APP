@@ -20,7 +20,23 @@ export default function SelectDetailsVeicles({title}) {
   const [search, setSearch] = useState('');
   const [newCar, setNewCar] = useRecoilState(addNewCar);
 
+  function handleIDData() {
+    switch (title) {
+      case 'Select Brand':
+        return 'make_id';
+      case 'Select Category':
+        return 'car_category_id';
+      case 'Select Color':
+        return 'color_id';
+      case 'Select Model':
+        return 'model_id';
+    }
+  }
+
   function handleTitleData() {
+    if (title.includes('Model')) {
+      return 'modal';
+    }
     switch (title) {
       case 'Select Brand':
         return 'car_make';
@@ -75,6 +91,7 @@ export default function SelectDetailsVeicles({title}) {
         <View className="h-[80]">
           <Input
             placeholder={'Enter Your Plate Number Car'}
+            value={newCar.plate_number || currentCar.plate_number}
             onChange={e => {
               setNewCar({
                 ...newCar,
@@ -97,25 +114,15 @@ export default function SelectDetailsVeicles({title}) {
                   return (
                     <SelectCardDetails
                       key={ele.id}
-                      onPress={() => {
-                        setCurrentActive(index);
-                      }}
-                      active={currentActive}
+                      active={newCar[handleIDData()] === ele[handleIDData()]}
                       id={index}
                       ele={ele}
-                      keyObj={
-                        title.includes('Model') ? 'modal' : handleTitleData()
-                      }
-                      title={
-                        title.includes('Model')
-                          ? ele.modal[0]
-                          : ele[handleTitleData()][0]
-                      }
+                      keyObj={handleTitleData()}
+                      idKey={handleIDData()}
+                      title={ele[handleTitleData()][0]}
                       color={ele.color_code}
                       img={
-                        title.includes('Model')
-                          ? ele.modal[0]
-                          : ele.image
+                        ele?.image
                           ? ele.image
                           : ele[`${handleTitleData()}_image`]
                       }
