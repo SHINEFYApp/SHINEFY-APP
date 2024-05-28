@@ -1,8 +1,8 @@
 import {ScrollView} from 'react-native-gesture-handler';
-import {Image, Text, View} from 'react-native-ui-lib';
+import {Colors, Image, Modal, Text, TouchableOpacity, View} from 'react-native-ui-lib';
 import RadioButton from '../../components/RadioButton/RadioButton';
 import SelectVechileCard from '../../components/selectVechileCard.jsx/selectVechileCard';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import Button from '../../components/mainButton/Button';
 import appleIcon from '../../assets/icons/appleIcon.png';
 import googleIcon from '../../assets/icons/googleIcon.png';
@@ -16,9 +16,17 @@ import {config} from '../../Provider/configProvider';
 import {useRecoilState} from 'recoil';
 import bookingDetailsAtom from '../../atoms/bookingDetails/bookingDetails.atom';
 import cashBooking from '../../Features/createBooking/createBooking';
+import WebView from 'react-native-webview';
+import { msgProvider } from '../../Provider/Messageconsolevalidationprovider/messageProvider';
+import { Font, localStorage, mobileH, mobileW } from '../../Provider/utilslib/Utils';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { StatusBar } from 'react-native';
+import { localimag } from '../../Provider/Localimage';
+import PayTabs from '../../components/payTabs/payTabs';
 
 export default function PaymentMethod({navigation}) {
   const [activePayment, setActivePayment] = useState(0);
+  const [webView, setWebView] = useState(false);
   const [bookingDetails, setBookingDetails] =
     useRecoilState(bookingDetailsAtom);
   const paymentMethodsOptions = [
@@ -39,10 +47,13 @@ export default function PaymentMethod({navigation}) {
     },
   ];
 
-
-
   return (
     <View className="pt-[80] px-5">
+      {webView &&
+        <PayTabs setWebView={setWebView} webView={webView} amount={  bookingDetails.total_amount
+      ? bookingDetails.total_amount
+      : bookingDetails.service_price}/>
+      }
       <ScrollView>
         <View>
           <Text className={'mb-2 font-semibold'}>
@@ -92,17 +103,28 @@ export default function PaymentMethod({navigation}) {
             set={setActivePayment}
           />
         </View> */}
-        {/* <View>
+        <View>
           <Text className={'mt-4 mb-3 font-semibold'}>
             {Lang_chg.debit_credit_card[config.language]}
           </Text>
-          <SelectVechileCard
+          <RadioButton
+            buttons={[
+              {
+                id: 1,
+                title: Lang_chg.debit_credit_card[config.language],
+                icon: creditIcon,
+              },
+            ]}
+            currentActive={activePayment}
+            set={setActivePayment}
+          />
+          {/* <SelectVechileCard
             text={Lang_chg.add_card[config.language]}
             navigation={navigation}
             screen={'AddCardScreen'}
             icon={creditIcon}
-          />
-        </View> */}
+          /> */}
+        </View>
         {/* <View>
           <Text className={'mt-4 mb-3 font-semibold'}>
             {Lang_chg.Payment_Option[config.language]}
@@ -117,7 +139,11 @@ export default function PaymentMethod({navigation}) {
         <Button
           Title={Lang_chg.Confirm[config.language]}
           onPress={() => {
-            cashBooking(bookingDetails , navigation);
+            if(activePayment == Lang_chg.debit_credit_card[config.language]){
+              setWebView(true)
+            } else {  
+              cashBooking(bookingDetails , navigation);
+            }
             // google_pay()
           }}
         />

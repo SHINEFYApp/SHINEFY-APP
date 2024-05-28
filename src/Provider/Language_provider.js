@@ -548,6 +548,7 @@ class Language_provider {
   privacypolicy_txt = ['Privacy Policy', 'سياسة الخصوصية'];
   terms_txt = ['Privacy Policy', 'سياسة الخصوصية'];
   mybookings_txt = ['My Bookings', 'حجوزاتي'];
+  book_Now = ['Create Book Now', 'احجز الان'];
   bookings_txt = ['Bookings', 'الحجوزات'];
   bookingid_txt = ['Booking ID: #7899302010', 'رقم الحجز: # 7899302010'];
   time_txt = ['15/Feb/22, 10:00AM', '15 / فبراير / 22 ، 10:00 صباحًا'];
@@ -604,6 +605,7 @@ class Language_provider {
   ontheway_txt = ['On the way', 'في الطريق'];
   arrive_txt = ['Arrived', 'وصل'];
   startwashing_txt = ['Started washing', 'ابدأ الغسيل'];
+  select_Location = ['Select Location', 'تحديد الموقع'];
   Cancellation_Reason = [
     'Please select the reason for cancellation',
     'الرجاء تحديد سبب الإلغاء',

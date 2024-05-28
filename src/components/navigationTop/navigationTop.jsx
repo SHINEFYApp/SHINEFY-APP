@@ -62,6 +62,8 @@ export default function NavigationTop(props) {
         return Lang_chg.select_payment_method[config.language];
       case 'WashServiceDetails':
         return Lang_chg.wash_services[config.language];
+      case 'AddBooking':
+        return Lang_chg.select_Location[config.language];
       default:
         return props.route.name;
     }

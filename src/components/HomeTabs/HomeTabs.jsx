@@ -21,6 +21,7 @@ import ProfileScreen from '../../screens/profileScreen/profileScreen';
 import MyBookingScreen from '../../screens/myBookingScreen/myBookingScreen';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
+import SelectLocation from '../../screens/selectLocation/selectLocation';
 const Tab = createBottomTabNavigator();
 
 export default function MyTabs() {
@@ -66,8 +67,8 @@ export default function MyTabs() {
         }}
       />
       <Tab.Screen
-        name="AddCar"
-        component={AddVechileScreen}
+        name="AddBooking"
+        component={SelectLocation}
         options={{
           tabBarIcon: () => <Image source={addIcon} />,
           tabBarButton: props => <CustomTabBarButton {...props} float={true} />,

@@ -15,16 +15,17 @@ import {msgProvider} from '../../Provider/Messageconsolevalidationprovider/messa
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 import SubTotalBooking from '../../components/subTotalBooking/SubTotalBooking';
-import myCarsList from '../../atoms/carsList/myCarsList';
+import myCarsList, { fetchMyCars } from '../../atoms/carsList/myCarsList';
 
 export default function RequestDetails({navigation, route}) {
   const [selectMain, setSelectMain] = useState('');
-  const cars = useRecoilValue(myCarsList);
+  const [cars, setMyCarsList] = useRecoilState(myCarsList);
   const [selectCar, setSelectCars] = useState();
   const [services, setServices] = useState();
   const [bookingDetails, setBookingDetails] =
     useRecoilState(bookingDetailsAtom);
   useEffect(() => {
+    fetchMyCars(setMyCarsList)
     let fetchData = async () => {
       setServices(await localStorage.getItemObject('services'));
     };

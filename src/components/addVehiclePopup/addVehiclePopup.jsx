@@ -17,7 +17,7 @@ export default function AddVehiclePopup({closePopUp, nextScreen}) {
         <Image className="my-4" source={img} />
       </View>
       <Button
-        Title={Lang_chg.addvechicle_txt[config.language]}
+        Title={Lang_chg.book_Now[config.language]}
         onPress={() => {
           nextScreen();
           closePopUp();

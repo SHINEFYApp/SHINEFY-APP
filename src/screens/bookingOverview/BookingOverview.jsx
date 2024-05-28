@@ -172,6 +172,7 @@ const BookingOverview = ({navigation, route}) => {
                   ...bookingDetails,
                   coupon_id: res.coupan_id,
                   discount_amount: res.dis_amount,
+                  total_amount : res.total_amount
                 });
               }}
             />
