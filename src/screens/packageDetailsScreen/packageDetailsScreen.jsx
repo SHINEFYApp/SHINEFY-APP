@@ -1,13 +1,19 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Image, Text, View} from 'react-native-ui-lib';
 import img from '../../assets/detailsCar.png';
-import timeIcon from '../../assets/icons/timeIcon.png';
 import Button from '../../components/mainButton/Button';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 import {ScrollView} from 'react-native-gesture-handler';
+import apiSauce from '../../API/apiSauce';
 
 export default function PackageDetailsScreen({navigation, route}) {
+  console.log(route);
+
+  useEffect(() => {
+    apiSauce.get(`/get_package_details/${route}`).then(res => console.log);
+  }, []);
+
   return (
     <View className="flex-1">
       <ScrollView>

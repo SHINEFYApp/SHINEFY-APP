@@ -15,12 +15,17 @@ import SelectVehicle from '../../components/selectVehicle/SelectVehicle';
 import {Lang_chg} from '../../Provider/Language_provider';
 import subTotalAtom from '../../atoms/subTotal/subTotal.atom';
 import applyCoupon from '../../Features/applyCoupon/applyCoupon';
+import RadioButton from '../../components/RadioButton/RadioButton';
+import walletIcon from '../../assets/icons/profile/wallet.png';
+import getWallet from '../../Features/getWallet/getWallet';
 
 const BookingOverview = ({navigation, route}) => {
   const [bookingDetails, setBookingDetails] =
     useRecoilState(bookingDetailsAtom);
   let date = new Date(reverseSortDate(bookingDetails.booking_date));
   const [coupon, setCoupon] = useState();
+  const [walletAmount, setWalletAmount] = useState();
+  const [isWallet, setIsWallet] = useState();
   const extraServiceData = useMemo(() => {
     let extraData = [];
     for (let key in bookingDetails?.extraData?.extraServices) {
@@ -28,7 +33,6 @@ const BookingOverview = ({navigation, route}) => {
     }
     return extraData;
   }, []);
-
   useEffect(() => {
     if (coupon?.couponName == '') {
       setCoupon();
@@ -45,6 +49,36 @@ const BookingOverview = ({navigation, route}) => {
       total_amount: route.params.price,
     });
   }, []);
+  useEffect(() => {
+    let fetchData = async () => {
+      let data = await getWallet();
+      setWalletAmount(data);
+    };
+    fetchData();
+  }, []);
+
+  function handleAmount() {
+    if (isWallet == Lang_chg.wallet_txt[config.language]) {
+      if (coupon?.total_amount) {
+        return +coupon?.total_amount - +walletAmount;
+      } else {
+        return +route.params.price - +walletAmount;
+      }
+    } else {
+      if (coupon?.total_amount) {
+        return +coupon?.total_amount;
+      } else {
+        return +route.params.price;
+      }
+    }
+  }
+
+  useEffect(() => {
+    setBookingDetails({
+      ...bookingDetails,
+      total_amount: handleAmount(),
+    });
+  }, [isWallet]);
 
   return (
     <View className={'pt-[90px] px-5'}>
@@ -120,6 +154,20 @@ const BookingOverview = ({navigation, route}) => {
               />
             </>
           )}
+          {isWallet == Lang_chg.wallet_txt[config.language] && (
+            <>
+              <BookingOverviewTextDetails
+                title={Lang_chg.wallet[config.language]}
+                value={Lang_chg.wallet[config.language]}
+                price={`-${walletAmount}`}
+              />
+              <View
+                className={
+                  'flex bg-[#C3C3C3] w-[80%] h-[1px] items-center my-5 mx-auto justify-center'
+                }
+              />
+            </>
+          )}
         </View>
         <View
           className={
@@ -129,10 +177,7 @@ const BookingOverview = ({navigation, route}) => {
             {Lang_chg.totalservicecharges_txt[config.language]}
           </Text>
           <Text className={'font-bold text-center text-lg'}>
-            {coupon?.total_amount
-              ? coupon?.total_amount
-              : bookingDetails.total_amount}{' '}
-            EGP
+            {handleAmount()} EGP
           </Text>
         </View>
         <View
@@ -172,12 +217,37 @@ const BookingOverview = ({navigation, route}) => {
                   ...bookingDetails,
                   coupon_id: res.coupan_id,
                   discount_amount: res.dis_amount,
-                  total_amount : res.total_amount
+                  total_amount: res.total_amount,
                 });
               }}
             />
           </View>
         </View>
+        <RadioButton
+          buttons={[
+            {
+              id: 1,
+              title: Lang_chg.wallet_txt[config.language],
+              icon: walletIcon,
+            },
+          ]}
+          currentActive={isWallet}
+          set={activeElement => {
+            if (isWallet) {
+              setIsWallet();
+              setBookingDetails({
+                ...bookingDetails,
+                redemwallet: 0,
+              });
+            } else {
+              setIsWallet(activeElement);
+              setBookingDetails({
+                ...bookingDetails,
+                redemwallet: walletAmount,
+              });
+            }
+          }}
+        />
         <Button
           Title={Lang_chg.confirm_booking[config.language]}
           btnStyle={'font-semibold text-lg'}

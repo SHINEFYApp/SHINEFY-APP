@@ -66,7 +66,7 @@ export default async function cashBooking(bookingDetails, navigation) {
   data.append('area_id', bookingDetails.area_id);
   data.append('note', bookingDetails.notes ? bookingDetails.notes : 'NA');
   data.append('payment_method', bookingDetails.payment_method);
-  // data.append('wallet_amount', this.state.redemwallet);
+  data.append('wallet_amount', bookingDetails.redemwallet);
   // data.append('online_amount', this.state.netpay);
   let url = config.baseURL + 'create_booking';
 

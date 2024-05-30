@@ -812,6 +812,7 @@ class Language_provider {
   ];
 
   packages = ['Packages', 'الحزم'];
+  package_details = ['Package Details', ' تفاصيل الحزم'];
 
   //-------------------------------------my subscriptions----------------------//
 

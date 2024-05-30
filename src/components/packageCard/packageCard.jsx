@@ -7,6 +7,7 @@ import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 
 export default function PackageCard({navigation , pack}) {
+  console.log(pack)
   return (
     <View className="bg-white py-4 px-5 rounded-xl m-2" style={style.box}>
       <View className="flex-row mb-3">
@@ -41,7 +42,7 @@ export default function PackageCard({navigation , pack}) {
           Title={Lang_chg.claim[config.language]}
           smallButton
           onPress={() => {
-            navigation.navigate('PackageDetailsScreen', 2);
+            navigation.navigate('PackageDetailsScreen', pack.id);
           }}
         />
       </View>
