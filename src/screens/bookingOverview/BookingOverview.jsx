@@ -3,8 +3,6 @@ import {TextInput} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Image, Text, View} from 'react-native-ui-lib';
 import locationMark from '../../assets/icons/bookingOverview/locationMark.png';
-import car from '../../assets/icons/bookingOverview/carImage.png';
-import CrossoverElement from '../../components/bookingOverview/crossoverElement';
 import BookingOverviewTextDetails from '../../components/bookingOverview/BookingOverviewTextDetails';
 import Button from '../../components/mainButton/Button';
 import bookingDetailsAtom from '../../atoms/bookingDetails/bookingDetails.atom';
@@ -13,7 +11,6 @@ import {reverseSortDate} from '../../utlites/sortDate';
 import {config} from '../../Provider/configProvider';
 import SelectVehicle from '../../components/selectVehicle/SelectVehicle';
 import {Lang_chg} from '../../Provider/Language_provider';
-import subTotalAtom from '../../atoms/subTotal/subTotal.atom';
 import applyCoupon from '../../Features/applyCoupon/applyCoupon';
 import RadioButton from '../../components/RadioButton/RadioButton';
 import walletIcon from '../../assets/icons/profile/wallet.png';
@@ -122,7 +119,7 @@ const BookingOverview = ({navigation, route}) => {
           />
           {extraServiceData.map(extraService => {
             return (
-              <>
+              <React.Fragment key={extraService.extra_service_id}>
                 <BookingOverviewTextDetails
                   title={''}
                   value={extraService.extra_service_name[config.language]}
@@ -137,10 +134,10 @@ const BookingOverview = ({navigation, route}) => {
                     'flex bg-[#C3C3C3] w-[80%] h-[1px] items-center my-5 mx-auto justify-center'
                   }
                 />
-              </>
+              </React.Fragment>
             );
           })}
-          {coupon?.couponName != '' && coupon && (
+          {coupon?.couponName !== '' && coupon && (
             <>
               <BookingOverviewTextDetails
                 title={'Coupon'}
@@ -154,7 +151,7 @@ const BookingOverview = ({navigation, route}) => {
               />
             </>
           )}
-          {isWallet == Lang_chg.wallet_txt[config.language] && (
+          {isWallet === Lang_chg.wallet_txt[config.language] && (
             <>
               <BookingOverviewTextDetails
                 title={Lang_chg.wallet[config.language]}

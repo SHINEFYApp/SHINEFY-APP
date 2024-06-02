@@ -59,7 +59,13 @@ export default function HomeScreen({navigation}) {
           className="px-3 mt-3"
           showsHorizontalScrollIndicator>
           {specialOffers?.map(offer => {
-            return <SaleBox key={offer.extra_service_id} offer={offer} />;
+            return (
+              <SaleBox
+                key={offer.extra_service_id}
+                navigation={navigation}
+                offer={offer}
+              />
+            );
           })}
         </ScrollView>
       </View>

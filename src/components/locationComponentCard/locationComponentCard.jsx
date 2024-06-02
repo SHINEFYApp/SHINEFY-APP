@@ -23,7 +23,7 @@ export default function LocationCard({location, navigation}) {
       onPress={() => {
         navigation.push('RequestDetails', location);
       }}>
-      <View className="flex-row items-center mx-4 my-2 pb-3 justify-between border-b border-[#c3c3c3] relative">
+      <View className="flex-row items-center my-2 pb-3 justify-between border-b border-[#c3c3c3] relative">
         <Modal
           avoidKeyboard={true}
           hasBackdrop={true}

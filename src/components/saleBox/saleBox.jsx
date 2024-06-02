@@ -1,11 +1,11 @@
-import {ImageBackground} from 'react-native';
+import {ImageBackground, TouchableOpacity} from 'react-native';
+import React from 'react';
 import {Text, View} from 'react-native-ui-lib';
 import WashCar from '../../assets/car-wash-detailing-station.png';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 
-export default function SaleBox({offer}) {
+export default function SaleBox({offer, navigation}) {
   return (
     <View className={'rounded-xl overflow-hidden min-w-[300px] mr-2 mb-2'}>
       <ImageBackground source={WashCar} className="p-4 relative">
@@ -28,7 +28,9 @@ export default function SaleBox({offer}) {
             </Text>
           </View>
         </View>
-        <TouchableOpacity className="bg-mainColor absolute py-2 px-4  bottom-1 right-1 rounded-lg">
+        <TouchableOpacity
+          onPress={() => navigation.push('SavedLocationScreen')}
+          className="bg-mainColor absolute py-2 px-4  bottom-2 right-2 rounded-lg">
           <Text className="text-white">{Lang_chg.claim[config.language]}</Text>
         </TouchableOpacity>
       </ImageBackground>
