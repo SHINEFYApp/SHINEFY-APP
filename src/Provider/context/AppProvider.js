@@ -1,12 +1,6 @@
 import React, {Component} from 'react';
-import {
-  SafeAreaView,
-  StatusBar,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import {Colors, Font, mediaprovider} from '../utilslib/Utils';
+import {StatusBar, Text, TouchableOpacity, View} from 'react-native';
+import {Colors, mediaprovider} from '../utilslib/Utils';
 import AppLoader from './AppLoader';
 import * as Animatable from 'react-native-animatable';
 import NetInfo from '@react-native-community/netinfo';
@@ -68,64 +62,62 @@ export class AppProvider extends Component {
 
     return (
       <AppContext.Provider value={{...funcs}}>
-       
-          <View style={{flex: 1}}>
-            <StatusBar
-              hidden={false}
-              StatusBarStyle="light-content"
-              backgroundColor={Colors.appColor}
-              translucent={false}
-              networkActivityIndicatorVisible={true}
-              barStyle="light-content"
-            />
+        <View style={{flex: 1}}>
+          <StatusBar
+            hidden={false}
+            StatusBarStyle="dark-content"
+            backgroundColor={'#fff'}
+            networkActivityIndicatorVisible
+            barStyle="dark-content"
+          />
 
-            {this.props.children}
-            <AppLoader loading={loading} />
+          {this.props.children}
+          <AppLoader loading={loading} />
 
-            {!this.state.isConnected && (
-              <View
+          {!this.state.isConnected && (
+            <View
+              style={{
+                position: 'absolute',
+                bottom: 5,
+                width: '100%',
+                backgroundColor: Colors.internetbackcolor,
+              }}>
+              <Text
                 style={{
-                  position: 'absolute',
-                  bottom: 5,
-                  width: '100%',
-                  backgroundColor: Colors.internetbackcolor,
+                  textAlign: 'center',
+                  paddingVertical: 5,
+                  fontSize: 14,
+                  color: Colors.internettextcolor,
                 }}>
-                <Text
+                No Internet connection
+              </Text>
+            </View>
+          )}
+          {this.state.backonline && (
+            <View
+              style={{
+                position: 'absolute',
+                bottom: 5,
+                width: '100%',
+                backgroundColor: Colors.onlinebackcolor,
+              }}>
+              <TouchableOpacity disabled>
+                <Animatable.Text
+                  animation="zoomIn"
+                  duration={3000}
+                  iterationCount="infinite"
                   style={{
                     textAlign: 'center',
+                    color: Colors.onlinetextcolor,
                     paddingVertical: 5,
                     fontSize: 14,
-                    color: Colors.internettextcolor,
                   }}>
-                  No Internet connection
-                </Text>
-              </View>
-            )}
-            {this.state.backonline && (
-              <View
-                style={{
-                  position: 'absolute',
-                  bottom: 5,
-                  width: '100%',
-                  backgroundColor: Colors.onlinebackcolor,
-                }}>
-                <TouchableOpacity disabled={true}>
-                  <Animatable.Text
-                    animation="zoomIn"
-                    duration={3000}
-                    iterationCount="infinite"
-                    style={{
-                      textAlign: 'center',
-                      color: Colors.onlinetextcolor,
-                      paddingVertical: 5,
-                      fontSize: 14,
-                    }}>
-                    Back online
-                  </Animatable.Text>
-                </TouchableOpacity>
-              </View>
-            )}
-          </View>
+                  Back online
+                </Animatable.Text>
+              </TouchableOpacity>
+            </View>
+          )}
+        </View>
       </AppContext.Provider>
     );
   }

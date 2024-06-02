@@ -20,7 +20,7 @@ export default function LoginModal({openSignup, navigation, closeLogin}) {
   }
 
   return (
-    <View className="transition-all right-0 bottom-0 bg-white w-full p-5 rounded-xl">
+    <View className="absolute transition-all left-0 right-0 -bottom-5 bg-white w-full p-5 rounded-xl">
       <KeyboardAwareScrollView>
         <View className="pb-5 relative">
           <View>

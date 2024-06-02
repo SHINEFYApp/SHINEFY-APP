@@ -388,7 +388,7 @@ class Language_provider {
   confirmpassword = ['Confirm Password', 'تأكيد كلمة المرور'];
   remember = ['Remember me', 'تذكرنى'];
   Forgot_password_2 = ['Forgot Password', 'هل نسيت كلمة السر'];
-  mobile_placeholder = ['Email', 'البريد الإلكتروني'];
+  mobile_placeholder = ['Phone', 'رفم الجوال'];
   categories = ['Categories', 'فئات'];
   view = ['View All', 'عرض الكل'];
   English = ['English', 'إنجليزي'];

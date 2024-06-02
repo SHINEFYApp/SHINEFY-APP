@@ -1,26 +1,15 @@
 import 'react-native-gesture-handler';
-import {Component} from 'react';
+import React, {Component} from 'react';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, useRoute} from '@react-navigation/native';
 import {AppProvider, AppConsumer} from './src/Provider/context/AppProvider';
 import Stacknav from './src/Provider/Routenavigation';
-import {I18nManager} from 'react-native';
+import {I18nManager, View} from 'react-native';
 import RNRestart from 'react-native-restart';
 import {localStorage} from './src/Provider/utilslib/Utils';
-import {LogBox} from 'react-native';
-import WelcomeScreen from './src/screens/welcomeScreen/welcomeScreen';
-import OTPScreen from './src/screens/OTPScreen/OTPScreen';
-import ForgotPasswordScreen from './src/screens/forgotpasswordScreen/forgotPasswordScreen';
-import MyTabs from './src/components/bottomTabs/bottomTabs';
-import { RecoilRoot } from 'recoil';
+import {RecoilRoot} from 'recoil';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
-
-// import WelcomeScreen from './src/screens/welcomeScreen/welcomeScreen';
-LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
-LogBox.ignoreAllLogs(); //Ignore all log notifications
-LogBox.ignoreLogs([
-  'Animated: `useNativeDriver` was not specified. This is a required option and must be explicitly set to `true` or `false`',
-]);
 global.MapAddress = 'NA';
 global.pushRedirection = 0;
 class App extends Component {
@@ -57,19 +46,18 @@ class App extends Component {
     return (
       <GestureHandlerRootView style={{flex: 1}}>
         <NavigationContainer>
-        <RecoilRoot>
-
-           <AppProvider {...this.props}>
-            <AppConsumer>
-              {funcs => {
-                global.props = {...funcs};
-                return <Stacknav {...funcs}/>;
-              }}
-            </AppConsumer>
-            
-          </AppProvider>
+          <RecoilRoot>
+            <SafeAreaProvider>
+              <AppProvider {...this.props}>
+                <AppConsumer>
+                  {funcs => {
+                    global.props = {...funcs};
+                    return <Stacknav {...funcs} />;
+                  }}
+                </AppConsumer>
+              </AppProvider>
+            </SafeAreaProvider>
           </RecoilRoot>
-
         </NavigationContainer>
       </GestureHandlerRootView>
     );

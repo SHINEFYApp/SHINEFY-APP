@@ -9,7 +9,7 @@ export default function BackButton({navigation}) {
         navigation.pop();
       }}
       className={
-        'h-[30px] w-[30px] rounded-full left-4 top-4 items-center justify-center border-[#ccc] border absolute z-10'
+        'h-[30px] w-[30px] relative rounded-full left-4 top-0 items-center justify-center border-[#ccc] border z-10'
       }>
       <View>
         <Image

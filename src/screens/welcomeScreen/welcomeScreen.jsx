@@ -1,5 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {BackHandler, ImageBackground, StyleSheet} from 'react-native';
+import {
+  BackHandler,
+  ImageBackground,
+  StatusBar,
+  StyleSheet,
+} from 'react-native';
 import {Image, Text, View} from 'react-native-ui-lib';
 import background from '../../assets/backgroundImage.png';
 import Button from '../../components/mainButton/Button';
@@ -11,6 +16,8 @@ import Modal from 'react-native-modal';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 import {localStorage} from '../../Provider/utilslib/Utils';
+import SafeAreaView from '../../components/SafeAreaView';
+
 export default function WelcomeScreen({navigation}) {
   const logoScale = useSharedValue(1);
   const logoTranslateY = useSharedValue(0);
@@ -24,6 +31,7 @@ export default function WelcomeScreen({navigation}) {
         navigation.replace('HomeScreen', {home_status: 1});
       }
     };
+    language_fun();
     getIsLoggedIn();
   });
   const handleLoginPress = () => {
@@ -46,6 +54,29 @@ export default function WelcomeScreen({navigation}) {
     setIsSignupModalVisible(false);
   };
 
+  const language_fun = async () => {
+    let textalign = await localStorage.getItemObject('language');
+    if (textalign != null) {
+      if (textalign == 1) {
+        config.textalign = 'right';
+
+        config.language = 1;
+        localStorage.setItemObject('languagesetenglish', 3);
+        localStorage.setItemObject('languagecathc', 0);
+        this.setState({loanguage: 1});
+      } else {
+        config.textalign = 'left';
+
+        config.language = 0;
+      }
+    } else {
+      config.textalign = 'left';
+
+      config.language = 0;
+      localStorage.setItemObject('language', 0);
+    }
+  };
+
   useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', () => {
       BackHandler.exitApp();
@@ -55,72 +86,82 @@ export default function WelcomeScreen({navigation}) {
 
   return (
     <View className="flex-1">
+      <StatusBar
+        hidden={false}
+        StatusBarStyle="light-content"
+        backgroundColor={'#00000010'}
+        translucent
+        networkActivityIndicatorVisible
+        barStyle="light-content"
+      />
       <ImageBackground source={background} style={styles.image}>
-        <View style={styles.container}>
-          <Animated.View
-            style={{
-              transform: [{translateY: logoTranslateY}, {scale: logoScale}],
-            }}>
-            <Image source={logo} />
-          </Animated.View>
-          <View width={'100%'}>
-            <Button
-              onPress={handleLoginPress}
-              Title={Lang_chg.login[config.language]}
-              textColor={'black'}
-            />
-            <Button
-              onPress={handleSignupPress}
-              Title={Lang_chg.create_new_account[config.language]}
-              secondStyle={true}
-            />
-          </View>
-          <View className="absolute bottom-5">
-            <Text className="text-white z-1 text-center">
-              {Lang_chg.continue_agreement[config.language]}
-            </Text>
-            <View className="flex flex-row gap-2 mt-1">
-              <Text className="z-1 text-white text-center underline">
-                {Lang_chg.terms_of_service[config.language]}
-              </Text>
-              <Text className="z-1 text-white text-center underline">
-                {Lang_chg.privacy_policy[config.language]}
-              </Text>
-              <Text className="z-1 text-white text-center underline">
-                {Lang_chg.content_policy[config.language]}
-              </Text>
+        <SafeAreaView>
+          <View style={styles.container}>
+            <Animated.View
+              style={{
+                transform: [{translateY: logoTranslateY}, {scale: logoScale}],
+              }}>
+              <Image source={logo} />
+            </Animated.View>
+            <View width={'100%'}>
+              <Button
+                onPress={handleLoginPress}
+                Title={Lang_chg.login[config.language]}
+                textColor={'black'}
+              />
+              <Button
+                onPress={handleSignupPress}
+                Title={Lang_chg.create_new_account[config.language]}
+                secondStyle={true}
+              />
             </View>
-          </View>
-          <Modal
-            isVisible={isLoginModalVisible}
-            hasBackdrop
-            onBackdropPress={() => {
-              setIsLoginModalVisible(false);
-            }}
-            onBackButtonPress={() => {
-              setIsLoginModalVisible(false);
-            }}>
-            <LoginModal
-              closeLogin={() => {
+            <View className="absolute bottom-5">
+              <Text className="text-white z-1 text-center">
+                {Lang_chg.continue_agreement[config.language]}
+              </Text>
+              <View className="flex flex-row gap-2 mt-1">
+                <Text className="z-1 text-white text-center underline">
+                  {Lang_chg.terms_of_service[config.language]}
+                </Text>
+                <Text className="z-1 text-white text-center underline">
+                  {Lang_chg.privacy_policy[config.language]}
+                </Text>
+                <Text className="z-1 text-white text-center underline">
+                  {Lang_chg.content_policy[config.language]}
+                </Text>
+              </View>
+            </View>
+            <Modal
+              isVisible={isLoginModalVisible}
+              hasBackdrop
+              onBackdropPress={() => {
                 setIsLoginModalVisible(false);
               }}
-              navigation={navigation}
-              openSignup={handleSignupPress}
-            />
-          </Modal>
+              onBackButtonPress={() => {
+                setIsLoginModalVisible(false);
+              }}>
+              <LoginModal
+                closeLogin={() => {
+                  setIsLoginModalVisible(false);
+                }}
+                navigation={navigation}
+                openSignup={handleSignupPress}
+              />
+            </Modal>
 
-          <Modal
-            hasBackdrop
-            isVisible={isSignupModalVisivle}
-            onBackdropPress={handleCloseSignup}
-            onBackButtonPress={handleCloseSignup}>
-            <SignUpModal
-              closeSignup={handleCloseSignup}
-              navigation={navigation}
-              openLogin={handleLoginPress}
-            />
-          </Modal>
-        </View>
+            <Modal
+              hasBackdrop
+              isVisible={isSignupModalVisivle}
+              onBackdropPress={handleCloseSignup}
+              onBackButtonPress={handleCloseSignup}>
+              <SignUpModal
+                closeSignup={handleCloseSignup}
+                navigation={navigation}
+                openLogin={handleLoginPress}
+              />
+            </Modal>
+          </View>
+        </SafeAreaView>
       </ImageBackground>
     </View>
   );

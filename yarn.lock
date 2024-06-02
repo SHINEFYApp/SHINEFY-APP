@@ -3306,7 +3306,7 @@ __metadata:
     react-native-ratings: "npm:^8.1.0"
     react-native-reanimated: "npm:^3.8.1"
     react-native-restart: "npm:^0.0.27"
-    react-native-safe-area-context: "npm:^4.9.0"
+    react-native-safe-area-context: "npm:^4.10.3"
     react-native-share: "npm:^10.0.2"
     react-native-simple-toast: "npm:^3.3.0"
     react-native-snap-carousel: "npm:^3.9.1"
@@ -9870,13 +9870,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-safe-area-context@npm:^4.9.0":
-  version: 4.9.0
-  resolution: "react-native-safe-area-context@npm:4.9.0"
+"react-native-safe-area-context@npm:^4.10.3":
+  version: 4.10.3
+  resolution: "react-native-safe-area-context@npm:4.10.3"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/27bb6b759d4d36f39e4a4a2d7e4d65f2e4e95175fc9ffeac63249680da54fd4cd0a4da064314d9ce579182200327967447da17cf8ea31badbaa4087de3302f42
+  checksum: 10c0/7c7c415d63e35aa10e68b691880fc3d8cfd192a63b62d594356206c2d0315270970cf2fb4796748afc444ce86fda5c915b49d94522c7c863c655a164829af5d5
   languageName: node
   linkType: hard
 

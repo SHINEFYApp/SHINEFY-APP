@@ -35,7 +35,6 @@ import ReviewScreen from '../screens/reviewScreen/ReviewScreen';
 
 import AddVechileScreen from '../screens/addVechile/addVechile';
 import CarPlateNumberScreen from '../screens/CarPlateNumberScreen';
-import Splash from '../Splash';
 
 const Stack = createStackNavigator();
 
@@ -46,12 +45,7 @@ const Stacknav = navigation => {
         header: props => <NavigationTop {...props} />,
         cardStyle: {backgroundColor: '#FFFAF2'},
       }}
-      initialRouteName={'Splash'}>
-      <Stack.Screen
-        name="Splash"
-        component={Splash}
-        options={{headerShown: false, gestureEnabled: false}}
-      />
+      initialRouteName={'WelcomeScreen'}>
       <Stack.Screen
         name="WelcomeScreen"
         component={WelcomeScreen}
