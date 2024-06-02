@@ -575,6 +575,7 @@ class Language_provider {
   navigatelocation_txt = ['Navigate Location', 'انتقل للموقع'];
   cardetails_txt = ['Your Car Details', 'تفاصيل سيارتك'];
   extraservice_txt = ['Extra Services', 'خدمات إضافية'];
+  mainservice_txt = ['Main Services', 'خدمات اساسية'];
   other_services = ['Other Services', 'خدمات اخري'];
   //==========================26/03/2022,atul texts
   subtotal_txt = ['Sub Total', 'المجموع الفرعي'];

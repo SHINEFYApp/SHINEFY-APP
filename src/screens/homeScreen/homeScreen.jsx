@@ -11,16 +11,21 @@ import {localStorage} from '../../Provider/localStorageProvider';
 import getServices from '../../Features/getServices/getServices';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
+import PackageCard from '../../components/packageCard/packageCard';
+import getPackages from '../../Features/getPackages/getPackages';
 
 export default function HomeScreen({navigation}) {
   const [services, SetServices] = useState([]);
   const [specialOffers, SetSpecialOffers] = useState([]);
   const [searchText, setSearchText] = useState('');
   const insets = useSafeAreaInsets();
+  const [packages, setPackages] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       const data = await getServices();
+      const packages = await getPackages();
       SetServices(data.all_service_arr.service_arr);
+      setPackages(packages.packages);
       SetSpecialOffers(data.all_service_arr.extra_service_arr);
       localStorage.setItemObject('services', data.all_service_arr);
     };
@@ -55,6 +60,32 @@ export default function HomeScreen({navigation}) {
           showsHorizontalScrollIndicator>
           {specialOffers?.map(offer => {
             return <SaleBox key={offer.extra_service_id} offer={offer} />;
+          })}
+        </ScrollView>
+      </View>
+      <View>
+        <View className="mt-2 flex-row items-center px-4">
+          <Text className="text-[#000] text-xl ">
+            {Lang_chg.packages[config.language]}
+          </Text>
+          <Text
+            className="text-mainColor flex-1 text-right"
+            onPress={() => {
+              navigation.navigate('PackageScreen');
+            }}>
+            {Lang_chg.see_all[config.language]}
+          </Text>
+        </View>
+        <ScrollView
+          horizontal={true}
+          className="pl-3 mt-3"
+          showsHorizontalScrollIndicator={false}>
+          {packages.map(pack => {
+            return (
+              <View className="w-[350px]">
+                <PackageCard pack={pack} navigation={navigation} />
+              </View>
+            );
           })}
         </ScrollView>
       </View>
