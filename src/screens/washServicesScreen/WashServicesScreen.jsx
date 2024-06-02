@@ -3,6 +3,7 @@ import React from 'react';
 import WashServicesCard from '../../components/washServicesCard/washServicesCard';
 import {useEffect, useState} from 'react';
 import getServices from '../../Features/getServices/getServices';
+import SafeAreaView from '../../components/SafeAreaView';
 
 export default function WashServicesScreen({navigation}) {
   const [services, SetServices] = useState([]);
@@ -15,20 +16,22 @@ export default function WashServicesScreen({navigation}) {
   }, []);
 
   return (
-    <View className="mt-[80px] px-2">
+    <SafeAreaView>
       <ScrollView>
-        {services?.map((service, index) => {
-          return (
-            <WashServicesCard
-              key={service.service_id}
-              page
-              navigation={navigation}
-              id={index}
-              service={service}
-            />
-          );
-        })}
+        <View className="mt-[80px] px-4">
+          {services?.map((service, index) => {
+            return (
+              <WashServicesCard
+                key={service.service_id}
+                page
+                navigation={navigation}
+                id={index}
+                service={service}
+              />
+            );
+          })}
+        </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }

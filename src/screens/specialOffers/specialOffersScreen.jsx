@@ -1,32 +1,37 @@
-import { ScrollView, View } from "react-native";
-import SaleBox from "../../components/saleBox/saleBox";
-import { useEffect, useState } from "react";
-import getServices from "../../Features/getServices/getServices";
+import {ScrollView, View} from 'react-native';
+import React from 'react';
+import SaleBox from '../../components/saleBox/saleBox';
+import {useEffect, useState} from 'react';
+import getServices from '../../Features/getServices/getServices';
+import SafeAreaView from '../../components/SafeAreaView';
 
-export default function SpecialOffersScreen() {
-  const [specialOffers , SetSpecialOffers] = useState([])
+export default function SpecialOffersScreen({navigation}) {
+  const [specialOffers, SetSpecialOffers] = useState([]);
 
-
-    useEffect(()=>{
+  useEffect(() => {
     const fetchData = async () => {
-    const data =await getServices()
-    SetSpecialOffers(data.all_service_arr.extra_service_arr)
-  }
-  fetchData()
-  },[])
+      const data = await getServices();
+      SetSpecialOffers(data.all_service_arr.extra_service_arr);
+    };
+    fetchData();
+  }, []);
 
-
-    return(
+  return (
+    <SafeAreaView>
+      <ScrollView>
         <View className="mt-[80px] px-2">
-            <ScrollView>
-                  {
-                specialOffers?.map((offer)=>{
-                  return(
-                    <SaleBox offer={offer} />
-                  )
-                })
-              }
-            </ScrollView>
+          {specialOffers?.map(offer => {
+            // console.log(offer); TODO: need to get the offer id from the backend response
+            return (
+              <SaleBox
+                key={offer.extra_service_id}
+                offer={offer}
+                navigation={navigation}
+              />
+            );
+          })}
         </View>
-    )
+      </ScrollView>
+    </SafeAreaView>
+  );
 }

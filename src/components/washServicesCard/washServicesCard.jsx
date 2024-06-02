@@ -1,16 +1,15 @@
-import {ImageBackground} from 'react-native';
+import {ImageBackground, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {Text} from 'react-native-ui-lib';
-import img from '../../assets/carWashing.png';
-import {TouchableHighlight} from 'react-native-gesture-handler';
 import {config} from '../../Provider/configProvider';
 export default function WashServicesCard({page, navigation, service}) {
-
- return (
-    <TouchableHighlight
+  return (
+    <TouchableOpacity
       onPress={() => {
         navigation.navigate('WashServiceDetails', {
-          id: service?.service_id ? service.service_id :service.extra_service_id,
+          id: service?.service_id
+            ? service.service_id
+            : service.extra_service_id,
           name: service.service_name,
         });
       }}
@@ -18,15 +17,24 @@ export default function WashServicesCard({page, navigation, service}) {
         page ? 'w-full' : 'w-[125px]'
       } mb-3`}>
       <ImageBackground
-        source={{uri: `${config.img_url3}${service.service_image ? service.service_image : service.extra_service_image }`}}
-        className={'flex-1 justify-end'} resizeMode='contain'>
+        source={{
+          uri: `${config.img_url3}${
+            service.service_image
+              ? service.service_image
+              : service.extra_service_image
+          }`,
+        }}
+        className={'flex-1 justify-end'}
+        resizeMode="contain">
         <Text
           className={
             'text-md text-white pl-1 pr-4 leading-5 pb-2 bg-[#00000087]'
           }>
-          {service.service_name ? service.service_name[config.language] : service.extra_service_name[config.language]}
+          {service.service_name
+            ? service.service_name[config.language]
+            : service.extra_service_name[config.language]}
         </Text>
       </ImageBackground>
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 }

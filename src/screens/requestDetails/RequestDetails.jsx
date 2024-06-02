@@ -6,16 +6,15 @@ import {useEffect, useState} from 'react';
 import SelectVehicle from '../../components/selectVehicle/SelectVehicle';
 import {ScrollView} from 'react-native-gesture-handler';
 import AddOtherVehicle from '../../components/addOtherVehicle/addOtherVehicle';
-import Button from '../../components/mainButton/Button';
 import {localStorage} from '../../Provider/localStorageProvider';
 import locationMark from '../../assets/icons/bookingOverview/locationMark.png';
-import {useRecoilState, useRecoilValue} from 'recoil';
+import {useRecoilState} from 'recoil';
 import bookingDetailsAtom from '../../atoms/bookingDetails/bookingDetails.atom';
 import {msgProvider} from '../../Provider/Messageconsolevalidationprovider/messageProvider';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 import SubTotalBooking from '../../components/subTotalBooking/SubTotalBooking';
-import myCarsList, { fetchMyCars } from '../../atoms/carsList/myCarsList';
+import myCarsList, {fetchMyCars} from '../../atoms/carsList/myCarsList';
 
 export default function RequestDetails({navigation, route}) {
   const [selectMain, setSelectMain] = useState('');
@@ -25,7 +24,7 @@ export default function RequestDetails({navigation, route}) {
   const [bookingDetails, setBookingDetails] =
     useRecoilState(bookingDetailsAtom);
   useEffect(() => {
-    fetchMyCars(setMyCarsList)
+    fetchMyCars(setMyCarsList);
     let fetchData = async () => {
       setServices(await localStorage.getItemObject('services'));
     };
@@ -37,16 +36,6 @@ export default function RequestDetails({navigation, route}) {
     });
     fetchData();
   }, []);
-
-  const data = [
-    {key: '1', value: 'Mobiles', disabled: true},
-    {key: '2', value: 'Appliances'},
-    {key: '3', value: 'Cameras'},
-    {key: '4', value: 'Computers', disabled: true},
-    {key: '5', value: 'Vegetables'},
-    {key: '6', value: 'Diary Products'},
-    {key: '7', value: 'Drinks'},
-  ];
 
   return (
     <>
@@ -82,6 +71,7 @@ export default function RequestDetails({navigation, route}) {
               {cars?.map(car => {
                 return (
                   <SelectVehicle
+                    key={car.vehicle_id}
                     car={car}
                     selected={selectCar}
                     onPress={() => {
@@ -108,6 +98,7 @@ export default function RequestDetails({navigation, route}) {
             {services?.service_arr?.map(service => {
               return (
                 <SelectMainService
+                  key={service.service_id}
                   service={service}
                   selected={selectMain}
                   onPress={id => {
@@ -132,7 +123,12 @@ export default function RequestDetails({navigation, route}) {
               {Lang_chg.select_extra_service[config.language]}
             </Text>
             {services?.extra_service_arr?.map(extra => {
-              return <SelectExtraService extraService={extra} />;
+              return (
+                <SelectExtraService
+                  key={extra.extra_service_id}
+                  extraService={extra}
+                />
+              );
             })}
           </View>
         </ScrollView>
