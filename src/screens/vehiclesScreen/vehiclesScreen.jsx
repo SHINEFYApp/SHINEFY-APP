@@ -11,16 +11,20 @@ import {useRecoilState, useSetRecoilState} from 'recoil';
 import myCarsList, {fetchMyCars} from '../../atoms/carsList/myCarsList';
 import addNewCar from '../../atoms/addNewCar/addNewCar';
 import updateCar from '../../atoms/currentCar/currentCar';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 export default function VehiclesScreen({navigation}) {
   const setNewCar = useSetRecoilState(addNewCar);
   const setUpdateCar = useSetRecoilState(updateCar);
   const [myCars, setMyCarsList] = useRecoilState(myCarsList);
+  const insets = useSafeAreaInsets();
   useEffect(() => {
     fetchMyCars(setMyCarsList);
   }, []);
   return (
-    <View className="pt-[80] px-5 relative flex-1">
+    <View
+      style={{paddingTop: insets.top + 70}}
+      className="px-4 relative flex-1">
       <FlatList
         ListEmptyComponent={
           <View className="flex-1 justify-center items-center p-10">

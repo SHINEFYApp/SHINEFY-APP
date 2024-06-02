@@ -5,6 +5,7 @@ import saveIcon from '../../assets/icons/savedLocationIcon.png';
 import backIcon from '../../assets/icons/backIcon.png';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 export default function NavigationTop(props) {
   function handleTitle() {
     switch (props.route.name) {
@@ -70,9 +71,10 @@ export default function NavigationTop(props) {
         return props.route.name;
     }
   }
-
+  const insets = useSafeAreaInsets();
   return (
     <View
+      style={{paddingTop: insets.top}}
       className={
         'flex-row  absolute w-full justify-between z-10 p-5 bg-white items-center rounded-b-2xl border-b border-l border-r border-[#C3C3C3]'
       }>

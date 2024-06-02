@@ -1,10 +1,10 @@
 import 'react-native-gesture-handler';
 import React, {Component} from 'react';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import {NavigationContainer, useRoute} from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 import {AppProvider, AppConsumer} from './src/Provider/context/AppProvider';
 import Stacknav from './src/Provider/Routenavigation';
-import {I18nManager, View} from 'react-native';
+import {I18nManager} from 'react-native';
 import RNRestart from 'react-native-restart';
 import {localStorage} from './src/Provider/utilslib/Utils';
 import {RecoilRoot} from 'recoil';

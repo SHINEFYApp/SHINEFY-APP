@@ -6,10 +6,12 @@ import Bookings from '../../components/Bookings/Bookings';
 import getBooking from '../../Features/getBooking/getBooking';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 export default function MyBookingScreen({navigation}) {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState('pending_booking');
+  const insets = useSafeAreaInsets();
 
   useEffect(() => {
     let fetchData = async () => {
@@ -20,7 +22,7 @@ export default function MyBookingScreen({navigation}) {
   }, [currentPage]);
 
   return (
-    <View className="pt-[80] px-5 flex-1">
+    <View style={{paddingTop: insets.top + 70}} className=" px-4 flex-1">
       <View
         className="bg-[#FFFAF2] py-3 px-8 flex-row justify-between rounded-xl"
         style={style.tabStyle}>

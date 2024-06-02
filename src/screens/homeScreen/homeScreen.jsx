@@ -5,7 +5,7 @@ import SearchInput from '../../components/searchInput/searchInput';
 import SaleBox from '../../components/saleBox/saleBox';
 import locationIcon from '../../assets/icons/locationIcon.png';
 import WashServicesCard from '../../components/washServicesCard/washServicesCard';
-
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import MapComponent from '../../components/mapComponent/mapComponent';
 import {localStorage} from '../../Provider/localStorageProvider';
 import getServices from '../../Features/getServices/getServices';
@@ -16,6 +16,7 @@ export default function HomeScreen({navigation}) {
   const [services, SetServices] = useState([]);
   const [specialOffers, SetSpecialOffers] = useState([]);
   const [searchText, setSearchText] = useState('');
+  const insets = useSafeAreaInsets();
   useEffect(() => {
     const fetchData = async () => {
       const data = await getServices();
@@ -28,7 +29,7 @@ export default function HomeScreen({navigation}) {
 
   return (
     <KeyboardAwareScrollView>
-      <View className="p-4 pt-[85px]">
+      <View style={{paddingTop: insets.top + 70}} className="px-4">
         <SearchInput
           placeholder={Lang_chg.what_looking_for_placholder[config.language]}
           onChange={t => setSearchText(t)}
@@ -87,17 +88,17 @@ export default function HomeScreen({navigation}) {
             {Lang_chg.see_all[config.language]}
           </Text>
         </View>
-        <FlatList 
+        <FlatList
           data={services.concat(specialOffers)}
           horizontal={true}
-          renderItem={({item ,index})=>(
-              <WashServicesCard
-                // key={item.service_id}
-                navigation={navigation}
-                id={index}
-                keyObj=""
-                service={item}
-              />
+          renderItem={({item, index}) => (
+            <WashServicesCard
+              // key={item.service_id}
+              navigation={navigation}
+              id={index}
+              keyObj=""
+              service={item}
+            />
           )}
         />
         {/* <ScrollView
