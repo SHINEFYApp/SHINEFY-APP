@@ -22,6 +22,7 @@ const FAQ = () => {
         {data?.map((faq, index) => {
           return (
             <FAOComponent
+              key={`${index}`}
               question={`${index + 1}-${faq.question[config.language]}`}
               content={faq.answer[config.language]}
             />
