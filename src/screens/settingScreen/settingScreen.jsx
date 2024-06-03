@@ -130,13 +130,13 @@ export default function SettingScreen({navigation}) {
         />
         <SelectVechileCard
           text={Lang_chg.tearmsetting[config.language]}
-          screen={'AboutUsScreen'}
+          screen={Lang_chg.tearmsetting[config.language]}
           navigation={navigation}
           icon={fileIcon}
         />
         <SelectVechileCard
           text={Lang_chg.privacy[config.language]}
-          screen={'AboutUsScreen'}
+          screen={Lang_chg.privacypolicy_txt[config.language]}
           navigation={navigation}
           icon={privateIcon}
         />

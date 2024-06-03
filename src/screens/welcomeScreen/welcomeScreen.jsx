@@ -143,15 +143,24 @@ export default function WelcomeScreen({navigation}) {
                 {Lang_chg.continue_agreement[config.language]}
               </Text>
               <View className="flex flex-row gap-2 mt-1">
-                <Text className="z-1 text-white text-center underline">
-                  {Lang_chg.terms_of_service[config.language]}
-                </Text>
-                <Text className="z-1 text-white text-center underline">
-                  {Lang_chg.privacy_policy[config.language]}
-                </Text>
-                <Text className="z-1 text-white text-center underline">
-                  {Lang_chg.content_policy[config.language]}
-                </Text>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate(Lang_chg.tearmsetting[config.language])
+                  }>
+                  <Text className="z-1 text-white text-center underline">
+                    {Lang_chg.terms_of_service[config.language]}
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate(
+                      Lang_chg.privacypolicy_txt[config.language],
+                    )
+                  }>
+                  <Text className="z-1 text-white text-center underline">
+                    {Lang_chg.privacy_policy[config.language]}
+                  </Text>
+                </TouchableOpacity>
               </View>
             </View>
             <Modal
