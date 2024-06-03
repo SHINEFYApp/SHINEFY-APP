@@ -17,7 +17,11 @@ import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 import {localStorage} from '../../Provider/utilslib/Utils';
 import SafeAreaView from '../../components/SafeAreaView';
-
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import googleLogin from '../../Features/googleLogin/googleLogin';
+import googleIcon from '../../assets/icons/googleLoginIcon.webp';
+import facebookIcon from '../../assets/icons/facebookIcon.png';
+import facebookLogin from '../../Features/facebookLogin/facebookLogin';
 export default function WelcomeScreen({navigation}) {
   const logoScale = useSharedValue(1);
   const logoTranslateY = useSharedValue(0);
@@ -114,6 +118,25 @@ export default function WelcomeScreen({navigation}) {
                 Title={Lang_chg.create_new_account[config.language]}
                 secondStyle={true}
               />
+              <View className="flex-row justify-center">
+                <TouchableOpacity
+                  onPress={() => {
+                    googleLogin(navigation);
+                  }}>
+                  <Image source={googleIcon} width={70} height={50} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    facebookLogin(navigation);
+                  }}>
+                  <Image
+                    source={facebookIcon}
+                    width={70}
+                    height={50}
+                    resizeMode="contain"
+                  />
+                </TouchableOpacity>
+              </View>
             </View>
             <View className="absolute bottom-5">
               <Text className="text-white z-1 text-center">

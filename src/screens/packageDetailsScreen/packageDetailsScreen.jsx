@@ -18,8 +18,6 @@ export default function PackageDetailsScreen({navigation, route}) {
     });
   }, []);
 
-  console.log(data);
-
   return (
     <View className="flex-1">
       {isPayment && (
@@ -57,7 +55,7 @@ export default function PackageDetailsScreen({navigation, route}) {
                 {Lang_chg.extraservice_txt[config.language]}
               </Text>
               {data?.extra_services?.map(service => {
-                console.log(service);
+              
                 return (
                   <Text>
                     {config.language == 0
@@ -73,7 +71,7 @@ export default function PackageDetailsScreen({navigation, route}) {
                 {Lang_chg.mainservice_txt[config.language]}
               </Text>
               {data?.main_services?.map(service => {
-                console.log(service);
+       
                 return (
                   <Text>
                     {config.language == 0
