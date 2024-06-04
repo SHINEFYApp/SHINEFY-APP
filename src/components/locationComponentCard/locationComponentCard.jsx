@@ -21,7 +21,7 @@ export default function LocationCard({location, navigation}) {
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation.push('RequestDetails', location);
+        navigation.push('BookingTypeScreen', location);
       }}>
       <View className="flex-row items-center my-2 pb-3 justify-between border-b border-[#c3c3c3] relative">
         <Modal

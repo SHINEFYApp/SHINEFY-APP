@@ -18,21 +18,18 @@ import myCarsList, {fetchMyCars} from '../../atoms/carsList/myCarsList';
 
 export default function RequestDetails({navigation, route}) {
   const [selectMain, setSelectMain] = useState('');
-  const [cars, setMyCarsList] = useRecoilState(myCarsList);
-  const [selectCar, setSelectCars] = useState();
   const [services, setServices] = useState();
   const [bookingDetails, setBookingDetails] =
     useRecoilState(bookingDetailsAtom);
   useEffect(() => {
-    fetchMyCars(setMyCarsList);
     let fetchData = async () => {
       setServices(await localStorage.getItemObject('services'));
     };
     setBookingDetails({
       ...bookingDetails,
-      address_loc: route.params.location,
-      longitude: route.params.longitude,
-      latitude: route.params.latitude,
+      address_loc: route.params.bookingType.params.location,
+      longitude: route.params.bookingType.params.longitude,
+      latitude: route.params.bookingType.params.latitude,
     });
     fetchData();
   }, []);
@@ -55,12 +52,12 @@ export default function RequestDetails({navigation, route}) {
                   {config.language === 0 ? 'Location' : 'الموقع'}:
                 </Text>
                 <Text className={'text-mainColor'}>
-                  {route.params.location}
+                  {route.params.bookingType.params.location}
                 </Text>
               </View>
             </ScrollView>
           </View>
-          <View>
+          {/* <View>
             <Text className="text-xl mb-3 mt-2">
               {Lang_chg.SelectVehicles[config.language]}
             </Text>
@@ -90,7 +87,7 @@ export default function RequestDetails({navigation, route}) {
               })}
               <AddOtherVehicle navigation={navigation} />
             </ScrollView>
-          </View>
+          </View> */}
           <View>
             <Text className="text-xl mb-3 mt-2">
               {Lang_chg.select_main_service[config.language]}
@@ -134,12 +131,10 @@ export default function RequestDetails({navigation, route}) {
         </ScrollView>
         <SubTotalBooking
           Press={() => {
-            if (!bookingDetails.vehicle_id) {
-              msgProvider.toast('Please Select Car', 'center');
-            } else if (!bookingDetails.service_id) {
+            if (!bookingDetails.service_id) {
               msgProvider.toast('Please Select Service', 'center');
             } else {
-              navigation.push('SelectDateTime');
+              navigation.push('selectBookingvehicle');
             }
           }}
         />

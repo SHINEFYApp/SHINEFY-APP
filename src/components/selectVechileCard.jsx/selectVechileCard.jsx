@@ -18,10 +18,8 @@ export default function SelectVechileCard({
   brandID,
   isSwitchEnabled,
   onChangeSwitch,
+  location: bookingType,
 }) {
-  function handleNavigate() {
-    navigation.navigate(screen, text);
-  }
   const [isEnabled, setIsEnable] = useState(isSwitchEnabled);
 
   function toggleSwitch() {
@@ -31,10 +29,10 @@ export default function SelectVechileCard({
   function handleNavigate() {
     if (screenTitle.includes('Model')) {
       if (brandID) {
-        navigation.navigate(screen, screenTitle);
+        navigation.navigate(screen, {screenTitle});
       }
     } else {
-      navigation.navigate(screen, screenTitle);
+      navigation.navigate(screen, {screenTitle, bookingType});
     }
   }
 

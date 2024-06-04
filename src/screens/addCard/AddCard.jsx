@@ -1,4 +1,5 @@
-import {Checkbox, Image, Text, View} from 'react-native-ui-lib';
+import React from 'react';
+import {Image, Text, View} from 'react-native-ui-lib';
 import creditCard from '../../assets/creditCard.png';
 import AddCardInput from '../../components/addCard/AddCardInput';
 import {TextInput} from 'react-native';
@@ -23,7 +24,7 @@ const AddCard = () => {
         <AddCardInput label={Lang_chg.card_holder[config.language]} />
         <AddCardInput label={Lang_chg.card_number[config.language]} />
         <View className={'flex flex-row items-center justify-center w-full'}>
-          <View className={`mb-4 w-[48%] mr-2`}>
+          <View className={'mb-4 w-[48%] mr-2'}>
             <Text className={'font-bold text-base mb-2'}>
               {Lang_chg.expiry_date[config.language]}
             </Text>
@@ -33,7 +34,7 @@ const AddCard = () => {
               }
             />
           </View>
-          <View className={`mb-4 w-[48%] ml-1`}>
+          <View className={'mb-4 w-[48%] ml-1'}>
             <Text className={'font-bold text-base mb-2'}>CVV</Text>
             <TextInput
               className={

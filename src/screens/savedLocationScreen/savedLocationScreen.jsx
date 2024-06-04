@@ -20,7 +20,7 @@ export default function SavedLocationScreen({navigation}) {
   }, []);
   return (
     <SafeAreaView>
-      <View className="flex-1 px-4  pt-[60px]">
+      <View className="flex-1 px-4 pt-[60px]">
         <FlatList
           ListEmptyComponent={
             <View className="w-full items-center p-10">

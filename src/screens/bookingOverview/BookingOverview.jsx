@@ -1,6 +1,6 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import {TextInput} from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
+import {FlatList, ScrollView} from 'react-native-gesture-handler';
 import {Image, Text, View} from 'react-native-ui-lib';
 import locationMark from '../../assets/icons/bookingOverview/locationMark.png';
 import BookingOverviewTextDetails from '../../components/bookingOverview/BookingOverviewTextDetails';
@@ -43,7 +43,9 @@ const BookingOverview = ({navigation, route}) => {
   useEffect(() => {
     setBookingDetails({
       ...bookingDetails,
-      total_amount: route.params.price,
+      total_amount:
+        route.params.price *
+        bookingDetails.extraData.allSelectedCarsDetails.length,
     });
   }, []);
   useEffect(() => {
@@ -59,13 +61,20 @@ const BookingOverview = ({navigation, route}) => {
       if (coupon?.total_amount) {
         return +coupon?.total_amount - +walletAmount;
       } else {
-        return +route.params.price - +walletAmount;
+        return (
+          +route.params.price *
+            bookingDetails.extraData.allSelectedCarsDetails.length -
+          +walletAmount
+        );
       }
     } else {
       if (coupon?.total_amount) {
         return +coupon?.total_amount;
       } else {
-        return +route.params.price;
+        return (
+          +route.params.price *
+          bookingDetails.extraData.allSelectedCarsDetails.length
+        );
       }
     }
   }
@@ -75,7 +84,7 @@ const BookingOverview = ({navigation, route}) => {
       ...bookingDetails,
       total_amount: handleAmount(),
     });
-  }, [isWallet]);
+  }, [isWallet, coupon]);
 
   return (
     <View className={'pt-[90px] px-5'}>
@@ -103,7 +112,12 @@ const BookingOverview = ({navigation, route}) => {
             </Text>
           </View>
         </ScrollView>
-        <SelectVehicle car={bookingDetails.extraData.car} />
+        <FlatList
+          data={bookingDetails.extraData.allSelectedCarsDetails}
+          renderItem={({item}) => <SelectVehicle car={item} />}
+          keyExtractor={item => item.vehicle_id}
+        />
+        {/* <SelectVehicle car={bookingDetails.extraData.car} /> */}
         <View className={'mt-4 py-2 px-6 w-full bg-white rounded-lg'}>
           <BookingOverviewTextDetails
             title={'services'}
@@ -117,11 +131,21 @@ const BookingOverview = ({navigation, route}) => {
               'flex bg-[#C3C3C3] w-[80%] h-[1px] items-center my-5 mx-auto justify-center'
             }
           />
+          <BookingOverviewTextDetails
+            title={Lang_chg.car_txt[config.language]}
+            value={Lang_chg.carsCount_txt[config.language]}
+            price={`X ${bookingDetails.extraData.allSelectedCarsDetails.length} `}
+          />
+          <View
+            className={
+              'flex bg-[#C3C3C3] w-[80%] h-[1px] items-center my-5 mx-auto justify-center'
+            }
+          />
           {extraServiceData.map(extraService => {
             return (
               <React.Fragment key={extraService.extra_service_id}>
                 <BookingOverviewTextDetails
-                  title={''}
+                  title={Lang_chg.extraservice_txt[config.language]}
                   value={extraService.extra_service_name[config.language]}
                   price={` ${extraService.quantity} X ${
                     extraService.extra_service_price
@@ -174,7 +198,7 @@ const BookingOverview = ({navigation, route}) => {
             {Lang_chg.totalservicecharges_txt[config.language]}
           </Text>
           <Text className={'font-bold text-center text-lg'}>
-            {handleAmount()} EGP
+            {bookingDetails.total_amount} EGP
           </Text>
         </View>
         <View
@@ -201,7 +225,9 @@ const BookingOverview = ({navigation, route}) => {
               Title={Lang_chg.Apply[config.language]}
               onPress={async () => {
                 let res = await applyCoupon(
-                  bookingDetails.total_amount,
+                  walletAmount
+                    ? bookingDetails.total_amount + walletAmount
+                    : bookingDetails.total_amount,
                   coupon.couponName,
                 );
 

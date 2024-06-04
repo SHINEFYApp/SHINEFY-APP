@@ -26,7 +26,11 @@ export default async function cashBooking(bookingDetails, navigation) {
 
   var data = new FormData();
   data.append('user_id', user_arr.user_id);
-  data.append('vehicle_id', bookingDetails.vehicle_id);
+  if (bookingDetails.extraData.allSelectedCars.length == 1) {
+    data.append('vehicle_id', bookingDetails.extraData.allSelectedCars[0]);
+  } else if (bookingDetails.extraData.allSelectedCars.length > 1) {
+    data.append('vehicles_ids', bookingDetails.extraData.allSelectedCars);
+  }
   data.append('free_status', '0'); // false=0 true=1 is Free
   data.append('service_id', bookingDetails.service_id);
   data.append('service_price', bookingDetails.service_price);
@@ -68,7 +72,12 @@ export default async function cashBooking(bookingDetails, navigation) {
   data.append('payment_method', bookingDetails.payment_method);
   data.append('wallet_amount', bookingDetails.redemwallet);
   // data.append('online_amount', this.state.netpay);
-  let url = config.baseURL + 'create_booking';
+  let url;
+  if (bookingDetails.extraData.allSelectedCars.length == 1) {
+    url = config.baseURL + 'create_booking';
+  } else if (bookingDetails.extraData.allSelectedCars.length > 1) {
+    url = config.baseURL + 'create_booking_multi';
+  }
 
   try {
     apifuntion.postApi(url, data).then(obj => {

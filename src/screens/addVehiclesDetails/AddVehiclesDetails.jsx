@@ -6,7 +6,7 @@ import Button from '../../components/mainButton/Button';
 export default function AddVehiclesDetails({navigation, route}) {
   return (
     <View className="pt-[80] px-5">
-      <SelectDetailsVeicles title={route.params} />
+      <SelectDetailsVeicles title={route.params.screenTitle} />
       <Button
         Title={'DONE'}
         onPress={() => {
