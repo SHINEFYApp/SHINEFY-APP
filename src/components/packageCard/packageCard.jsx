@@ -1,24 +1,30 @@
 import {Image, Text, View} from 'react-native-ui-lib';
 import Button from '../mainButton/Button';
-import Img from '../../assets/cardCar.png';
+import React from 'react';
 import timeIcon from '../../assets/icons/timeIcon2.png';
 import {StyleSheet} from 'react-native';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 
-export default function PackageCard({navigation , pack}) {
-
+export default function PackageCard({navigation, pack}) {
   return (
     <View className="bg-white py-4 px-5 rounded-xl m-2" style={style.box}>
       <View className="flex-row mb-3">
-        <Image source={{uri:pack.package_img}} style={{width:"50" , resizeMode:"cover" }} />
+        <Image
+          source={{uri: pack.package_img}}
+          style={{width: 50, resizeMode: 'cover'}}
+        />
         <View className="flex-row justify-between ml-4 flex-1">
           <Text
-            className={`text-xs text-center p-1 rounded-full text-[#DD9923] bg-[#DD992345] absolute right-0 `}>
+            className={
+              'text-xs text-center p-1 rounded-full text-[#DD9923] bg-[#DD992345] absolute right-0 '
+            }>
             Car Detailing
           </Text>
           <View className="gap-2">
-            <Text className="font-bold text-xl">{pack[config.language == 0 ? "name" : "name_ar"]}</Text>
+            <Text className="font-bold text-xl">
+              {pack[config.language == 0 ? 'name' : 'name_ar']}
+            </Text>
             {/* <View className="flex-row items-center">
               <Image source={timeIcon} />
               <Text className="ml-2 font-bold">One Wash (SHINEFY Plus)</Text>
@@ -26,12 +32,15 @@ export default function PackageCard({navigation , pack}) {
             <View className="flex-row items-center">
               <Image source={timeIcon} />
               <Text className="ml-2">
-                {+pack.extra_services_count + +pack.main_services_count} {Lang_chg.other_services[config.language]}
+                {+pack.extra_services_count + +pack.main_services_count}{' '}
+                {Lang_chg.other_services[config.language]}
               </Text>
             </View>
             <View className="flex-row items-center">
               <Image source={timeIcon} />
-              <Text className="ml-2">{pack.total_days} {Lang_chg.mins[config.language]}</Text>
+              <Text className="ml-2">
+                {pack.total_days} {Lang_chg.mins[config.language]}
+              </Text>
             </View>
           </View>
         </View>

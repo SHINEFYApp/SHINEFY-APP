@@ -88,7 +88,7 @@ export default function HomeScreen({navigation}) {
           showsHorizontalScrollIndicator={false}>
           {packages.map(pack => {
             return (
-              <View className="w-[350px]">
+              <View key={pack.id} className="w-[350px]">
                 <PackageCard pack={pack} navigation={navigation} />
               </View>
             );
