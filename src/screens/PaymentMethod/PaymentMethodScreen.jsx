@@ -42,6 +42,7 @@ export default function PaymentMethod({navigation}) {
   const [webView, setWebView] = useState(false);
   const [bookingDetails, setBookingDetails] =
     useRecoilState(bookingDetailsAtom);
+    
   const paymentMethodsOptions = [
     {
       id: 1,

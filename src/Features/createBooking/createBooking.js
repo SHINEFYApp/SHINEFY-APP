@@ -78,10 +78,11 @@ export default async function cashBooking(bookingDetails, navigation) {
   } else if (bookingDetails.extraData.allSelectedCars.length > 1) {
     url = config.baseURL + 'create_booking_multi';
   }
+  console.log(data);
 
   try {
     apifuntion.postApi(url, data).then(obj => {
-      navigation.navigate('HomeScreen');
+      // navigation.navigate('HomeScreen');
     });
   } catch (err) {
     if (err === 'noNetwork') {

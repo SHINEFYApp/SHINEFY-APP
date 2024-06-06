@@ -26,32 +26,32 @@ export default function PayTabs({setWebView, amount, webView, navigation}) {
   function onNavigationStateChange(webViewState) {
     webViewState.canGoBack = false;
     // console.log(webViewState)
-    // if (webViewState.loading == false) {
-    //   var t = webViewState.url.split('/').pop().split('?')[0];
+    if (webViewState.loading == false) {
+      var t = webViewState.url.split('/').pop().split('?')[0];
 
-    //   if (typeof t != null) {
-    //     var p = webViewState.url.split('?').pop().split('&');
+      if (typeof t != null) {
+        var p = webViewState.url.split('?').pop().split('&');
 
-    //     if (t.includes('payment_success')) {
-    //       var payment_id = 0;
+        if (t.includes('payment_success')) {
+          var payment_id = 0;
 
-    //       var payment_date = '';
+          var payment_date = '';
 
-    //       var payment_time = '';
+          var payment_time = '';
 
-    //       setWebView(false);
-    //       setTimeout(() => {
-    //         cashBooking(bookingDetails, navigation);
-    //       }, 300);
-    //     } else if (t.includes('payment_cancel')) {
-    //       msgProvider.toast(Lang_chg.payment_fail[config.language], 'center');
+          setWebView(false);
+          setTimeout(() => {
+            cashBooking(bookingDetails, navigation);
+          }, 300);
+        } else if (t.includes('payment_cancel')) {
+          msgProvider.toast(Lang_chg.payment_fail[config.language], 'center');
 
-    //       setWebView(false);
+          setWebView(false);
 
-    //       return false;
-    //     }
-    //   }
-    // }
+          return false;
+        }
+      }
+    }
   }
   return (
     <Modal

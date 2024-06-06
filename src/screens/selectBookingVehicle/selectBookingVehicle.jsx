@@ -29,7 +29,7 @@ export default function SelectBookingVehicles({navigation}) {
 
   const carsId = myCars.map(car => {
     return car.vehicle_id;
-  }); // get all users cars ID to check if user selected all cars
+  // }); // get all users cars ID to check if user selected all cars
   function selectAllCars() {
     setIsSelectAll(!isSelectAll);
     if (isSelectAll) {
@@ -48,7 +48,7 @@ export default function SelectBookingVehicles({navigation}) {
     }
   } // select all cars or remove all cars
   useEffect(() => {
-    setIsSelectAll(equalsCheck(selectCarID, carsId));
+    setIsSelectAll(equalsCheck(selectCarID, myCars));
     setBookingDetails({
       ...bookingDetails,
       extraData: {
@@ -57,35 +57,15 @@ export default function SelectBookingVehicles({navigation}) {
         allSelectedCarsDetails: selectCarDetails,
       },
     });
-  }, [selectCarID]); // to check if user selected all cars manual and add it to global state
+  }, [selectCarID, myCars]); // to check if user selected all cars manual and add it to global state
 
   function equalsCheck(arr1, arr2) {
-    selectCarDetails.sort(({vehicle_id: num1}, {vehicle_id: num2}) => {
-      return num1 - num2;
-    });
-    const a = arr1.sort((num1, num2) => {
-      return num1 - num2;
-    });
-    const b = arr2.sort((num1, num2) => {
-      return num1 - num2;
-    });
-    // check the length
-    if (a.length != b.length) {
-      return false;
+    if (arr1.length === arr2.length) {
+      return true;
     } else {
-      let result = false;
-
-      // comparing each element of array
-      for (let i = 0; i < a.length; i++) {
-        if (a[i] !== b[i]) {
-          return false;
-        } else {
-          result = true;
-        }
-      }
-      return result;
+      return false;
     }
-  } // chack if all cars Selected after arrange carsId and selected cars to compare two arrays
+  } // chack if all cars Selected after arrange carsId and selected cars to compare two arrays   // check if all cars is selected by compare length of arrays
 
   return (
     <View
