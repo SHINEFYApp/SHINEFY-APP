@@ -29,7 +29,7 @@ export default function SelectBookingVehicles({navigation}) {
 
   const carsId = myCars.map(car => {
     return car.vehicle_id;
-  // }); // get all users cars ID to check if user selected all cars
+  }); // get all users cars ID to check if user selected all cars
   function selectAllCars() {
     setIsSelectAll(!isSelectAll);
     if (isSelectAll) {
