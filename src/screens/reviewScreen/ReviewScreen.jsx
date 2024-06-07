@@ -10,6 +10,7 @@ import messageIcon from '../../assets/icons/ContactUs/message.png';
 import Button from '../../components/mainButton/Button';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
+import ReviewQuestion from '../../components/reviewQuestion/ReviewQuestion';
 
 const ReviewScreen = () => {
   const [userRating, setUserRating] = useState(0);
@@ -72,6 +73,21 @@ const ReviewScreen = () => {
                 }`}
               />
             </View>
+          </View>
+          <View className={'mt-4'}>
+            <ReviewQuestion
+              question={'1. Are you satisfied with SHINEFY Experience?'}
+            />
+            <ReviewQuestion
+              question={
+                '2. Is the work of Islam Anwar Abdelrahem Mjahed meet your expectations?'
+              }
+            />
+            <ReviewQuestion
+              question={
+                '3. Does Islam Anwar Abdelrahem Mjahed asked for accepted tips?'
+              }
+            />
           </View>
           <View className={'mt-12'}>
             <Button
