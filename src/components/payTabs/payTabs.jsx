@@ -13,7 +13,7 @@ import WebView from 'react-native-webview';
 import bookingDetailsAtom from '../../atoms/bookingDetails/bookingDetails.atom';
 import {useRecoilValue} from 'recoil';
 
-export default function PayTabs({setWebView, amount, webView, navigation}) {
+export default function PayTabs({setWebView, webView, navigation, url}) {
   const [userData, setUserData] = useState();
   const bookingDetails = useRecoilValue(bookingDetailsAtom);
   useEffect(() => {
@@ -25,33 +25,33 @@ export default function PayTabs({setWebView, amount, webView, navigation}) {
 
   function onNavigationStateChange(webViewState) {
     webViewState.canGoBack = false;
-    // console.log(webViewState)
-    if (webViewState.loading == false) {
-      var t = webViewState.url.split('/').pop().split('?')[0];
+    console.log(webViewState);
+    // if (webViewState.loading == false) {
+    //   var t = webViewState.url.split('/').pop().split('?')[0];
 
-      if (typeof t != null) {
-        var p = webViewState.url.split('?').pop().split('&');
+    //   if (typeof t != null) {
+    //     var p = webViewState.url.split('?').pop().split('&');
 
-        if (t.includes('payment_success')) {
-          var payment_id = 0;
+    //     if (t.includes('payment_success')) {
+    //       var payment_id = 0;
 
-          var payment_date = '';
+    //       var payment_date = '';
 
-          var payment_time = '';
+    //       var payment_time = '';
 
-          setWebView(false);
-          setTimeout(() => {
-            cashBooking(bookingDetails, navigation);
-          }, 300);
-        } else if (t.includes('payment_cancel')) {
-          msgProvider.toast(Lang_chg.payment_fail[config.language], 'center');
+    //       setWebView(false);
+    //       setTimeout(() => {
+    //         cashBooking(bookingDetails, navigation);
+    //       }, 300);
+    //     } else if (t.includes('payment_cancel')) {
+    //       msgProvider.toast(Lang_chg.payment_fail[config.language], 'center');
 
-          setWebView(false);
+    //       setWebView(false);
 
-          return false;
-        }
-      }
-    }
+    //       return false;
+    //     }
+    //   }
+    // }
   }
   return (
     <Modal
@@ -117,12 +117,7 @@ export default function PayTabs({setWebView, amount, webView, navigation}) {
         <View style={{flex: 1, backgroundColor: 'white'}}>
           <WebView
             source={{
-              uri:
-                config.baseURL2 +
-                'payment_url.php?user_id=' +
-                userData?.user_id +
-                '&amount=' +
-                parseFloat(parseFloat(amount)).toFixed(2),
+              uri: url,
             }}
             onNavigationStateChange={onNavigationStateChange.bind(this)}
             javaScriptEnabled={true}

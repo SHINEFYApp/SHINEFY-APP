@@ -7,6 +7,8 @@ import getServices from '../../Features/getServices/getServices';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 import getPackages from '../../Features/getPackages/getPackages';
+import getUserPackages from '../../Features/getUserPackages/getUserPackages';
+import {localStorage} from '../../Provider/localStorageProvider';
 
 export default function MySubscreptionScreen({navigation}) {
   const [specialOffers, SetSpecialOffers] = useState([]);
@@ -15,9 +17,9 @@ export default function MySubscreptionScreen({navigation}) {
   useEffect(() => {
     const fetchData = async () => {
       const data = await getServices();
-      const packages = await getPackages();
-      setPackages(packages.packages);
+      const myPackage = await getUserPackages();
       SetSpecialOffers(data.all_service_arr.extra_service_arr);
+      setPackages(myPackage.packageSubscription);
       localStorage.setItemObject('services', data.all_service_arr);
     };
     fetchData();
@@ -64,13 +66,9 @@ export default function MySubscreptionScreen({navigation}) {
           horizontal={true}
           className="pl-3 mt-3"
           showsHorizontalScrollIndicator={false}>
-          {packages.map(pack => {
-            return (
-              <View className="w-[350px]">
-                <PackageCard pack={pack} navigation={navigation} />
-              </View>
-            );
-          })}
+          <View className="w-[350px]">
+            <PackageCard pack={packages} navigation={navigation} />
+          </View>
         </ScrollView>
       </View>
     </View>
