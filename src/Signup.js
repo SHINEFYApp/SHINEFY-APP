@@ -837,7 +837,6 @@ export default class Signup extends Component {
                           }
                           placeholderTextColor={Colors.signup_placeholder_color}
                           value={this.state.companyCode}
-                          keyboardType="Number-pad"
                           maxLength={100}
                           returnKeyLabel="done"
                           returnKeyType="done"
