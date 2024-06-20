@@ -957,7 +957,7 @@ export default class Login extends Component {
               </View>
             )}
 
-            {Platform.OS == 'ios' && (
+            {/*Platform.OS == 'ios' && (
               <View
                 style={{
                   flexDirection: 'row',
@@ -1013,7 +1013,7 @@ export default class Login extends Component {
                   </TouchableOpacity>
                 )}
               </View>
-            )}
+            )*/}
 
             <View
               style={{

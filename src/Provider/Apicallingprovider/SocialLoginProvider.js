@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
 import {Alert} from 'react-native';
 import {CommonActions} from '@react-navigation/native';
-// import { appleAuth,AppleButton } from '@invertase/react-native-apple-authentication';
+// import {
+//   appleAuth,
+//   AppleButton,
+// } from '@invertase/react-native-apple-authentication';
 import {
   msgProvider,
   msgText,
@@ -160,7 +163,6 @@ class SocialLoginProvider extends Component {
         },
         error => {},
       );
-
     // TODO: Send the token to backend
   };
   socaillogout = async (type, navigation) => {
