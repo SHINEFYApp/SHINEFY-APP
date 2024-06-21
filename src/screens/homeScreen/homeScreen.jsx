@@ -13,6 +13,7 @@ import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 import PackageCard from '../../components/packageCard/packageCard';
 import getPackages from '../../Features/getPackages/getPackages';
+import getSavedLocation from '../../Features/getSavedLocation/getSavedLocation';
 
 export default function HomeScreen({navigation}) {
   const [services, SetServices] = useState([]);
@@ -24,6 +25,8 @@ export default function HomeScreen({navigation}) {
     const fetchData = async () => {
       const data = await getServices();
       const packages = await getPackages();
+      const myLocations = await getSavedLocation();
+      console.log(myLocations);
       SetServices(data.all_service_arr.service_arr);
       setPackages(packages.packages);
       SetSpecialOffers(data.all_service_arr.extra_service_arr);

@@ -1,3 +1,4 @@
+import React from 'react';
 import {useEffect, useState} from 'react';
 import {localStorage} from '../../Provider/localStorageProvider';
 import {Colors, Image, Modal, Text, View} from 'react-native-ui-lib';
@@ -14,6 +15,7 @@ import bookingDetailsAtom from '../../atoms/bookingDetails/bookingDetails.atom';
 import {useRecoilValue} from 'recoil';
 
 export default function PayTabs({setWebView, webView, navigation, url}) {
+  console.log(url);
   const [userData, setUserData] = useState();
   const bookingDetails = useRecoilValue(bookingDetailsAtom);
   useEffect(() => {

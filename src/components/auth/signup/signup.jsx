@@ -28,7 +28,7 @@ export default function SignupModal({openLogin, navigation, closeSignup}) {
   }
 
   return (
-    <View className="absolute transition-all left-0 right-0 -bottom-5 bg-white w-full p-5 rounded-xl">
+    <View className="absolute transition-all left-0 right-0 -bottom-5 bg-white w-full p-5 rounded-xl h-full">
       <KeyboardAwareScrollView>
         <View className="pb-5 relative">
           <View>
@@ -126,6 +126,11 @@ export default function SignupModal({openLogin, navigation, closeSignup}) {
               icon={keyIcon}
               isBorder={true}
               type={'passowrd'}
+              onChange={e => {
+                handleUserData({
+                  con_password: e.nativeEvent.text,
+                });
+              }}
             />
           </View>
           <View className="flex flex-row items-center gap-2 mb-2">
@@ -141,7 +146,7 @@ export default function SignupModal({openLogin, navigation, closeSignup}) {
               onPress={() => {
                 // navigation.navigate("Signup")
                 // closeSignup()
-                signupAuth(userData, navigation, closeSignup);
+                signupAuth(userData, navigation, closeSignup, isSelected , isCompany);
               }}
             />
           </View>
