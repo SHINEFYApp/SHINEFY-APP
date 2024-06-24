@@ -2132,6 +2132,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@paytabs/react-native-paytabs@npm:2.6.6":
+  version: 2.6.6
+  resolution: "@paytabs/react-native-paytabs@npm:2.6.6"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/126b1dbd578770cc02bc87199e90cf7f08779ed9dc0cf6a5856c7aaad4ec52f245341074b461c2df773f1a407d87b201969235cc11ffaabe7f540b5af11b1e9a
+  languageName: node
+  linkType: hard
+
 "@pkgjs/parseargs@npm:^0.11.0":
   version: 0.11.0
   resolution: "@pkgjs/parseargs@npm:0.11.0"
@@ -3159,6 +3169,7 @@ __metadata:
     "@babel/core": "npm:^7.20.0"
     "@babel/preset-env": "npm:^7.20.0"
     "@babel/runtime": "npm:^7.20.0"
+    "@paytabs/react-native-paytabs": "npm:2.6.6"
     "@react-native-async-storage/async-storage": "npm:^1.22.3"
     "@react-native-community/blur": "npm:^4.4.0"
     "@react-native-community/datetimepicker": "patch:@react-native-community/datetimepicker@npm%3A7.6.2#~/.yarn/patches/@react-native-community-datetimepicker-npm-7.6.2-8985f28201.patch"

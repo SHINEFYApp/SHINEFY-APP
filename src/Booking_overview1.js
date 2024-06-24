@@ -349,7 +349,10 @@ export default class Booking_overview1 extends Component {
         dis_amount: dis_amount,
       };
       localStorage.setItemObject('discount_arr', dis_arr);
-      if (this.state.free_status == 1) {
+      if (
+        this.state.free_status === 1 ||
+        (this.state.wallet_apply && this.state.netpay == 0)
+      ) {
         this.cashBooking();
       } else {
         this.props.navigation.navigate('Payment_option', {
@@ -408,21 +411,78 @@ export default class Booking_overview1 extends Component {
     data.append('wallet_amount', this.state.redemwallet);
     data.append('online_amount', this.state.netpay);
     let url = config.baseURL + 'create_booking';
+    apifuntion
+      .postApi(url, data)
+      .then(obj => {
+        if (obj.success == 'true') {
+          localStorage.setItemObject('user_arr', obj.user_details);
+          localStorage.setItemObject('booking_number', obj.booking_number);
+          localStorage.removeItem('booking_vehicle_arr');
+          localStorage.removeItem('user_vehicle_arr');
+          localStorage.removeItem('location_arr');
+          localStorage.removeItem('booking_service_arr');
+          localStorage.removeItem('vat_data');
+          localStorage.removeItem('user_all_bookings');
+          localStorage.removeItem('all_slots');
+          localStorage.removeItem('booking_time_slots');
+          localStorage.removeItem('page_status');
+          localStorage.removeItem('discount_arr');
+          if (obj.notification_arr != 'NA') {
+            notification.notification_arr_schedule(obj.notification_arr);
+          }
+          if (obj.notification_arr1 != 'NA') {
+            notification.notification_arr(obj.notification_arr1);
+          }
 
-    this.setState({loading: false});
-    if (err == 'noNetwork') {
-      msgProvider.alert(
-        Lang_chg.msgTitleNoNetwork[config.language],
-        Lang_chg.noNetwork[config.language],
-        false,
-      );
-    } else {
-      msgProvider.alert(
-        Lang_chg.msgTitleServerNotRespond[config.language],
-        Lang_chg.serverNotRespond[config.language],
-        false,
-      );
-    }
+          this.props.navigation.navigate('Success', {success_status: 2});
+        } else {
+          if (obj.slotNotAvailable == 'yes') {
+            setTimeout(() => {
+              msgProvider.alert(
+                Lang_chg.information[config.language],
+                obj.msg[config.language],
+                false,
+              );
+            }, 200);
+            this.props.navigation.navigate('Select_Date');
+            localStorage.removeItem('booking_time_slots');
+            localStorage.removeItem('all_slots');
+            return false;
+          }
+          setTimeout(() => {
+            msgProvider.alert(
+              Lang_chg.information[config.language],
+              obj.msg,
+              false,
+            );
+          }, 200);
+          if (obj.acount_delete_status == 'deactivate') {
+            config.checkUserDelete(this.props.navigation);
+            return false;
+          }
+          if (obj.account_active_status == 'deactivate') {
+            config.checkUserDeactivate(this.props.navigation);
+            return false;
+          }
+          return false;
+        }
+      })
+      .catch(err => {
+        this.setState({loading: false});
+        if (err == 'noNetwork') {
+          msgProvider.alert(
+            Lang_chg.msgTitleNoNetwork[config.language],
+            Lang_chg.noNetwork[config.language],
+            false,
+          );
+        } else {
+          msgProvider.alert(
+            Lang_chg.msgTitleServerNotRespond[config.language],
+            Lang_chg.serverNotRespond[config.language],
+            false,
+          );
+        }
+      });
   };
 
   editBooking = async () => {
@@ -1346,7 +1406,7 @@ export default class Booking_overview1 extends Component {
                           </View>
                         </View>
                       )}
-                      {!this.state.isLoadedWallet && (
+                      {/* {!this.state.isLoadedWallet && (
                         <Text
                           style={{
                             marginTop: 15,
@@ -1475,7 +1535,7 @@ export default class Booking_overview1 extends Component {
                                 fontSize: (mobileW * 3.6) / 100,
                               }}>
                               {Lang_chg.wallet[config.language]}
-                              {/* {parseFloat(this.state.wallet_amount.toFixed(2))} */}
+                              {// {parseFloat(this.state.wallet_amount.toFixed(2))} }
                             </Text>
                           </View>
                           <View style={{width: '50%'}}>
@@ -1496,7 +1556,7 @@ export default class Booking_overview1 extends Component {
                                     fontSize: (mobileW * 3.6) / 100,
                                     textAlign: 'right',
                                   }}>
-                                  {/* {-parseFloat(this.state.redemwallet.toFixed(2))} */}
+                                  {// {-parseFloat(this.state.redemwallet.toFixed(2))}}
                                   {Lang_chg.Remove[config.language]}
                                 </Text>
                               </TouchableOpacity>
@@ -1508,14 +1568,14 @@ export default class Booking_overview1 extends Component {
                                   fontSize: (mobileW * 3.6) / 100,
                                   textAlign: 'right',
                                 }}>
-                                {/* {-parseFloat(this.state.redemwallet.toFixed(2))} */}
+                                {// {-parseFloat(this.state.redemwallet.toFixed(2))}}
                                 - {this.state.redemwallet}{' '}
                                 {Lang_chg.sar_txt[config.language]}
                               </Text>
                             </View>
                           </View>
                         </View>
-                      )}
+                      )} */}
 
                       <DashedLine
                         axis="horizontal"
