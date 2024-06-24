@@ -235,8 +235,8 @@ export default class Home_save_location extends Component {
   };
 
   //-----------------google address get--------------//
-  getadddressfromlatlong = event => {
-    fetch(
+  getadddressfromlatlong =async event => {
+    let res = await fetch(
       'https://maps.googleapis.com/maps/api/geocode/json?address=' +
         event.latitude +
         ',' +
@@ -246,9 +246,10 @@ export default class Home_save_location extends Component {
         '&language=' +
         config.maplanguage,
     )
-      .then(response => response.json())
-      .then(resp => {
-        let responseJson = resp.results[0];
+
+    
+    let response =await res.json()
+    let responseJson = response.results[0];
         let city = '';
         let administrative_area_level_1 = '';
         for (let i = 0; i < responseJson.address_components.length; i++) {
@@ -283,15 +284,17 @@ export default class Home_save_location extends Component {
         var google_latitude = details.geometry.location.lat;
         var google_longitude = details.geometry.location.lng;
         var google_address = details.formatted_address;
+        
+        return google_address
 
         this.setState({
-          latDelta: event.latitudeDelta,
-          longDelta: event.longitudeDelta,
+          // latDelta: event?.latitudeDelta,
+          // longDelta: event?.longitudeDelta,
           google_address: google_address,
           google_latitude: google_latitude,
           google_longitude: google_longitude,
         });
-      });
+
   };
   //----------function for getting current lat long end----------//
   //----------for map end-------------------//
@@ -323,6 +326,14 @@ export default class Home_save_location extends Component {
       return false;
     }
     var data = new FormData();
+  //     data.append('user_type', 1);
+  // data.append('status', status);
+  // data.append('user_id', user_id);
+  // data.append('user_location_id', 'NA');
+  // data.append('name', name);
+  // data.append('latitude', location.latitude);
+  // data.append('longitude', location.longitude);
+  // data.append('location', await getLocationName(location));
     data.append('user_type', user_type);
     data.append('status', status);
     data.append('user_id', user_id);
@@ -330,7 +341,9 @@ export default class Home_save_location extends Component {
     data.append('name', address);
     data.append('latitude', google_latitude);
     data.append('longitude', google_longitude);
-    data.append('location', google_address);
+    let location = {latitude:google_latitude , longitude:google_longitude}
+    let googlelocation = await this.getadddressfromlatlong(location)
+    data.append('location', googlelocation);
     let url = config.baseURL + 'save_user_location';
     apifuntion
       .postApi(url, data)
