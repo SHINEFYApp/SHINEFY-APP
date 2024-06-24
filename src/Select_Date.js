@@ -493,7 +493,7 @@ export default class Select_Date extends Component {
       'Nov',
       'Dec',
     ];
-    var selected_date_arr = date._d;
+    var selected_date_arr = date;
     var getDate = selected_date_arr.getDate();
     var getMonth = selected_date_arr.getMonth() + 1;
     var getYear = selected_date_arr.getFullYear();

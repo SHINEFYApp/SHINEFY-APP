@@ -936,7 +936,7 @@ export default class Home extends Component {
                     alignItems: 'center',
                   }}
                   onPress={() => {
-                    this.props.navigation.navigate('Search_Location');
+                    this.props.navigation.navigate('Saved_Location');
                   }}>
                   <View
                     style={{

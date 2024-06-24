@@ -2,7 +2,7 @@ import NetInfo from '@react-native-community/netinfo';
 import {Platform} from 'react-native';
 
 class ApiContainer {
-  myAppVersion = Platform.OS === 'ios' ? '5' : '5';
+  myAppVersion = Platform.OS === 'ios' ? '6' : '6';
   usertype = 'user';
 
   getApi = async (url, status) => {

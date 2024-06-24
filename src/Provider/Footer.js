@@ -45,18 +45,7 @@ export default class Footer extends Component {
   componentDidMount() {}
 
   modalFun = async () => {
-    let home_data = await localStorage.getItemObject('user_home_data');
-    let vehicle_arr = home_data.vehicle_arr;
-    if (vehicle_arr == 'NA') {
-      this.CheckVehicle();
-    } else {
-      this.props.mapModel();
-      // alert('Hello')
-    }
-    // }
-    // else{
-    //     this.props.navigation.navigate('Home',{home_status:3})
-    // }
+    this.props.navigation.navigate('Search_Location');
   };
   CheckVehicle = () => {
     Alert.alert(

@@ -666,7 +666,7 @@ export default class Profile extends Component {
                 </View>
               </TouchableOpacity>
 
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 style={{
                   width: (mobileW * 85) / 100,
                   alignSelf: 'center',
@@ -721,7 +721,7 @@ export default class Profile extends Component {
                     {Lang_chg.mywallet_txt[config.language]}
                   </Text>
                 </View>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
 
               <TouchableOpacity
                 style={{
