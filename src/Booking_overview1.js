@@ -1406,7 +1406,7 @@ export default class Booking_overview1 extends Component {
                           </View>
                         </View>
                       )}
-                      {/* {!this.state.isLoadedWallet && (
+                      {!this.state.isLoadedWallet && (
                         <Text
                           style={{
                             marginTop: 15,
@@ -1491,9 +1491,14 @@ export default class Booking_overview1 extends Component {
                               <TouchableOpacity
                                 activeOpacity={0.7}
                                 onPress={() => {
-                                   if(!this.state.wallet_amount) {
-                                    msgProvider.toast(Lang_chg.use_wallet_title[config.language], 'center');
-                                    return false
+                                  if (!this.state.wallet_amount) {
+                                    msgProvider.toast(
+                                      Lang_chg.use_wallet_title[
+                                        config.language
+                                      ],
+                                      'center',
+                                    );
+                                    return false;
                                   }
                                   global.props.showLoader();
                                   this.checkwalletamount();
@@ -1539,7 +1544,7 @@ export default class Booking_overview1 extends Component {
                                 fontSize: (mobileW * 3.6) / 100,
                               }}>
                               {Lang_chg.wallet[config.language]}
-                              {// {parseFloat(this.state.wallet_amount.toFixed(2))} }
+                              {/* {parseFloat(this.state.wallet_amount.toFixed(2))} */}
                             </Text>
                           </View>
                           <View style={{width: '50%'}}>
@@ -1560,7 +1565,7 @@ export default class Booking_overview1 extends Component {
                                     fontSize: (mobileW * 3.6) / 100,
                                     textAlign: 'right',
                                   }}>
-                                  {// {-parseFloat(this.state.redemwallet.toFixed(2))}}
+                                  {/* {-parseFloat(this.state.redemwallet.toFixed(2))}*/}
                                   {Lang_chg.Remove[config.language]}
                                 </Text>
                               </TouchableOpacity>
@@ -1572,14 +1577,14 @@ export default class Booking_overview1 extends Component {
                                   fontSize: (mobileW * 3.6) / 100,
                                   textAlign: 'right',
                                 }}>
-                                {// {-parseFloat(this.state.redemwallet.toFixed(2))}}
+                                {/* {-parseFloat(this.state.redemwallet.toFixed(2))} */}
                                 - {this.state.redemwallet}{' '}
                                 {Lang_chg.sar_txt[config.language]}
                               </Text>
                             </View>
                           </View>
                         </View>
-                      )} */}
+                      )}
 
                       <DashedLine
                         axis="horizontal"
