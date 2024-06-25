@@ -1491,6 +1491,10 @@ export default class Booking_overview1 extends Component {
                               <TouchableOpacity
                                 activeOpacity={0.7}
                                 onPress={() => {
+                                   if(!this.state.wallet_amount) {
+                                    msgProvider.toast(Lang_chg.use_wallet_title[config.language], 'center');
+                                    return false
+                                  }
                                   global.props.showLoader();
                                   this.checkwalletamount();
                                   setTimeout(() => {
