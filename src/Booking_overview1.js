@@ -412,7 +412,7 @@ export default class Booking_overview1 extends Component {
     data.append('online_amount', this.state.netpay);
     let url = config.baseURL + 'create_booking';
     apifuntion
-      .postApi(url, data)
+      // .postApi(url, data)
       .then(obj => {
         if (obj.success == 'true') {
           localStorage.setItemObject('user_arr', obj.user_details);
@@ -508,6 +508,7 @@ export default class Booking_overview1 extends Component {
     localStorage.removeItem('discount_arr');
     this.props.navigation.navigate('Home', {home_status: 2});
   };
+
 
   render() {
     return (

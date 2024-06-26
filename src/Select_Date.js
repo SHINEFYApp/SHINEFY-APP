@@ -151,13 +151,14 @@ export default class Select_Date extends Component {
 
   checkTomarrowTime = (item, index) => {
     let data = this.state.tomarrow_slots;
+    let dataArr = this.state.tomarrow_arr;
     for (let i = 0; i < data.length; i++) {
       data[i].status = false;
     }
     data[index].status = true;
     this.setState({
       tomarrow_slots: data,
-      booking_date: this.state.tomarrow_arr.date,
+      booking_date: dataArr.date,
       booking_time: data[index].time,
       area_id: this.state.tomarrow_arr.area_id,
       service_boy_id: this.state.tomarrow_arr.service_boy_id,
@@ -560,10 +561,10 @@ export default class Select_Date extends Component {
     } else {
       if (date_slots == 'NA' || (date_slots?.length ?? 0) == 0) {
         this.setState({
-          booking_day: Lang_chg.today_txt,
-          booking_date: this.state.date_slots.date,
-          booking_time: Lang_chg.waiting_time_slot[config.language],
-          area_id: this.state.date_slots.area_id,
+          booking_day: booking_day,
+          booking_date: booking_date,
+          booking_time: booking_time,
+          area_id: area_id,
         });
       }
       this.redirectionFun();
@@ -614,7 +615,6 @@ export default class Select_Date extends Component {
         booking_day,
         free_status,
       } = this.state;
-
       let booking_slot = {
         area_id: area_id,
         service_boy_id: service_boy_id,
