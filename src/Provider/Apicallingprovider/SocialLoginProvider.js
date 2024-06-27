@@ -80,7 +80,7 @@ class SocialLoginProvider extends Component {
   };
 
   FacebookLogin = async navigation => {
-    navigatefunction = navigation;
+    let navigatefunction = navigation;
     LoginManager.logInWithPermissions(['public_profile', 'email']).then(
       result => {
         if (result.isCancelled) {

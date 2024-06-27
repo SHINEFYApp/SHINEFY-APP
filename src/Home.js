@@ -101,6 +101,10 @@ export default class Home extends Component {
       setTimeout(() => {
         this.setHomeData();
         this.getNotificationCount();
+        localStorage.setItemObject(
+          'booking_vehicle_arr',
+          this.state.vehical_arr[this.state.vehicle_index],
+        );
       }, 500);
     });
 
@@ -939,7 +943,7 @@ export default class Home extends Component {
                     alignItems: 'center',
                   }}
                   onPress={() => {
-                    this.props.navigation.navigate('Saved_Location');
+                    this.props.navigation.navigate('Search_Location');
                   }}>
                   <View
                     style={{
