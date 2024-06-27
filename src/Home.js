@@ -47,6 +47,8 @@ import PushNotification from 'react-native-push-notification';
 import {pushnotification} from './Provider/Pushnotificationredirection';
 import messaging from '@react-native-firebase/messaging';
 import HomeAdPopup from './HomeAdPopup';
+import {setVehicleData} from './apis/viechles';
+
 export default class Home extends Component {
   _didFocusSubscription;
   _willBlurSubscription;
@@ -57,7 +59,7 @@ export default class Home extends Component {
       timer: false,
       modalVisible: false,
       user_id: '',
-      vehicle_arr: 'NA',
+      vehical_arr: 'NA',
       vehicle_index: 0,
       vehicle_id: '',
 
@@ -112,6 +114,7 @@ export default class Home extends Component {
         ),
     );
     this.getnotification();
+    setVehicleData(this, this.props.navigation);
   }
 
   //--------for notification get  start -------------
@@ -1225,7 +1228,7 @@ export default class Home extends Component {
               </Text>
             </View>
 
-            {this.state.vehicle_arr != 'NA' && (
+            {this.state.vehical_arr != 'NA' && (
               <View
                 style={{
                   alignSelf: 'center',
@@ -1247,7 +1250,7 @@ export default class Home extends Component {
                   ref={c => {
                     this._carousel = c;
                   }}
-                  data={this.state.vehicle_arr}
+                  data={this.state.vehical_arr}
                   // loop={true}
                   firstItem={this.state.vehicle_index}
                   renderItem={({item, index}) => {
@@ -1405,6 +1408,10 @@ export default class Home extends Component {
                   itemWidth={(mobileW * 80) / 100}
                   onSnapToItem={index => {
                     this.setState({vehicle_index: index});
+                    localStorage.setItemObject(
+                      'booking_vehicle_arr',
+                      this.state.vehical_arr[index],
+                    );
                     this.setIndex(index);
                   }}
                 />
@@ -1413,7 +1420,7 @@ export default class Home extends Component {
                                 </TouchableOpacity> */}
               </View>
             )}
-            {this.state.vehicle_arr == 'NA' && (
+            {this.state.vehical_arr == 'NA' && (
               <TouchableOpacity
                 activeOpacity={0.7}
                 onPress={() => {

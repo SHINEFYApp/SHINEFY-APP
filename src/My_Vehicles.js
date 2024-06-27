@@ -42,7 +42,7 @@ import Footer from './Provider/Footer';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import Icon2 from 'react-native-vector-icons/Entypo';
 import Geolocation from '@react-native-community/geolocation';
-
+import {setVehicleData} from './apis/viechles';
 export default class My_Vehicles extends Component {
   _didFocusSubscription;
   _willBlurSubscription;
@@ -147,92 +147,7 @@ export default class My_Vehicles extends Component {
   };
 
   setVehicleData = async () => {
-    var user_arr = await localStorage.getItemObject('user_arr');
-    let user_id = user_arr.user_id;
-    this.setState({user_id: user_id});
-    let vehicle_id = 'NA';
-    var url = config.baseURL + 'get_user_vehicle/' + user_id + '/' + vehicle_id;
-    var user_vehicle_arr = await localStorage.getItemObject(
-      'saved_vehicle_arr',
-    );
-    if (user_vehicle_arr == null) {
-      apifuntion
-        .getApi(url)
-        .then(obj => {
-          if (obj.success == 'true') {
-            localStorage.setItemObject('user_arr', obj.user_details);
-            localStorage.setItemObject('saved_vehicle_arr', obj.vehicle_arr);
-            this.setState({vehical_arr: obj.vehicle_arr, refresh: false});
-          } else {
-            if (obj.account_active_status[0] == 'deactivate') {
-              config.checkUserDeactivate(this.props.navigation);
-              return false;
-            }
-
-            if (obj.acount_delete_status[0] == 'deactivate') {
-              config.checkUserDelete(this.props.navigation);
-              return false;
-            }
-
-            return false;
-          }
-        })
-        .catch(err => {
-          if (err == 'noNetwork') {
-            msgProvider.alert(
-              Lang_chg.msgTitleNoNetwork[config.language],
-              Lang_chg.noNetwork[config.language],
-              false,
-            );
-            return false;
-          } else {
-            msgProvider.alert(
-              Lang_chg.msgTitleServerNotRespond[config.language],
-              Lang_chg.serverNotRespond[config.language],
-              false,
-            );
-            return false;
-          }
-        });
-    } else {
-      this.setState({vehical_arr: user_vehicle_arr, refresh: false});
-      apifuntion
-        .getApi(url, 1)
-        .then(obj => {
-          if (obj.success == 'true') {
-            localStorage.setItemObject('user_arr', obj.user_details);
-            localStorage.setItemObject('saved_vehicle_arr', obj.vehicle_arr);
-          } else {
-            if (obj.account_active_status[0] == 'deactivate') {
-              config.checkUserDeactivate(this.props.navigation);
-              return false;
-            }
-            if (obj.acount_delete_status[0] == 'deactivate') {
-              config.checkUserDelete(this.props.navigation);
-              return false;
-            }
-
-            return false;
-          }
-        })
-        .catch(err => {
-          if (err == 'noNetwork') {
-            msgProvider.alert(
-              Lang_chg.msgTitleNoNetwork[config.language],
-              Lang_chg.noNetwork[config.language],
-              false,
-            );
-            return false;
-          } else {
-            msgProvider.alert(
-              Lang_chg.msgTitleServerNotRespond[config.language],
-              Lang_chg.serverNotRespond[config.language],
-              false,
-            );
-            return false;
-          }
-        });
-    }
+    setVehicleData(this, this.props.navigation);
   };
 
   getCoordinatesModal = region => {

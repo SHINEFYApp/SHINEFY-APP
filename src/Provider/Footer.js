@@ -45,7 +45,15 @@ export default class Footer extends Component {
   componentDidMount() {}
 
   modalFun = async () => {
-    this.props.navigation.navigate('Search_Location');
+    let booking_vehicle_arr = await localStorage.getItemObject(
+      'booking_vehicle_arr',
+    );
+
+    if (!booking_vehicle_arr) {
+      this.CheckVehicle();
+    } else {
+      this.props.mapModel();
+    }
   };
   CheckVehicle = () => {
     Alert.alert(
