@@ -6,7 +6,6 @@ import {
   Keyboard,
   Text,
   Modal,
-  FlatList,
   Alert,
   StyleSheet,
   TextInput,
@@ -14,12 +13,9 @@ import {
   TouchableOpacity,
   SafeAreaView,
   ImageBackground,
-  Dimensions,
   Platform,
 } from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {ScrollView} from 'react-native-gesture-handler';
-import {Shareratepro} from './Provider/Sharerateapp';
 //import OneSignal from 'react-native-onesignal';
 import {
   Colors,
@@ -30,12 +26,8 @@ import {
   apifuntion,
   config,
   localStorage,
-  consolepro,
   Lang_chg,
   msgProvider,
-  msgTitle,
-  msgText,
-  Currentltlg,
   SocialLogin,
 } from './Provider/utilslib/Utils';
 import {validationprovider} from '../src/Provider/Validation_provider';

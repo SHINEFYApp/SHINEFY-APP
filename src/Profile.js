@@ -3,22 +3,14 @@ import {
   View,
   Image,
   BackHandler,
-  Keyboard,
   Text,
   Modal,
-  FlatList,
   StyleSheet,
-  TextInput,
   StatusBar,
   TouchableOpacity,
   SafeAreaView,
   ImageBackground,
-  Dimensions,
-  ColorPropType,
-  Platform,
 } from 'react-native';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import HideWithKeyboard from 'react-native-hide-with-keyboard';
 import {ScrollView} from 'react-native-gesture-handler';
 import {
   Colors,
@@ -29,17 +21,11 @@ import {
   apifuntion,
   config,
   localStorage,
-  consolepro,
   Lang_chg,
   msgProvider,
-  msgTitle,
-  msgText,
-  Currentltlg,
 } from './Provider/utilslib/Utils';
 import Footer from './Provider/Footer';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
-import Icon2 from 'react-native-vector-icons/Entypo';
-import Geolocation from '@react-native-community/geolocation';
 
 export default class Profile extends Component {
   _didFocusSubscription;

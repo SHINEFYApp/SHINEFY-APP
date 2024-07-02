@@ -3,23 +3,17 @@ import {
   View,
   Image,
   BackHandler,
-  Keyboard,
   Text,
   Modal,
   FlatList,
   ScrollView,
   StyleSheet,
   RefreshControl,
-  TextInput,
   StatusBar,
   TouchableOpacity,
   SafeAreaView,
   ImageBackground,
-  Dimensions,
-  Platform,
 } from 'react-native';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import HideWithKeyboard from 'react-native-hide-with-keyboard';
 import {
   Colors,
   Font,
@@ -29,19 +23,12 @@ import {
   apifuntion,
   config,
   localStorage,
-  consolepro,
   Lang_chg,
   msgProvider,
-  msgTitle,
-  msgText,
-  Currentltlg,
 } from './Provider/utilslib/Utils';
-import {validationprovider} from '../src/Provider/Validation_provider';
 import {Nodata_foundimage} from '../src/Provider/Nodata_foundimage';
 import Footer from './Provider/Footer';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
-import Icon2 from 'react-native-vector-icons/Entypo';
-import Geolocation from '@react-native-community/geolocation';
 import {setVehicleData} from './apis/viechles';
 export default class My_Vehicles extends Component {
   _didFocusSubscription;
@@ -49,7 +36,7 @@ export default class My_Vehicles extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      vehical_arr: 'NA',
+      vehical_arr: [],
       loaddata: false,
       refresh: false,
       user_id: '',
@@ -614,7 +601,7 @@ export default class My_Vehicles extends Component {
                 />
               }>
               <View style={{marginTop: (mobileW * 1) / 100, flex: 1}}>
-                {this.state.vehical_arr != 'NA' ? (
+                {this.state.vehical_arr.length ? (
                   <FlatList
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}

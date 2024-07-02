@@ -3,20 +3,15 @@ import {
   View,
   Image,
   BackHandler,
-  Keyboard,
   Text,
   Modal,
-  FlatList,
   StyleSheet,
   Alert,
-  TextInput,
   StatusBar,
   TouchableOpacity,
   SafeAreaView,
   ImageBackground,
-  Dimensions,
   Platform,
-  Clipboard,
   PermissionsAndroid,
 } from 'react-native';
 
@@ -29,25 +24,19 @@ import {
   apifuntion,
   config,
   localStorage,
-  consolepro,
   Lang_chg,
   msgProvider,
   msgTitle,
-  msgText,
-  Currentltlg,
 } from './Provider/utilslib/Utils';
-import {validationprovider} from '../src/Provider/Validation_provider';
 import Carousel from 'react-native-snap-carousel';
 import Footer from './Provider/Footer';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
-import Icon2 from 'react-native-vector-icons/Entypo';
 import Geolocation from '@react-native-community/geolocation';
-import {notification} from './Provider/NotificationProvider';
 import PushNotification from 'react-native-push-notification';
-import {pushnotification} from './Provider/Pushnotificationredirection';
 import messaging from '@react-native-firebase/messaging';
 import HomeAdPopup from './HomeAdPopup';
 import {setVehicleData} from './apis/viechles';
+import {pushnotification} from './Provider/Pushnotificationredirection';
 
 export default class Home extends Component {
   _didFocusSubscription;
@@ -59,7 +48,7 @@ export default class Home extends Component {
       timer: false,
       modalVisible: false,
       user_id: '',
-      vehical_arr: 'NA',
+      vehical_arr: [],
       vehicle_index: 0,
       vehicle_id: '',
 
@@ -92,12 +81,16 @@ export default class Home extends Component {
   componentDidMount() {
     pushnotification.redirectfun(this.props);
     this.getHomeAdd();
+    this.setVehicleData();
+
     this.props.navigation.addListener('focus', () => {
       this.getlatlong();
       if (this.props.route.params.home_status != null) {
         this.setState({home_status: this.props.route.params.home_status});
       }
       this.setState({timer: false});
+      this.setVehicleData();
+
       setTimeout(() => {
         this.setHomeData();
         this.getNotificationCount();
@@ -118,9 +111,10 @@ export default class Home extends Component {
         ),
     );
     this.getnotification();
-    setVehicleData(this, this.props.navigation);
   }
-
+  setVehicleData = () => {
+    setVehicleData(this, this.props.navigation);
+  };
   //--------for notification get  start -------------
   getnotification = async () => {
     messaging().onMessage(async remoteMessage => {
@@ -493,6 +487,7 @@ export default class Home extends Component {
       .then(obj => {
         if (obj.success == 'true') {
           // alert(obj?.ad?.description);
+          console.log(obj.ad);
           this.setState({adObj: obj?.ad, showHomeAd: true});
         }
       })
@@ -1232,7 +1227,7 @@ export default class Home extends Component {
               </Text>
             </View>
 
-            {this.state.vehical_arr != 'NA' && (
+            {!!this.state.vehical_arr?.length && (
               <View
                 style={{
                   alignSelf: 'center',
@@ -1254,7 +1249,7 @@ export default class Home extends Component {
                   ref={c => {
                     this._carousel = c;
                   }}
-                  data={this.state.vehical_arr}
+                  data={this.state.vehical_arr || []}
                   // loop={true}
                   firstItem={this.state.vehicle_index}
                   renderItem={({item, index}) => {
@@ -1424,7 +1419,7 @@ export default class Home extends Component {
                                 </TouchableOpacity> */}
               </View>
             )}
-            {this.state.vehical_arr == 'NA' && (
+            {!this.state.vehical_arr.length && (
               <TouchableOpacity
                 activeOpacity={0.7}
                 onPress={() => {

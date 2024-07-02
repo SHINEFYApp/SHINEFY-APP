@@ -5,19 +5,14 @@ import {
   BackHandler,
   Keyboard,
   Text,
-  Modal,
-  FlatList,
-  StyleSheet,
   TextInput,
   StatusBar,
   TouchableOpacity,
   SafeAreaView,
   ImageBackground,
-  Dimensions,
   Platform,
+  StyleSheet,
 } from 'react-native';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {ScrollView} from 'react-native-gesture-handler';
 import HideWithKeyboard from 'react-native-hide-with-keyboard';
 import {
   Colors,
@@ -28,14 +23,9 @@ import {
   apifuntion,
   config,
   localStorage,
-  consolepro,
   Lang_chg,
   msgProvider,
-  msgTitle,
-  msgText,
-  Currentltlg,
 } from './Provider/utilslib/Utils';
-import {validationprovider} from '../src/Provider/Validation_provider';
 
 export default class Change_password extends Component {
   _didFocusSubscription;
@@ -218,76 +208,73 @@ export default class Change_password extends Component {
   };
   render() {
     return (
-      <>
+      <View style={Styles.container}>
         <View style={Styles.container}>
-          <View style={Styles.container}>
-            <SafeAreaView
-              style={{backgroundColor: Colors.theme_color, flex: 0}}
-            />
-            <StatusBar
-              barStyle="light-content"
-              backgroundColor={Colors.statusbar_color}
-              hidden={false}
-              translucent={false}
-              networkActivityIndicatorVisible={true}
-            />
-            <ImageBackground
-              source={localimag.new_header}
+          <SafeAreaView
+            style={{backgroundColor: Colors.theme_color, flex: 0}}
+          />
+          <StatusBar
+            barStyle="light-content"
+            backgroundColor={Colors.statusbar_color}
+            hidden={false}
+            translucent={false}
+            networkActivityIndicatorVisible={true}
+          />
+          <ImageBackground
+            source={localimag.new_header}
+            style={{
+              width: (mobileW * 100) / 100,
+              height: (mobileW * 20) / 100,
+            }}>
+            <View
               style={{
                 width: (mobileW * 100) / 100,
-                height: (mobileW * 20) / 100,
+                justifyContent: 'center',
+                alignSelf: 'center',
+                alignItems: 'center',
+                flexDirection: 'row',
+                paddingVertical: (mobileW * 6) / 100,
               }}>
+              <TouchableOpacity
+                activeOpacity={0.7}
+                style={{
+                  justifyContent: 'center',
+                  width: '20%',
+                  alignItems: 'center',
+                }}
+                onPress={() => {
+                  this.props.navigation.goBack();
+                }}>
+                <Image
+                  source={localimag.goback}
+                  style={{
+                    width: (mobileW * 5.5) / 100,
+                    height: (mobileW * 5.5) / 100,
+                    transform: [
+                      config.textalign == 'right' ? {scaleX: -1} : {scaleX: 1},
+                    ],
+                  }}
+                />
+              </TouchableOpacity>
               <View
                 style={{
-                  width: (mobileW * 100) / 100,
-                  justifyContent: 'center',
-                  alignSelf: 'center',
+                  width: '80%',
                   alignItems: 'center',
-                  flexDirection: 'row',
-                  paddingVertical: (mobileW * 6) / 100,
+                  paddingRight: (mobileW * 13) / 100,
                 }}>
-                <TouchableOpacity
-                  activeOpacity={0.7}
+                <Text
                   style={{
-                    justifyContent: 'center',
-                    width: '20%',
-                    alignItems: 'center',
-                  }}
-                  onPress={() => {
-                    this.props.navigation.goBack();
+                    fontFamily: Font.fontsemibold,
+                    fontSize: (mobileW * 5.5) / 100,
+                    color: Colors.whiteColor,
                   }}>
-                  <Image
-                    source={localimag.goback}
-                    style={{
-                      width: (mobileW * 5.5) / 100,
-                      height: (mobileW * 5.5) / 100,
-                      transform: [
-                        config.textalign == 'right'
-                          ? {scaleX: -1}
-                          : {scaleX: 1},
-                      ],
-                    }}
-                  />
-                </TouchableOpacity>
-                <View
-                  style={{
-                    width: '80%',
-                    alignItems: 'center',
-                    paddingRight: (mobileW * 13) / 100,
-                  }}>
-                  <Text
-                    style={{
-                      fontFamily: Font.fontsemibold,
-                      fontSize: (mobileW * 5.5) / 100,
-                      color: Colors.whiteColor,
-                    }}>
-                    {Lang_chg.changepassword_txt[config.language]}
-                  </Text>
-                </View>
+                  {Lang_chg.changepassword_txt[config.language]}
+                </Text>
               </View>
-            </ImageBackground>
-            style=
-            {{
+            </View>
+          </ImageBackground>
+          <View
+            style={{
               flexDirection: 'row',
               marginTop: (mobileW * 10) / 100,
               width: (mobileW * 85) / 100,
@@ -295,8 +282,7 @@ export default class Change_password extends Component {
               alignItems: 'center',
               borderBottomWidth: 1,
               borderBottomColor: Colors.pass_bottom_border,
-            }}
-            >
+            }}>
             <View style={{width: '10%'}}>
               <Image
                 source={localimag.padlock1}
@@ -547,7 +533,7 @@ export default class Change_password extends Component {
             }}
           />
         </HideWithKeyboard>
-      </>
+      </View>
     );
   }
 }

@@ -7,7 +7,7 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import {mobileH, mobileW, localimag} from './Provider/utilslib/Utils';
+import {mobileW, localimag} from './Provider/utilslib/Utils';
 
 const HomeAdPopup = ({showDialog, ad, onClose}) => {
   return (
