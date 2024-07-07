@@ -1,8 +1,5 @@
-import React from 'react';
-//import OneSignal from 'react-native-onesignal';
-import {config} from './configProvider';
+import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import {localStorage} from './localStorageProvider';
-// import { msgProvider, msgTitle, msgText } from './messageProvider';
 import {notification} from './NotificationProvider';
 import PushNotification from 'react-native-push-notification';
 global.propsnavigation = '';
@@ -64,6 +61,7 @@ class Pushnotificationredirection {
             props.navigation.navigate('Login');
           }
         }
+        notification.finish(PushNotificationIOS.FetchResult.NoData);
       },
     });
   };

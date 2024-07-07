@@ -37,6 +37,7 @@ import messaging from '@react-native-firebase/messaging';
 import HomeAdPopup from './HomeAdPopup';
 import {setVehicleData} from './apis/viechles';
 import {pushnotification} from './Provider/Pushnotificationredirection';
+import {notification} from './Provider/NotificationProvider';
 
 export default class Home extends Component {
   _didFocusSubscription;
