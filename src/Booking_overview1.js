@@ -427,7 +427,6 @@ export default class Booking_overview1 extends Component {
           localStorage.removeItem('booking_time_slots');
           localStorage.removeItem('page_status');
           localStorage.removeItem('discount_arr');
-          console.log('obj.notification_arr', obj.notification_arr);
           if (obj.notification_arr != 'NA') {
             notification.notification_arr_schedule(obj.notification_arr);
           }
