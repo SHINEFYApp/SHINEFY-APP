@@ -137,7 +137,9 @@ class NotificationProvider {
     })
       .then(response => response.text())
       .then(res => {})
-      .catch(err => {});
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   //----------------------------------------end--------------------------------------------------

@@ -55,6 +55,8 @@
 	<string>204ab0ce29c165d4a42461e50ed83fb4</string>
 	<key>FacebookDisplayName</key>
 	<string>Shinefy</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -78,7 +80,7 @@
 	<key>NSLocationWhenInUseUsageDescription - 2</key>
 	<string>Shinefy App  would like to access your location for address and near by users, it is safe and secure.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Shinefy would like to access your Microphone for vedio recording. Your vedio won&apos;t be shared without your permission.It is safe and secure.</string>
+	<string>Shinefy would like to access your Microphone for vedio recording. Your vedio won't be shared without your permission.It is safe and secure.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Shinefy would like to access your Photo Library for App Profile Photo Uploading. Your photos wont be shared without your permission.It is safe and secure.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -124,8 +126,6 @@
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
-	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 </dict>
 </plist>
