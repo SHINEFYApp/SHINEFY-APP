@@ -13,11 +13,9 @@ import {
   TouchableOpacity,
   SafeAreaView,
   ImageBackground,
-  Dimensions,
 } from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {ScrollView} from 'react-native-gesture-handler';
-import HideWithKeyboard from 'react-native-hide-with-keyboard';
 import {
   Colors,
   Font,
@@ -27,14 +25,9 @@ import {
   apifuntion,
   config,
   localStorage,
-  consolepro,
   Lang_chg,
   msgProvider,
-  msgTitle,
-  msgText,
-  Currentltlg,
 } from './Provider/utilslib/Utils';
-import {validationprovider} from '../src/Provider/Validation_provider';
 import {Nodata_foundimage} from '../src/Provider/Nodata_foundimage';
 
 export default class Select_Service extends Component {
@@ -298,20 +291,19 @@ export default class Select_Service extends Component {
     var extra_amount = 0;
     var extra_time = 0;
     let data = this.state.extra_service_arr;
-    var data2 = [];
-    if (notChangeSelect === true) {
+    var data2 = [...this.state.extra_service_data];
+    if (notChangeSelect) {
     } else {
-      data.forEach(element => {
-        if (element.extra_service_id === data[index].extra_service_id) {
-        } else {
-          element.status = false;
-        }
-      });
       data[index].status = !data[index].status;
     }
 
-    if (data[index].status == true) {
-      data2.push(item);
+    if (data[index].status) {
+      if (
+        data2.filter(x => x.extra_service_id === item.extra_service_id)
+          .length === 0
+      ) {
+        data2.push(item);
+      }
       extra_amount =
         Number(
           data[index].extra_service_price *
@@ -345,14 +337,17 @@ export default class Select_Service extends Component {
     if (time === undefined || time === null) {
       time = 0;
     }
-    extra_amount =
-      data[index].status === true
-        ? Number(item.extra_service_price * (item.extra_serivce_qty ?? 1))
-        : 0;
-    let myExtraTime =
-      data[index].status === true ? Number(item.extra_service_time) : 0;
-    let total_extra =
-      (data[index].extra_serivce_qty ?? 1) * Number(myExtraTime);
+    extra_amount = data2.reduce(
+      (a, b) => a + Number(b.extra_service_price * (b.extra_serivce_qty ?? 1)),
+      0,
+    );
+    console.log('extra_amount', extra_amount);
+    let myExtraTime = data2.reduce(
+      (a, b) => (a + b.status === true ? Number(item.extra_service_time) : 0),
+      0,
+    );
+
+    let total_extra = extra_amount * Number(myExtraTime);
     let total_time = Number(this.state.service_time) + total_extra;
     let subTotal = (
       Number(this.state.service_amount) + Number(extra_amount)
@@ -420,8 +415,8 @@ export default class Select_Service extends Component {
 
   render() {
     return (
-      <View style={Styles.container}>
-        <View style={Styles.container}>
+      <View style={styles.container}>
+        <View style={styles.container}>
           <SafeAreaView
             style={{backgroundColor: Colors.theme_color, flex: 0}}
           />
@@ -443,7 +438,7 @@ export default class Select_Service extends Component {
             <SafeAreaView
               style={{backgroundColor: Colors.theme_color, flex: 0}}
             />
-            <View style={Styles.container}>
+            <View style={styles.container}>
               <StatusBar
                 barStyle="light-content"
                 backgroundColor={Colors.statusbar_color}
@@ -646,8 +641,8 @@ export default class Select_Service extends Component {
                           <View
                             style={
                               item.borderStatus == true
-                                ? Styles.serviceContainer
-                                : Styles.serviceContainer1
+                                ? styles.serviceContainer
+                                : styles.serviceContainer1
                             }>
                             <View style={{width: '21%'}}>
                               <Image
@@ -817,8 +812,8 @@ export default class Select_Service extends Component {
                           <View
                             style={
                               item.borderStatus == true
-                                ? Styles.serviceContainer
-                                : Styles.serviceContainer1
+                                ? styles.serviceContainer
+                                : styles.serviceContainer1
                             }>
                             <View style={{width: '21%'}}>
                               <Image
@@ -1198,14 +1193,7 @@ export default class Select_Service extends Component {
                       />
                     </View>
                     <TextInput
-                      style={{
-                        fontFamily: Font.outfit_regular,
-                        textAlign: config.textalign,
-                        fontSize: (mobileW * 3.5) / 100,
-                        width: '90%',
-                        height: (mobileW * 26) / 100,
-                        color: Colors.textBlack_color,
-                      }}
+                      style={styles.notesInput}
                       placeholder=""
                       placeholderTextColor={'#B3B3B3'}
                       value={this.state.notes}
@@ -1228,22 +1216,9 @@ export default class Select_Service extends Component {
 
                 <TouchableOpacity
                   activeOpacity={0.7}
-                  style={{
-                    backgroundColor: Colors.appColor,
-                    width: (mobileW * 80) / 100,
-                    borderRadius: 25,
-                    marginTop: (mobileH * 3) / 100,
-                    alignSelf: 'center',
-                  }}
+                  style={styles.continueButton}
                   onPress={() => this.navigationFun()}>
-                  <Text
-                    style={{
-                      color: Colors.whiteColor,
-                      alignSelf: 'center',
-                      fontSize: (mobileW * 4) / 100,
-                      fontFamily: Font.fontmedium,
-                      paddingVertical: (mobileW * 2) / 100,
-                    }}>
+                  <Text style={styles.continueText}>
                     {Lang_chg.continue_txt[config.language]}
                   </Text>
                 </TouchableOpacity>
@@ -1258,7 +1233,7 @@ export default class Select_Service extends Component {
   }
 }
 
-const Styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.whiteColor,
@@ -1277,5 +1252,27 @@ const Styles = StyleSheet.create({
     alignSelf: 'center',
     flexDirection: 'row',
     paddingTop: (mobileW * 4.5) / 100,
+  },
+  continueText: {
+    color: Colors.whiteColor,
+    alignSelf: 'center',
+    fontSize: (mobileW * 4) / 100,
+    fontFamily: Font.fontmedium,
+    paddingVertical: (mobileW * 2) / 100,
+  },
+  continueButton: {
+    backgroundColor: Colors.appColor,
+    width: (mobileW * 80) / 100,
+    borderRadius: 25,
+    marginTop: (mobileH * 3) / 100,
+    alignSelf: 'center',
+  },
+  notesInput: {
+    fontFamily: Font.outfit_regular,
+    textAlign: config.textalign,
+    fontSize: (mobileW * 3.5) / 100,
+    width: '90%',
+    height: (mobileW * 26) / 100,
+    color: Colors.textBlack_color,
   },
 });
