@@ -5,20 +5,15 @@ import {
   View,
   Image,
   BackHandler,
-  Keyboard,
   Text,
   Modal,
   FlatList,
   StyleSheet,
-  TextInput,
   StatusBar,
   TouchableOpacity,
   SafeAreaView,
   ImageBackground,
-  Dimensions,
 } from 'react-native';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {ScrollView} from 'react-native-gesture-handler';
 import HideWithKeyboard from 'react-native-hide-with-keyboard';
 import {
   Colors,
@@ -29,16 +24,12 @@ import {
   apifuntion,
   config,
   localStorage,
-  consolepro,
   Lang_chg,
   msgProvider,
-  msgTitle,
-  msgText,
-  Currentltlg,
 } from './Provider/utilslib/Utils';
-import {validationprovider} from '../src/Provider/Validation_provider';
 import {notification} from './Provider/NotificationProvider';
 import {WebView} from 'react-native-webview';
+import ContinueButton from './Components/ContinueButton';
 
 export default class Payment_option extends Component {
   _didFocusSubscription;
@@ -563,29 +554,11 @@ export default class Payment_option extends Component {
               }}
             />
           </View>
-          <TouchableOpacity
-            activeOpacity={0.7}
-            style={{
-              backgroundColor: Colors.appColor,
-              width: (mobileW * 80) / 100,
-              borderRadius: 25,
-              marginTop: (mobileH * 8) / 100,
-              alignSelf: 'center',
-            }}
+          <ContinueButton
             onPress={() => {
               this.PaymentMethod();
-            }}>
-            <Text
-              style={{
-                color: Colors.whiteColor,
-                alignSelf: 'center',
-                fontSize: (mobileW * 4) / 100,
-                fontFamily: Font.fontmedium,
-                paddingVertical: (mobileW * 2) / 100,
-              }}>
-              {Lang_chg.continue_txt[config.language]}
-            </Text>
-          </TouchableOpacity>
+            }}
+          />
         </View>
         <HideWithKeyboard>
           <ImageBackground

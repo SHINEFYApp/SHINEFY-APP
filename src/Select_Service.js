@@ -29,6 +29,7 @@ import {
   msgProvider,
 } from './Provider/utilslib/Utils';
 import {Nodata_foundimage} from '../src/Provider/Nodata_foundimage';
+import ContinueButton from './Components/ContinueButton';
 
 export default class Select_Service extends Component {
   _didFocusSubscription;
@@ -1213,15 +1214,7 @@ export default class Select_Service extends Component {
                     />
                   </View>
                 </View>
-
-                <TouchableOpacity
-                  activeOpacity={0.7}
-                  style={styles.continueButton}
-                  onPress={() => this.navigationFun()}>
-                  <Text style={styles.continueText}>
-                    {Lang_chg.continue_txt[config.language]}
-                  </Text>
-                </TouchableOpacity>
+                <ContinueButton onPress={() => this.navigationFun()} />
               </KeyboardAwareScrollView>
             ) : (
               <Nodata_foundimage />

@@ -3,23 +3,17 @@ import {
   View,
   Image,
   BackHandler,
-  Keyboard,
   Text,
-  Modal,
   FlatList,
   RefreshControl,
   StyleSheet,
   Alert,
-  TextInput,
   StatusBar,
   TouchableOpacity,
   SafeAreaView,
   ImageBackground,
-  Dimensions,
 } from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {ScrollView} from 'react-native-gesture-handler';
-import HideWithKeyboard from 'react-native-hide-with-keyboard';
 import {
   Colors,
   Font,
@@ -29,16 +23,12 @@ import {
   apifuntion,
   config,
   localStorage,
-  consolepro,
   Lang_chg,
   msgProvider,
-  msgTitle,
-  msgText,
-  Currentltlg,
 } from './Provider/utilslib/Utils';
-import {validationprovider} from '../src/Provider/Validation_provider';
 import CalendarPicker from 'react-native-calendar-picker';
 import {Nodata_foundimage} from '../src/Provider/Nodata_foundimage';
+import ContinueButton from './Components/ContinueButton';
 
 export default class Select_Date extends Component {
   _didFocusSubscription;
@@ -1265,86 +1255,32 @@ export default class Select_Date extends Component {
                 )}
                 {this.state.day_choose == 1 &&
                   this.state.today_arr != 'Close' && (
-                    <TouchableOpacity
-                      activeOpacity={0.7}
-                      style={{
-                        backgroundColor: Colors.appColor,
-                        width: (mobileW * 80) / 100,
-                        borderRadius: 25,
-                        marginTop: (mobileH * 6) / 100,
-                        alignSelf: 'center',
-                      }}
+                    <ContinueButton
                       onPress={() => {
                         this.navigationFun();
-                      }}>
-                      <Text
-                        style={{
-                          color: Colors.whiteColor,
-                          alignSelf: 'center',
-                          fontSize: (mobileW * 4) / 100,
-                          fontFamily: Font.fontmedium,
-                          paddingVertical: (mobileW * 2.5) / 100,
-                        }}>
-                        {Lang_chg.continue_txt[config.language]}
-                      </Text>
-                    </TouchableOpacity>
+                      }}
+                    />
                   )}
 
                 {this.state.day_choose == 2 &&
                   (this.state.tomarrow_arr != 'Close' ||
                     this.state.tomarrow_slots != 'NA') &&
                   this.state.tomarrow_arr.service_boy_id != 'NA' && (
-                    <TouchableOpacity
-                      activeOpacity={0.7}
-                      style={{
-                        backgroundColor: Colors.appColor,
-                        width: (mobileW * 80) / 100,
-                        borderRadius: 25,
-                        marginTop: (mobileH * 6) / 100,
-                        alignSelf: 'center',
-                      }}
+                    <ContinueButton
                       onPress={() => {
                         this.navigationFun1();
-                      }}>
-                      <Text
-                        style={{
-                          color: Colors.whiteColor,
-                          alignSelf: 'center',
-                          fontSize: (mobileW * 4) / 100,
-                          fontFamily: Font.fontmedium,
-                          paddingVertical: (mobileW * 2.5) / 100,
-                        }}>
-                        {Lang_chg.continue_txt[config.language]}
-                      </Text>
-                    </TouchableOpacity>
+                      }}
+                    />
                   )}
 
                 {this.state.date_slots != 'NA' &&
                   this.state.date_arr != 'Close' &&
                   this.state.day_choose == 3 && (
-                    <TouchableOpacity
-                      activeOpacity={0.7}
-                      style={{
-                        backgroundColor: Colors.appColor,
-                        width: (mobileW * 80) / 100,
-                        borderRadius: 25,
-                        marginTop: (mobileH * 6) / 100,
-                        alignSelf: 'center',
-                      }}
+                    <ContinueButton
                       onPress={() => {
                         this.navigationFun2();
-                      }}>
-                      <Text
-                        style={{
-                          color: Colors.whiteColor,
-                          alignSelf: 'center',
-                          fontSize: (mobileW * 4) / 100,
-                          fontFamily: Font.fontmedium,
-                          paddingVertical: (mobileW * 2.5) / 100,
-                        }}>
-                        {Lang_chg.continue_txt[config.language]}
-                      </Text>
-                    </TouchableOpacity>
+                      }}
+                    />
                   )}
               </KeyboardAwareScrollView>
             ) : (
