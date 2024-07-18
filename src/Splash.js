@@ -108,16 +108,24 @@ export default class Splash extends Component {
     }, 2000);
   }
 
-  getfcmtoken = () => {
+  getfcmtoken = async () => {
     if (requestUserPermission()) {
       messaging()
         .getToken()
-        .then(fcmToken => {
+        .then(async fcmToken => {
           this.setState({
             player_id: fcmToken,
           });
-          player_id_me1 = fcmToken;
-          config.GetPlayeridfunctin(fcmToken);
+          var user_arr = await localStorage.getItemObject('user_arr');
+          let user_id = user_arr.user_id;
+          if (user_id) {
+            const url = config.burl + '/api/save_user_notification_data';
+            const data = new FormData();
+            data.append('player_id', fcmToken);
+            data.append('device_type', config.device_type);
+            data.append('user_id', user_id);
+            await apifuntion.postApi(url, data);
+          }
         });
     }
   };

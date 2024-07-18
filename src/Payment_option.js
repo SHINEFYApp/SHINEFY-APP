@@ -94,7 +94,15 @@ export default class Payment_option extends Component {
     } else if (this.state.payment_method == 1 && this.state.netpay == 0) {
       this.cashBooking();
     } else {
-      this.setState({webviewshow: true});
+      let url =
+        config.baseURL +
+        `payment/paytab/pay?amount=${this.state.netpay}&user_id=${this.state.user_id}`;
+      apifuntion.getApi(url).then(linkResponse => {
+        this.setState({
+          webviewshow: true,
+          paymentUrl: linkResponse.payment_url,
+        });
+      });
     }
   };
 
@@ -391,12 +399,7 @@ export default class Payment_option extends Component {
 
                 <WebView
                   source={{
-                    uri:
-                      config.baseURL2 +
-                      'payment_url.php?user_id=' +
-                      this.state.user_id +
-                      '&amount=' +
-                      parseFloat(parseFloat(this.state.netpay)).toFixed(2),
+                    uri: this.state.paymentUrl,
                   }}
                   onNavigationStateChange={this._onNavigationStateChange.bind(
                     this,

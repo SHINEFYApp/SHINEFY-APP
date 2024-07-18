@@ -80,6 +80,15 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
+    async function requestNotificationPermission() {
+      await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
+      );
+    }
+
+    if (Platform.OS === 'android' && Platform.Version >= 33) {
+      requestNotificationPermission();
+    }
     pushnotification.redirectfun(this.props);
     this.getHomeAdd();
     this.setVehicleData();
@@ -222,49 +231,42 @@ export default class Home extends Component {
   //--------------------function for get lat long ------------//
 
   getlatlong = async () => {
-    let permission = await localStorage.getItemString('permission');
-    if (permission != 'denied') {
-      var that = this;
-      //Checking for the permission just after component loaded
-      if (Platform.OS === 'ios') {
-        this.callLocation(that);
-      } else {
-        // this.callLocation(that);
-        async function requestLocationPermission() {
-          try {
-            const granted = await PermissionsAndroid.request(
-              PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-              {
-                title: 'Location Access Required',
-                message: 'This App needs to Access your location',
-              },
-            );
-            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-              that.callLocation(that);
-            } else {
-              let position = {
-                coords: {
-                  latitude: that.state.latitude,
-                  longitude: that.state.longitude,
-                },
-              };
-              localStorage.setItemString('permission', 'denied');
-              that.getalldata(position);
-            }
-          } catch (err) {
-            console.warn(err);
-          }
-        }
-        requestLocationPermission();
-      }
+    var that = this;
+    //Checking for the permission just after component loaded
+    if (Platform.OS === 'ios') {
+      this.callLocation(that);
     } else {
-      let position = {
-        coords: {
-          latitude: this.state.latitude,
-          longitude: this.state.longitude,
-        },
-      };
-      this.getalldata(position);
+      // this.callLocation(that);
+      async function requestLocationPermission() {
+        try {
+          const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+            {
+              title: 'Location Access Required',
+              message: 'This App needs to Access your location',
+            },
+          );
+          if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+            that.callLocation(that);
+          } else {
+            let position = {
+              coords: {
+                latitude: that.state.latitude,
+                longitude: that.state.longitude,
+              },
+            };
+            localStorage.setItemString('permission', 'denied');
+            that.getalldata(position);
+          }
+        } catch (err) {
+          console.warn(err);
+        }
+      }
+      if (Platform.Version >= 33) {
+        requestLocationPermission();
+      } else {
+        this.callLocation(this);
+      }
     }
   };
 

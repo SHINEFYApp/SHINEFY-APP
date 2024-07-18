@@ -14,6 +14,8 @@ import {
   SafeAreaView,
   ImageBackground,
   Dimensions,
+  PermissionsAndroid,
+  Platform,
 } from 'react-native';
 import {
   Colors,
@@ -253,6 +255,12 @@ export default class Edit_profile extends Component {
   };
 
   _openCamera = () => {
+    async function requestCameraPermission() {
+      await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA);
+    }
+    if (Platform.OS === 'android' && Platform.Version >= 33) {
+      requestCameraPermission();
+    }
     mediaprovider.launchCamera(true).then(obj => {
       this.setState({
         profile_image: obj.path,
