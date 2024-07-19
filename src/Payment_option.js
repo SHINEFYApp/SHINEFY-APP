@@ -117,7 +117,6 @@ export default class Payment_option extends Component {
     let res = webViewState.url.split('/');
     let isError = res[res.length - 1].split('&')[0].split('=').pop();
     if (isError === 'D') {
-      console.log(res[res.length - 1].split('&')[1].split('=')[1]);
       msgProvider.toast(
         res[res.length - 1].split('&')[1].split('=')[1].split('%20').join(' '),
         'center',
@@ -133,50 +132,6 @@ export default class Payment_option extends Component {
       this.setState({webviewshow: false});
     }
 
-    // webViewState.canGoBack = false;
-
-    // if (webViewState.loading == false) {
-    //   var t = webViewState.url.split('/').pop().split('?')[0];
-
-    //   if (typeof t != null) {
-    //     var p = webViewState.url.split('?').pop().split('&');
-
-    //     if (t.includes('payment_success')) {
-    //       var payment_id = 0;
-
-    //       var payment_date = '';
-
-    //       var payment_time = '';
-
-    //       // for (var i = 0; i < p.length; i++) {
-    //       //   var val = p[i].split('=');
-    //       //   if (val[0] == 'payment_id') {
-    //       //     payment_id = val[1];
-    //       //   }
-    //       //   this.setState({transaction_id: payment_id});
-    //       // }
-    //       this.setState({webviewshow: false});
-    //       setTimeout(() => {
-    //         this.cashBooking();
-    //       }, 300);
-
-    //       // if (payment_id) {
-    //       //   this.setState({webviewshow: false});
-    //       //   setTimeout(() => {
-    //       //     this.cashBooking();
-    //       //   }, 300);
-    //       // } else {
-    //       //   this.handleBackPress();
-    //       // }
-    //     } else if (t.includes('payment_cancel')) {
-    //       msgProvider.toast(Lang_chg.payment_fail[config.language], 'center');
-
-    //       this.setState({webviewshow: false});
-
-    //       return false;
-    //     }
-    //   }
-    // }
   }
 
   cashBooking = async () => {
