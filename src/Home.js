@@ -490,7 +490,6 @@ export default class Home extends Component {
       .then(obj => {
         if (obj.success == 'true') {
           // alert(obj?.ad?.description);
-          console.log(obj.ad);
           this.setState({adObj: obj?.ad, showHomeAd: true});
         }
       })
