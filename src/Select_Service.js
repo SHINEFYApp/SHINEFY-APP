@@ -131,9 +131,15 @@ export default class Select_Service extends Component {
             let data = obj.all_service_arr;
             localStorage.setItemObject('all_service_arr', data);
             localStorage.setItemObject('service_arr', data.service_arr);
+            let arrangeService = data.service_arr.points.sort(
+              (a, b) => b.service_price - a.service_price,
+            );
+            let arrangeExtra = data.service_arr.points.sort(
+              (a, b) => b.service_price - a.service_price,
+            );
             this.setState({
-              service_arr: data.service_arr,
-              extra_service_arr: data.extra_service_arr,
+              service_arr: arrangeService,
+              extra_service_arr: arrangeExtra,
               service_data: data.service_arr[0],
               service_amount: data.service_arr[0].service_price,
               subTotal: Number(data.service_arr[0].service_price).toFixed(2),
