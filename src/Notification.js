@@ -90,7 +90,6 @@ export default class Notification extends Component {
     let user_details = await localStorage.getItemObject('user_arr');
     let user_id = user_details.user_id;
     let url = config.baseURL1 + 'get_notification.php?user_id=' + user_id;
-
     apifuntion
       .getApi(url, page)
       .then(obj => {

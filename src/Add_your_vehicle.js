@@ -1354,6 +1354,7 @@ export default class Add_your_vehicle extends Component {
                               borderRightColor: Colors.bottom_border,
                               borderRightWidth: (mobileW * 0.3) / 100,
                             }}>
+                            <View style={{width:40 , height:40 , backgroundColor:item.color_code , marginBottom:10}}></View>
                             <View style={{flexDirection: 'row'}}>
                               <Text
                                 style={{
