@@ -1,16 +1,34 @@
 import React, {useEffect, useState} from 'react';
 import {ImageBackground, StyleSheet} from 'react-native';
-import {Colors, Text, View} from 'react-native-ui-lib';
+import {Colors, Text, TouchableOpacity, View} from 'react-native-ui-lib';
 import background from '../../assets/backgroundImage.png';
 import OTPTextInput from 'react-native-otp-textinput';
 import {Lang_chg, config, mobileW} from '../../Provider/utilslib/Utils';
 import Button from '../../components/mainButton/Button';
 import BackButton from '../../components/backButton/backButton';
 import {sendOTP} from '../../Features/verifyOTP/verifyOTP';
+import forgotPassword from '../../Features/forgotPassword/forgotPassword';
+import secondsToHMS from '../../utlites/secondsToHMS';
 
 export default function OTPScreen({navigation, route}) {
   const [otp, setOTP] = useState('');
+  const [timer , setTimer] = useState(120)
+  const [isReset , setIsReset] = useState(false)
+function startTimer() {
+  let currentTime = 10
 
+    let interval = setInterval(() => {
+      setTimer(currentTime -= 1)
+
+      if (currentTime <= 0) {
+          clearInterval(interval);
+        }
+      
+    }, 1000);
+  }
+  useEffect(()=>{
+    startTimer()
+  },[isReset])
   return (
     <View className={'flex-1'}>
       <BackButton navigation={navigation} />
@@ -54,12 +72,24 @@ export default function OTPScreen({navigation, route}) {
                 );
               }}
             />
+        <View className={"flex-row justify-center"}>
             <Text className={'text-center'}>
               {Lang_chg.dont_receive_otp[config.language]}{' '}
+              </Text>
+                {
+                  timer <= 0 ? 
+                  <TouchableOpacity  onPress={()=>{
+                    setIsReset(true)
+                    forgotPassword(navigation, route.params.phone_number);
+                  }}>
               <Text className={'text-mainColor underline'}>
                 {Lang_chg.resend_text[config.language]}
               </Text>
-            </Text>
+              </TouchableOpacity>
+                   :
+                   <Text>{secondsToHMS(timer)}</Text>
+                  }
+                  </View>
           </View>
         </View>
       </ImageBackground>

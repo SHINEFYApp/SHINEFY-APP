@@ -15,7 +15,7 @@ import bookingDetailsAtom from '../../atoms/bookingDetails/bookingDetails.atom';
 import {useRecoilValue} from 'recoil';
 
 export default function PayTabs({setWebView, webView, navigation, url}) {
-  console.log(url);
+
   const [userData, setUserData] = useState();
   const bookingDetails = useRecoilValue(bookingDetailsAtom);
   useEffect(() => {
@@ -27,7 +27,7 @@ export default function PayTabs({setWebView, webView, navigation, url}) {
 
   function onNavigationStateChange(webViewState) {
     webViewState.canGoBack = false;
-    console.log(webViewState);
+ 
     // if (webViewState.loading == false) {
     //   var t = webViewState.url.split('/').pop().split('?')[0];
 

@@ -23,7 +23,7 @@ export default async function subscripePackage(
   global.props.showLoader();
 
   let res = await apifuntion.postApi(url, data);
-  console.log(res);
+
   if (res.success === 'true') {
     return true;
   } else {

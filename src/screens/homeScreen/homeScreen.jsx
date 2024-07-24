@@ -26,7 +26,7 @@ export default function HomeScreen({navigation}) {
       const data = await getServices();
       const packages = await getPackages();
       const myLocations = await getSavedLocation();
-      console.log(myLocations);
+     
       SetServices(data.all_service_arr.service_arr);
       setPackages(packages.packages);
       SetSpecialOffers(data.all_service_arr.extra_service_arr);
