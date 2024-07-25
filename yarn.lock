@@ -3297,6 +3297,7 @@ __metadata:
     react-native-hide-with-keyboard: "npm:^1.2.1"
     react-native-htmlview: "npm:^0.17.0"
     react-native-image-crop-picker: "npm:^0.40.3"
+    react-native-image-picker: "npm:^7.1.2"
     react-native-keyboard-aware-scroll-view: "npm:^0.9.5"
     react-native-maps: "npm:^1.10.3"
     react-native-modal: "npm:^13.0.1"
@@ -9716,6 +9717,16 @@ __metadata:
   peerDependencies:
     react-native: ">=0.40.0"
   checksum: 10c0/2db3abafc5ca2ed7a1de231d211369e258d3fd285fe4aab6c98bf451e13216ef18a127ab2d9089f8df49277ddb81ebdb0628274caf187106d16aa8055500472a
+  languageName: node
+  linkType: hard
+
+"react-native-image-picker@npm:^7.1.2":
+  version: 7.1.2
+  resolution: "react-native-image-picker@npm:7.1.2"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/3621e2462b4026ba2d3e0d71179161a09bf744b09ed53cf62944356971fc6204e06845298d99e69437517a51b5b7b434318e16018e62e14a3031976b67e801a3
   languageName: node
   linkType: hard
 

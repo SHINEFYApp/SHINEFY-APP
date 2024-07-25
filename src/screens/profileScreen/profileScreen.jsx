@@ -38,11 +38,11 @@ export default function ProfileScreen({navigation}) {
           <View className="items-center relative border-2 border-mainColor w-[110px] p-1 rounded-full mx-auto">
             <Image
               source={
-                pic
+               data.image == "NA"
                   ? pic
                   : {
                       uri: `${'https://shinefy.co/app-test/webservice/images/'}${
-                        data.img
+                        data.image
                       }`,
                     }
               }

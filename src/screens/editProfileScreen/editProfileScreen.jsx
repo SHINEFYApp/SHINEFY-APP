@@ -13,7 +13,7 @@ import {Lang_chg} from '../../Provider/Language_provider';
 import editIcon from '../../assets/icons/editIconVehicle.png';
 import {config} from '../../Provider/configProvider';
 import {TouchableOpacity} from 'react-native';
-
+import ImagePicker from 'react-native-image-crop-picker';
 export default function EditProfileScreen({navigation}) {
   const data = useRecoilValue(profileData);
   const [newData, setNewData] = useState({
@@ -21,9 +21,17 @@ export default function EditProfileScreen({navigation}) {
     phone_number: data.phone_number,
     email: data.email,
   });
+  const [currentIMG , setCurrentIMG] = useState(data.image)
 
-  async function updateProfilePic() {
-    const result = await launchImageLibrary();
+  function updateProfilePic() {
+      ImagePicker.openPicker({
+        width: 300,
+        height: 400,
+        cropping: true
+      }).then(image => {
+        setNewData({...newData, profile_image : image.path});
+        setCurrentIMG(image.path)
+      });
   }
 
   return (
@@ -33,7 +41,11 @@ export default function EditProfileScreen({navigation}) {
           <TouchableOpacity onPress={updateProfilePic}>
             <View className="items-center relative border-2 border-mainColor w-[110px] p-1 rounded-full mx-auto">
               <Image
-                source={pic}
+                source={currentIMG != 'NA' ? currentIMG.includes("file") ? {uri:currentIMG}:{
+                      uri: `${'https://shinefy.co/app-test/webservice/images/'}${
+                        data.image
+                      }`,
+                    } : pic}
                 className="p-4 border w-[100] h-[100] rounded-full"
               />
               <View className="bg-mainColor absolute -right-3 -top-2 rounded-full">
@@ -71,7 +83,7 @@ export default function EditProfileScreen({navigation}) {
             <Button
               Title={Lang_chg.editprofile_txt[config.language]}
               onPress={async () => {
-                await editProfile(newData);
+                await editProfile(newData , navigation);
               }}
             />
           </View>
