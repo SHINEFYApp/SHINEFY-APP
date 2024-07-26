@@ -6,6 +6,7 @@ import {config} from '../../Provider/configProvider';
 import {Lang_chg} from '../../Provider/Language_provider';
 
 export default function BookingCard({progress, ButtonTitle, navigation, book}) {
+
   return (
     <View className="bg-white p-3 mb-3">
       <View className="flex-row border-b pb-3 border-[#ccc] mb-3">

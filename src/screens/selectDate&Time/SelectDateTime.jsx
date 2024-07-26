@@ -71,8 +71,6 @@ export default function SelectDateTime({navigation}) {
     setTime('');
   }, [date]);
 
-  console.log(date)
-
   return (
     <SafeAreaView>
       <View className="pt-[80] px-5 relative h-full">

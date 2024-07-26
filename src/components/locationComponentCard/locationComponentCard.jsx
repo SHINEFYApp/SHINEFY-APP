@@ -14,14 +14,16 @@ import myLocationList, {
   fetchMyLoaction,
 } from '../../atoms/locationList/myLocationList';
 import {useSetRecoilState} from 'recoil';
+import checkLocation from '../../Features/checkLocation/checkLocation';
 export default function LocationCard({location, navigation}) {
   const [isPopUpOpenDelete, setIsPopUpOpenDelete] = useState(false);
   const setLocationList = useSetRecoilState(myLocationList);
 
   return (
     <TouchableOpacity
-      onPress={() => {
-        navigation.push('BookingTypeScreen', location);
+      onPress={async() => {
+        const state = await checkLocation(location)
+        state && navigation.push('BookingTypeScreen', location);
       }}>
       <View className="flex-row items-center my-2 pb-3 justify-between border-b border-[#c3c3c3] relative">
         <Modal

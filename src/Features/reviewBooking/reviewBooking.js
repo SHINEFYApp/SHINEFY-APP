@@ -21,14 +21,12 @@ export async function reviewBooking(data , navigation) {
   fd.append('nature_status', data.nature_status);
   fd.append('rating', data.rating);
   let url = config.baseURL + 'user_rating';
-  console.log(fd)
+
   apifuntion
     .postApi(url, fd)
     .then(obj => {
-      console.log(obj)
       if (obj.success == 'true') {
-        console.log(obj.notification_arr[0].message)
-        msgProvider.toast(obj.notification_arr[0].message)
+        msgProvider.alert(obj.notification_arr[0].message)
         navigation.navigate('HomeScreen');
         if (obj.notification_arr != 'NA') {
           notification.notification_arr_schedule(obj.notification_arr);

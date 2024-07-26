@@ -33,7 +33,6 @@ export default function EditProfileScreen({navigation}) {
       });
   }
 
-  console.log(currentIMG)
 
   return (
     <KeyboardAwareScrollView>
