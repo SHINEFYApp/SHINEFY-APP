@@ -1,10 +1,11 @@
 import {apifuntion} from '../../Provider/Apicallingprovider/apiProvider';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {msgProvider} from '../../Provider/Messageconsolevalidationprovider/messageProvider';
+import { notification } from '../../Provider/NotificationProvider';
 import {config} from '../../Provider/configProvider';
 import {localStorage} from '../../Provider/localStorageProvider';
 
-export async function reviewBooking(data) {
+export async function reviewBooking(data , navigation) {
   if (data.rating <= 0) {
     msgProvider.toast(Lang_chg.emptyRating[config.language], 'center');
     return false;
@@ -15,29 +16,22 @@ export async function reviewBooking(data) {
   fd.append('user_id', user_id);
   fd.append('service_boy_id', data.service_boy_id);
   fd.append('booking_id', data.booking_id);
-  // data.append('behavior_status', behavior_status);
-  // data.append('work_status', work_status);
-  // data.append('nature_status', nature_status);
+  fd.append('behavior_status', data.behavior_status);
+  fd.append('work_status', data.work_status);
+  fd.append('nature_status', data.nature_status);
   fd.append('rating', data.rating);
   let url = config.baseURL + 'user_rating';
+  console.log(fd)
   apifuntion
     .postApi(url, fd)
     .then(obj => {
+      console.log(obj)
       if (obj.success == 'true') {
+        console.log(obj.notification_arr[0].message)
+        msgProvider.toast(obj.notification_arr[0].message)
+        navigation.navigate('HomeScreen');
         if (obj.notification_arr != 'NA') {
           notification.notification_arr_schedule(obj.notification_arr);
-        }
-        if (status == 1) {
-          setTimeout(() => {
-            this.props.navigation.navigate('Bookings_Details', {
-              my_booking_check: 1,
-              booking_id: obj.booking_id,
-            });
-          });
-        } else {
-          setTimeout(() => {
-            this.props.navigation.goBack();
-          }, 300);
         }
       } else {
         msgProvider.alert(

@@ -1027,6 +1027,10 @@ PODS:
     - Google-Maps-iOS-Utils (= 4.2.2)
     - GoogleMaps (= 7.4.0)
     - React-Core
+  - react-native-image-picker (7.1.2):
+    - glog
+    - RCT-Folly (= 2022.05.16.00)
+    - React-Core
   - react-native-maps (1.10.3):
     - React-Core
   - react-native-netinfo (11.3.1):
@@ -1296,6 +1300,7 @@ DEPENDENCIES:
   - react-native-fbsdk-next (from `../node_modules/react-native-fbsdk-next`)
   - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
   - react-native-google-maps (from `../node_modules/react-native-maps`)
+  - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-maps (from `../node_modules/react-native-maps`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-restart (from `../node_modules/react-native-restart`)
@@ -1433,6 +1438,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/geolocation"
   react-native-google-maps:
     :path: "../node_modules/react-native-maps"
+  react-native-image-picker:
+    :path: "../node_modules/react-native-image-picker"
   react-native-maps:
     :path: "../node_modules/react-native-maps"
   react-native-netinfo:
@@ -1574,6 +1581,7 @@ SPEC CHECKSUMS:
   react-native-fbsdk-next: a929da980a4ec199391da637d3d2ce22b6e7779e
   react-native-geolocation: 2436615dae25af14b6ed85626080001bceae2bfd
   react-native-google-maps: 1bcc1f9f13f798fcf230db7fe476f3566d0bc0a3
+  react-native-image-picker: 7c3a279e7a518628910f2ea02917bd3b90049465
   react-native-maps: 72a8a903f8a1b53e2c777ba79102078ab502e0bf
   react-native-netinfo: bdb108d340cdb41875c9ced535977cac6d2ff321
   react-native-restart: 7595693413fe3ca15893702f2c8306c62a708162
@@ -1618,8 +1626,8 @@ SPEC CHECKSUMS:
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Toast: ec33c32b8688982cecc6348adeae667c1b9938da
   TOCropViewController: edfd4f25713d56905ad1e0b9f5be3fbe0f59c863
-  Yoga: 9e6a04eacbd94f97d94577017e9f23b3ab41cf6c
+  Yoga: a716eea57d0d3430219c0a5a233e1e93ee931eb7
 
-PODFILE CHECKSUM: a8399aa609468a2b473eed1c38d5b94ee84ee47d
+PODFILE CHECKSUM: 50eed27366340491e05c1e2344f2919d19e5f7fd
 
 COCOAPODS: 1.15.2

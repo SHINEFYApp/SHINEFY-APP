@@ -76,7 +76,7 @@ export default function NavigationTop(props) {
     <View
       style={{paddingTop: insets.top}}
       className={
-        'flex-row  absolute w-full justify-between z-10 p-5 bg-white items-center rounded-b-2xl border-b border-l border-r border-[#C3C3C3]'
+        'absolute flex-row w-full justify-between z-10 p-5 bg-white items-center rounded-b-2xl border-b border-l border-r border-[#C3C3C3]'
       }>
       {props.route.name == 'Home' ? (
         <TouchableOpacity

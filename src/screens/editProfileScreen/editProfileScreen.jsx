@@ -21,8 +21,7 @@ export default function EditProfileScreen({navigation}) {
     phone_number: data.phone_number,
     email: data.email,
   });
-  const [currentIMG , setCurrentIMG] = useState(data.image)
-
+  const [currentIMG , setCurrentIMG] = useState()
   function updateProfilePic() {
       ImagePicker.openPicker({
         width: 300,
@@ -34,6 +33,8 @@ export default function EditProfileScreen({navigation}) {
       });
   }
 
+  console.log(currentIMG)
+
   return (
     <KeyboardAwareScrollView>
       <View className="pt-[80] px-8 flex-1">
@@ -41,11 +42,7 @@ export default function EditProfileScreen({navigation}) {
           <TouchableOpacity onPress={updateProfilePic}>
             <View className="items-center relative border-2 border-mainColor w-[110px] p-1 rounded-full mx-auto">
               <Image
-                source={currentIMG != 'NA' ? currentIMG.includes("file") ? {uri:currentIMG}:{
-                      uri: `${'https://shinefy.co/app-test/webservice/images/'}${
-                        data.image
-                      }`,
-                    } : pic}
+                source={{uri:currentIMG}}
                 className="p-4 border w-[100] h-[100] rounded-full"
               />
               <View className="bg-mainColor absolute -right-3 -top-2 rounded-full">

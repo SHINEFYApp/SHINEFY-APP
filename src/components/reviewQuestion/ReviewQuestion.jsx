@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import { Text, View } from 'react-native-ui-lib'
+import { Lang_chg } from '../../Provider/Language_provider';
+import { config } from '../../Provider/configProvider';
 
-const ReviewQuestion = ({ question }) => {
+const ReviewQuestion = ({ question , setAnswers,questionKey }) => {
   const [activeButton, setActiveButton] = useState('');
 
   const options = [
     {
-      title: 'Yes'
+      title: Lang_chg.yes_txt[config.language]
     },
     {
-      title: 'No'
+      title: Lang_chg.no_txt[config.language]
     }
   ]
 
@@ -24,6 +26,7 @@ const ReviewQuestion = ({ question }) => {
             className="w-fit mx-5"
             underlayColor={'transparent'}
             onPress={() => {
+              setAnswers((oldData)=>({...oldData , [questionKey]: button.title == Lang_chg.yes_txt[config.language] ? 1 : 0}))
               setActiveButton(button.title);
             }}>
             <View className="flex-row gap-4 items-center">

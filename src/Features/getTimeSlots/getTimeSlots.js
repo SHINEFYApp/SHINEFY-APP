@@ -11,6 +11,7 @@ export default async function getTimeSlots(data) {
   let amount = data.service_price;
   let user_id = user_arr.user_id;
   let date = data.booking_date;
+  console.log(date)
   var url =
     config.baseURL +
     'get_slots/' +
@@ -26,7 +27,7 @@ export default async function getTimeSlots(data) {
     '/' +
     amount;
   let res = await apifuntion.getApi(url, 0);
-
+  console.log(res.slots_arr.date_slots)
   return res.slots_arr.date_slots;
   // .then(obj => {
   //   return obj;

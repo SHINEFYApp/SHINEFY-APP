@@ -13,7 +13,7 @@ export default function BookingCard({progress, ButtonTitle, navigation, book}) {
         <View className="flex-row justify-between ml-2 flex-1">
           <View className="gap-2 mt-2">
             <Text
-              className={`text-xs text-center p-1 rounded-full ${
+              className={`text-xs text-center p-1 rounded-full  ${
                 progress == 'pending_booking'
                   ? 'text-[#E15249] bg-[#E1524945]'
                   : progress == 'inprogress_booking'

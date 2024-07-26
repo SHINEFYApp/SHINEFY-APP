@@ -82,7 +82,7 @@ export default async function cashBooking(bookingDetails, navigation) {
 
   try {
     apifuntion.postApi(url, data).then(obj => {
-      // navigation.navigate('HomeScreen');
+      navigation.navigate('HomeScreen');
     });
   } catch (err) {
     if (err === 'noNetwork') {
