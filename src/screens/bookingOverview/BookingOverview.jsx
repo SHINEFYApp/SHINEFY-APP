@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {TextInput} from 'react-native';
 import {FlatList, ScrollView} from 'react-native-gesture-handler';
 import {Image, Text, View} from 'react-native-ui-lib';
@@ -23,6 +23,7 @@ const BookingOverview = ({navigation, route}) => {
   const [coupon, setCoupon] = useState();
   const [walletAmount, setWalletAmount] = useState();
   const [isWallet, setIsWallet] = useState();
+  const couponInput = useRef()
   const extraServiceData = useMemo(() => {
     let extraData = [];
     for (let key in bookingDetails?.extraData?.extraServices) {
@@ -112,7 +113,7 @@ const BookingOverview = ({navigation, route}) => {
             </Text>
           </View>
         </ScrollView>
-        <FlatList
+       <FlatList
           data={bookingDetails.extraData.allSelectedCarsDetails}
           renderItem={({item}) => <SelectVehicle car={item} />}
           keyExtractor={item => item.vehicle_id}
@@ -206,6 +207,7 @@ const BookingOverview = ({navigation, route}) => {
             'bg-white items-center w-full rounded mt-4 flex flex-row justify-between px-4 border-2 border-[#C3C3C3] mb-1'
           }>
           <TextInput
+          value={coupon?.couponName}
             className={`h-[40px] w-[70%] font-bold pr-4 border-r border-r-[#C3C3C3] ${
               config.language === 0
                 ? 'placeholder:text-left'
@@ -221,11 +223,17 @@ const BookingOverview = ({navigation, route}) => {
             }}
           />
           <View className={'w-[25%]'}>
-            <Button
+            {
+              coupon?.total_amount ? <Button
+              Title={Lang_chg.Remove[config.language]}
+              onPress={async () => {
+                setCoupon();
+              }}
+            /> :<Button
               Title={Lang_chg.Apply[config.language]}
               onPress={async () => {
                 let res = await applyCoupon(
-                  walletAmount
+                  isWallet
                     ? bookingDetails.total_amount + walletAmount
                     : bookingDetails.total_amount,
                   coupon.couponName,
@@ -244,6 +252,8 @@ const BookingOverview = ({navigation, route}) => {
                 });
               }}
             />
+            }
+            
           </View>
         </View>
         <RadioButton

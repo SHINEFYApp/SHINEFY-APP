@@ -9,7 +9,7 @@ export default async function applyCoupon(service_amount, coupan_code) {
   Keyboard.dismiss();
   let user_arr = await localStorage.getItemObject('user_arr');
   let user_id = user_arr.user_id;
-  let amount = parseFloat(service_amount);
+  let amount = (service_amount);
   // let coupan_code = coupan_code;
   let vat_amount = 0;
   //-----------------Coupan code--------------------
@@ -23,10 +23,12 @@ export default async function applyCoupon(service_amount, coupan_code) {
   data.append('coupan_code', coupan_code);
   data.append('vat_amount', vat_amount);
   let url = config.baseURL + 'apply_coupan';
+  console.log(service_amount)
 
   try {
     let obj = await apifuntion.postApi(url, data);
     if (obj.success == 'true') {
+      console.log(obj)
       return obj;
       if (obj.coupan_id == 'NA' && obj.status == false) {
         this.setState({
