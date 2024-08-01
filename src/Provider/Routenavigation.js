@@ -39,6 +39,7 @@ import TermsConditions from '../screens/termsConditions/TermsConditions';
 import PrivacyPolicy from '../screens/privacyPolicy/PrivacyPolicy';
 import BookingType from '../screens/BookingType/BookingType';
 import SelectBookingVehicles from '../screens/selectBookingVehicle/selectBookingVehicle';
+import BookingDetails from '../screens/bookingDetails/bookingDetails';
 
 const Stack = createStackNavigator();
 
@@ -63,6 +64,10 @@ const Stacknav = navigation => {
       <Stack.Screen
         name="SavedLocationScreen"
         component={SavedLocationScreen}
+      />
+      <Stack.Screen
+        name="BookingDetailsScreen"
+        component={BookingDetails}
       />
       <Stack.Screen
         name="PackageScreen"

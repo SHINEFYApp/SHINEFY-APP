@@ -63,7 +63,6 @@ export default async function cashBooking(bookingDetails, navigation) {
   data.append('address_loc', bookingDetails.address_loc);
   data.append('latitude', bookingDetails.latitude);
   data.append('longitude', bookingDetails.longitude);
-
   let newDate = bookingDetails.booking_date.split('-');
   data.append('booking_date', `${newDate[0]}-${newDate[1]}-${newDate[2]}`);
   data.append('booking_time', bookingDetails.booking_time);
@@ -79,9 +78,11 @@ export default async function cashBooking(bookingDetails, navigation) {
     url = config.baseURL + 'create_booking_multi';
   }
 
-
+  console.log(data)
+  
   try {
     apifuntion.postApi(url, data).then(obj => {
+      console.log(obj)
       navigation.navigate('HomeScreen');
     });
   } catch (err) {

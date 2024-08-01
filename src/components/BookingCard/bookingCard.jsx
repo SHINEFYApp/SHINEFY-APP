@@ -4,11 +4,16 @@ import Img from '../../assets/cardCar.png';
 import timeIcon from '../../assets/icons/timeIcon2.png';
 import {config} from '../../Provider/configProvider';
 import {Lang_chg} from '../../Provider/Language_provider';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function BookingCard({progress, ButtonTitle, navigation, book}) {
 
+  console.log(book)
+
   return (
-    <View className="bg-white p-3 mb-3">
+    <TouchableOpacity onPress={()=>{
+      navigation.navigate("BookingDetailsScreen" , book.booking_id)
+    }} className="bg-white p-3 mb-3">
       <View className="flex-row border-b pb-3 border-[#ccc] mb-3">
         <Image source={Img} />
         <View className="flex-row justify-between ml-2 flex-1">
@@ -71,6 +76,6 @@ export default function BookingCard({progress, ButtonTitle, navigation, book}) {
           <Text>500 EGY</Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }

@@ -10,7 +10,7 @@ export default function WashServicesCard({page, navigation, service}) {
           id: service?.service_id
             ? service.service_id
             : service.extra_service_id,
-          name: service.service_name,
+          name: service?.service_id ? "main" : "extra",
         });
       }}
       className={`h-[152px] w-full overflow-hidden rounded-lg mr-2 ${

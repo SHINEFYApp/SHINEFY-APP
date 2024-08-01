@@ -12,12 +12,23 @@ import SafeAreaView from '../../components/SafeAreaView';
 export default function WashServiceDetails({navigation, route}) {
   const [data, setData] = useState({});
 
+  console.log(route.params.id)
+  console.log(route.params.name)
+
   useEffect(() => {
     let fetchData = async () => {
-      setData(await getServiceDetails(route.params.id));
+      setData(await getServiceDetails(route.params.id, route.params.name));
     };
     fetchData();
   }, []);
+  console.log(data)
+
+  function handleData(dataName) {
+    if(route.params.name === "extra"){
+      return `${route.params.name}_${dataName}`
+    } 
+    return dataName
+  }
 
   return (
     <SafeAreaView>
@@ -31,8 +42,8 @@ export default function WashServiceDetails({navigation, route}) {
                   data[
                     `${
                       config.language === 0
-                        ? 'service_name'
-                        : 'service_name_arabic'
+                        ? handleData('service_name')
+                        : handleData('service_name_arabic')
                     }`
                   ]}
               </Text>
@@ -41,8 +52,8 @@ export default function WashServiceDetails({navigation, route}) {
                   data[
                     `${
                       config.language === 0
-                        ? 'service_label'
-                        : 'service_label_arabic'
+                        ? handleData('service_label')
+                        : handleData('service_label_arabic')
                     }`
                   ]}
               </Text>
@@ -52,11 +63,11 @@ export default function WashServiceDetails({navigation, route}) {
                 <Image source={timeIcon} />
                 <Text className="text-lg">
                   {' '}
-                  {data?.service_time} {Lang_chg.mins[config.language]}
+                  {data[handleData("service_time")]} {Lang_chg.mins[config.language]}
                 </Text>
               </View>
               <View className="flex-row items-center">
-                <Text className="text-xl">{data?.service_price}EGP </Text>
+                <Text className="text-xl">{data[handleData("service_price")]}EGP </Text>
                 <Text>/{Lang_chg.services[config.language]}</Text>
               </View>
             </View>
@@ -69,8 +80,8 @@ export default function WashServiceDetails({navigation, route}) {
                   data[
                     `${
                       config.language === 0
-                        ? 'service_description'
-                        : 'service_description_arabic'
+                        ? handleData('service_description')
+                        : handleData('service_description_arabic')
                     }`
                   ]
                 }
