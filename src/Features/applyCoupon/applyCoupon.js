@@ -23,12 +23,10 @@ export default async function applyCoupon(service_amount, coupan_code) {
   data.append('coupan_code', coupan_code);
   data.append('vat_amount', vat_amount);
   let url = config.baseURL + 'apply_coupan';
-  console.log(service_amount)
 
   try {
     let obj = await apifuntion.postApi(url, data);
     if (obj.success == 'true') {
-      console.log(obj)
       return obj;
       if (obj.coupan_id == 'NA' && obj.status == false) {
         this.setState({

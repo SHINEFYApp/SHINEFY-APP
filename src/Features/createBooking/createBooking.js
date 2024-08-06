@@ -29,13 +29,21 @@ export default async function cashBooking(bookingDetails, navigation) {
   if (bookingDetails.extraData.allSelectedCars.length == 1) {
     data.append('vehicle_id', bookingDetails.extraData.allSelectedCars[0]);
   } else if (bookingDetails.extraData.allSelectedCars.length > 1) {
-    data.append('vehicles_ids', bookingDetails.extraData.allSelectedCars);
+    let obj = {}
+    bookingDetails.extraData.allSelectedCars.map((ele,index)=>{
+      obj = {
+        ...obj , 
+        [index]: ele 
+      }
+      data.append(`vehicles_ids[${index}]`, ele);
+    })
+    console.log(obj)
   }
   data.append('free_status', '0'); // false=0 true=1 is Free
   data.append('service_id', bookingDetails.service_id);
   data.append('service_price', bookingDetails.service_price);
-  // data.append('extra_service_id', extra_id);
-  // data.append('extra_service_price', all_service_data.extra_service_amount);
+  data.append('extra_service_id', "NA");
+  data.append('extra_service_price', "NA");
   data.append(
     'sub_total',
     bookingDetails.total_amount
@@ -71,19 +79,28 @@ export default async function cashBooking(bookingDetails, navigation) {
   data.append('payment_method', bookingDetails.payment_method);
   data.append('wallet_amount', bookingDetails.redemwallet);
   // data.append('online_amount', this.state.netpay);
+  let jsonData= {}
   let url;
   if (bookingDetails.extraData.allSelectedCars.length == 1) {
     url = config.baseURL + 'create_booking';
   } else if (bookingDetails.extraData.allSelectedCars.length > 1) {
+    data._parts.map((ele)=>{
+      jsonData = {...jsonData , 
+        [ele[0]] : ele[1]
+      }
+    })
+    console.log(jsonData)
     url = config.baseURL + 'create_booking_multi';
   }
-
-  console.log(data)
+  console.log(url)
   
+
+  console.log(data._parts)
   try {
     apifuntion.postApi(url, data).then(obj => {
+      console.log(data)
       console.log(obj)
-      navigation.navigate('HomeScreen');
+      // navigation.navigate('HomeScreen');
     });
   } catch (err) {
     if (err === 'noNetwork') {

@@ -18,6 +18,7 @@ export default function PackageDetailsScreen({navigation, route}) {
   const [isPayment, setIsPayment] = useState(false);
   const [isPaymentURL, setIsPaymentURL] = useState('');
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+  const [webView, setWebView] = useState(false);
 
   useEffect(() => {
     apiSauce.get(`/get_package_details/${route.params}`).then(res => {
@@ -30,11 +31,12 @@ export default function PackageDetailsScreen({navigation, route}) {
 
   return (
     <View className="flex-1">
-      {isPayment && (
+      {webView && (
         <PayTabs
-          url={isPaymentURL}
-          webView={isPayment}
-          setWebView={setIsPayment}
+          setWebView={setWebView}
+          webView={webView}
+          navigation={navigation}
+          amount={data.package.price}
         />
       )}
       <Modal
@@ -102,9 +104,9 @@ export default function PackageDetailsScreen({navigation, route}) {
             Title={Lang_chg.claim[config.language]}
             onPress={async () => {
               // setIsPayment(true);
+              setWebView(true);
               let url = await paymentTab(data.package.price);
-              setIsPaymentURL(url);
-              setIsPayment(true);
+              
               // console.log(data.package.id);
               // let res = await subscripePackage(
               //   data.package.id,

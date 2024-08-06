@@ -18,7 +18,7 @@ export default function BookingType({navigation, route}) {
       />
       <SelectVechileCard
         text={Lang_chg.packageBooking[config.language]}
-        screen="RequestDetails"
+        screen="MyPackagesScreen"
         navigation={navigation}
         location={{
           params: route.params,
