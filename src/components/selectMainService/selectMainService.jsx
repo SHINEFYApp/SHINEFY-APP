@@ -7,7 +7,8 @@ import {Image, Text, View} from 'react-native-ui-lib';
 import img from '../../assets/extraService.png';
 import globalStyle from '../../assets/globalStyle';
 import {config} from '../../Provider/configProvider';
-export default function SelectMainService({selected, service, onPress}) {
+export default function SelectMainService({selected, service, onPress,isPackage}) {
+
   return (
     <TouchableHighlight
       underlayColor={'white'}
@@ -25,24 +26,39 @@ export default function SelectMainService({selected, service, onPress}) {
             {service.service_name[config.language]}
           </Text>
           <View className="flex-row gap-3 items-center mt-[1px]">
-            <Text
-              className={`${
-                selected === service.service_id
-                  ? 'text-white'
-                  : 'text-mainColor'
-              } font-bold`}>
-              {service.service_price} EGP
-            </Text>
-            <View className="flex-row items-center">
-              <Text
-                className={`text-xs text-center p-1 rounded-full ${
-                  selected === service.service_id
-                    ? 'text-white'
-                    : 'text-mainColor'
-                } bg-[#DD992345]  `}>
-                {service.service_label[config.language]}
-              </Text>
-            </View>
+            {
+              isPackage ? 
+                <Text
+                  className={`${
+                    selected === service.service_id
+                      ? 'text-white'
+                      : 'text-mainColor'
+                  } font-bold`}>
+                  {service.remind_quantity} of {service.quantity} 
+                </Text>
+              : 
+                <Text
+                  className={`${
+                    selected === service.service_id
+                      ? 'text-white'
+                      : 'text-mainColor'
+                  } font-bold`}>
+                  {service.service_price} EGP
+                </Text>
+            }
+            {
+              !isPackage &&
+                <View className="flex-row items-center">
+                  <Text
+                    className={`text-xs text-center p-1 rounded-full ${
+                      selected === service.service_id
+                        ? 'text-white'
+                        : 'text-mainColor'
+                    } bg-[#DD992345]  `}>
+                    {service?.service_label[config.language]}
+                  </Text>
+                </View>
+            }
           </View>
         </View>
       </View>

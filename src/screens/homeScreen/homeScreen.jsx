@@ -34,7 +34,7 @@ export default function HomeScreen({navigation}) {
     };
     fetchData();
   }, []);
-  console.log(specialOffers)
+
 
   return (
     <KeyboardAwareScrollView>

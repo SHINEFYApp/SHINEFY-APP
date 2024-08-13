@@ -21,6 +21,7 @@ export default function MyBookingScreen({navigation}) {
     fetchData();
   }, [currentPage]);
 
+
   return (
     <View style={{paddingTop: insets.top + 70}} className=" px-4 flex-1">
       <View

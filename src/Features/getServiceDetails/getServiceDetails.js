@@ -6,7 +6,7 @@ export default async function getServiceDetails(id , service) {
 
     try {
       let res= await apiSauce.get(`/get_service/${user_arr.user_id}/${id}/${service}`)
-      console.log(res.data)
+   
         return(res.data.service_details)
 }catch(err) {
 

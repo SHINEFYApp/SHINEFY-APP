@@ -8,7 +8,7 @@ import { useRecoilState } from 'recoil';
 import bookingDetailsAtom from '../../atoms/bookingDetails/bookingDetails.atom';
 import { msgProvider } from '../../Provider/Messageconsolevalidationprovider/messageProvider';
 import calcSubTotal from '../../utlites/calcSubTotal';
-export default function SelectExtraService({extraService}) {
+export default function SelectExtraService({extraService , isPackage}) {
   const [bookingDetails, setBookingDetails] = useRecoilState(bookingDetailsAtom)
   const [counter, setCounter] = useState(0);
 
@@ -73,8 +73,18 @@ export default function SelectExtraService({extraService}) {
                 if (!bookingDetails['service_id']) {
                   msgProvider.toast('Please Select Main service to Select Extra Service', 'center');     
                 }else {
-                  setCounter(counter + 1);
-                  handleExtraService(counter + 1)
+                  if(isPackage) {
+                    if(extraService.remind_quantity > counter) {
+                      setCounter(counter + 1);
+                      handleExtraService(counter + 1)
+                    } else {
+                      msgProvider.toast('you select all remind extra service', 'center');     
+
+                    }
+                  }else {
+                    setCounter(counter + 1);
+                    handleExtraService(counter + 1)
+                  }
                 }
               }}>
               <Text className="font-semibold text-xl">+</Text>

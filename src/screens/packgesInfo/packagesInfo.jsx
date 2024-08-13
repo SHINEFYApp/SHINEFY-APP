@@ -15,26 +15,29 @@ import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 import SubTotalBooking from '../../components/subTotalBooking/SubTotalBooking';
 import myCarsList, {fetchMyCars} from '../../atoms/carsList/myCarsList';
+import getUserPackageDetails from '../../Features/getPackageUserDetails/getPackageUserDetails';
 
 export default function PackageInfo({navigation, route}) {
 
-    console.log(route , "packageinfoo")
+
   const [selectMain, setSelectMain] = useState('');
   const [services, setServices] = useState();
   const [bookingDetails, setBookingDetails] =
     useRecoilState(bookingDetailsAtom);
-  useEffect(() => {
-    let fetchData = async () => {
-      setServices(await localStorage.getItemObject('services'));
-    };
-    setBookingDetails({
-      ...bookingDetails,
-      address_loc: route.params.bookingType.params.location,
-      longitude: route.params.bookingType.params.longitude,
-      latitude: route.params.bookingType.params.latitude,
-    });
-    fetchData();
-  }, []);
+    useEffect(() => {
+      let fetchData = async () => {
+        let res = await getUserPackageDetails(1)
+       let newData = {extra_service_arr : res.data.extra_services , service_arr :res.data.main_services}
+        setServices(newData);
+      };
+      setBookingDetails({
+        ...bookingDetails,
+        address_loc: route.params.bookingType.params.location,
+        longitude: route.params.bookingType.params.longitude,
+        latitude: route.params.bookingType.params.latitude,
+      });
+      fetchData();
+    }, []);
 
   return (
     <>
@@ -97,6 +100,7 @@ export default function PackageInfo({navigation, route}) {
             {services?.service_arr?.map(service => {
               return (
                 <SelectMainService
+                isPackage={true}
                   key={service.service_id}
                   service={service}
                   selected={selectMain}
@@ -124,6 +128,7 @@ export default function PackageInfo({navigation, route}) {
             {services?.extra_service_arr?.map(extra => {
               return (
                 <SelectExtraService
+                  isPackage={true}
                   key={extra.extra_service_id}
                   extraService={extra}
                 />

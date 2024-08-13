@@ -7,8 +7,6 @@ import getUserPackages from "../../Features/getUserPackages/getUserPackages";
 
 export default function MyPackages ({navigation , route}) {
 
-    console.log(route.params)
-
   const [data, setData] = useState();
 
   useEffect(() => {

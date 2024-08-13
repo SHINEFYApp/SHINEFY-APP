@@ -10,6 +10,6 @@ export default async function getUserPackages() {
   data.append('user_id', user_id);
   var url = config.baseURL + 'my_subscription_package/';
   let res = await apiSauce.get(url, {user_id});
-  console.log(res.data)
+
   return res.data;
 }

@@ -37,7 +37,7 @@ export default async function cashBooking(bookingDetails, navigation) {
       }
       data.append(`vehicles_ids[${index}]`, ele);
     })
-    console.log(obj)
+  
   }
   data.append('free_status', '0'); // false=0 true=1 is Free
   data.append('service_id', bookingDetails.service_id);
@@ -89,18 +89,13 @@ export default async function cashBooking(bookingDetails, navigation) {
         [ele[0]] : ele[1]
       }
     })
-    console.log(jsonData)
+  
     url = config.baseURL + 'create_booking_multi';
   }
-  console.log(url)
-  
-
-  console.log(data._parts)
   try {
     apifuntion.postApi(url, data).then(obj => {
-      console.log(data)
-      console.log(obj)
-      // navigation.navigate('HomeScreen');
+
+      navigation.navigate('HomeScreen');
     });
   } catch (err) {
     if (err === 'noNetwork') {

@@ -33,6 +33,7 @@ export default function PackageDetailsScreen({navigation, route}) {
     <View className="flex-1">
       {webView && (
         <PayTabs
+          url={isPaymentURL}
           setWebView={setWebView}
           webView={webView}
           navigation={navigation}
@@ -106,7 +107,7 @@ export default function PackageDetailsScreen({navigation, route}) {
               // setIsPayment(true);
               setWebView(true);
               let url = await paymentTab(data.package.price);
-              
+              setIsPaymentURL(url)
               // console.log(data.package.id);
               // let res = await subscripePackage(
               //   data.package.id,

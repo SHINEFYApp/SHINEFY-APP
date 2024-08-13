@@ -12,7 +12,7 @@ import myLocationList, {
 } from '../../atoms/locationList/myLocationList';
 import {useRecoilState} from 'recoil';
 import SafeAreaView from '../../components/SafeAreaView';
-export default function SavedLocationScreen({navigation}) {
+export default function SavedLocationScreen({navigation ,route}) {
   const [locationList, setLocationList] = useRecoilState(myLocationList);
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export default function SavedLocationScreen({navigation}) {
           }
           keyExtractor={item => item.user_location_id}
           renderItem={({item}) => (
-            <LocationCard location={item} navigation={navigation} />
+            <LocationCard location={item} navigation={navigation} isEdit={route?.params?.editLocation} bookingId={route?.params?.book_id}/>
           )}
         />
       </View>

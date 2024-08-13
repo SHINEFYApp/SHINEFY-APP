@@ -16,8 +16,10 @@ import getTimeSlots from '../../Features/getTimeSlots/getTimeSlots';
 import sortDate from '../../utlites/sortDate';
 import SubTotalBooking from '../../components/subTotalBooking/SubTotalBooking';
 import SafeAreaView from '../../components/SafeAreaView';
+import Button from '../../components/mainButton/Button';
+import editTimeBooking from '../../Features/reschedule/reschedule';
 
-export default function SelectDateTime({navigation}) {
+export default function SelectDateTime({navigation , route}) {
   const [date, setDate] = useState(Lang_chg.today_txt[config.language]);
   const [time, setTime] = useState('');
   const [isCustomDate, setIsCustomDate] = useState(false);
@@ -63,13 +65,21 @@ export default function SelectDateTime({navigation}) {
     });
   }
 
+
   useEffect(() => {
     const fetchDate = async () => {
-      setSlots(await getTimeSlots(bookingDetails));
+      setSlots(await getTimeSlots(route.params?.isEdit ? {
+        longitude : route.params.longitude,
+        latitude : route.params.latitude,
+        booking_date : bookingDetails.booking_date,
+        service_time : route.params.service_hours,
+        service_price : 0
+      } :bookingDetails));
     };
     fetchDate();
     setTime('');
   }, [date]);
+
 
   return (
     <SafeAreaView>
@@ -148,19 +158,44 @@ export default function SelectDateTime({navigation}) {
             })}
           </View>
         </View>
+        {
+          !route.params?.isEdit ?
         <View className="flex-row bg-white justify-between absolute bottom-0 right-0 w-[100vw] rounded-t-3xl">
           <SubTotalBooking
             Press={subtotal => {
               if (!bookingDetails.booking_date) {
                 msgProvider.toast('Please Select Date', 'center');
-                // } else if (!bookingDetails.booking_time) {
-                //   msgProvider.toast('Please Select Time', 'center');
+                } else if (!bookingDetails.booking_time) {
+                  msgProvider.toast('Please Select Time', 'center');
               } else {
                 navigation.push('Booking Overview', {price: subtotal});
               }
             }}
           />
-        </View>
+        </View> :
+         <Button
+          onPress={() => {
+             if (!bookingDetails.booking_time) {
+                msgProvider.toast('Please Select time', 'center');
+              } else {
+                editTimeBooking({
+                  service_price : 0,
+                  booking_id: route.params.book_id,
+                  booking_date: bookingDetails.booking_date,
+                  booking_time: bookingDetails.booking_time,
+                  area_id: route.params.area_id,
+                  service_time: route.params.service_hours,
+                  service_boy_id: route.params.service_boy_id,
+                  longitude : route.params.longitude,
+                  latitude : route.params.latitude,
+                  address_loc:route.params.address_loc
+                },navigation)
+              }
+          }}
+          Title={Lang_chg.reschedule_txt[config.language]}
+      
+        />
+        }
       </View>
     </SafeAreaView>
   );

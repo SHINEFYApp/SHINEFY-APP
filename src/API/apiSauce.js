@@ -9,7 +9,7 @@ const apiSauce = create({
       base64.encode('mario') + ':' + base64.encode('carbonell'),
     )}`,
     'app-type': Platform.OS,
-    'app-version': '5',
+    'app-version': Platform.OS === 'ios' ? '8' : '9',
     'user-type': 'user',
   },
 });

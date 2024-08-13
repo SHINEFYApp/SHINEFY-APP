@@ -5,12 +5,13 @@ import sortDate from '../../utlites/sortDate';
 
 export default async function getTimeSlots(data) {
   var user_arr = await localStorage.getItemObject('user_arr');
+  let user_id = user_arr.user_id;
   let latitude = data.latitude;
   let longitude = data.longitude;
   let service_time = data.service_time;
   let amount = data.service_price;
-  let user_id = user_arr.user_id;
   let date = data.booking_date;
+  
 
   var url =
     config.baseURL +
@@ -21,12 +22,13 @@ export default async function getTimeSlots(data) {
     '/' +
     date +
     '/' +
-    service_time +
+    service_time+
     '/' +
     user_id +
     '/' +
     amount;
   let res = await apifuntion.getApi(url, 0);
+  
   return res.slots_arr.date_slots;
   // .then(obj => {
   //   return obj;

@@ -8,8 +8,6 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function BookingCard({progress, ButtonTitle, navigation, book}) {
 
-  console.log(book)
-
   return (
     <TouchableOpacity onPress={()=>{
       navigation.navigate("BookingDetailsScreen" , book.booking_id)

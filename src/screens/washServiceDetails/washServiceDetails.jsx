@@ -12,17 +12,12 @@ import SafeAreaView from '../../components/SafeAreaView';
 export default function WashServiceDetails({navigation, route}) {
   const [data, setData] = useState({});
 
-  console.log(route.params.id)
-  console.log(route.params.name)
-
   useEffect(() => {
     let fetchData = async () => {
       setData(await getServiceDetails(route.params.id, route.params.name));
     };
     fetchData();
   }, []);
-  console.log(data)
-
   function handleData(dataName) {
     if(route.params.name === "extra"){
       return `${route.params.name}_${dataName}`

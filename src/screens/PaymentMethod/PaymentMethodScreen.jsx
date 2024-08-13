@@ -36,10 +36,12 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {StatusBar} from 'react-native';
 import {localimag} from '../../Provider/Localimage';
 import PayTabs from '../../components/payTabs/payTabs';
+import paymentTab from '../../Features/paymentTab/paymntTab';
 
 export default function PaymentMethod({navigation}) {
   const [activePayment, setActivePayment] = useState(0);
   const [webView, setWebView] = useState(false);
+  const [currentUrl, setCurrentUrl] = useState("");
   const [bookingDetails, setBookingDetails] =
     useRecoilState(bookingDetailsAtom);
     
@@ -65,6 +67,7 @@ export default function PaymentMethod({navigation}) {
     <View className="pt-[80] px-5">
       {webView && (
         <PayTabs
+        url={currentUrl}
           setWebView={setWebView}
           webView={webView}
           navigation={navigation}
@@ -165,8 +168,13 @@ export default function PaymentMethod({navigation}) {
         {/* </View> */}
         <Button
           Title={Lang_chg.Confirm[config.language]}
-          onPress={() => {
+          onPress={async () => {
             if (activePayment == Lang_chg.debit_credit_card[config.language]) {
+              const url = await paymentTab(bookingDetails.total_amount
+              ? bookingDetails.total_amount
+              : bookingDetails.service_price)
+
+              setCurrentUrl(url)
               setWebView(true);
             } else {
               cashBooking(bookingDetails, navigation);

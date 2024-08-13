@@ -15,15 +15,25 @@ import myLocationList, {
 } from '../../atoms/locationList/myLocationList';
 import {useSetRecoilState} from 'recoil';
 import checkLocation from '../../Features/checkLocation/checkLocation';
-export default function LocationCard({location, navigation}) {
+import editBookingLocation from '../../Features/editBookingLocation/editBookingLocation';
+export default function LocationCard({location, navigation ,isEdit ,bookingId}) {
   const [isPopUpOpenDelete, setIsPopUpOpenDelete] = useState(false);
   const setLocationList = useSetRecoilState(myLocationList);
 
   return (
     <TouchableOpacity
       onPress={async() => {
-        const state = await checkLocation(location)
-        state && navigation.push('BookingTypeScreen', location);
+        if (isEdit) {
+          editBookingLocation({
+            bookingId ,
+            lat : location.latitude,
+            lon : location.longitude,
+            address_loc : location.location 
+          },navigation)
+        }else {
+          const state = await checkLocation(location)
+          state && navigation.push('BookingTypeScreen', location);
+        }
       }}>
       <View className="flex-row items-center my-2 pb-3 justify-between border-b border-[#c3c3c3] relative">
         <Modal

@@ -24,6 +24,7 @@ export default function PayTabs({setWebView, webView, navigation, url}) {
     };
     getUser();
   }, []);
+  
 
   function onNavigationStateChange(webViewState) {
     webViewState.canGoBack = false;

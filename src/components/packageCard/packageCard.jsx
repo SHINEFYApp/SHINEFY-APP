@@ -7,7 +7,6 @@ import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 
 export default function PackageCard({navigation, pack , isUse , route}) {
-
   return (
     <View className="bg-white py-4 px-5 rounded-xl m-2" style={style.box}>
       <View className="flex-row mb-3">
@@ -24,7 +23,10 @@ export default function PackageCard({navigation, pack , isUse , route}) {
           </Text>
           <View className="gap-2">
             <Text className="font-bold text-xl">
-              {pack[config.language == 0 ? 'name' : 'name_ar']}
+              {pack.name ?
+                pack[config.language == 0 ? 'name' : 'name_ar'] 
+                : pack.package_info[config.language == 0 ? 'name' : 'name_ar'] 
+              }
             </Text>
             {/* <View className="flex-row items-center">
               <Image source={timeIcon} />
@@ -33,16 +35,21 @@ export default function PackageCard({navigation, pack , isUse , route}) {
             <View className="flex-row items-center">
               <Image source={timeIcon} />
               <Text className="ml-2">
-                {+pack.extra_services_count + +pack.main_services_count}{' '}
+                {pack?.extra_services_count ? +pack.extra_services_count + +pack.main_services_count : 
+                pack?.extra_services?.length}{' '}
                 {Lang_chg.other_services[config.language]}
               </Text>
             </View>
+            {
+              pack?.extra_services_count &&
             <View className="flex-row items-center">
               <Image source={timeIcon} />
               <Text className="ml-2">
+                
                 {pack.total_days} {Lang_chg.mins[config.language]}
               </Text>
             </View>
+            }
           </View>
         </View>
       </View>

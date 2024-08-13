@@ -7,7 +7,7 @@ import cancelBooking from '../../Features/cancelBooking/cancelBooking';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 
-const CancelBooking = ({route}) => {
+const CancelBooking = ({route , navigation}) => {
   const [activeButton, setActiveButton] = useState('');
   const [reason, setReason] = useState('');
   const options = [
@@ -86,6 +86,7 @@ const CancelBooking = ({route}) => {
               activeButton == Lang_chg.other_reason[config.language]
                 ? reason
                 : activeButton,
+                navigation
             );
           }}
         />
