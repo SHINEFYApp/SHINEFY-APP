@@ -83,7 +83,7 @@ export default function SelectDateTime({navigation , route}) {
 
   return (
     <SafeAreaView>
-      <View className="pt-[80] px-5 relative h-full">
+      <View className="pt-[50] px-5 relative h-full">
         <View>
           <Text className={'font-semibold my-3'}>
             {Lang_chg.Selectdatetime_txt[config.language]}

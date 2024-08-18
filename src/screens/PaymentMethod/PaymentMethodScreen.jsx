@@ -64,7 +64,7 @@ export default function PaymentMethod({navigation}) {
   ];
 
   return (
-    <View className="pt-[80] px-5">
+    <View className="pt-[120] px-5">
       {webView && (
         <PayTabs
         url={currentUrl}

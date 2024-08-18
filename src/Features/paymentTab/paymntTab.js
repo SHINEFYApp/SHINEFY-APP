@@ -9,6 +9,7 @@ export default async function paymentTab(amount) {
   let res = await apiSauce.get(
     `/payment/paytab/pay?amount=${amount}&user_id=${user_id}`,
   );
+  console.log(res.data)
   if (res.data.status === 'success') {
     return res.data.payment_url;
   } else {

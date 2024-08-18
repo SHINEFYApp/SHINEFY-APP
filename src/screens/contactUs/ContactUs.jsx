@@ -14,7 +14,7 @@ const ContactUsScreen = ({navigation}) => {
   [message, setMessage] = useState({});
 
   return (
-    <View className="pt-[80px] px-5">
+    <View className="pt-[120px] px-5">
       <ContactUsInput
         icon={userIcon}
         placeholder={Lang_chg.name[config.language]}

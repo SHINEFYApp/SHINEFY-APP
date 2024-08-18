@@ -16,7 +16,7 @@ export default function ChangePasswordProfile({navigation}) {
   const [pass, setPass] = useState({});
 
   return (
-    <View className="pt-[80] flex-1 relative px-5">
+    <View className="pt-[120] flex-1 relative px-5">
       <View className="absolute top-[120] w-full ml-5">
         <Input
           secureTextEntry={true}

@@ -24,6 +24,7 @@ export default function WashServiceDetails({navigation, route}) {
     } 
     return dataName
   }
+  console.log(data)
 
   return (
     <SafeAreaView>
@@ -82,14 +83,14 @@ export default function WashServiceDetails({navigation, route}) {
                 }
               </Text>
             </View>
-            <View className="gap-3">
+            {/* <View className="gap-3">
               <Text className="text-xl font-bold">
                 {Lang_chg.services[config.language]} :
               </Text>
               <Text>Car Detailing</Text>
               <Text>Exterior Cleaning</Text>
               <Text>Vacuum Cleaning</Text>
-            </View>
+            </View> */}
           </View>
           <Button
             onPress={() => {

@@ -4,15 +4,15 @@ import {localStorage} from '../../Provider/localStorageProvider';
 import sortDate from '../../utlites/sortDate';
 
 export default async function getTimeSlots(data) {
+  console.log(data.service_time)
   var user_arr = await localStorage.getItemObject('user_arr');
   let user_id = user_arr.user_id;
   let latitude = data.latitude;
   let longitude = data.longitude;
   let service_time = data.service_time;
-  let amount = data.service_price;
+  let amount = data.service_price ? data.service_price : 0;
   let date = data.booking_date;
   
-
   var url =
     config.baseURL +
     'get_slots/' +
@@ -27,6 +27,7 @@ export default async function getTimeSlots(data) {
     user_id +
     '/' +
     amount;
+    console.log(url)
   let res = await apifuntion.getApi(url, 0);
   
   return res.slots_arr.date_slots;

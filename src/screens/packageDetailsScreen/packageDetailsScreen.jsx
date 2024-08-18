@@ -105,9 +105,10 @@ export default function PackageDetailsScreen({navigation, route}) {
             Title={Lang_chg.claim[config.language]}
             onPress={async () => {
               // setIsPayment(true);
-              setWebView(true);
+              // setWebView(true);
               let url = await paymentTab(data.package.price);
-              setIsPaymentURL(url)
+              console.log(url)
+              // setIsPaymentURL(url)
               // console.log(data.package.id);
               // let res = await subscripePackage(
               //   data.package.id,

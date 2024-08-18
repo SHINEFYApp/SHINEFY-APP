@@ -62,7 +62,7 @@ export default function AddVechileScreen({navigation, route}) {
     }, 1000);
   };
   return (
-    <KeyboardAwareScrollView className="pt-[80px] px-4">
+    <KeyboardAwareScrollView className="pt-[120px] px-4">
       <Modal
         swipeDirection={'down'}
         onSwipeMove={handleClosePopUp}

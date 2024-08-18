@@ -36,7 +36,7 @@ export default function EditProfileScreen({navigation}) {
 
   return (
     <KeyboardAwareScrollView>
-      <View className="pt-[80] px-8 flex-1">
+      <View className="pt-[120] px-8 flex-1">
         <View className="my-10">
           <TouchableOpacity onPress={updateProfilePic}>
             <View className="items-center relative border-2 border-mainColor w-[110px] p-1 rounded-full mx-auto">

@@ -17,7 +17,7 @@ const FAQ = () => {
   }, []);
 
   return (
-    <View className={'mt-[90px] mx-5'}>
+    <View className={'mt-[120px] mx-5'}>
       <ScrollView>
         {data?.map((faq, index) => {
           return (

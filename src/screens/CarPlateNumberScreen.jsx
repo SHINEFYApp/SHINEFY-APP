@@ -5,7 +5,7 @@ import PlateInput from '../components/PlateInput';
 
 export default function CarPlateNumberScreen({navigation, route}) {
   return (
-    <View className="pt-[80] px-5">
+    <View className="pt-[120] px-5">
       <PlateInput />
       <Button
         Title={'DONE'}

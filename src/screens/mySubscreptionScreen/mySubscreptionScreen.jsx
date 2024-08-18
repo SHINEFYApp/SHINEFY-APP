@@ -26,7 +26,7 @@ export default function MySubscreptionScreen({navigation}) {
   }, []);
 
   return (
-    <View className="pt-[80]">
+    <View className="pt-[120]">
       <View>
         <View className="mt-2 flex-row items-center px-4">
           <Text className="text-[#000] text-xl ">
