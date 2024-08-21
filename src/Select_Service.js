@@ -61,7 +61,6 @@ export default class Select_Service extends Component {
   }
 
   componentDidMount() {
-    
     this.props.navigation.addListener('focus', () => {
       //     setTimeout( () => {
       //         this.getServices();
@@ -121,7 +120,7 @@ export default class Select_Service extends Component {
     let user_id = user_arr.user_id;
     this.setState({user_id: user_id});
     var url = config.baseURL + 'get_service/' + user_id;
-    
+
     var get_service = await localStorage.getItemObject('all_service_arr');
     if (get_service == null) {
       apifuntion
@@ -272,7 +271,6 @@ export default class Select_Service extends Component {
   };
 
   checkMainService = async (item, index) => {
-    console.log(item , "a77a")
     let data = this.state.service_arr;
     for (let i = 0; i < data.length; i++) {
       data[i].status = false;
@@ -421,7 +419,6 @@ export default class Select_Service extends Component {
       }
     });
   };
-
 
   render() {
     return (
