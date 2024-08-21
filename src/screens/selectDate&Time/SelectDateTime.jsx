@@ -20,6 +20,7 @@ import Button from '../../components/mainButton/Button';
 import editTimeBooking from '../../Features/reschedule/reschedule';
 
 export default function SelectDateTime({navigation , route}) {
+ 
   const [date, setDate] = useState(Lang_chg.today_txt[config.language]);
   const [time, setTime] = useState('');
   const [isCustomDate, setIsCustomDate] = useState(false);
@@ -168,7 +169,7 @@ export default function SelectDateTime({navigation , route}) {
                 } else if (!bookingDetails.booking_time) {
                   msgProvider.toast('Please Select Time', 'center');
               } else {
-                navigation.push('Booking Overview', {price: subtotal});
+                navigation.push('Booking Overview', {price: subtotal , type:route.params});
               }
             }}
           />

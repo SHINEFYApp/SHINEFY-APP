@@ -15,6 +15,7 @@ import applyCoupon from '../../Features/applyCoupon/applyCoupon';
 import RadioButton from '../../components/RadioButton/RadioButton';
 import walletIcon from '../../assets/icons/profile/wallet.png';
 import getWallet from '../../Features/getWallet/getWallet';
+import create_package_booking from '../../Features/createPackgeBooking/createPackageBooking';
 
 const BookingOverview = ({navigation, route}) => {
   const [bookingDetails, setBookingDetails] =
@@ -79,7 +80,6 @@ const BookingOverview = ({navigation, route}) => {
       }
     }
   }
-
   useEffect(() => {
     setBookingDetails({
       ...bookingDetails,
@@ -284,7 +284,14 @@ const BookingOverview = ({navigation, route}) => {
         <Button
           Title={Lang_chg.confirm_booking[config.language]}
           btnStyle={'font-semibold text-lg'}
-          onPress={() => navigation.push('PaymentMethod')}
+          onPress={() => {
+            if(route.params.type == "package") {
+              create_package_booking(bookingDetails , navigation)
+            } else {
+              navigation.push('PaymentMethod')
+            }
+            
+          }}
         />
         <Button
           Title={Lang_chg.cancelBooking_txt[config.language]}

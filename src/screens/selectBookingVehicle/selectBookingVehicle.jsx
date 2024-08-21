@@ -15,7 +15,8 @@ import SubTotalBooking from '../../components/subTotalBooking/SubTotalBooking';
 import {msgProvider} from '../../Provider/Messageconsolevalidationprovider/messageProvider';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
-export default function SelectBookingVehicles({navigation}) {
+export default function SelectBookingVehicles({navigation , route}) {
+
   const [myCars, setMyCarsList] = useRecoilState(myCarsList); //user all cars
   const [isSelectAll, setIsSelectAll] = useState(false); // state if selected true
   const [selectCarID, setSelectCarsID] = useState([]); // selectedCars by id
@@ -133,7 +134,7 @@ export default function SelectBookingVehicles({navigation}) {
           if (bookingDetails.extraData.allSelectedCars.length == 0) {
             msgProvider.toast('Please Select Car', 'center');
           } else {
-            navigation.push('SelectDateTime');
+            navigation.push('SelectDateTime' , route.params);
           }
         }}
       />

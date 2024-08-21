@@ -141,7 +141,7 @@ export default function PackageInfo({navigation, route}) {
             if (!bookingDetails.service_id) {
               msgProvider.toast('Please Select Service', 'center');
             } else {
-              navigation.push('selectBookingvehicle');
+              navigation.push('selectBookingvehicle' , "package");
             }
           }}
         />
