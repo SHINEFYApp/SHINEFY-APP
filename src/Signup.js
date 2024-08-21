@@ -317,6 +317,7 @@ export default class Signup extends Component {
     apifuntion
       .postApi(url, data)
       .then(obj => {
+        console.log(obj)
         if (obj.success == 'true') {
           localStorage.setItemObject('user_arr', obj.user_details);
           // if (social_type == 'app') {
