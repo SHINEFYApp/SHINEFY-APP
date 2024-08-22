@@ -90,6 +90,7 @@ export default class Select_Service extends Component {
     apifuntion
       .getApi(url)
       .then(obj => {
+        
         this.setState({loadingProfile: false});
         if (obj.success == 'true') {
           let user_arr = obj.user_details;
@@ -131,15 +132,9 @@ export default class Select_Service extends Component {
             let data = obj.all_service_arr;
             localStorage.setItemObject('all_service_arr', data);
             localStorage.setItemObject('service_arr', data.service_arr);
-            let arrangeService = data.service_arr.points.sort(
-              (a, b) => b.service_price - a.service_price,
-            );
-            let arrangeExtra = data.service_arr.points.sort(
-              (a, b) => b.service_price - a.service_price,
-            );
             this.setState({
-              service_arr: arrangeService,
-              extra_service_arr: arrangeExtra,
+              service_arr: data.service_arr,
+              extra_service_arr: data.extra_service_arr,
               service_data: data.service_arr[0],
               service_amount: data.service_arr[0].service_price,
               subTotal: Number(data.service_arr[0].service_price).toFixed(2),
@@ -348,7 +343,7 @@ export default class Select_Service extends Component {
       (a, b) => a + Number(b.extra_service_price * (b.extra_serivce_qty ?? 1)),
       0,
     );
-    console.log('extra_amount', extra_amount);
+
     let myExtraTime = data2.reduce(
       (a, b) => (a + b.status === true ? Number(item.extra_service_time) : 0),
       0,
