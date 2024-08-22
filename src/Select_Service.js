@@ -289,6 +289,20 @@ export default class Select_Service extends Component {
       total_service_time: new_time,
       service_time: data[index].service_time,
     });
+    let dataextra = this.state.extra_service_arr;
+    dataextra.map((obj)=>{
+      if(obj.status) {
+        obj.status = false
+      }
+    this.setState({
+      subTotal:  Number(new_amount).toFixed(2),
+      extra_service_arr: dataextra,
+      extra_service_data: [],
+      extra_service_amount: "NA",
+      total_service_time: "NA",
+      extra_service_time: "NA",
+    });
+    })
     await localStorage.setItemObject('service_arr', data);
   };
 
@@ -935,11 +949,11 @@ export default class Select_Service extends Component {
                               <TouchableOpacity
                                 activeOpacity={0.7}
                                 onPress={() => {
-                                  if(this.state.isExtraService == 1){
-                                    this.checkExtraService(item, index);
-
-                                  }else{
+                                  if(this.state.isExtraService == 0){
                                     msgProvider.alert( Lang_chg.disableExtraService[config.language] )
+                                
+                                  }else{
+                                    this.checkExtraService(item, index);
                                   }
                                 }}
                                 style={{

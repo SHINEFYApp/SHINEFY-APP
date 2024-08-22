@@ -20,7 +20,7 @@ class Currentlatlong {
           );
           if (granted === PermissionsAndroid.RESULTS.GRANTED) {
             //To Check, If Permission is granted
-            global.props.showLoader();
+            // global.props.showLoader();
             resolve(this.getOneTimeLocation());
             resolve(this.subscribeLocationLocation());;
           } else {

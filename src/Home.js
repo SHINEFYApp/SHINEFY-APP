@@ -101,9 +101,10 @@ export default class Home extends Component {
       this.setState({timer: false});
       this.setVehicleData();
 
-      setTimeout(() => {
-        this.setHomeData();
-        this.getNotificationCount();
+      setTimeout(async () => {
+        await this.setHomeData();
+        await this.getNotificationCount();
+        
         localStorage.setItemObject(
           'booking_vehicle_arr',
           this.state.vehical_arr[this.state.vehicle_index],
@@ -121,6 +122,7 @@ export default class Home extends Component {
         ),
     );
     this.getnotification();
+   
   }
   setVehicleData = () => {
     setVehicleData(this, this.props.navigation);
@@ -488,6 +490,8 @@ export default class Home extends Component {
     apifuntion
       .getApi(url, 1)
       .then(obj => {
+        global.props.hideLoader();
+
         if (obj.success == 'true') {
           // alert(obj?.ad?.description);
           this.setState({adObj: obj?.ad, showHomeAd: true});
@@ -514,6 +518,8 @@ export default class Home extends Component {
       apifuntion
         .getApi(url, 1)
         .then(obj => {
+          global.props.hideLoader();
+       
           if (obj.success == 'true') {
             localStorage.setItemObject('user_arr', obj.user_details);
             localStorage.setItemObject('user_home_data', obj.home_arr);
@@ -581,6 +587,8 @@ export default class Home extends Component {
       apifuntion
         .getApi(url, 1)
         .then(obj => {
+          global.props.hideLoader();
+          
           if (obj.success == 'true') {
             localStorage.setItemObject('user_arr', obj.user_details);
             localStorage.setItemObject('user_home_data', obj.home_arr);
@@ -642,7 +650,7 @@ export default class Home extends Component {
   checkLocation = async () => {
     let {google_address, google_latitude, google_longitude, user_id} =
       this.state;
-    global.props.showLoader();
+    // global.props.showLoader();
     var url =
       config.baseURL +
       'check_location/' +
@@ -651,10 +659,12 @@ export default class Home extends Component {
       global.longitude +
       '/' +
       user_id;
+    
 
     apifuntion
       .getApi(url, 1)
       .then(obj => {
+
         global.props.hideLoader();
         if (obj.success == 'true') {
           localStorage.setItemObject('user_arr', obj.user_details);
@@ -689,6 +699,8 @@ export default class Home extends Component {
     apifuntion
       .getApi(url, 1)
       .then(obj => {
+        global.props.hideLoader();
+   
         if (obj.success == 'true') {
           this.setState({notification_count: obj.notification_count});
         } else {

@@ -117,9 +117,8 @@ export default class Payment_option extends Component {
     let res = webViewState.url.split('/');
     let isError = res[res.length - 1].split('&')[0].split('=').pop();
     if (isError === 'D') {
-      msgProvider.toast(
-        res[res.length - 1].split('&')[1].split('=')[1].split('%20').join(' '),
-        'center',
+      msgProvider.alert(
+        res[res.length - 1].split('&')[1].split('=')[1].split('%20').join(' ')
       );
       this.setState({webviewshow: false});
     } else if (isError === 'A') {
@@ -168,7 +167,7 @@ export default class Payment_option extends Component {
     data.append('free_status', slot_data.free_status);
     data.append('service_id', service_data.service_id);
     data.append('service_price', service_data.service_price);
-    data.append('extra_service_id', extra_id);
+    data.append('extra_service_id', extra_id == "" ? "NA" : extra_id );
     data.append('extra_service_price', all_service_data.extra_service_amount);
     data.append('sub_total', all_service_data.subTotal);
     data.append('vat_amount', vat_data.amount);
@@ -192,6 +191,7 @@ export default class Payment_option extends Component {
     apifuntion
       .postApi(url, data)
       .then(obj => {
+       
         if (obj.success == 'true') {
           localStorage.setItemObject('user_arr', obj.user_details);
           localStorage.setItemObject('booking_number', obj.booking_number);
