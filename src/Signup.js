@@ -297,7 +297,7 @@ export default class Signup extends Component {
     data.append('f_name', firstname);
     data.append('l_name', lastname);
     data.append('email', email);
-    data.append('phone_number', mobile);
+    data.append('phone_number', mobile.startsWith("0") ? mobile : `0${mobile}`);
     data.append('player_id', player_id_me1);
     data.append('device_type', config.device_type);
     data.append('social_type', social_type);

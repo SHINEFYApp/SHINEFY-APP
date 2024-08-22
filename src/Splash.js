@@ -119,7 +119,7 @@ export default class Splash extends Component {
           var user_arr = await localStorage.getItemObject('user_arr');
           let user_id = user_arr.user_id;
           if (user_id) {
-            const url = config.burl + '/api/save_user_notification_data';
+            const url = config.baseURL + 'save_user_notification_data';
             const data = new FormData();
             data.append('player_id', fcmToken);
             data.append('device_type', config.device_type);
