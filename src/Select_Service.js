@@ -136,6 +136,7 @@ export default class Select_Service extends Component {
               service_arr: data.service_arr,
               extra_service_arr: data.extra_service_arr,
               service_data: data.service_arr[0],
+              isExtraService:data.service_arr[0].apply_add_extra_service,
               service_amount: data.service_arr[0].service_price,
               subTotal: Number(data.service_arr[0].service_price).toFixed(2),
               service_time: data.service_arr[0].service_time,
@@ -180,6 +181,7 @@ export default class Select_Service extends Component {
           service_arr: get_service.service_arr,
           extra_service_arr: get_service.extra_service_arr,
           service_data: get_service.service_arr[0],
+          isExtraService:get_service.service_arr[0].apply_add_extra_service,
           service_amount: parseFloat(get_service.service_arr[0].service_price),
           subTotal: Number(get_service.service_arr[0].service_price).toFixed(2),
           service_time: get_service.service_arr[0].service_time,
@@ -279,6 +281,7 @@ export default class Select_Service extends Component {
     data[index].status = true;
     this.setState({
       mainServiceID: data[index].service_id,
+      isExtraService:data[index].apply_add_extra_service ,
       service_arr: data,
       service_data: item,
       subTotal: Number(new_amount).toFixed(2),
@@ -906,6 +909,7 @@ export default class Select_Service extends Component {
                             <View style={{width: '20%', flexDirection: 'row'}}>
                               <TouchableOpacity
                                 onPress={() => {
+                                  
                                   this.setState({
                                     Details:
                                       item.extra_service_description[
@@ -931,7 +935,12 @@ export default class Select_Service extends Component {
                               <TouchableOpacity
                                 activeOpacity={0.7}
                                 onPress={() => {
-                                  this.checkExtraService(item, index);
+                                  if(this.state.isExtraService == 1){
+                                    this.checkExtraService(item, index);
+
+                                  }else{
+                                    msgProvider.alert( Lang_chg.disableExtraService[config.language] )
+                                  }
                                 }}
                                 style={{
                                   width: '50%',

@@ -221,6 +221,10 @@ class Language_provider {
     'Address cannot be more than 250 characters.',
     'لا يجوز أن تكن عدد حروف العنوان أكثر من 250 حرفًا',
   ];
+  disableExtraService = [
+    'you cannot use this extra service with selected main service please select another main services and try again',
+    ' لا يجوز استخدام هذه الخدمة الاضافية مع الخدمة الرئيسية المختارة برجاء اختيار خدمة رئيسية اخرى و المحاولة مرة اخرى',
+  ];
   minlenaddress = [
     'Address must be at least 3 characters .',
     'يجب ألا يقل العنوان عن 3 أحرف',
