@@ -191,7 +191,6 @@ export default class Payment_option extends Component {
     apifuntion
       .postApi(url, data)
       .then(obj => {
-       
         if (obj.success == 'true') {
           localStorage.setItemObject('user_arr', obj.user_details);
           localStorage.setItemObject('booking_number', obj.booking_number);
@@ -213,7 +212,12 @@ export default class Payment_option extends Component {
           }
 
           this.props.navigation.navigate('Success', {success_status: 2});
-        } else {
+        } else if (obj.success == 'false'){
+          msgProvider.alert(
+            obj.msg[config.language],
+          );
+        } 
+        else {
           if (obj.slotNotAvailable == 'yes') {
             setTimeout(() => {
               msgProvider.alert(

@@ -2,7 +2,7 @@ import NetInfo from '@react-native-community/netinfo';
 import {Platform} from 'react-native';
 
 class ApiContainer {
-  myAppVersion = Platform.OS === 'ios' ? '10' : '10';
+  myAppVersion = Platform.OS === 'ios' ? '12' : '12';
   usertype = 'user';
 
   getApi = async (url, status) => {
@@ -17,7 +17,7 @@ class ApiContainer {
             headers: {
               'Cache-Control': 'no-cache, no-store, must-revalidate',
               Pragma: 'no-cache',
-              Expires: 0,
+              Expires: 0,  
               Accept: 'application/json',
               'Content-Type': 'multipart/form-data',
               'app-type': Platform.OS === 'ios' ? 'ios' : 'android',

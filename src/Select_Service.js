@@ -298,9 +298,9 @@ export default class Select_Service extends Component {
       subTotal:  Number(new_amount).toFixed(2),
       extra_service_arr: dataextra,
       extra_service_data: [],
-      extra_service_amount: "NA",
-      total_service_time: "NA",
-      extra_service_time: "NA",
+      extra_service_amount: 0,
+      total_service_time: new_time,
+      extra_service_time: 0,
     });
     })
     await localStorage.setItemObject('service_arr', data);
