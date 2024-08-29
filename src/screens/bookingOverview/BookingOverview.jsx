@@ -18,6 +18,7 @@ import getWallet from '../../Features/getWallet/getWallet';
 import create_package_booking from '../../Features/createPackgeBooking/createPackageBooking';
 
 const BookingOverview = ({navigation, route}) => {
+  console.log(route.params.type)
   const [bookingDetails, setBookingDetails] =
     useRecoilState(bookingDetailsAtom);
   let date = new Date(reverseSortDate(bookingDetails.booking_date));
@@ -191,96 +192,101 @@ const BookingOverview = ({navigation, route}) => {
             </>
           )}
         </View>
-        <View
-          className={
-            'bg-mainColor py-4 w-full rounded mt-4 flex flex-row justify-between px-4'
-          }>
-          <Text className={'font-bold text-center text-lg'}>
-            {Lang_chg.totalservicecharges_txt[config.language]}
-          </Text>
-          <Text className={'font-bold text-center text-lg'}>
-            {bookingDetails.total_amount} EGP
-          </Text>
-        </View>
-        <View
-          className={
-            'bg-white items-center w-full rounded mt-4 flex flex-row justify-between px-4 border-2 border-[#C3C3C3] mb-1'
-          }>
-          <TextInput
-          value={coupon?.couponName}
-            className={`h-[40px] w-[70%] font-bold pr-4 border-r border-r-[#C3C3C3] ${
-              config.language === 0
-                ? 'placeholder:text-left'
-                : 'placeholder:text-right'
-            }`}
-            placeholder={Lang_chg.enter_promo_code[config.language]}
-            placeholderTextColor={'#C3C3C3'}
-            onChange={e => {
-              setCoupon({
-                ...coupon,
-                couponName: e.nativeEvent.text,
-              });
-            }}
-          />
-          <View className={'w-[25%]'}>
-            {
-              coupon?.total_amount ? <Button
-              Title={Lang_chg.Remove[config.language]}
-              onPress={async () => {
-                setCoupon();
-              }}
-            /> :<Button
-              Title={Lang_chg.Apply[config.language]}
-              onPress={async () => {
-                let res = await applyCoupon(
-                  isWallet
-                    ? bookingDetails.total_amount + walletAmount
-                    : bookingDetails.total_amount,
-                  coupon.couponName,
-                );
-
+        {
+          route.params.type != "package" &&
+        <>
+          <View
+            className={
+              'bg-mainColor py-4 w-full rounded mt-4 flex flex-row justify-between px-4'
+            }>
+            <Text className={'font-bold text-center text-lg'}>
+              {Lang_chg.totalservicecharges_txt[config.language]}
+            </Text>
+            <Text className={'font-bold text-center text-lg'}>
+              {bookingDetails.total_amount} EGP
+            </Text>
+          </View>
+          <View
+            className={
+              'bg-white items-center w-full rounded mt-4 flex flex-row justify-between px-4 border-2 border-[#C3C3C3] mb-1'
+            }>
+            <TextInput
+            value={coupon?.couponName}
+              className={`h-[40px] w-[70%] font-bold pr-4 border-r border-r-[#C3C3C3] ${
+                config.language === 0
+                  ? 'placeholder:text-left'
+                  : 'placeholder:text-right'
+              }`}
+              placeholder={Lang_chg.enter_promo_code[config.language]}
+              placeholderTextColor={'#C3C3C3'}
+              onChange={e => {
                 setCoupon({
                   ...coupon,
-                  dis_amount: res.dis_amount,
-                  total_amount: res.total_amount,
-                });
-                setBookingDetails({
-                  ...bookingDetails,
-                  coupon_id: res.coupan_id,
-                  discount_amount: res.dis_amount,
-                  total_amount: res.total_amount,
+                  couponName: e.nativeEvent.text,
                 });
               }}
             />
-            }
-            
+            <View className={'w-[25%]'}>
+              {
+                coupon?.total_amount ? <Button
+                Title={Lang_chg.Remove[config.language]}
+                onPress={async () => {
+                  setCoupon();
+                }}
+              /> :<Button
+                Title={Lang_chg.Apply[config.language]}
+                onPress={async () => {
+                  let res = await applyCoupon(
+                    isWallet
+                      ? bookingDetails.total_amount + walletAmount
+                      : bookingDetails.total_amount,
+                    coupon.couponName,
+                  );
+
+                  setCoupon({
+                    ...coupon,
+                    dis_amount: res.dis_amount,
+                    total_amount: res.total_amount,
+                  });
+                  setBookingDetails({
+                    ...bookingDetails,
+                    coupon_id: res.coupan_id,
+                    discount_amount: res.dis_amount,
+                    total_amount: res.total_amount,
+                  });
+                }}
+              />
+              }
+              
+            </View>
           </View>
-        </View>
-        <RadioButton
-          buttons={[
-            {
-              id: 1,
-              title: Lang_chg.wallet_txt[config.language],
-              icon: walletIcon,
-            },
-          ]}
-          currentActive={isWallet}
-          set={activeElement => {
-            if (isWallet) {
-              setIsWallet();
-              setBookingDetails({
-                ...bookingDetails,
-                redemwallet: 0,
-              });
-            } else {
-              setIsWallet(activeElement);
-              setBookingDetails({
-                ...bookingDetails,
-                redemwallet: walletAmount,
-              });
-            }
-          }}
-        />
+          <RadioButton
+            buttons={[
+              {
+                id: 1,
+                title: Lang_chg.wallet_txt[config.language],
+                icon: walletIcon,
+              },
+            ]}
+            currentActive={isWallet}
+            set={activeElement => {
+              if (isWallet) {
+                setIsWallet();
+                setBookingDetails({
+                  ...bookingDetails,
+                  redemwallet: 0,
+                });
+              } else {
+                setIsWallet(activeElement);
+                setBookingDetails({
+                  ...bookingDetails,
+                  redemwallet: walletAmount,
+                });
+              }
+            }}
+          />
+        </>
+        }
         <Button
           Title={Lang_chg.confirm_booking[config.language]}
           btnStyle={'font-semibold text-lg'}

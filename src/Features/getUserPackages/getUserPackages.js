@@ -8,8 +8,9 @@ export default async function getUserPackages() {
   let user_id = user_arr.user_id;
   let data = new FormData();
   data.append('user_id', user_id);
-  var url = config.baseURL + 'my_subscription_package/';
+  var url =  'my_subscription_package/';
   let res = await apiSauce.get(url, {user_id});
+  console.log(res)
 
   return res.data;
 }

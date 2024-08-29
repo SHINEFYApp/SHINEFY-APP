@@ -72,7 +72,10 @@ export default function SelectExtraService({extraService , isPackage}) {
               onPress={() => {
                 if (!bookingDetails['service_id']) {
                   msgProvider.toast('Please Select Main service to Select Extra Service', 'center');     
-                }else {
+                }else if (bookingDetails.extraData.service.apply_add_extra_service == 0) {
+                  msgProvider.toast('Please Select Main service to Select Extra Service', 'center');     
+                } 
+                else {
                   if(isPackage) {
                     if(extraService.remind_quantity > counter) {
                       setCounter(counter + 1);

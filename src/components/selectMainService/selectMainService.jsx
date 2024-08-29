@@ -9,6 +9,8 @@ import globalStyle from '../../assets/globalStyle';
 import {config} from '../../Provider/configProvider';
 export default function SelectMainService({selected, service, onPress,isPackage}) {
 
+  console.log(service)
+
   return (
     <TouchableHighlight
       underlayColor={'white'}
@@ -37,14 +39,27 @@ export default function SelectMainService({selected, service, onPress,isPackage}
                   {service.remind_quantity} of {service.quantity} 
                 </Text>
               : 
+              <View>
+                {
+                  service.service_discount != null &&
                 <Text
                   className={`${
                     selected === service.service_id
-                      ? 'text-white'
-                      : 'text-mainColor'
+                    ? 'text-white'
+                    : 'text-mainColor'
                   } font-bold`}>
                   {service.service_price} EGP
                 </Text>
+                }
+                <Text
+                  className={`${
+                    selected === service.service_id
+                    ? 'text-white'
+                    : 'text-mainColor'
+                  } font-bold ${service.service_discount != null && "line-through"} `}>
+                  {service.service_price_before_discount} EGP
+                </Text>
+              </View>
             }
             {
               !isPackage &&

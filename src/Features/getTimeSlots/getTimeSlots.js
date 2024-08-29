@@ -1,3 +1,4 @@
+import apiSauce from '../../API/apiSauce';
 import {apifuntion} from '../../Provider/Apicallingprovider/apiProvider';
 import {config} from '../../Provider/configProvider';
 import {localStorage} from '../../Provider/localStorageProvider';
@@ -14,7 +15,6 @@ export default async function getTimeSlots(data) {
   let date = data.booking_date;
   
   var url =
-    config.baseURL +
     'get_slots/' +
     latitude +
     '/' +
@@ -28,7 +28,7 @@ export default async function getTimeSlots(data) {
     '/' +
     amount;
     console.log(url)
-  let res = await apifuntion.getApi(url, 0);
+  let {data:res} = await apiSauce.get(url);
   
   return res.slots_arr.date_slots;
   // .then(obj => {

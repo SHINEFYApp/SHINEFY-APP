@@ -6,7 +6,11 @@ const BookingOverviewTextDetails = ({ title, value, price }) => {
         <Text className={'mb-2 text-mainColor font-semibold text-lg capitalize'}>{title}</Text>
         <View className={'w-full flex flex-row items-center justify-between'}>
             <Text className={'text-lg ml-4'}>{value}</Text>
-            <Text className={'text-lg font-semibold'}>{price}</Text>
+            {
+               !price.includes("undefined") &&
+                <Text className={'text-lg font-semibold'}>{price}</Text>
+                
+            }
         </View>
     </View>;
 };
