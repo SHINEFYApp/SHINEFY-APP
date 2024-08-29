@@ -15,7 +15,7 @@ import {
 global.player_id_me1 = '123456';
 //--------------------------- Config Provider Start -----------------------
 class configProvider {
-  burl = 'https://mobile-shinefy.co/app';
+  burl = 'https://mobile.shinefy.co';
   baseURL = this.burl + '/admin/api/';
   baseURL1 = this.burl + '/webservice/';
   baseURL2 = this.burl + '/payment/paytab/';

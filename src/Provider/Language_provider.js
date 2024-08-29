@@ -625,6 +625,14 @@ class Language_provider {
     'I am not able due to some urgent work sorry for the inconvenience.',
     'أنا غير قادر بسبب بعض الأعمال العاجلة ,آسف للإزعاج.',
   ];
+  disableExtraService = [
+    'you cannot use this extra service with selected main service please select another main services and try again',
+    ' لا يجوز استخدام هذه الخدمة الاضافية مع الخدمة الرئيسية المختارة برجاء اختيار خدمة رئيسية اخرى و المحاولة مرة اخرى',
+  ];
+  disableExtraServiceTitle = [
+    "can't select extra service",
+    'لا يمكن اختيار خدمة اضافية',
+  ];
   cancelBooking_txt = ['Cancel Booking', 'إلغاء الحجز'];
   cancelservice_txt = ['Cancel Service', 'إلغاء الخدمة'];
   submit1_txt = ['Submit', 'تقديم'];

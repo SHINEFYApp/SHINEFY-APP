@@ -8,6 +8,7 @@ import { useRecoilState } from 'recoil';
 import bookingDetailsAtom from '../../atoms/bookingDetails/bookingDetails.atom';
 import { msgProvider } from '../../Provider/Messageconsolevalidationprovider/messageProvider';
 import calcSubTotal from '../../utlites/calcSubTotal';
+import { Lang_chg } from '../../Provider/Language_provider';
 export default function SelectExtraService({extraService , isPackage}) {
   const [bookingDetails, setBookingDetails] = useRecoilState(bookingDetailsAtom)
   const [counter, setCounter] = useState(0);
@@ -29,11 +30,12 @@ export default function SelectExtraService({extraService , isPackage}) {
                       }
       })
   }
+  console.log(config.img_url3 + extraService.extra_service_image)
   return (
     <View
       className="bg-white rounded-lg p-2 flex-row mb-3"
       style={globalStyle.boxShadow}>
-      <Image source={img} className="mr-2" />
+      <Image source={{uri: config.img_url3 + extraService.extra_service_image}} className="mr-2" />
       <View>
         <Text className="font-bold text-md">
           {extraService.extra_service_name[config.language]}
@@ -73,7 +75,7 @@ export default function SelectExtraService({extraService , isPackage}) {
                 if (!bookingDetails['service_id']) {
                   msgProvider.toast('Please Select Main service to Select Extra Service', 'center');     
                 }else if (bookingDetails.extraData.service.apply_add_extra_service == 0) {
-                  msgProvider.toast('Please Select Main service to Select Extra Service', 'center');     
+                  msgProvider.alert(Lang_chg.disableExtraServiceTitle[config.language] , Lang_chg.disableExtraService[config.language])     
                 } 
                 else {
                   if(isPackage) {
