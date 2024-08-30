@@ -18,9 +18,8 @@ export default async function checkLocation (location) {
           location.longitude +
           '/' +
           user_id;
-        console.log(url)
+       
           const {data:obj} = await apiSauce.get(url)
-          console.log("obj")
           if (obj.success == 'true') {
               localStorage.setItemObject('user_arr', obj.user_details);
               return true

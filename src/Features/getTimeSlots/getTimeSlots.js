@@ -5,7 +5,7 @@ import {localStorage} from '../../Provider/localStorageProvider';
 import sortDate from '../../utlites/sortDate';
 
 export default async function getTimeSlots(data) {
-  console.log(data.service_time)
+
   var user_arr = await localStorage.getItemObject('user_arr');
   let user_id = user_arr.user_id;
   let latitude = data.latitude;
@@ -27,7 +27,7 @@ export default async function getTimeSlots(data) {
     user_id +
     '/' +
     amount;
-    console.log(url)
+  
   let {data:res} = await apiSauce.get(url);
   
   return res.slots_arr.date_slots;

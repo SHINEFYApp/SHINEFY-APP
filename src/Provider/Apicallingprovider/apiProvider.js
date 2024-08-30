@@ -26,7 +26,7 @@ class ApiContainer {
             },
           })
             .then(response => {
-              console.log(response , "you")
+             
               global.props.hideLoader();
               if (response.status === 423) {
                 alert('Must update app version first');
@@ -115,7 +115,7 @@ class ApiContainer {
             body: data,
           })
             .then(response => {
-              console.log(response)
+             
               global.props.hideLoader();
               if (response.status === 423) {
                 alert('Must update app version first');

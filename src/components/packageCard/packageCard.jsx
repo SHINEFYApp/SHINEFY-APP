@@ -5,8 +5,12 @@ import timeIcon from '../../assets/icons/timeIcon2.png';
 import {StyleSheet} from 'react-native';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
+import { useRecoilState } from 'recoil';
+import bookingDetailsAtom from '../../atoms/bookingDetails/bookingDetails.atom';
 
 export default function PackageCard({navigation, pack , isUse , route}) {
+  const [bookingDetails, setBookingDetails] =
+    useRecoilState(bookingDetailsAtom);
   return (
     <View className="bg-white py-4 px-5 rounded-xl m-2" style={style.box}>
       <View className="flex-row mb-3">
@@ -59,7 +63,12 @@ export default function PackageCard({navigation, pack , isUse , route}) {
           Title={Lang_chg.claim[config.language]}
           smallButton
           onPress={() => {
-            navigation.navigate(isUse ? 'PackageInfoScreen' : 'PackageDetailsScreen',isUse ? route :  pack.id);
+            setBookingDetails({
+              ...bookingDetails ,
+              package_id : pack.id ,
+              package_user_id :pack.package_id
+            })
+            navigation.navigate(isUse ? 'PackageInfoScreen' : 'PackageDetailsScreen',isUse ? route :  pack.id );
           }}
         />
       </View>

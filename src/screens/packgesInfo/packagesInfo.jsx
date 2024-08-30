@@ -19,7 +19,6 @@ import getUserPackageDetails from '../../Features/getPackageUserDetails/getPacka
 
 export default function PackageInfo({navigation, route}) {
 
-
   const [selectMain, setSelectMain] = useState('');
   const [services, setServices] = useState();
   const [bookingDetails, setBookingDetails] =

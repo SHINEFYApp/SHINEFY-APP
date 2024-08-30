@@ -24,7 +24,7 @@ export default function WashServiceDetails({navigation, route}) {
     } 
     return dataName
   }
-  console.log(data)
+ 
 
   return (
     <SafeAreaView>

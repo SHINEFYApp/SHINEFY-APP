@@ -9,7 +9,6 @@ import globalStyle from '../../assets/globalStyle';
 import {config} from '../../Provider/configProvider';
 export default function SelectMainService({selected, service, onPress,isPackage}) {
 
-  console.log(service)
 
   return (
     <TouchableHighlight

@@ -7,7 +7,7 @@ import BookingOverviewTextDetails from '../../components/bookingOverview/Booking
 import Button from '../../components/mainButton/Button';
 import bookingDetailsAtom from '../../atoms/bookingDetails/bookingDetails.atom';
 import {useRecoilState} from 'recoil';
-import {reverseSortDate} from '../../utlites/sortDate';
+import sortDate, {reverseSortDate} from '../../utlites/sortDate';
 import {config} from '../../Provider/configProvider';
 import SelectVehicle from '../../components/selectVehicle/SelectVehicle';
 import {Lang_chg} from '../../Provider/Language_provider';
@@ -18,7 +18,7 @@ import getWallet from '../../Features/getWallet/getWallet';
 import create_package_booking from '../../Features/createPackgeBooking/createPackageBooking';
 
 const BookingOverview = ({navigation, route}) => {
-  console.log(route.params.type)
+
   const [bookingDetails, setBookingDetails] =
     useRecoilState(bookingDetailsAtom);
   let date = new Date(reverseSortDate(bookingDetails.booking_date));
@@ -304,7 +304,13 @@ const BookingOverview = ({navigation, route}) => {
           secondStyle={true}
           textColor={'#dd9923'}
           btnStyle={'font-semibold text-lg'}
-          onPress={() => navigation.push('HomeScreen')}
+          onPress={() => {
+            let date = new Date();
+            setBookingDetails({
+               booking_date: sortDate(date.toLocaleDateString())
+            })
+            navigation.push('HomeScreen')
+          }}
         />
         <View className={'py-3'} />
       </ScrollView>

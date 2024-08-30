@@ -147,7 +147,7 @@ export default function SelectDateTime({navigation , route}) {
             {Lang_chg.selecttime1_txt[config.language]}
           </Text>
           <View className="flex-row  flex-wrap">
-            {slots?.slot_arr?.map(slot => {
+            {slots?.slots?.map(slot => {
               return (
                 <SelectDateBox
                   key={slot.time}

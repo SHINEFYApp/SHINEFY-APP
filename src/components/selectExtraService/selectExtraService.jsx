@@ -30,7 +30,6 @@ export default function SelectExtraService({extraService , isPackage}) {
                       }
       })
   }
-  console.log(config.img_url3 + extraService.extra_service_image)
   return (
     <View
       className="bg-white rounded-lg p-2 flex-row mb-3"
