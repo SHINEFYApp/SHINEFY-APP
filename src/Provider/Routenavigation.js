@@ -61,7 +61,7 @@ const Stacknav = navigation => {
       <Stack.Screen
         name="HomeScreen"
         component={HomeTabs}
-        options={{ headerShown: false }}
+        options={{ headerShown: false , gestureEnabled: false}}
       />
       <Stack.Screen
         name="SavedLocationScreen"

@@ -8,6 +8,7 @@ import {useCallback, useState} from 'react';
 
 export default function Bookings({navigation, bookings, currentPage}) {
   const [refreshing, setRefreshing] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);

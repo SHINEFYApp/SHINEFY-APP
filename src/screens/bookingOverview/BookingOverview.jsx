@@ -149,10 +149,10 @@ const BookingOverview = ({navigation, route}) => {
                 <BookingOverviewTextDetails
                   title={Lang_chg.extraservice_txt[config.language]}
                   value={extraService?.extra_service_name[config.language]}
-                  price={` ${extraService.quantity} X ${
-                    extraService.extra_service_price
+                  price={` ${extraService?.quantity} X ${
+                    extraService?.extra_service_price
                   } = ${
-                    extraService.quantity * extraService.extra_service_price
+                    extraService?.quantity * extraService?.extra_service_price
                   }EGP`}
                 />
                 <View

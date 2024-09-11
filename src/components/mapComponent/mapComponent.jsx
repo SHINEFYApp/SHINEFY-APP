@@ -11,8 +11,9 @@ import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 import myLocationList, { fetchMyLoaction } from '../../atoms/locationList/myLocationList';
 import { useSetRecoilState } from 'recoil';
+import PackageCardSkeleton from '../packageCard/packageCardSkeleton';
 
-export default function MapComponent({isNewLocation, navigation}) {
+export default function MapComponent({isNewLocation, navigation , setCurrentLocation}) {
   const [region, setRegion] = useState({
     latitude: 29.96073734024412,
     latitudeDelta: 0.001162180276701008,
@@ -27,11 +28,22 @@ export default function MapComponent({isNewLocation, navigation}) {
   });
   const setLocationList = useSetRecoilState(myLocationList);
 
+  const [isLoading , setIsLoading] = useState(false)
+
   useEffect(() => {
     const getLocation = async () => {
+      setIsLoading(false)
       const location = await GetLocation.getCurrentPosition({
         enableHighAccuracy: true,
       });
+      setIsLoading(true)
+      if(setCurrentLocation){
+        setCurrentLocation(r=>({
+          ...r,
+          latitude: location.latitude,
+          longitude: location.longitude,
+        }))
+      }
       setNewLocation(r=>({
         ...r,
         latitude: location.latitude,
@@ -42,57 +54,74 @@ export default function MapComponent({isNewLocation, navigation}) {
         latitude: location.latitude,
         longitude: location.longitude,
       }));
+
+      
+      
     };
     getLocation();
   }, []);
+
+  useEffect(()=>{
+     if(setCurrentLocation){
+        setCurrentLocation(newLocation)
+      }
+  },[newLocation])
+
 
 
 
   const [name, setName] = useState('');
   return (
-    <View className="flex-1 relative">
-      <MapView
-        customMapStyle={mapStyle}
-        provider={PROVIDER_GOOGLE}
-        // scrollEnabled
-        className="h-full w-full"
-        onRegionChangeComplete={setNewLocation}
-        region={region}
-        cameraZoomRange={50}>
-        {!isNewLocation && (
-          <Marker draggable coordinate={region}>
-            <Image source={indectorIcon} />
-          </Marker>
-        )}
-      </MapView>
-      {isNewLocation && (
-        <Image
-          source={indectorIcon}
-          className="absolute w-10 h-10 top-1/2 left-1/2 -mt-10 -ml-5"
-        />
-      )}
-      {isNewLocation && (
-        <View className="absolute bottom-16 mx-5 p-5 rounded-xl bg-[#FFFAF2]">
-          <Text className="text-xl text-center mb-5 font-bold">
-            {Lang_chg.booking_location[config.language]}
-          </Text>
-          <Input
-            placeholder={Lang_chg.confirm_booking_location[config.language]}
-            onChange={e => {
-              setName(e.nativeEvent.text);
-            }}
-          />
-          <Button
-            Title={Lang_chg.confirm_booking[config.language]}
-            onPress={async () => {
-              let res = await addLocation(newLocation, name);
-              fetchMyLoaction(setLocationList);
-              res && navigation.goBack();
-            }}
-          />
-        </View>
-      )}
-    </View>
+    <>
+      {
+        isLoading ? 
+          <View className="flex-1 relative">
+            <MapView
+            scrollEnabled={false}
+              customMapStyle={mapStyle}
+              provider={PROVIDER_GOOGLE}
+              // scrollEnabled
+              className="h-full w-full"
+              onRegionChangeComplete={setNewLocation}
+              region={region}
+              cameraZoomRange={50}>
+              {!isNewLocation && (
+                <Marker draggable coordinate={region}>
+                  <Image source={indectorIcon} />
+                </Marker>
+              )}
+            </MapView>
+            {isNewLocation && (
+              <Image
+                source={indectorIcon}
+                className="absolute w-10 h-10 top-1/2 left-1/2 -mt-10 -ml-5"
+              />
+            )}
+            {isNewLocation && (
+              <View className="absolute bottom-16 mx-5 p-5 rounded-xl bg-[#FFFAF2]">
+                <Text className="text-xl text-center mb-5 font-bold">
+                  {Lang_chg.booking_location[config.language]}
+                </Text>
+                <Input
+                  placeholder={Lang_chg.confirm_booking_location[config.language]}
+                  onChange={e => {
+                    setName(e.nativeEvent.text);
+                  }}
+                />
+                <Button
+                  Title={Lang_chg.confirm_booking[config.language]}
+                  onPress={async () => {
+                    let res = await addLocation(newLocation, name);
+                    fetchMyLoaction(setLocationList);
+                    res && navigation.goBack();
+                  }}
+                />
+              </View>
+            )}
+          </View> :
+            <PackageCardSkeleton/>
+      }
+    </>
   );
 }
 

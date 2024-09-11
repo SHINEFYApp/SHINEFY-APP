@@ -22,6 +22,8 @@ import googleLogin from '../../Features/googleLogin/googleLogin';
 import googleIcon from '../../assets/icons/googleLoginIcon.webp';
 import facebookIcon from '../../assets/icons/facebookIcon.png';
 import facebookLogin from '../../Features/facebookLogin/facebookLogin';
+import { AccessToken, LoginButton } from 'react-native-fbsdk-next';
+import callsocailweb from '../../Features/socialLogin/socialLogin';
 export default function WelcomeScreen({navigation}) {
   const logoScale = useSharedValue(1);
   const logoTranslateY = useSharedValue(0);
@@ -129,6 +131,7 @@ export default function WelcomeScreen({navigation}) {
                   onPress={() => {
                     facebookLogin(navigation);
                   }}>
+
                   <Image
                     source={facebookIcon}
                     width={70}
@@ -136,6 +139,23 @@ export default function WelcomeScreen({navigation}) {
                     resizeMode="contain"
                   />
                 </TouchableOpacity>
+                <LoginButton
+      onLoginFinished={(error, result) => {
+        if (error) {
+          console.log("login has error: " + result.error);
+        } else if (result.isCancelled) {
+          console.log("login is cancelled.");
+        } else {
+          console.log(result)
+          console.log(AccessToken.toString())
+          AccessToken.getCurrentAccessToken().then((data) => {
+            console.log(data.permissions)
+            console.log(data);
+          });
+        }
+      }}
+      onLogoutFinished={() => console.log("logout.")}/>
+
               </View>
             </View>
             <View className="absolute bottom-5">

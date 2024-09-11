@@ -4,21 +4,24 @@ import Svg, {Path} from 'react-native-svg';
 import {Image} from 'react-native-ui-lib';
 import Modal from 'react-native-modal';
 import AddVehiclePopup from '../addVehiclePopup/addVehiclePopup';
-import {useRecoilState} from 'recoil';
+import {useRecoilState, useRecoilValue} from 'recoil';
 import addVehiclePopUpState from '../../atoms/addNewCar/addNewCar';
-const CustomTabBarButton = props => {
+import currentMapAtom from '../../atoms/currentMap/currentMapAtom';
+const CustomTabBarButton = (props ,{navigation}) => {
   const [isAddPopUpOpen, setIsAddPopUpOpen] = useState(false);
-
+  const currentMap = useRecoilValue(currentMapAtom)
   function handleClosePopUp() {
     setIsAddPopUpOpen(false);
   }
-
+  
   return props.float ? (
     <View style={styles.btnWrapper}>
       <Modal avoidKeyboard={true} hasBackdrop={true} isVisible={isAddPopUpOpen}>
         <AddVehiclePopup
           closePopUp={handleClosePopUp}
           nextScreen={props.onPress}
+          Map={currentMap}
+          navigation={props.navigation}
         />
       </Modal>
       <View style={{flexDirection: 'row'}}>

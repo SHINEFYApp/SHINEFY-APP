@@ -208,7 +208,7 @@ class SocialLoginProvider extends Component {
               // firebaseprovider.getMyInboxAllData();
               localStorage.setItemObject('user_arr', obj.user_details);
               setTimeout(() => {
-                navigation.navigate('HomeScreen', {home_status: 3});
+                navigation.navigate('Home', {home_status: 3});
               }, 500);
             }
           } else {

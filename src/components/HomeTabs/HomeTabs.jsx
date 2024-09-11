@@ -24,7 +24,7 @@ import {config} from '../../Provider/configProvider';
 import SelectLocation from '../../screens/selectLocation/selectLocation';
 const Tab = createBottomTabNavigator();
 
-export default function MyTabs() {
+export default function MyTabs(parentProps) {
   return (
     <Tab.Navigator
       sceneContainerStyle={{
@@ -71,7 +71,7 @@ export default function MyTabs() {
         component={SelectLocation}
         options={{
           tabBarIcon: () => <Image source={addIcon} />,
-          tabBarButton: props => <CustomTabBarButton {...props} float={true} />,
+          tabBarButton: props => <CustomTabBarButton {...props} float={true} navigation={parentProps.navigation} />,
           tabBarLabel: () => {},
         }}
       />

@@ -106,8 +106,8 @@ export default function PackageDetailsScreen({navigation, route}) {
             onPress={async () => {
               // setIsPayment(true);
               // setWebView(true);
-              let url = await paymentTab(data.package.price);
-          
+              // let url = await paymentTab(data.package.price);
+                subscripePackage(route.params , 500)
               // setIsPaymentURL(url)
               // console.log(data.package.id);
               // let res = await subscripePackage(

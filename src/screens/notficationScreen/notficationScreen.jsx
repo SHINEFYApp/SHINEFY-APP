@@ -12,7 +12,7 @@ export default function NotficationScreen() {
 
   useEffect(() => {
     const fetchData = async () => {
-      let res = await getNotification();
+      let res = await getNotification(1);
       setNotfi(res.notification_arr);
     };
     fetchData();

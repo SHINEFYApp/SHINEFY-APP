@@ -29,7 +29,7 @@
 			<string>com.shinefy</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb250981121434170</string>
+				<string>fb2414590135385437</string>
 			</array>
 		</dict>
 		<dict>
@@ -48,11 +48,11 @@
 	<key>FacebookAdvertiserIDCollectionEnabled</key>
 	<true/>
 	<key>FacebookAppID</key>
-	<string>250981121434170</string>
+	<string>2414590135385437</string>
 	<key>FacebookAutoLogAppEventsEnabled</key>
 	<true/>
 	<key>FacebookClientToken</key>
-	<string>204ab0ce29c165d4a42461e50ed83fb4</string>
+	<string>ef0478a85270c7870365f2bb6f57dda3</string>
 	<key>FacebookDisplayName</key>
 	<string>Shinefy</string>
 	<key>LSApplicationQueriesSchemes</key>

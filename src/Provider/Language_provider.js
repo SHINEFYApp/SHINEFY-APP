@@ -307,6 +307,7 @@ class Language_provider {
   cancel = ['Cancel', 'إلغاء'];
   Yes = ['Yes', 'نعم'];
   yes_confirm = ['Yes, Confirm', 'نعم ، قم بالتأكيد'];
+  no_confirm = ['No, go to Saved Location', 'لا ،  الذهاب الي المواقع المحفوظة'];
   No = ['No', 'لا'];
   ok = ['Ok', 'موافق'];
   or = ['Or', 'أو'];
@@ -861,6 +862,7 @@ class Language_provider {
     'هل أنت متأكد أنك تريد حذف سيارتك؟',
   ];
   welcome_back = ['Welcome Back', 'مرحبًا بعودتك'];
+  buy= ['Buy', 'شراء'];
 
   // Terms & Conditions
   titleTermscondition = ['Terms & Conditions', 'الشروط والأحكام'];

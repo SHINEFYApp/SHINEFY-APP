@@ -60,7 +60,7 @@ export default function PackageCard({navigation, pack , isUse , route}) {
 
       <View className="absolute bottom-0 right-5">
         <Button
-          Title={Lang_chg.claim[config.language]}
+          Title={isUse ? Lang_chg.claim[config.language] :Lang_chg.buy[config.language] }
           smallButton
           onPress={() => {
             setBookingDetails({
@@ -68,7 +68,7 @@ export default function PackageCard({navigation, pack , isUse , route}) {
               package_id : pack.id ,
               package_user_id :pack.package_id
             })
-            navigation.navigate(isUse ? 'PackageInfoScreen' : 'PackageDetailsScreen',isUse ? route :  pack.id );
+            navigation.navigate(isUse ? 'PackageInfoScreen' : 'PackageDetailsScreen',isUse ? {...route , packID : pack.id} :  pack.id );
           }}
         />
       </View>

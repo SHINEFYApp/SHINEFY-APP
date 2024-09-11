@@ -25,7 +25,7 @@ export default function PackageInfo({navigation, route}) {
     useRecoilState(bookingDetailsAtom);
     useEffect(() => {
       let fetchData = async () => {
-        let res = await getUserPackageDetails(1)
+        let res = await getUserPackageDetails(route.params.packID)
        let newData = {extra_service_arr : res.data.extra_services , service_arr :res.data.main_services}
         setServices(newData);
       };

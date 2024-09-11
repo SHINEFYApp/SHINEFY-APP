@@ -33,6 +33,7 @@ target 'Shinefy' do
 
   rn_maps_path = '../node_modules/react-native-maps'
   pod 'react-native-google-maps', :path => rn_maps_path
+  pod 'Firebase/Messaging'
 
   use_react_native!(
     :path => config[:reactNativePath],

@@ -14,21 +14,27 @@ import {config} from '../../Provider/configProvider';
 import PackageCard from '../../components/packageCard/packageCard';
 import getPackages from '../../Features/getPackages/getPackages';
 import getSavedLocation from '../../Features/getSavedLocation/getSavedLocation';
+import { useRecoilState } from 'recoil';
+import currentMapAtom from '../../atoms/currentMap/currentMapAtom';
+import PackageCardSkeleton from '../../components/packageCard/packageCardSkeleton';
 
 export default function HomeScreen({navigation}) {
   const [services, SetServices] = useState([]);
   const [specialOffers, SetSpecialOffers] = useState([]);
+  const [isServicesLoading , setIsServicesLoading] = useState(false)
+  const [isPackagesLoading , setIsPackagesLoading] = useState(false)
   const [searchText, setSearchText] = useState('');
   const insets = useSafeAreaInsets();
   const [packages, setPackages] = useState([]);
+  const [_, setCurrentMap] = useRecoilState(currentMapAtom);
   useEffect(() => {
     const fetchData = async () => {
       const data = await getServices();
       const packages = await getPackages();
       const myLocations = await getSavedLocation();
-     
       SetServices(data.all_service_arr.service_arr);
       setPackages(packages.packages);
+      setIsPackagesLoading(true)
       SetSpecialOffers(data.all_service_arr.extra_service_arr);
       localStorage.setItemObject('services', data.all_service_arr);
     };
@@ -57,21 +63,34 @@ export default function HomeScreen({navigation}) {
             }}>
             {Lang_chg.see_all[config.language]}
           </Text>
-        </View>
-        <ScrollView
-          horizontal
+        </View> 
+        {
+          isPackagesLoading ? 
+          <FlatList
           className="px-3 mt-3"
-          showsHorizontalScrollIndicator>
-          {specialOffers?.map(offer => {
-            return (
+            data={specialOffers}
+            horizontal={true}
+            renderItem={({item, index}) => (
               <SaleBox
-                key={offer.extra_service_id}
+                key={item.extra_service_id}
                 navigation={navigation}
-                offer={offer}
+                offer={item}
               />
-            );
-          })}
-        </ScrollView>
+             
+            )}
+          /> 
+          :
+           <FlatList
+           data={[...Array(5).keys()]}
+           horizontal={true}
+           renderItem={({item, index}) => (
+             <View key={item.id} className="w-[350px] h-[90] mx-2">
+                 <PackageCardSkeleton/>
+               </View>
+           )}
+         />   
+        }
+       
       </View>
       <View>
         <View className="mt-2 flex-row items-center px-4">
@@ -86,18 +105,26 @@ export default function HomeScreen({navigation}) {
             {Lang_chg.see_all[config.language]}
           </Text>
         </View>
-        <ScrollView
-          horizontal={true}
-          className="pl-3 mt-3"
-          showsHorizontalScrollIndicator={false}>
-          {packages.map(pack => {
-            return (
-              <View key={pack.id} className="w-[350px]">
-                <PackageCard pack={pack} navigation={navigation} />
-              </View>
-            );
-          })}
-        </ScrollView>
+        {
+          isPackagesLoading ? 
+          <FlatList
+           data={packages}
+           horizontal={true}
+           renderItem={({item, index}) => (
+             <View key={item.id} className="w-[350px] mx-2">
+                 <PackageCard pack={item} navigation={navigation} />
+               </View>
+           )}
+         /> :  <FlatList
+           data={[...Array(5).keys()]}
+           horizontal={true}
+           renderItem={({item, index}) => (
+             <View key={item.id} className="w-[350px] h-[90] mx-2">
+                 <PackageCardSkeleton/>
+               </View>
+           )}
+         /> 
+        }
       </View>
       <View className={'p-4'}>
         <View>
@@ -129,19 +156,32 @@ export default function HomeScreen({navigation}) {
             {Lang_chg.see_all[config.language]}
           </Text>
         </View>
-        <FlatList
-          data={services.concat(specialOffers)}
-          horizontal={true}
-          renderItem={({item, index}) => (
-            <WashServicesCard
-              // key={item.service_id}
-              navigation={navigation}
-              id={index}
-              keyObj=""
-              service={item}
-            />
-          )}
-        />
+        {
+          isPackagesLoading ? 
+          <FlatList
+            data={services.concat(specialOffers)}
+            horizontal={true}
+            renderItem={({item, index}) => (
+              <WashServicesCard
+                // key={item.service_id}
+                navigation={navigation}
+                id={index}
+                keyObj=""
+                service={item}
+              />
+            )}
+          />
+          :
+           <FlatList
+           data={[...Array(5).keys()]}
+           horizontal={true}
+           renderItem={({item, index}) => (
+             <View key={item.id} className="w-[350px] h-[90] mx-2">
+                 <PackageCardSkeleton/>
+               </View>
+           )}
+         /> 
+        }
         {/* <ScrollView
           className="px-3 mt-3"
           horizontal

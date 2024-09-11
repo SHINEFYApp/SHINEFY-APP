@@ -5,7 +5,7 @@ import {config} from '../../Provider/configProvider';
 import {msgProvider} from '../../Provider/Messageconsolevalidationprovider/messageProvider';
 import {apifuntion} from '../../Provider/Apicallingprovider/apiProvider';
 
-async function getLocationName(location) {
+export async function getLocationName(location) {
   let locationName = await fetch(
     'https://maps.googleapis.com/maps/api/geocode/json?address=' +
       location.latitude +

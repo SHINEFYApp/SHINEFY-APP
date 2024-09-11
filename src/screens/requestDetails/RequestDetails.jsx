@@ -39,10 +39,9 @@ export default function RequestDetails({navigation, route}) {
       <View className=" pt-[80px] flex-1">
         <ScrollView className="px-2 w-[95%] flex-1 mx-auto">
           <View>
-            <Text className="text-xl mb-3">
+            <Text className="text-xl mb-3" >
               {Lang_chg.wash_location[config.language]}
             </Text>
-            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               <View
                 className={
                   'bg-white py-4 px-3 w-full rounded my-2 flex flex-row items-center overflow-hidden'
@@ -55,7 +54,7 @@ export default function RequestDetails({navigation, route}) {
                   {route.params.bookingType.params.location}
                 </Text>
               </View>
-            </ScrollView>
+          
           </View>
           {/* <View>
             <Text className="text-xl mb-3 mt-2">
