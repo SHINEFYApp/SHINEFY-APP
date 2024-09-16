@@ -83,6 +83,8 @@ class SocialLoginProvider extends Component {
         if (result.isCancelled) {
           // alert('login cancel')
         } else {
+          try {
+
           AccessToken.getCurrentAccessToken().then(data => {
             const processRequest = new GraphRequest(
               '/me?fields=id,name,email,first_name,middle_name,last_name,picture.type(large)',
@@ -91,6 +93,10 @@ class SocialLoginProvider extends Component {
             );
             new GraphRequestManager().addRequest(processRequest).start();
           });
+          } catch (err) {
+
+          }
+
         }
       },
     );
@@ -191,6 +197,9 @@ class SocialLoginProvider extends Component {
     apifuntion
       .postApi(url, data)
       .then(obj => {
+        console.log(url)
+        console.log(data)
+        console.log(obj)
         if (obj.success == 'true') {
           if (obj.user_exist == 'yes') {
             if (obj.user_details.otp_verify === 0) {

@@ -23,7 +23,7 @@ export default function AddVechileScreen({navigation, route}) {
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   const [currentCar, setCurrentCar] = useRecoilState(updateCar);
   const setMyCarsList = useSetRecoilState(myCarsList);
-
+ const [isLoading , setIsLoading] = useState(false)
   function handleClosePopUp() {
     setIsPopUpOpen(false);
   }
@@ -47,12 +47,17 @@ export default function AddVechileScreen({navigation, route}) {
         ...cC,
         carID: currentCar.vehicle_id,
       }));
-      await updateVehicle(newCar);
+      await updateVehicle(newCar , setIsLoading);
     } else {
-      await addVehicle(newCar);
+      setIsLoading(true)
+      let res = await addVehicle(newCar ,setIsLoading);
+      res && handleSuccess()
     }
+    
+  };
+  function handleSuccess() {
+    setIsLoading(false)
     setIsPopUpOpen(true);
-
     fetchMyCars(setMyCarsList);
     setTimeout(() => {
       setIsPopUpOpen(false);
@@ -60,7 +65,8 @@ export default function AddVechileScreen({navigation, route}) {
       setCurrentCar({});
       navigation.goBack();
     }, 1000);
-  };
+    
+  }
   return (
     <KeyboardAwareScrollView className="pt-[120px] px-4">
       <Modal
@@ -159,6 +165,7 @@ export default function AddVechileScreen({navigation, route}) {
         navigation={navigation}
       />
       <Button
+      isLoading={isLoading}
         Title={`${
           route.params
             ? Lang_chg.update_vechile[config.language]

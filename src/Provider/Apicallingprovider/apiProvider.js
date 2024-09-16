@@ -10,7 +10,7 @@ class ApiContainer {
       NetInfo.fetch().then(state => {
         if (state.isConnected == true) {
           if (status != 1) {
-            global.props.showLoader();
+      
           }
           fetch(url, {
             method: 'GET',
@@ -27,7 +27,7 @@ class ApiContainer {
           })
             .then(response => {
              
-              global.props.hideLoader();
+              
               if (response.status === 423) {
                 alert('Must update app version first');
               } else {
@@ -35,15 +35,15 @@ class ApiContainer {
               }
             })
             .then(obj => {
-              global.props.hideLoader();
+              
               resolve(obj);
             })
             .catch(error => {
-              global.props.hideLoader();
+              
               reject(error);
             });
         } else {
-          global.props.hideLoader();
+          
           reject('noNetwork');
         }
       });
@@ -53,9 +53,9 @@ class ApiContainer {
     return new Promise((resolve, reject) => {
       NetInfo.fetch().then(state => {
         if (state.isConnected == true) {
-          // global.props.showLoader();
+          //  
           if (status != 1) {
-            global.props.showLoader();
+             
           }
           fetch(url, {
             method: 'POST',
@@ -72,7 +72,7 @@ class ApiContainer {
             body: data,
           })
             .then(response => {
-              global.props.hideLoader();
+              
               if (response.status === 423) {
                 alert('Must update app version first');
               } else {
@@ -80,15 +80,15 @@ class ApiContainer {
               }
             })
             .then(obj => {
-              global.props.hideLoader();
+              
               resolve(obj);
             })
             .catch(error => {
-              global.props.hideLoader();
+              
               reject(error);
             });
         } else {
-          global.props.hideLoader();
+          
           reject('noNetwork');
         }
       });
@@ -99,7 +99,6 @@ class ApiContainer {
     return new Promise((resolve, reject) => {
       NetInfo.fetch().then(state => {
         if (state.isConnected == true) {
-          global.props.showLoader();
           fetch(url, {
             method: 'POST',
             headers: {
@@ -116,7 +115,7 @@ class ApiContainer {
           })
             .then(response => {
              
-              global.props.hideLoader();
+              
               if (response.status === 423) {
                 alert('Must update app version first');
               } else {
@@ -124,15 +123,15 @@ class ApiContainer {
               }
             })
             .then(obj => {
-              global.props.hideLoader();
+              
               resolve(obj);
             })
             .catch(error => {
-              global.props.hideLoader();
+              
               reject(error);
             });
         } else {
-          global.props.hideLoader();
+          
           reject('noNetwork');
         }
       });
@@ -158,7 +157,7 @@ class ApiContainer {
             body: data,
           })
             .then(response => {
-              global.props.hideLoader();
+              
               if (response.status === 423) {
                 alert('Must update app version first');
               } else {
@@ -166,15 +165,15 @@ class ApiContainer {
               }
             })
             .then(obj => {
-              global.props.hideLoader();
+              
               resolve(obj);
             })
             .catch(error => {
-              global.props.hideLoader();
+              
               reject(error);
             });
         } else {
-          global.props.hideLoader();
+          
           reject('noNetwork');
         }
       });

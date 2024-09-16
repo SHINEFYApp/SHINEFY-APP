@@ -4,7 +4,7 @@ import {msgProvider} from '../../Provider/Messageconsolevalidationprovider/messa
 import {config} from '../../Provider/configProvider';
 import {localStorage} from '../../Provider/localStorageProvider';
 
-export default function loginAuth(data, navigation, closeLoginModal) {
+export default async function loginAuth(data, navigation, closeLoginModal , setIsLoading) {
   var formData = new FormData(data);
   formData.append('phone_number', data.phone_number);
   formData.append('password', data.password);
@@ -18,6 +18,7 @@ export default function loginAuth(data, navigation, closeLoginModal) {
   apifuntion
     .postApi(url, formData)
     .then(obj => {
+      setIsLoading(false)
       if (obj.success == 'true') {
         closeLoginModal();
         var user_arr = obj.user_details;

@@ -4416,6 +4416,7 @@ __metadata:
     jest: "npm:^29.6.3"
     moti: "npm:^0.29.0"
     nativewind: "npm:^2.0.11"
+    pod-install: "npm:^0.2.2"
     prettier: "npm:2.8.8"
     react: "npm:18.2.0"
     react-native: "npm:0.73.5"
@@ -11660,6 +11661,15 @@ __metadata:
   version: 3.4.0
   resolution: "pngjs@npm:3.4.0"
   checksum: 10c0/88ee73e2ad3f736e0b2573722309eb80bd2aa28916f0862379b4fd0f904751b4f61bb6bd1ecd7d4242d331f2b5c28c13309dd4b7d89a9b78306e35122fdc5011
+  languageName: node
+  linkType: hard
+
+"pod-install@npm:^0.2.2":
+  version: 0.2.2
+  resolution: "pod-install@npm:0.2.2"
+  bin:
+    pod-install: build/index.js
+  checksum: 10c0/23034563ea13d4604978e2285450e1c169c76d7be1623cf73a37328942434827276b4bc24a701137f8d033a53e529dd1f7b925971e5c942b96136048aee3b2f2
   languageName: node
   linkType: hard
 

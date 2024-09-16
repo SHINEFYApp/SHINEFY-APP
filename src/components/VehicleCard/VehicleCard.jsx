@@ -96,7 +96,7 @@ export default function VehicleCard({car, navigation}) {
           setNewCar(car);
           navigation.push('updateVehicle', 'updateVehicle');
         }}
-        className="absolute -bottom-2 pb-0 -right-2 bg-[#FFFAF2] p-2 rounded-tl-3xl">
+        className="absolute -bottom-8 pb-0 -right-2 bg-[#FFFAF2] p-2 rounded-tl-3xl">
         <Image source={editIcon} />
       </TouchableOpacity>
     </View>

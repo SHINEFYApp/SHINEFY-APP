@@ -18,6 +18,7 @@ import {config} from '../../../Provider/configProvider';
 export default function SignupModal({openLogin, navigation, closeSignup}) {
   const [isCompany, setIsCompany] = useState(false);
   const [isSelected, setSelection] = useState(false);
+  const [isLoading , setIsLoading] = useState(false)
 
   const [userData, setUserData] = useState({});
 
@@ -141,12 +142,14 @@ export default function SignupModal({openLogin, navigation, closeSignup}) {
           </View>
           <View className="my-2">
             <Button
+            isLoading={isLoading}
               textColor={'#fff'}
               Title={Lang_chg.signup[config.language]}
               onPress={() => {
                 // navigation.navigate("Signup")
                 // closeSignup()
-                signupAuth(userData, navigation, closeSignup, isSelected , isCompany);
+                
+                signupAuth(userData, navigation, closeSignup, isSelected , isCompany , setIsLoading);
               }}
             />
           </View>

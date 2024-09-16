@@ -4,7 +4,7 @@ import { localStorage } from "../../Provider/localStorageProvider";
 import { msgProvider } from "../../Provider/Messageconsolevalidationprovider/messageProvider";
 
 export default function callsocailweb (result, navigation) {
-    console.log(result)
+
     var data = new FormData();
     data.append('social_email', result.social_email);
     data.append('social_id', result.social_id);

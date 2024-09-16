@@ -81,7 +81,6 @@ export default function SelectDateTime({navigation , route}) {
     setTime('');
   }, [date]);
 
-
   return (
     <SafeAreaView>
       <View className="pt-[50] px-5 relative h-full">

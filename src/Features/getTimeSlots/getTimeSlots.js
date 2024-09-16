@@ -29,7 +29,6 @@ export default async function getTimeSlots(data) {
     amount;
   
   let {data:res} = await apiSauce.get(url);
-  
   return res.slots_arr.date_slots;
   // .then(obj => {
   //   return obj;

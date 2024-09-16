@@ -2,6 +2,7 @@ import {Image, Text, TouchableOpacity, View} from 'react-native-ui-lib';
 import React from 'react';
 import {useRecoilState} from 'recoil';
 import addNewCar from '../../atoms/addNewCar/addNewCar';
+import { config } from '../../Provider/configProvider';
 
 export default function SelectCarCategoryCard({
   title,
@@ -13,6 +14,7 @@ export default function SelectCarCategoryCard({
   ele,
 }) {
   const [newCar, setNewCar] = useRecoilState(addNewCar);
+
   return (
     <View
       className={`p-3 mx-2 border border-[#ccc] rounded-lg w-[45%] mb-[10%] ${
@@ -37,7 +39,7 @@ export default function SelectCarCategoryCard({
             img?.includes('.') && (
               <Image
                 source={{
-                  uri: `${'https://shinefy.co/app-test/webservice/images/'}${img}`,
+                  uri: `${config.img_url3 + img}`,
                 }}
                 style={{
                   width: '100%',

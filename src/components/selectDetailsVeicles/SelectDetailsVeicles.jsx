@@ -50,10 +50,10 @@ export default function SelectDetailsVeicles({title}) {
     if (!title.includes('plate')) {
       return data?.filter(ele => {
         return title.includes('Model')
-          ? ele.modal[0].toLowerCase().includes(search)
+          ? ele.modal[0].toLowerCase().includes(search.toLowerCase())
           : ele[handleTitleData()][config.language]
               .toLowerCase()
-              .includes(search);
+              .includes(search.toLowerCase());
       });
     }
   }, [search, data]);

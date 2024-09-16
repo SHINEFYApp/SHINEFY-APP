@@ -11,6 +11,8 @@ export default function signupAuth(
   navigation,
   closeSignup,
   checkboxPolicy,
+  _,
+  setIsLoading
 ) {
   if (data.firstName?.length <= 0 || data.firstName == undefined) {
     msgProvider.toast(Lang_chg.emptyFirstName[config.language], 'center');
@@ -99,9 +101,11 @@ export default function signupAuth(
   formData.append('password', data.password);
 
   let url = config.baseURL + 'signup';
+  setIsLoading(true)
   apifuntion
     .postApi(url, formData)
     .then(obj => {
+      setIsLoading(false)
       if (obj.success == 'true') {
         localStorage.setItemObject('user_arr', obj.user_details);
         if ('app' === 'app') {

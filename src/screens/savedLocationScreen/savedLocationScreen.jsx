@@ -1,5 +1,5 @@
 import {Image, View} from 'react-native-ui-lib';
-import React from 'react';
+import React, { useState } from 'react';
 import emptyImg from '../../assets/emptyIMG.png';
 import Button from '../../components/mainButton/Button';
 import LocationCard from '../../components/locationComponentCard/locationComponentCard';
@@ -12,15 +12,30 @@ import myLocationList, {
 } from '../../atoms/locationList/myLocationList';
 import {useRecoilState} from 'recoil';
 import SafeAreaView from '../../components/SafeAreaView';
+import PackageCardSkeleton from '../../components/packageCard/packageCardSkeleton';
 export default function SavedLocationScreen({navigation ,route}) {
   const [locationList, setLocationList] = useRecoilState(myLocationList);
+ const [isLoading , setIsLoading] = useState(true)
 
   useEffect(() => {
-    fetchMyLoaction(setLocationList);
+    let fetchData = async()=>{
+       await fetchMyLoaction(setLocationList);
+       setIsLoading(false)
+    }
+    fetchData()
   }, []);
   return (
     <SafeAreaView>
       <View className="flex-1 px-4 pt-[60px]">
+        {
+          isLoading ? <FlatList
+           data={[...Array(5).keys()]}
+           renderItem={({item, index}) => (
+             <View key={item.id} className="w-[350px] h-[60px] m-2">
+                 <PackageCardSkeleton/>
+               </View>
+           )}
+         />  :
         <FlatList
           ListEmptyComponent={
             <View className="w-full items-center p-10">
@@ -44,6 +59,7 @@ export default function SavedLocationScreen({navigation ,route}) {
             <LocationCard location={item} navigation={navigation} isEdit={route?.params?.editLocation} bookingId={route?.params?.book_id}/>
           )}
         />
+        }
       </View>
     </SafeAreaView>
   );

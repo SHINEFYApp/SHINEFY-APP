@@ -12,6 +12,7 @@ import {config} from '../../Provider/configProvider';
 import myLocationList, { fetchMyLoaction } from '../../atoms/locationList/myLocationList';
 import { useSetRecoilState } from 'recoil';
 import PackageCardSkeleton from '../packageCard/packageCardSkeleton';
+import checkLocation from '../../Features/checkLocation/checkLocation';
 
 export default function MapComponent({isNewLocation, navigation , setCurrentLocation}) {
   const [region, setRegion] = useState({
@@ -29,6 +30,7 @@ export default function MapComponent({isNewLocation, navigation , setCurrentLoca
   const setLocationList = useSetRecoilState(myLocationList);
 
   const [isLoading , setIsLoading] = useState(false)
+  const [isLoadingAdd , setIsLoadingAdd] = useState(false)
 
   useEffect(() => {
     const getLocation = async () => {
@@ -77,7 +79,7 @@ export default function MapComponent({isNewLocation, navigation , setCurrentLoca
         isLoading ? 
           <View className="flex-1 relative">
             <MapView
-            scrollEnabled={false}
+            scrollEnabled={isNewLocation}
               customMapStyle={mapStyle}
               provider={PROVIDER_GOOGLE}
               // scrollEnabled
@@ -109,11 +111,15 @@ export default function MapComponent({isNewLocation, navigation , setCurrentLoca
                   }}
                 />
                 <Button
+                isLoading={isLoadingAdd}
                   Title={Lang_chg.confirm_booking[config.language]}
                   onPress={async () => {
-                    let res = await addLocation(newLocation, name);
+                    setIsLoadingAdd(true)
+                    let checked = await checkLocation(newLocation)
+                    let res = checked && await addLocation(newLocation, name);
                     fetchMyLoaction(setLocationList);
-                    res && navigation.goBack();
+                    res && navigation.goBack()
+                    setIsLoadingAdd(false)
                   }}
                 />
               </View>

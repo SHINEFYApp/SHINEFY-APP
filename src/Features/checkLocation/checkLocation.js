@@ -9,6 +9,7 @@ export default async function checkLocation (location) {
 
     var user_arr = await localStorage.getItemObject('user_arr');
     var user_id = user_arr.user_id;
+    console.log(user_id)
     try {
         var url =
 
@@ -24,11 +25,11 @@ export default async function checkLocation (location) {
               localStorage.setItemObject('user_arr', obj.user_details);
               return true
             }else {
-                msgProvider.alert(obj.msg[config.language])
+                msgProvider.alert(Lang_chg.location_text[config.language] ,obj.msg[config.language])
             }
         
     }catch(err) {
-        console.log(err)
+      
     }
 
   };

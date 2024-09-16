@@ -38,7 +38,7 @@ export default function BookingDetails({route , navigation}) {
 
 
     return(
-         <View className={'pt-[120px] px-5'}>
+         <View className={'pt-[80px] px-5'}>
       <ScrollView className={'pb-16'}>
         <View className={'bg-mainColor py-4 w-full rounded'}>
           <Text className={'font-bold text-center text-lg'}>

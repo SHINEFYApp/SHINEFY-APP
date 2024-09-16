@@ -1,6 +1,6 @@
 import {ImageBackground, TouchableOpacity} from 'react-native';
 import React from 'react';
-import {Text} from 'react-native-ui-lib';
+import {Text, View} from 'react-native-ui-lib';
 import {config} from '../../Provider/configProvider';
 export default function WashServicesCard({page, navigation, service}) {
   return (
@@ -26,14 +26,23 @@ export default function WashServicesCard({page, navigation, service}) {
         }}
         className={'flex-1 justify-end'}
         resizeMode="contain">
-        <Text
-          className={
-            'text-md text-white pl-1 pr-4 leading-5 pb-2 bg-[#00000087]'
-          }>
-          {service.service_name
-            ? service.service_name[config.language]
-            : service.extra_service_name[config.language]}
-        </Text>
+          <View className={
+                  ' justify-between pl-1 pr-4 leading-5 pb-2 bg-[#00000087]'
+                }>
+
+              <Text className="text-white text-[12px]">
+                {service.service_name
+                  ? service.service_name[config.language]
+                  : service.extra_service_name[config.language]}
+              </Text>
+              <Text className="text-white text-[12px]">
+                {service.service_name
+                  ?  service.service_price
+                  :  service.extra_service_price
+               
+                }
+              </Text>
+            </View>
       </ImageBackground>
     </TouchableOpacity>
   );

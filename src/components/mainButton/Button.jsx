@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {ActivityIndicator, StyleSheet} from 'react-native';
 import {Image, Text, TouchableOpacity, View} from 'react-native-ui-lib';
 export default function Button({
   Title,
@@ -10,10 +10,12 @@ export default function Button({
   buttonColor,
   icon,
   btnStyle,
+  isLoading
 }) {
   return (
     <View>
       <TouchableOpacity
+        disabled = {isLoading}
         onPress={onPress}
         style={[
           styles.button,
@@ -24,11 +26,16 @@ export default function Button({
         ]}>
         <View className="flex-row justify-center items-center gap-2">
           {icon && <Image source={icon} />}
-          <Text
+          {
+            isLoading ? 
+            <ActivityIndicator color={textColor} />
+            :
+            <Text
             style={[styles.text, textColor && {color: textColor}]}
             className={smallButton ? 'text-xs' : btnStyle}>
             {Title}
           </Text>
+          }
         </View>
       </TouchableOpacity>
     </View>

@@ -9,22 +9,25 @@ import loginAuth from '../../../Features/login/login';
 import {useState} from 'react';
 import {Lang_chg} from '../../../Provider/Language_provider';
 import {config} from '../../../Provider/configProvider';
+import { mobileW } from '../../../Provider/utilslib/Utils';
 
 export default function LoginModal({openSignup, navigation, closeLogin}) {
   const [userData, setUserData] = useState({});
-
+  const [isLoading , setIsLoading] = useState(false)
   function handleUserData(data) {
     setUserData(prev => {
       return {...prev, ...data};
     });
   }
 
+  const x = "100px"
+
   return (
     <View className="absolute transition-all left-0 right-0 -bottom-5 bg-white w-full p-5 rounded-xl">
       <KeyboardAwareScrollView>
         <View className="pb-5 relative">
           <View>
-            <Text className={'text-3xl font-bold text-center p-5'}>
+            <Text className={`text-2xl font-bold text-center p-5`}>
               {Lang_chg.welcome_back[config.language]}
             </Text>
           </View>
@@ -56,11 +59,13 @@ export default function LoginModal({openSignup, navigation, closeLogin}) {
           </View>
           <View className="my-10">
             <Button
+              isLoading ={isLoading}
               textColor={'#fff'}
               Title={Lang_chg.login[config.language]}
-              onPress={() => {
-                loginAuth(userData, navigation, closeLogin);
-              }}
+              onPress={async () => {
+                setIsLoading(true)
+                await loginAuth(userData, navigation, closeLogin ,setIsLoading);
+                }}
             />
             <Text
               onPress={() => {
