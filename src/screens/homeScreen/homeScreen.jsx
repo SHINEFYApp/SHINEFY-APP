@@ -139,7 +139,7 @@ export default function HomeScreen({navigation}) {
           </View>
 
           <View className="h-[165px] mt-1 rounded-lg overflow-hidden">
-            <MapComponent />
+            <MapComponent isMove={false}/>
           </View>
         </View>
       </View>

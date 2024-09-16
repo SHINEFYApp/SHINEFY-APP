@@ -14,7 +14,7 @@ import { useSetRecoilState } from 'recoil';
 import PackageCardSkeleton from '../packageCard/packageCardSkeleton';
 import checkLocation from '../../Features/checkLocation/checkLocation';
 
-export default function MapComponent({isNewLocation, navigation , setCurrentLocation}) {
+export default function MapComponent({isNewLocation, navigation , setCurrentLocation ,isMove}) {
   const [region, setRegion] = useState({
     latitude: 29.96073734024412,
     latitudeDelta: 0.001162180276701008,
@@ -79,7 +79,7 @@ export default function MapComponent({isNewLocation, navigation , setCurrentLoca
         isLoading ? 
           <View className="flex-1 relative">
             <MapView
-            scrollEnabled={isNewLocation}
+            scrollEnabled={isMove}
               customMapStyle={mapStyle}
               provider={PROVIDER_GOOGLE}
               // scrollEnabled

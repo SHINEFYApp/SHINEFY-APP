@@ -41,6 +41,7 @@ import paymentTab from '../../Features/paymentTab/paymntTab';
 export default function PaymentMethod({navigation}) {
   const [activePayment, setActivePayment] = useState(0);
   const [webView, setWebView] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [currentUrl, setCurrentUrl] = useState("");
   const [bookingDetails, setBookingDetails] =
     useRecoilState(bookingDetailsAtom);
@@ -167,19 +168,14 @@ export default function PaymentMethod({navigation}) {
           /> */}
         {/* </View> */}
         <Button
+        isLoading={isLoading}
           Title={Lang_chg.Confirm[config.language]}
           onPress={async () => {
-            if (activePayment == Lang_chg.debit_credit_card[config.language]) {
-              const url = await paymentTab(bookingDetails.total_amount
-              ? bookingDetails.total_amount
-              : bookingDetails.service_price)
-
-              setCurrentUrl(url)
-              setWebView(true);
-            } else {
-              cashBooking(bookingDetails, navigation);
-            }
-            // google_pay()
+            setIsLoading(true)
+            let paymentLink = await cashBooking(bookingDetails, navigation);
+            setIsLoading(false)
+            setWebView(true)
+            setCurrentUrl(paymentLink)
           }}
         />
       </ScrollView>

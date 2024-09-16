@@ -19,13 +19,13 @@ export default function AddVehiclePopup({closePopUp, nextScreen , Map , navigati
         <TouchableOpacity className="ml-auto my-2" onPress={closePopUp}>
           <Image source={closeIcon} />
         </TouchableOpacity>
-        <Text className=" text-2xl font-bold my-5">
+        <Text className=" text-xl font-bold my-5">
           {Lang_chg.confirm_booking_location[config.language]}
         </Text>
         {/* <Image className="my-4" source={img} /> */}
       </View>
       <View className="h-[165px] mt-1 rounded-lg overflow-hidden">
-              <MapComponent setCurrentLocation={setCurrentLocation}/>
+              <MapComponent setCurrentLocation={setCurrentLocation} isMove={false}/>
         </View>
       <Button
         Title={Lang_chg.yes_confirm[config.language]}
