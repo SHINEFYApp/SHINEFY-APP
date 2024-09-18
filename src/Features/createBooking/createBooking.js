@@ -3,8 +3,9 @@ import {Lang_chg} from '../../Provider/Language_provider';
 import {msgProvider} from '../../Provider/Messageconsolevalidationprovider/messageProvider';
 import {config} from '../../Provider/configProvider';
 import {localStorage} from '../../Provider/localStorageProvider';
+import sortDate from '../../utlites/sortDate';
 
-export default async function cashBooking(bookingDetails, navigation) {
+export default async function cashBooking(bookingDetails, navigation ,setIsPopUpOpen ,setBookingDetails) {
   var vehicle_data = await localStorage.getItemObject('booking_vehicle_arr');
   var location_data = await localStorage.getItemObject('location_arr');
   var all_service_data = await localStorage.getItemObject(
@@ -39,11 +40,19 @@ export default async function cashBooking(bookingDetails, navigation) {
       })
       
     }
+    if(bookingDetails?.extraData?.extraServices) {
+      Object.entries(bookingDetails?.extraData?.extraServices).forEach(([key, value] , index)=>{
+        console.log(value.quantity)
+        console.log(value.extra_service_id)
+        data.append(`extra_service_id[${index}]`, value.extra_service_id);
+        data.append(`extra_services_quantity[${index}]`,value.quantity);
+      })
+    }
+    // data.append(`extra_service_id`, "NA");
+    // data.append(`extra_service_quantity[${index}]`,value.quantity);
     data.append('free_status', '0'); // false=0 true=1 is Free
     data.append('service_id', bookingDetails.service_id);
     data.append('service_price', bookingDetails.service_price);
-    data.append('extra_service_id', "NA");
-    data.append('extra_service_price', "NA");
     data.append(
       'sub_total',
       bookingDetails.total_amount
@@ -77,7 +86,7 @@ export default async function cashBooking(bookingDetails, navigation) {
     data.append('area_id', bookingDetails.area_id);
     data.append('note', bookingDetails.notes ? bookingDetails.notes : 'NA');
     data.append('payment_method', bookingDetails.payment_method);
-    data.append('wallet_amount', bookingDetails.redemwallet);
+    data.append('wallet_amount', bookingDetails.redemwallet ? bookingDetails.redemwallet : 0 );
     // data.append('online_amount', this.state.netpay);
     let jsonData= {}
     let url;
@@ -92,16 +101,26 @@ export default async function cashBooking(bookingDetails, navigation) {
       
       url = config.baseURL + 'create_booking_multi';
     }
+
+    console.log(data)
     try {
       let obj = await apifuntion.postApi(url, data)
-      console.log("work")
       console.log(obj)
+
       if(obj.success == "true") {
         if(bookingDetails.payment_method == 1) {
-            return obj.online_payment_url
+          return obj.online_payment_url
+        }else {
+          setIsPopUpOpen(true)
+          // navigation.navigate('HomeScreen')
+          let date = new Date();
+          //  setBookingDetails({
+          //     booking_date: sortDate(date.toLocaleDateString())
+          //  })
           }
-        // navigation.navigate('HomeScreen');
-      }
+        } else {
+          msgProvider.alert("", obj.msg[config.language])
+        }
 
   } catch (err) {
     if (err === 'noNetwork') {

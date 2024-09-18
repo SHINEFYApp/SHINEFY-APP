@@ -6,7 +6,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 export default function AddVehiclesDetails({navigation, route}) {
   return (
-    <ScrollView className="mt-[80] px-5 pb-[500]">
+    <ScrollView className="mt-[110] px-5 pb-[500]">
       <SelectDetailsVeicles title={route.params.screenTitle} />
       <Button
         Title={'DONE'}

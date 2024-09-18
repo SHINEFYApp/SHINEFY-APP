@@ -17,10 +17,10 @@ import SubTotalBooking from '../../components/subTotalBooking/SubTotalBooking';
 import myCarsList, {fetchMyCars} from '../../atoms/carsList/myCarsList';
 
 export default function RequestDetails({navigation, route}) {
-  const [selectMain, setSelectMain] = useState('');
   const [services, setServices] = useState();
   const [bookingDetails, setBookingDetails] =
-    useRecoilState(bookingDetailsAtom);
+  useRecoilState(bookingDetailsAtom);
+  const [selectMain, setSelectMain] = useState(bookingDetails.service_id ? bookingDetails.service_id : "");
   useEffect(() => {
     let fetchData = async () => {
       setServices(await localStorage.getItemObject('services'));
@@ -34,9 +34,10 @@ export default function RequestDetails({navigation, route}) {
     fetchData();
   }, []);
 
+
   return (
     <>
-      <View className=" pt-[80px] flex-1">
+      <View className=" pt-[100px] flex-1">
         <ScrollView className="px-2 w-[95%] flex-1 mx-auto">
           <View>
             <Text className="text-xl mb-3" >
@@ -107,6 +108,7 @@ export default function RequestDetails({navigation, route}) {
                       extraData: {
                         ...bookingDetails?.extraData,
                         service,
+                        extraServices : null
                       },
                     });
                   }}
@@ -123,6 +125,7 @@ export default function RequestDetails({navigation, route}) {
                 <SelectExtraService
                   key={extra.extra_service_id}
                   extraService={extra}
+          
                 />
               );
             })}

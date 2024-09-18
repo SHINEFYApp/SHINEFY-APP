@@ -7,7 +7,6 @@ import {Lang_chg} from '../../Provider/Language_provider';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function BookingCard({progress, ButtonTitle, navigation, book}) {
-
   return (
     <TouchableOpacity onPress={()=>{
       navigation.navigate("BookingDetailsScreen" , book.booking_id)
@@ -23,10 +22,10 @@ export default function BookingCard({progress, ButtonTitle, navigation, book}) {
                   : progress == 'inprogress_booking'
                   ? 'text-[#5ABC7B] bg-[#5ABC7B45]'
                   : null
-              }`}>
-              {book?.service_name[config.language]}
+              }`} >
+              {Lang_chg.wash_services[config.language]}
             </Text>
-            <Text className="font-bold">Rapid Shine Auto Spa</Text>
+            <Text className="font-bold"> {book?.service_name[config.language]}</Text>
             <View className="flex-row items-center">
               <Image source={timeIcon} />
               <Text className="ml-2">30 {Lang_chg.mins[config.language]}</Text>
@@ -69,9 +68,9 @@ export default function BookingCard({progress, ButtonTitle, navigation, book}) {
           <Text>{Lang_chg.order_date[config.language]}</Text>
           <Text>{book.createtime.split(',')[0]}</Text>
         </View>
-        <View className="gap-2">
+        <View className="gap-2 justify-center">
           <Text>{Lang_chg.total_payment[config.language]}</Text>
-          <Text>500 EGY</Text>
+          <Text>{book.total_price} EGY</Text>
         </View>
       </View>
     </TouchableOpacity>

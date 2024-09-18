@@ -18,11 +18,15 @@ import SubTotalBooking from '../../components/subTotalBooking/SubTotalBooking';
 import SafeAreaView from '../../components/SafeAreaView';
 import Button from '../../components/mainButton/Button';
 import editTimeBooking from '../../Features/reschedule/reschedule';
+import PackageCardSkeleton from '../../components/packageCard/packageCardSkeleton';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default function SelectDateTime({navigation , route}) {
  
   const [date, setDate] = useState(Lang_chg.today_txt[config.language]);
   const [time, setTime] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingData, setIsLoadingData] = useState(false);
   const [isCustomDate, setIsCustomDate] = useState(false);
   const [slots, setSlots] = useState([]);
   const [selectDate, setSelectDate] = useState(new Date());
@@ -69,6 +73,7 @@ export default function SelectDateTime({navigation , route}) {
 
   useEffect(() => {
     const fetchDate = async () => {
+      setIsLoadingData(true)
       setSlots(await getTimeSlots(route.params?.isEdit ? {
         longitude : route.params.longitude,
         latitude : route.params.latitude,
@@ -76,6 +81,7 @@ export default function SelectDateTime({navigation , route}) {
         service_time : route.params.service_hours,
         service_price : 0
       } :bookingDetails));
+      setIsLoadingData(false)
     };
     fetchDate();
     setTime('');
@@ -83,81 +89,98 @@ export default function SelectDateTime({navigation , route}) {
 
   return (
     <SafeAreaView>
-      <View className="pt-[50] px-5 relative h-full">
-        <View>
-          <Text className={'font-semibold my-3'}>
-            {Lang_chg.Selectdatetime_txt[config.language]}
-          </Text>
-          <View className="flex-row justify-between">
-            <SelectDateBox
-              title={Lang_chg.today_txt[config.language]}
-              onPress={() =>
-                handleSelectDate(Lang_chg.today_txt[config.language])
-              }
-              selected={date}
-            />
-            <SelectDateBox
-              title={Lang_chg.tomorrow_txt[config.language]}
-              onPress={() =>
-                handleSelectDate(Lang_chg.tomorrow_txt[config.language])
-              }
-              selected={date}
-            />
-            <SelectDateBox
-              title={Lang_chg.Selectdatetime_txt[config.language]}
-              onPress={() => {
-                setIsCustomDate(true);
-                setDate('');
-              }}
-              selected={isCustomDate}
-            />
-          </View>
-          {isCustomDate && (
-            <View className="mt-8 bg-white p-5 rounded-2xl" style={style.box}>
-              <DateTimePicker
-                mode="single"
-                date={selectDate}
-                onChange={prams => {
-                  let x = new Date(prams.date);
-                  handleSelectDate(x.toLocaleDateString());
-                  setSelectDate(prams.date);
+      <View className="pt-[50] px-5 relative h-full ">
+        <ScrollView className="mb-[100]">
+          <View>
+            <Text className={'font-semibold my-3'}>
+              {Lang_chg.Selectdatetime_txt[config.language]}
+            </Text>
+            <View className="flex-row justify-between">
+              <SelectDateBox
+                title={Lang_chg.today_txt[config.language]}
+                onPress={() =>
+                  handleSelectDate(Lang_chg.today_txt[config.language])
+                }
+                selected={date}
+              />
+              <SelectDateBox
+                title={Lang_chg.tomorrow_txt[config.language]}
+                onPress={() =>
+                  handleSelectDate(Lang_chg.tomorrow_txt[config.language])
+                }
+                selected={date}
+              />
+              <SelectDateBox
+                title={Lang_chg.Selectdatetime_txt[config.language]}
+                onPress={() => {
+                  setIsCustomDate(true);
+                  setDate('');
                 }}
-                selectedItemColor="#DD9923"
-                headerButtonsPosition="right"
-                headerButtonColor="#DD9923"
-                minDate={new Date()}
-                headerTextStyle={{
-                  color: '#DD9923',
-                }}
-                calendarTextStyle={{
-                  color: '#DD9923',
-                  fontSize: 18,
-                }}
-                selectedTextStyle={{
-                  fontSize: 18,
-                }}
-                height={mobileW - 80}
+                selected={isCustomDate}
               />
             </View>
-          )}
-        </View>
-        <View>
-          <Text className={'mt-3 font-semibold'}>
-            {Lang_chg.selecttime1_txt[config.language]}
-          </Text>
-          <View className="flex-row  flex-wrap">
-            {slots?.slots?.map(slot => {
-              return (
-                <SelectDateBox
-                  key={slot.time}
-                  title={slot.time}
-                  onPress={handleSelectTime}
-                  selected={time}
+            {isCustomDate && (
+              <View className="mt-8 bg-white p-5 rounded-2xl" style={style.box}>
+                <DateTimePicker
+                  mode="single"
+                  date={selectDate}
+                  onChange={prams => {
+                    let x = new Date(prams.date);
+                    handleSelectDate(x.toLocaleDateString());
+                    setSelectDate(prams.date);
+                  }}
+                  selectedItemColor="#DD9923"
+                  headerButtonsPosition="right"
+                  headerButtonColor="#DD9923"
+                  minDate={new Date()}
+                  headerTextStyle={{
+                    color: '#DD9923',
+                  }}
+                  calendarTextStyle={{
+                    color: '#DD9923',
+                    fontSize: 18,
+                  }}
+                  selectedTextStyle={{
+                    fontSize: 18,
+                  }}
+                  height={mobileW - 80}
                 />
-              );
-            })}
+              </View>
+            )}
           </View>
-        </View>
+          <View>
+            <Text className={'mt-3 font-semibold'}>
+              {Lang_chg.selecttime1_txt[config.language]}
+            </Text>
+              {
+                isLoadingData ?
+            <View className="flex-row  flex-wrap">
+              {[...Array(9).keys()].map((_ , index) => {
+                return (
+                <View key={index} className="w-1/4 h-[30px] m-2">
+                  <PackageCardSkeleton/>
+                </View>
+                );
+              })}
+            </View>
+              :  
+            <View className="flex-row  flex-wrap">
+              {slots?.slots?.map(slot => {
+                return (
+                  <SelectDateBox
+                    key={slot.time}
+                    title={slot.time}
+                    onPress={handleSelectTime}
+                    selected={time}
+                  />
+                );
+              })}
+            </View>
+            }
+
+          </View>
+        </ScrollView>
+
         {
           !route.params?.isEdit ?
         <View className="flex-row bg-white justify-between absolute bottom-0 right-0 w-[100vw] rounded-t-3xl">
@@ -174,11 +197,13 @@ export default function SelectDateTime({navigation , route}) {
           />
         </View> :
          <Button
-          onPress={() => {
+         isLoading={isLoading}
+          onPress={async () => {
              if (!bookingDetails.booking_time) {
                 msgProvider.toast('Please Select time', 'center');
               } else {
-                editTimeBooking({
+                setIsLoading(true)
+               let res = await editTimeBooking({
                   service_price : 0,
                   booking_id: route.params.book_id,
                   booking_date: bookingDetails.booking_date,
@@ -190,6 +215,8 @@ export default function SelectDateTime({navigation , route}) {
                   latitude : route.params.latitude,
                   address_loc:route.params.address_loc
                 },navigation)
+                setIsLoading(false)
+
               }
           }}
           Title={Lang_chg.reschedule_txt[config.language]}

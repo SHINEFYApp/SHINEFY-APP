@@ -5,7 +5,7 @@ import Input from '../../components/inputs/input';
 import userIcon from '../../assets/icons/userIcon.png';
 import phoneIcon from '../../assets/icons/phoneIcon.png';
 import Button from '../../components/mainButton/Button';
-import {useRecoilValue} from 'recoil';
+import {useRecoilState, useRecoilValue} from 'recoil';
 import profileData from '../../atoms/profileData/profileData';
 import {useState} from 'react';
 import editProfile from '../../Features/editProfile/editProfile';
@@ -15,13 +15,13 @@ import {config} from '../../Provider/configProvider';
 import {TouchableOpacity} from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 export default function EditProfileScreen({navigation}) {
-  const data = useRecoilValue(profileData);
+  const [data , setData] = useRecoilState(profileData);
   const [newData, setNewData] = useState({
     name: data.name,
     phone_number: data.phone_number,
     email: data.email,
   });
-  const [currentIMG , setCurrentIMG] = useState()
+  const [currentIMG , setCurrentIMG] = useState(config.img_url3 + data.image)
   function updateProfilePic() {
       ImagePicker.openPicker({
         width: 300,

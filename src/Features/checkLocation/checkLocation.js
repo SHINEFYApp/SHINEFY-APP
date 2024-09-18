@@ -9,7 +9,7 @@ export default async function checkLocation (location) {
 
     var user_arr = await localStorage.getItemObject('user_arr');
     var user_id = user_arr.user_id;
-    console.log(user_id)
+
     try {
         var url =
 

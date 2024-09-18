@@ -8,7 +8,7 @@ import {config} from '../../Provider/configProvider';
 import { useRecoilState } from 'recoil';
 import bookingDetailsAtom from '../../atoms/bookingDetails/bookingDetails.atom';
 
-export default function PackageCard({navigation, pack , isUse , route}) {
+export default function PackageCard({navigation, pack , isUse , route , profile}) {
   const [bookingDetails, setBookingDetails] =
     useRecoilState(bookingDetailsAtom);
   return (
@@ -59,6 +59,8 @@ export default function PackageCard({navigation, pack , isUse , route}) {
       </View>
 
       <View className="absolute bottom-0 right-5">
+        {
+          !profile && 
         <Button
           Title={isUse ? Lang_chg.claim[config.language] :Lang_chg.buy[config.language] }
           smallButton
@@ -71,6 +73,7 @@ export default function PackageCard({navigation, pack , isUse , route}) {
             navigation.navigate(isUse ? 'PackageInfoScreen' : 'PackageDetailsScreen',isUse ? {...route , packID : pack.id} :  pack.id );
           }}
         />
+        }
       </View>
     </View>
   );

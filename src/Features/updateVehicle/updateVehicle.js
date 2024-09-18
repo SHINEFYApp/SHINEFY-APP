@@ -5,25 +5,28 @@ import {config} from '../../Provider/configProvider';
 import {localStorage} from '../../Provider/localStorageProvider';
 
 export default async function updateVehicle(currentCar) {
+  console.log(currentCar)
   let user_arr = await localStorage.getItemObject('user_arr');
   let user_id = user_arr.user_id;
   const fd = new FormData();
   fd.append(
     'car_category_id',
-    currentCar?.car_category?.car_category_id || 'NA',
+    currentCar?.car_category_id || 'NA',
   );
-  fd.append('model_id', currentCar?.modal?.model_id || 'NA');
-  fd.append('make_id', currentCar?.car_make?.make_id || 'NA');
-  fd.append('color_id', currentCar?.car_color?.color_id || 'NA');
-  fd.append('vehicle_id', currentCar.carID);
+  fd.append('model_id', currentCar?.model_id || 'NA');
+  fd.append('make_id', currentCar?.make_id || 'NA');
+  fd.append('color_id', currentCar?.color_id || 'NA');
+  fd.append('vehicle_id', currentCar.vehicle_id);
   fd.append('plate_number', currentCar.plate_number);
   fd.append('user_id', user_id);
 
   let url = config.baseURL + 'update_vehicle';
   try {
     let res = await apifuntion.postApi(url, fd);
+    console.log(fd)
+    console.log(res)
     msgProvider.toast(Lang_chg.vehicleUpdateSuccess[config.language], 'center');
-    return res.success;
+    return true;
   } catch (err) {}
   // apifuntion
   //   .postApi(url, fd)

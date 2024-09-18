@@ -47,7 +47,8 @@ export default function AddVechileScreen({navigation, route}) {
         ...cC,
         carID: currentCar.vehicle_id,
       }));
-      await updateVehicle(newCar , setIsLoading);
+      let res = await updateVehicle(newCar , setIsLoading);
+      res && handleSuccess()
     } else {
       setIsLoading(true)
       let res = await addVehicle(newCar ,setIsLoading);
@@ -60,7 +61,7 @@ export default function AddVechileScreen({navigation, route}) {
     setIsPopUpOpen(true);
     fetchMyCars(setMyCarsList);
     setTimeout(() => {
-      setIsPopUpOpen(false);
+
       setNewCar({});
       setCurrentCar({});
       navigation.goBack();
@@ -75,7 +76,7 @@ export default function AddVechileScreen({navigation, route}) {
         avoidKeyboard={true}
         hasBackdrop={true}
         isVisible={isPopUpOpen}>
-        <SuccessAddVehicle closePopUp={handleClosePopUp} />
+        <SuccessAddVehicle closePopUp={handleClosePopUp} title={Lang_chg.vehicle_added_success_msg[config.language]} />
       </Modal>
       <SelectVechileCard
         screenTitle={'Select Category'}

@@ -10,6 +10,7 @@ import {config} from '../../Provider/configProvider';
 const CancelBooking = ({route , navigation}) => {
   const [activeButton, setActiveButton] = useState('');
   const [reason, setReason] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const options = [
     {
       id: 1,
@@ -78,16 +79,19 @@ const CancelBooking = ({route , navigation}) => {
       )}
       <View className={'mt-5'}>
         <Button
+        isLoading={isLoading}
           Title={Lang_chg.cancelBooking_txt[config.language]}
           btnStyle={'text-lg'}
           onPress={async () => {
+            setIsLoading(true)
             let res = await cancelBooking(
               route.params.book_id,
               activeButton == Lang_chg.other_reason[config.language]
-                ? reason
-                : activeButton,
-                navigation
+              ? reason
+              : activeButton,
+              navigation
             );
+            setIsLoading(false)
           }}
         />
       </View>

@@ -41,8 +41,8 @@ export default function ProfileScreen({navigation}) {
                data?.image == "NA"
                   ? pic
                   : {
-                      uri: `${'https://shinefy.co/app-test/webservice/images/'}${
-                        data?.image
+                      uri: `${
+                         config.img_url3 + data?.image
                       }`,
                     }
               }

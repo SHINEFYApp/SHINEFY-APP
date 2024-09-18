@@ -18,5 +18,8 @@ export default async function editBookingLocation (data ,navigation) {
       if(res.success== "true") {
         navigation.navigate("HomeScreen")
         msgProvider.toast("your booking location updated succesfully" , "center")
+      }else {
+        msgProvider.toast(res.msg[config.language] , "center")
+
       }
 }

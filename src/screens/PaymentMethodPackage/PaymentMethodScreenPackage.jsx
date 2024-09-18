@@ -24,48 +24,21 @@ import {useRecoilState} from 'recoil';
 import bookingDetailsAtom from '../../atoms/bookingDetails/bookingDetails.atom';
 import cashBooking from '../../Features/createBooking/createBooking';
 import WebView from 'react-native-webview';
-import {msgProvider} from '../../Provider/Messageconsolevalidationprovider/messageProvider';
-import {
-  Font,
-  localStorage,
-  mobileH,
-  mobileW,
-} from '../../Provider/utilslib/Utils';
+import Modal from 'react-native-modal';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {StatusBar} from 'react-native';
 import {localimag} from '../../Provider/Localimage';
 import PayTabs from '../../components/payTabs/payTabs';
 import paymentTab from '../../Features/paymentTab/paymntTab';
+import subscripePackage from '../../Features/subscripePackage/subscripePackage';
 import SuccessAddVehicle from '../../components/successAddVehicle/successAddVehicle';
-import Modal from 'react-native-modal';
-import sortDate from '../../utlites/sortDate';
-export default function PaymentMethod({navigation}) {
+
+export default function PaymentMethodPackage({navigation , route}) {
   const [activePayment, setActivePayment] = useState(0);
   const [webView, setWebView] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [currentUrl, setCurrentUrl] = useState("");
   const [isPopUpOpen , setIsPopUpOpen] = useState(false)
-
-  const [bookingDetails, setBookingDetails] =
-    useRecoilState(bookingDetailsAtom);
-    
-  const paymentMethodsOptions = [
-    {
-      id: 1,
-      title: Lang_chg.paypal[config.language],
-      icon: paypalIcon,
-    },
-    {
-      id: 2,
-      title: Lang_chg.apple_pay[config.language],
-      icon: appleIcon,
-    },
-    {
-      id: 3,
-      title: Lang_chg.google_pay[config.language],
-      icon: googleIcon,
-    },
-  ];
 
   function handleClosePopUp() {
       setIsPopUpOpen(false)
@@ -73,13 +46,13 @@ export default function PaymentMethod({navigation}) {
 
   return (
     <View className="pt-[120] px-5">
-      <Modal
+          <Modal
         swipeDirection={'down'}
         onSwipeMove={handleClosePopUp}
         avoidKeyboard={true}
         hasBackdrop={true}
         isVisible={isPopUpOpen}>
-        <SuccessAddVehicle closePopUp={handleClosePopUp} title={Lang_chg.successbookingTxt[config.language]} />
+        <SuccessAddVehicle closePopUp={handleClosePopUp} title={Lang_chg.packageBookingSuccess[config.language]} />
       </Modal>
       {webView && (
         <PayTabs
@@ -87,44 +60,10 @@ export default function PaymentMethod({navigation}) {
           setWebView={setWebView}
           webView={webView}
           navigation={navigation}
-            success= {()=>{
-            setIsPopUpOpen(true)
-          navigation.navigate('HomeScreen')
-          let date = new Date();
-           setBookingDetails({
-              booking_date: sortDate(date.toLocaleDateString())
-           })
-          }}
-          amount={
-            bookingDetails.total_amount
-              ? bookingDetails.total_amount
-              : bookingDetails.service_price
-          }
+          setIsPopUpOpen={setIsPopUpOpen}
         />
       )}
       <ScrollView>
-        <View>
-          <Text className={'mb-2 font-semibold'}>
-            {Lang_chg.cash_txt[config.language]}
-          </Text>
-          <RadioButton
-            buttons={[
-              {
-                id: 1,
-                title: Lang_chg.cash_txt[config.language],
-                icon: cashIcon,
-              },
-            ]}
-            currentActive={activePayment}
-            set={activeElement => {
-              setBookingDetails({
-                ...bookingDetails,
-                payment_method: 0,
-              });
-              setActivePayment(activeElement);
-            }}
-          />
-        </View>
         {/* <View>
           <Text className={'mt-4 mb-3 font-semibold'}>
             {Lang_chg.packages[config.language]}
@@ -162,46 +101,31 @@ export default function PaymentMethod({navigation}) {
                 title: Lang_chg.debit_credit_card[config.language],
                 icon: creditIcon,
               },
+              {
+                id: 2,
+                title: Lang_chg.wallet[config.language],
+                icon: walletIcon,
+              },
             ]}
             currentActive={activePayment}
             set={activeElement => {
-              setBookingDetails({
-                ...bookingDetails,
-                payment_method: 1,
-              });
+              
               setActivePayment(activeElement);
             }}
           />
-          {/* <SelectVechileCard
-            text={Lang_chg.add_card[config.language]}
-            navigation={navigation}
-            screen={'AddCardScreen'}
-            icon={creditIcon}
-          /> */}
         </View>
-        {/* <View>
-          <Text className={'mt-4 mb-3 font-semibold'}>
-            {Lang_chg.Payment_Option[config.language]}
-          </Text> */}
-
-        {/* <RadioButton
-            buttons={paymentMethodsOptions}
-            currentActive={activePayment}
-            set={setActivePayment}
-          /> */}
-        {/* </View> */}
         <Button
         isLoading={isLoading}
           Title={Lang_chg.Confirm[config.language]}
           onPress={async () => {
-            setIsLoading(true)
-            let paymentLink = await cashBooking(bookingDetails, navigation ,setIsPopUpOpen , setBookingDetails);
+            // setIsLoading(true)
+            console.log(activePayment)
+            let paymentLink = await subscripePackage(route.params.packId , activePayment == Lang_chg.wallet[config.language] ? "wallet" : "visa");
             if (paymentLink != undefined){
               setCurrentUrl(paymentLink)
+              setIsLoading(false)
               setWebView(true)
-              
             }
-            setIsLoading(false)
           }}
         />
       </ScrollView>

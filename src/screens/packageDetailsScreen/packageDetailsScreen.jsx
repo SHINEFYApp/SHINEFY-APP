@@ -104,17 +104,7 @@ export default function PackageDetailsScreen({navigation, route}) {
           <Button
             Title={Lang_chg.claim[config.language]}
             onPress={async () => {
-              // setIsPayment(true);
-              // setWebView(true);
-              // let url = await paymentTab(data.package.price);
-                subscripePackage(route.params , 500)
-              // setIsPaymentURL(url)
-              // console.log(data.package.id);
-              // let res = await subscripePackage(
-              //   data.package.id,
-              //   data.package.price,
-              // );
-              // setIsPopUpOpen(res);
+              navigation.navigate("PaymentMethodPackage" , {packId :route.params })
             }}
           />
         </View>

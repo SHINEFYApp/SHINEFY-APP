@@ -36,12 +36,11 @@ export default function SubTotalBooking({verfiy, nextPage, Press}) {
   // setTotal(subTotal)
 
   // },[subTotal])
-
   return (
     <View className="flex-row bg-white justify-between  w-full rounded-t-3xl p-5">
       <View>
         <Text className="text-md">{Lang_chg.subTotal[config.language]}</Text>
-        <Text className="font-bold text-xl">{subTotal} EGP</Text>
+        <Text className="font-bold text-xl">{subTotal ? subTotal : 0} EGP</Text>
       </View>
       <Button
         Title={Lang_chg.continue[config.language]}

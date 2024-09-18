@@ -42,6 +42,7 @@ import SelectBookingVehicles from '../screens/selectBookingVehicle/selectBooking
 import BookingDetails from '../screens/bookingDetails/bookingDetails';
 import MyPackages from '../screens/myPackages/myPackages';
 import PackageInfo from '../screens/packgesInfo/packagesInfo';
+import PaymentMethodPackage from '../screens/PaymentMethodPackage/PaymentMethodScreenPackage';
 
 const Stack = createStackNavigator();
 
@@ -66,6 +67,10 @@ const Stacknav = navigation => {
       <Stack.Screen
         name="SavedLocationScreen"
         component={SavedLocationScreen}
+      />
+      <Stack.Screen
+        name="PaymentMethodPackage"
+        component={PaymentMethodPackage}
       />
       <Stack.Screen
         name="MyPackagesScreen"

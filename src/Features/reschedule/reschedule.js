@@ -21,11 +21,9 @@ export default async function editTimeBooking(data , navigation) {
       fd.append('address_loc', data.address_loc);
 
       let url = config.baseURL + 'reschedule_booking';
+        try {
 
-      apifuntion
-        .postApi(url, fd)
-        .then(obj => {
-    
+          let obj = await apifuntion.postApi(url, fd)
           if (obj.success == 'true') {
             msgProvider.toast("your booking reschedule successfuly" , "center")
             navigation.navigate("HomeScreen")
@@ -51,8 +49,7 @@ export default async function editTimeBooking(data , navigation) {
             }, 200);
             return false;
           }
-        })
-        .catch(err => {
+        }catch(err) {
           this.setState({loading: false});
           if (err == 'noNetwork') {
             msgProvider.alert(
@@ -67,5 +64,5 @@ export default async function editTimeBooking(data , navigation) {
               false,
             );
           }
-        });
+        }
 }

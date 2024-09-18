@@ -14,7 +14,7 @@ import WebView from 'react-native-webview';
 import bookingDetailsAtom from '../../atoms/bookingDetails/bookingDetails.atom';
 import {useRecoilValue} from 'recoil';
 
-export default function PayTabs({setWebView, webView, navigation, url}) {
+export default function PayTabs({setWebView, webView, navigation, url , setIsPopUpOpen , success}) {
 
   const [userData, setUserData] = useState();
   const bookingDetails = useRecoilValue(bookingDetailsAtom);
@@ -28,7 +28,23 @@ export default function PayTabs({setWebView, webView, navigation, url}) {
 
   function onNavigationStateChange(webViewState) {
     webViewState.canGoBack = false;
+
  
+
+    if (webViewState.loading == false && webViewState.url.includes("final")){
+      let payment_success = webViewState.url.split("final?")[1].split("=")[1]
+      if(payment_success == "success") {
+        setWebView(false)
+        if (setIsPopUpOpen) {
+            setIsPopUpOpen(true)
+          }
+        navigation.navigate("HomeScreen")
+        success()
+      }else {
+        console.log("payment failed")
+      }
+    }
+
     // if (webViewState.loading == false) {
     //   var t = webViewState.url.split('/').pop().split('?')[0];
 

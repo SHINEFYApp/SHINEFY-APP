@@ -1,12 +1,14 @@
 import BookingCard from '../BookingCard/bookingCard';
 import React from 'react';
-import {RefreshControl, ScrollView} from 'react-native-gesture-handler';
+import {FlatList, RefreshControl, ScrollView} from 'react-native-gesture-handler';
 import EmptyBooking from '../emptyBooking/emptyBooking';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 import {useCallback, useState} from 'react';
+import PackageCardSkeleton from '../packageCard/packageCardSkeleton';
+import { View } from 'react-native-ui-lib';
 
-export default function Bookings({navigation, bookings, currentPage}) {
+export default function Bookings({navigation, bookings, currentPage,isLoading}) {
   const [refreshing, setRefreshing] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -16,25 +18,33 @@ export default function Bookings({navigation, bookings, currentPage}) {
       setRefreshing(false);
     }, 2000);
   }, []);
-  if (
-    !bookings ||
-    !bookings[currentPage] ||
-    bookings[currentPage] === 'NA' ||
-    !bookings[currentPage].length
-  ) {
-    return <EmptyBooking />;
-  }
+  
   return (
     <ScrollView
       className="mt-4"
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }>
-      {bookings[currentPage]?.map(book => {
-        return (
-          <BookingCard
-            key={book.booking_id}
-            book={book}
+        {
+          isLoading ?<FlatList
+           data={[...Array(5).keys()]}
+           renderItem={({item, index}) => (
+             <View key={item.id} className="w-[350px] h-[160px] m-2">
+                 <PackageCardSkeleton/>
+               </View>
+           )}
+         /> 
+         :
+      <FlatList
+          ListEmptyComponent={
+          <EmptyBooking />
+          }
+          data={bookings[currentPage]?.reverse()}
+          
+          keyExtractor={item => item.booking_id}
+          renderItem={({item}) => (
+            <BookingCard
+            book={item}
             progress={currentPage}
             ButtonTitle={
               currentPage == 'inprogress_booking'
@@ -45,8 +55,10 @@ export default function Bookings({navigation, bookings, currentPage}) {
             }
             navigation={navigation}
           />
-        );
-      })}
+          )}
+        />
+        }
+  
     </ScrollView>
   );
 }

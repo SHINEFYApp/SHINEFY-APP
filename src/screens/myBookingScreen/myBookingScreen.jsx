@@ -10,13 +10,16 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 export default function MyBookingScreen({navigation}) {
   const [data, setData] = useState([]);
+  const [isLoading , setIsLoading] = useState(false)
   const [currentPage, setCurrentPage] = useState('pending_booking');
   const insets = useSafeAreaInsets();
 
   useEffect(() => {
     let fetchData = async () => {
+      setIsLoading(true)
       let data = await getBooking();
       setData(data.booking_arr);
+      setIsLoading(false)
     };
     fetchData();
   }, [currentPage]);
@@ -62,6 +65,7 @@ export default function MyBookingScreen({navigation}) {
         </TouchableOpacity>
       </View>
       <Bookings
+        isLoading={isLoading}
         currentPage={currentPage}
         bookings={data}
         navigation={navigation}

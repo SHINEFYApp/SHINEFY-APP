@@ -6,7 +6,7 @@ import {config} from '../../Provider/configProvider';
 
 export default function BookingType({navigation, route}) {
   return (
-    <View className="flex-1 px-4 bg-white pt-[80]">
+    <View className="flex-1 px-4 bg-white pt-[110]">
       <SelectVechileCard
         text={Lang_chg.normalBooking[config.language]}
         screen="RequestDetails"

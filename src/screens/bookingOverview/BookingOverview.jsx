@@ -16,6 +16,7 @@ import RadioButton from '../../components/RadioButton/RadioButton';
 import walletIcon from '../../assets/icons/profile/wallet.png';
 import getWallet from '../../Features/getWallet/getWallet';
 import create_package_booking from '../../Features/createPackgeBooking/createPackageBooking';
+import Modal from 'react-native-modal';
 
 const BookingOverview = ({navigation, route}) => {
 
@@ -89,7 +90,7 @@ const BookingOverview = ({navigation, route}) => {
   }, [isWallet, coupon]);
 
   return (
-    <View className={'pt-[120px] px-5'}>
+    <View className={'pt-[110px] px-5'}>
       <ScrollView className={'pb-16'}>
         <View className={'bg-mainColor py-4 w-full rounded'}>
           <Text className={'font-bold text-center text-lg'}>
@@ -115,7 +116,7 @@ const BookingOverview = ({navigation, route}) => {
           </View>
         </ScrollView>
        <FlatList
-          data={bookingDetails.extraData.allSelectedCarsDetails}
+          data={bookingDetails?.extraData?.allSelectedCarsDetails}
           renderItem={({item}) => <SelectVehicle car={item} />}
           keyExtractor={item => item.vehicle_id}
         />
@@ -124,9 +125,9 @@ const BookingOverview = ({navigation, route}) => {
           <BookingOverviewTextDetails
             title={'services'}
             value={
-              bookingDetails.extraData.service.service_name[config.language]
+              bookingDetails?.extraData?.service?.service_name[config.language]
             }
-            price={`${bookingDetails.extraData.service.service_price} EGP`}
+            price={`${bookingDetails?.extraData?.service?.service_price} EGP`}
           />
           <View
             className={
@@ -136,7 +137,7 @@ const BookingOverview = ({navigation, route}) => {
           <BookingOverviewTextDetails
             title={Lang_chg.car_txt[config.language]}
             value={Lang_chg.carsCount_txt[config.language]}
-            price={`X ${bookingDetails.extraData.allSelectedCarsDetails.length} `}
+            price={`X ${bookingDetails?.extraData?.allSelectedCarsDetails?.length} `}
           />
           <View
             className={
@@ -203,7 +204,7 @@ const BookingOverview = ({navigation, route}) => {
               {Lang_chg.totalservicecharges_txt[config.language]}
             </Text>
             <Text className={'font-bold text-center text-lg'}>
-              {bookingDetails.total_amount} EGP
+              {bookingDetails?.total_amount} EGP
             </Text>
           </View>
           <View
@@ -306,10 +307,10 @@ const BookingOverview = ({navigation, route}) => {
           btnStyle={'font-semibold text-lg'}
           onPress={() => {
             let date = new Date();
+            navigation.push('HomeScreen')
             setBookingDetails({
                booking_date: sortDate(date.toLocaleDateString())
             })
-            navigation.push('HomeScreen')
           }}
         />
         <View className={'py-3'} />

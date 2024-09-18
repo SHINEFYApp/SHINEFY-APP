@@ -553,6 +553,7 @@ class Language_provider {
   bookings_txt = ['Bookings', 'الحجوزات'];
   normalBooking = ['Normal Booking', 'حجز عادي'];
   packageBooking = ['Package Booking', 'حجز بالحزم'];
+  packageBookingSuccess = ["subscribe package Success", 'تم الاشتراك في بنجاح'];
   bookingid_txt = ['Booking ID: #7899302010', 'رقم الحجز: # 7899302010'];
   time_txt = ['15/Feb/22, 10:00AM', '15 / فبراير / 22 ، 10:00 صباحًا'];
   service_txt = ['Service', 'خدمة'];

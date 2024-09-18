@@ -17,11 +17,11 @@ import getSavedLocation from '../../Features/getSavedLocation/getSavedLocation';
 import { useRecoilState } from 'recoil';
 import currentMapAtom from '../../atoms/currentMap/currentMapAtom';
 import PackageCardSkeleton from '../../components/packageCard/packageCardSkeleton';
+import getHome from '../../Features/getHome/getHome';
 
 export default function HomeScreen({navigation}) {
   const [services, SetServices] = useState([]);
   const [specialOffers, SetSpecialOffers] = useState([]);
-  const [isServicesLoading , setIsServicesLoading] = useState(false)
   const [isPackagesLoading , setIsPackagesLoading] = useState(false)
   const [searchText, setSearchText] = useState('');
   const insets = useSafeAreaInsets();
@@ -29,9 +29,10 @@ export default function HomeScreen({navigation}) {
   const [_, setCurrentMap] = useRecoilState(currentMapAtom);
   useEffect(() => {
     const fetchData = async () => {
+      const isReview = await getHome()
       const data = await getServices();
       const packages = await getPackages();
-      const myLocations = await getSavedLocation();
+      // const myLocations = await getSavedLocation();
       SetServices(data.all_service_arr.service_arr);
       setPackages(packages.packages);
       setIsPackagesLoading(true)
@@ -41,17 +42,16 @@ export default function HomeScreen({navigation}) {
     fetchData();
   }, []);
 
-
   return (
     <KeyboardAwareScrollView>
       <View style={{paddingTop: insets.top + 70}} className="px-4">
-        <SearchInput
+        {/* <SearchInput
           placeholder={Lang_chg.what_looking_for_placholder[config.language]}
           onChange={t => setSearchText(t)}
           value={searchText}
-        />
+        /> */}
       </View>
-      <View>
+      {/* <View>
         <View className="mt-2 flex-row items-center px-4">
           <Text className="text-[#000] text-xl ">
             {Lang_chg.special_offers[config.language]}
@@ -91,7 +91,7 @@ export default function HomeScreen({navigation}) {
          />   
         }
        
-      </View>
+      </View> */}
       <View>
         <View className="mt-2 flex-row items-center px-4">
           <Text className="text-[#000] text-xl ">

@@ -10,45 +10,24 @@ import getPackages from '../../Features/getPackages/getPackages';
 import getUserPackages from '../../Features/getUserPackages/getUserPackages';
 import {localStorage} from '../../Provider/localStorageProvider';
 
-export default function MySubscreptionScreen({navigation}) {
+export default function MySubscreptionScreen({navigation} , route) {
   const [specialOffers, SetSpecialOffers] = useState([]);
   const [packages, setPackages] = useState([]);
 
+
+
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getServices();
+      // const data = await getServices();
       const myPackage = await getUserPackages();
-      SetSpecialOffers(data.all_service_arr.extra_service_arr);
+      // SetSpecialOffers(data.all_service_arr.extra_service_arr);
       setPackages(myPackage.packageSubscription);
-      localStorage.setItemObject('services', data.all_service_arr);
     };
     fetchData();
   }, []);
-
+  
   return (
-    <View className="pt-[120]">
-      <View>
-        <View className="mt-2 flex-row items-center px-4">
-          <Text className="text-[#000] text-xl ">
-            {Lang_chg.special_offers[config.language]}
-          </Text>
-          <Text
-            className="text-mainColor flex-1 text-right"
-            onPress={() => {
-              navigation.navigate('specialOffersScreen');
-            }}>
-            {Lang_chg.see_all[config.language]}
-          </Text>
-        </View>
-        <ScrollView
-          horizontal={true}
-          className="pl-3 mt-3"
-          showsHorizontalScrollIndicator={false}>
-          {specialOffers?.map(offer => {
-            return <SaleBox offer={offer} />;
-          })}
-        </ScrollView>
-      </View>
+    <View className="pt-[110]">
       <View>
         <View className="mt-2 flex-row items-center px-4">
           <Text className="text-[#000] text-xl ">
@@ -57,7 +36,7 @@ export default function MySubscreptionScreen({navigation}) {
           <Text
             className="text-mainColor flex-1 text-right"
             onPress={() => {
-              navigation.navigate('specialOffersScreen');
+              navigation.navigate('PackageScreen');
             }}>
             {Lang_chg.see_all[config.language]}
           </Text>
@@ -67,7 +46,9 @@ export default function MySubscreptionScreen({navigation}) {
           className="pl-3 mt-3"
           showsHorizontalScrollIndicator={false}>
           <View className="w-[350px]">
-            <PackageCard pack={packages} navigation={navigation} />
+           {packages?.map(pack => {
+            return <PackageCard navigation={navigation} pack={pack} isUse={true} route={route.params} profile={true}/>;
+          })}
           </View>
         </ScrollView>
       </View>

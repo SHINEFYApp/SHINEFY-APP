@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {Image, Text, View} from 'react-native-ui-lib';
 import img from '../../assets/extraService.png';
@@ -9,14 +9,24 @@ import bookingDetailsAtom from '../../atoms/bookingDetails/bookingDetails.atom';
 import { msgProvider } from '../../Provider/Messageconsolevalidationprovider/messageProvider';
 import calcSubTotal from '../../utlites/calcSubTotal';
 import { Lang_chg } from '../../Provider/Language_provider';
-export default function SelectExtraService({extraService , isPackage}) {
+export default function SelectExtraService({extraService , isPackage ,quan}) {
   const [bookingDetails, setBookingDetails] = useRecoilState(bookingDetailsAtom)
   const [counter, setCounter] = useState(0);
 
+  useEffect(()=>{
+    if(bookingDetails?.extraData?.extraServices){
+      if(bookingDetails?.extraData?.extraServices[extraService?.extra_service_name[0]]){
+
+        setCounter(bookingDetails?.extraData?.extraServices[extraService?.extra_service_name[0]].quantity)
+      }
+    } else{
+      setCounter(0)
+    }
+  },[bookingDetails.service_id])
+  
   function handleExtraService(quan) {
    
       setBookingDetails({
-        
                       ...bookingDetails , 
                       extraData : {
                         ...bookingDetails.extraData ,
@@ -74,7 +84,7 @@ export default function SelectExtraService({extraService , isPackage}) {
                 if (!bookingDetails['service_id']) {
                   msgProvider.toast('Please Select Main service to Select Extra Service', 'center');     
                 }else if (bookingDetails.extraData.service.apply_add_extra_service == 0) {
-                  msgProvider.alert(Lang_chg.disableExtraServiceTitle[config.language] , Lang_chg.disableExtraService[config.language])     
+                  msgProvider.alert(Lang_chg.disableExtraServiceTitle[config.language] , Lang_chg.disableExtraService[config.language].quantity)     
                 } 
                 else {
                   if(isPackage) {

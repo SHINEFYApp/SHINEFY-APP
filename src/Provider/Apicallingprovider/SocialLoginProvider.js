@@ -192,14 +192,11 @@ class SocialLoginProvider extends Component {
     data.append('player_id', player_id_me1);
     data.append('social_type', result.social_type);
     localStorage.setItemObject('socialdata', result);
-    var url = config.baseURL1 + 'social_login.php';
+    var url = config.baseURL + 'social_login';
 
     apifuntion
       .postApi(url, data)
       .then(obj => {
-        console.log(url)
-        console.log(data)
-        console.log(obj)
         if (obj.success == 'true') {
           if (obj.user_exist == 'yes') {
             if (obj.user_details.otp_verify === 0) {
@@ -217,7 +214,7 @@ class SocialLoginProvider extends Component {
               // firebaseprovider.getMyInboxAllData();
               localStorage.setItemObject('user_arr', obj.user_details);
               setTimeout(() => {
-                navigation.navigate('Home', {home_status: 3});
+                navigation.navigate('HomeScreen', {home_status: 3});
               }, 500);
             }
           } else {

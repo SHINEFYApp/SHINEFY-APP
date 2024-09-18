@@ -7,10 +7,12 @@ import SafeAreaView from '../../components/SafeAreaView';
 
 export default function WashServicesScreen({navigation}) {
   const [services, SetServices] = useState([]);
+  const [extraService, SetExtraService] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       const data = await getServices();
       SetServices(data.all_service_arr.service_arr);
+      SetExtraService(data.all_service_arr.extra_service_arr);
     };
     fetchData();
   }, []);
@@ -19,7 +21,7 @@ export default function WashServicesScreen({navigation}) {
     <SafeAreaView>
       <ScrollView>
         <View className="mt-[80px] px-4">
-          {services?.map((service, index) => {
+          {services.concat(extraService)?.map((service, index) => {
             return (
               <WashServicesCard
                 key={service.service_id}

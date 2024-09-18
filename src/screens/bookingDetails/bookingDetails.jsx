@@ -19,18 +19,19 @@ export default function BookingDetails({route , navigation}) {
         const fetchData = async ()=>{
             const res = await getBooking(route.params)
             setBookingData(res.booking_arr)
-            if(res.booking_arr.vehicles_arr.length == 0) {
-              setVehiclesArr([{
-                vehicle_name : res.booking_arr.vehicle_name ,
-                vehicle_id : res.booking_arr.vehicle_id ,
-                vehicle_image : res.booking_arr.vehicle_image ,
-                model_name : res.booking_arr.model_name,
-                color_name : res.booking_arr.color_name,
-                make_name : res.booking_arr.make_name
-              }])
-            } else {
-              setVehiclesArr(res.booking_arr.vehicles_arr)
-            }
+            console.log(res.booking_arr)
+            // if(res.booking_arr.vehicles_arr.length == 0) {
+            //   setVehiclesArr([{
+            //     vehicle_name : res.booking_arr.vehicle_name ,
+            //     vehicle_id : res.booking_arr.vehicle_id ,
+            //     vehicle_image : res.booking_arr.vehicle_image ,
+            //     model_name : res.booking_arr.model_name,
+            //     color_name : res.booking_arr.color_name,
+            //     make_name : res.booking_arr.make_name
+            //   }])
+            // } else {
+            //   setVehiclesArr(res.booking_arr.vehicles_arr)
+            // }
         }
         fetchData()
     },[])

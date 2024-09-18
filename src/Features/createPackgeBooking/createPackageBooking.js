@@ -45,6 +45,8 @@ export default async function create_package_booking (bookingDetails, navigation
   
   try {
     apifuntion.postApi(url, data).then(obj => {
+      console.log(data)
+      console.log(obj)
       if(obj.success == "true") {
         navigation.navigate('HomeScreen');
       }
