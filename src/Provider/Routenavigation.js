@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import WelcomeScreen from '../screens/welcomeScreen/welcomeScreen';
 import ForgotPasswordScreen from '../screens/forgotpasswordScreen/forgotPasswordScreen';

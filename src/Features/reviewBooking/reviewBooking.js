@@ -25,6 +25,9 @@ export async function reviewBooking(data , navigation) {
   apifuntion
     .postApi(url, fd)
     .then(obj => {
+      console.log(obj ,"taritn")
+      console.log(fd)
+      console.log(url)
       if (obj.success == 'true') {
         msgProvider.alert(obj.notification_arr[0].message)
         navigation.navigate('HomeScreen');

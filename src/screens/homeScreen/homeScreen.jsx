@@ -20,6 +20,7 @@ import PackageCardSkeleton from '../../components/packageCard/packageCardSkeleto
 import getHome from '../../Features/getHome/getHome';
 
 export default function HomeScreen({navigation}) {
+  console.log(navigation)
   const [services, SetServices] = useState([]);
   const [specialOffers, SetSpecialOffers] = useState([]);
   const [isPackagesLoading , setIsPackagesLoading] = useState(false)
@@ -29,9 +30,9 @@ export default function HomeScreen({navigation}) {
   const [_, setCurrentMap] = useRecoilState(currentMapAtom);
   useEffect(() => {
     const fetchData = async () => {
-      const isReview = await getHome()
       const data = await getServices();
       const packages = await getPackages();
+      
       // const myLocations = await getSavedLocation();
       SetServices(data.all_service_arr.service_arr);
       setPackages(packages.packages);
@@ -41,6 +42,16 @@ export default function HomeScreen({navigation}) {
     };
     fetchData();
   }, []);
+
+  // useEffect(()=>{
+  //   const fetchData = async ()=>{
+  //     const isRating = await getHome()
+  //       if (isRating.isRate) {
+  //         navigation.navigate("Review" , {...isRating})
+  //       }
+  //   }
+  //   fetchData()
+  // },[navigation])
 
   return (
     <KeyboardAwareScrollView>

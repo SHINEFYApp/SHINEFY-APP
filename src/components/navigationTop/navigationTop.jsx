@@ -1,11 +1,12 @@
 import {Image, Text, TouchableOpacity, View} from 'react-native-ui-lib';
-import React from 'react';
+import React, { useEffect } from 'react';
 import notfiIcon from '../../assets/icons/notifcationIcon.png';
 import saveIcon from '../../assets/icons/savedLocationIcon.png';
 import backIcon from '../../assets/icons/backIcon.png';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import getHome from '../../Features/getHome/getHome';
 export default function NavigationTop(props) {
   function handleTitle() {
     switch (props.route.name) {
@@ -71,6 +72,16 @@ export default function NavigationTop(props) {
         return props.route.name;
     }
   }
+  useEffect(()=>{
+
+    const fetchData = async ()=>{
+      const isRating = await getHome()
+        if (isRating.isRate) {
+          // props.navigation.navigate("Review" , {...isRating})
+        }
+    }
+    fetchData()
+  },[props])
   const insets = useSafeAreaInsets();
   return (
     <View

@@ -6,7 +6,7 @@ export default async function getBooking(currentBooking = "NA") {
   let user_id = user_arr.user_id;
   var url = '/get_booking/' + user_id + '/' + currentBooking;
   let res = await apiSauce.get(url);
-  console.log(res)
+  console.log(url)
 
   return res.data;
 }
