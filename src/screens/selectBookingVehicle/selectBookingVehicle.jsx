@@ -70,7 +70,7 @@ export default function SelectBookingVehicles({navigation , route}) {
 
   return (
     <View
-      style={{paddingTop: insets.top + 70}}
+      style={{paddingTop: insets.top }}
       className="px-4 relative flex-1">
       <TouchableOpacity
         onPress={selectAllCars}

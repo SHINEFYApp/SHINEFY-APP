@@ -25,12 +25,13 @@ import facebookLogin from '../../Features/facebookLogin/facebookLogin';
 import { AccessToken, LoginButton } from 'react-native-fbsdk-next';
 import callsocailweb from '../../Features/socialLogin/socialLogin';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import getHome from '../../Features/getHome/getHome';
 export default function WelcomeScreen({navigation}) {
   const logoScale = useSharedValue(1);
   const logoTranslateY = useSharedValue(0);
   const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
   const [isSignupModalVisivle, setIsSignupModalVisible] = useState(false);
-
+  const [userData , setUserData] = useState({})
   useEffect(() => {
     const getIsLoggedIn = async () => {
       const user_details = await localStorage.getItemObject('user_arr');
@@ -83,13 +84,30 @@ export default function WelcomeScreen({navigation}) {
       localStorage.setItemObject('language', 0);
     }
   };
+  //    useEffect(()=>{
 
-  useEffect(() => {
-    BackHandler.addEventListener('hardwareBackPress', () => {
-      BackHandler.exitApp();
-    });
-    return BackHandler.removeEventListener('hardwareBackPress');
-  }, []);
+  //   const fetchData = async ()=>{
+  //     const isRating = await getHome()
+  //       if (isRating.isRate) {
+  //         navigation.navigate("Review" , {...isRating})
+  //       }
+  //   }
+  //     fetchData()
+
+  // },[])
+
+  // useEffect(() => {
+  //   BackHandler.addEventListener('hardwareBackPress', () => {
+  //     BackHandler.exitApp();
+  //   });
+  //   return BackHandler.removeEventListener('hardwareBackPress');
+  // }, []);
+
+  useEffect(()=>{
+    if(userData.signUp === true) {
+      setIsSignupModalVisible(true)
+    }
+  },[userData])
 
   return (
     <View className="flex-1">
@@ -124,14 +142,14 @@ export default function WelcomeScreen({navigation}) {
               <View className="flex-row justify-center">
                 <TouchableOpacity
                   onPress={() => {
-                    googleLogin(navigation);
+                    googleLogin(navigation , setUserData);
                   
                   }}>
                   <Image source={googleIcon} width={70} height={50} />
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => {
-                    facebookLogin(navigation);
+                    facebookLogin(navigation , setUserData);
                   }}>
 
                   <Image
@@ -192,6 +210,7 @@ export default function WelcomeScreen({navigation}) {
               onBackdropPress={handleCloseSignup}
               onBackButtonPress={handleCloseSignup}>
               <SignUpModal
+                userDataSocial = {userData}
                 closeSignup={handleCloseSignup}
                 navigation={navigation}
                 openLogin={handleLoginPress}

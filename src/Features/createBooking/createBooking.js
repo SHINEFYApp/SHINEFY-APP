@@ -42,13 +42,13 @@ export default async function cashBooking(bookingDetails, navigation ,setIsPopUp
     }
     if(bookingDetails?.extraData?.extraServices) {
       Object.entries(bookingDetails?.extraData?.extraServices).forEach(([key, value] , index)=>{
-        console.log(value.quantity)
-        console.log(value.extra_service_id)
         data.append(`extra_service_id[${index}]`, value.extra_service_id);
         data.append(`extra_services_quantity[${index}]`,value.quantity);
       })
+    }else {
+      data.append(`extra_services_id`, "NA");
+      
     }
-    // data.append(`extra_service_id`, "NA");
     // data.append(`extra_service_quantity[${index}]`,value.quantity);
     data.append('free_status', '0'); // false=0 true=1 is Free
     data.append('service_id', bookingDetails.service_id);
@@ -102,21 +102,20 @@ export default async function cashBooking(bookingDetails, navigation ,setIsPopUp
       url = config.baseURL + 'create_booking_multi';
     }
 
-    console.log(data)
+   
     try {
       let obj = await apifuntion.postApi(url, data)
-      console.log(obj)
-
+   
       if(obj.success == "true") {
         if(bookingDetails.payment_method == 1) {
           return obj.online_payment_url
         }else {
           setIsPopUpOpen(true)
-          // navigation.navigate('HomeScreen')
+          navigation.replace('HomeScreen')
           let date = new Date();
-          //  setBookingDetails({
-          //     booking_date: sortDate(date.toLocaleDateString())
-          //  })
+           setBookingDetails({
+              booking_date: sortDate(date.toLocaleDateString())
+           })
           }
         } else {
           msgProvider.alert("", obj.msg[config.language])

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { FlatList, ScrollView } from "react-native-gesture-handler";
 import { Image, Text, View } from "react-native-ui-lib";
 import BookingOverviewTextDetails from "../../components/bookingOverview/BookingOverviewTextDetails";
@@ -14,32 +14,38 @@ export default function BookingDetails({route , navigation}) {
   
   const [bookingData , setBookingData] = useState()
   const [vehicleArr , setVehiclesArr] = useState([])
+  const extraServices = useMemo(()=>{
+   return Object.values(bookingData?.extra_services ? bookingData?.extra_services : {})
+    
+  },[bookingData])
+
 
     useEffect(()=>{
         const fetchData = async ()=>{
             const res = await getBooking(route.params)
             setBookingData(res.booking_arr)
-            console.log(res.booking_arr)
-            // if(res.booking_arr.vehicles_arr.length == 0) {
-            //   setVehiclesArr([{
-            //     vehicle_name : res.booking_arr.vehicle_name ,
-            //     vehicle_id : res.booking_arr.vehicle_id ,
-            //     vehicle_image : res.booking_arr.vehicle_image ,
-            //     model_name : res.booking_arr.model_name,
-            //     color_name : res.booking_arr.color_name,
-            //     make_name : res.booking_arr.make_name
-            //   }])
-            // } else {
-            //   setVehiclesArr(res.booking_arr.vehicles_arr)
-            // }
+           
+            if(res.booking_arr.vehicles_arr.length == 0) {
+              setVehiclesArr([{
+                vehicle_name : res.booking_arr.vehicle_name ,
+                vehicle_id : res.booking_arr.vehicle_id ,
+                vehicle_image : res.booking_arr.vehicle_image ,
+                model_name : res.booking_arr.model_name,
+                color_name : res.booking_arr.color_name,
+                make_name : res.booking_arr.make_name
+              }])
+            } else {
+              setVehiclesArr(res.booking_arr.vehicles_arr)
+            }
         }
         fetchData()
     },[])
 
 
 
+
     return(
-         <View className={'pt-[80px] px-5'}>
+         <View className={'pt-[10px] px-5'}>
       <ScrollView className={'pb-16'}>
         <View className={'bg-mainColor py-4 w-full rounded'}>
           <Text className={'font-bold text-center text-lg'}>
@@ -90,16 +96,16 @@ export default function BookingDetails({route , navigation}) {
               'flex bg-[#C3C3C3] w-[80%] h-[1px] items-center my-5 mx-auto justify-center'
             }
           />
-          {bookingData?.extraServiceData?.map(extraService => {
-            return (
-              <React.Fragment key={extraService.extra_service_id}>
+          <FlatList 
+            data={extraServices}
+          renderItem={({item:extraService}) => <React.Fragment>
                 <BookingOverviewTextDetails
                   title={Lang_chg.extraservice_txt[config.language]}
                   value={extraService?.extra_service_name[config.language]}
-                  price={` ${extraService.quantity} X ${
+                  price={` ${extraService.extra_services_quantity} X ${
                     extraService.extra_service_price
                   } = ${
-                    extraService.quantity * extraService.extra_service_price
+                    extraService.extra_services_quantity * extraService.extra_service_price
                   }EGP`}
                 />
                 <View
@@ -107,9 +113,10 @@ export default function BookingDetails({route , navigation}) {
                     'flex bg-[#C3C3C3] w-[80%] h-[1px] items-center my-5 mx-auto justify-center'
                   }
                 />
-              </React.Fragment>
-            );
-          })}
+              </React.Fragment>}
+          keyExtractor={item => item.booking_id}
+          />
+
     
         </View>
         <View

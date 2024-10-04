@@ -62,16 +62,19 @@ export default function SelectExtraService({extraService , isPackage ,quan}) {
                   if (counter - 1!= 0) {
                     handleExtraService(counter - 1)
                   } else {
-                      setBookingDetails({
-                      ...bookingDetails , 
-                      extraData : {
-                        ...bookingDetails.extraData ,
-                        extraServices :{
-                          ...bookingDetails.extraData.extraServices ,
-                          [extraService.extra_service_name[0]] : null
-                        } 
-                      }
-                    })
+                    
+                    
+                    const { [extraService.extra_service_name[0]]: _, ...newExtraData } = bookingDetails.extraData.extraServices;
+                    setBookingDetails({
+                    ...bookingDetails , 
+                    extraData : {
+                      ...bookingDetails.extraData ,
+                      extraServices : newExtraData
+                    }
+                  })
+
+
+                    
                   }
                 }
               }}>

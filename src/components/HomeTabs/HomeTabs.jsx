@@ -36,11 +36,14 @@ export default function MyTabs(parentProps) {
         headerShown: true,
         tabBarStyle: styles.tabBarStyle,
         tabBarShowLabel: false,
+    
       }}>
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={HomeScreen} 
+
         options={{
+          gestureEnabled: false,
           tabBarLabel: 'Home TEST',
           tabBarIcon: () => <Image source={homeIcon} />,
           tabBarButton: props => (

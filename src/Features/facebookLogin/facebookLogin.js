@@ -1,9 +1,9 @@
 import {SocialLogin} from '../../Provider/Apicallingprovider/SocialLoginProvider';
 import {localStorage} from '../../Provider/localStorageProvider';
 
-const facebookLogin = async navigation => {
+const facebookLogin = async (navigation , setSignUp) => {
  
-    SocialLogin.Socialfunction(navigation, 'facebook');
+    await SocialLogin.Socialfunction(navigation, 'facebook' , null , setSignUp);
   
 };
 

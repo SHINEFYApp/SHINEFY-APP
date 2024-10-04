@@ -6,7 +6,8 @@ import AppLogout from "../logout/Logout";
 export default async function deleteAccount() {
 
     let user_arr = await localStorage.getItemObject('user_arr');
-    let user_id = user_arr.user_id;
+    // let user_id = user_arr.user_id;
+
     var data = new FormData();
     data.append('user_id', user_id);
     data.append('message', "other");
@@ -15,7 +16,7 @@ export default async function deleteAccount() {
     apifuntion
       .postApi(url, data)
       .then(obj => {
-   
+        
         if (obj.success == 'true') {
           AppLogout();
         } else {

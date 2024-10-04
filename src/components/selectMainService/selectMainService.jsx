@@ -23,7 +23,7 @@ export default function SelectMainService({selected, service, onPress,isPackage}
         } rounded-lg p-2 mb-3 flex-row`}>
         <Image source={img} className="mr-2" />
         <View>
-          <Text className="font-bold text-md">
+          <Text className="font-bold text-md ">
             {service.service_name[config.language]}
           </Text>
           <View className="flex-row gap-3 items-center mt-[1px]">
@@ -68,7 +68,7 @@ export default function SelectMainService({selected, service, onPress,isPackage}
                       selected === service.service_id
                         ? 'text-white'
                         : 'text-mainColor'
-                    } bg-[#DD992345]  `}>
+                    } bg-[#DD992345] w-[150] `}>
                     {service?.service_label[config.language]}
                   </Text>
                 </View>

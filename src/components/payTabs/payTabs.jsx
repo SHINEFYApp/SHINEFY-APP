@@ -33,16 +33,19 @@ export default function PayTabs({setWebView, webView, navigation, url , setIsPop
 
     if (webViewState.loading == false && webViewState.url.includes("final")){
       let payment_success = webViewState.url.split("final?")[1].split("=")[1]
+      console.log(payment_success)
       if(payment_success == "success") {
         setWebView(false)
-        if (setIsPopUpOpen) {
-            setIsPopUpOpen(true)
-          }
-        navigation.navigate("HomeScreen")
-        success()
-      }else {
-        console.log("payment failed")
-      }
+        // if (setIsPopUpOpen) {
+          //     setIsPopUpOpen(true)
+          //   }
+          navigation.navigate("HomeScreen")
+          success()
+        }else if (t.includes('payment_cancel')) {
+          msgProvider.toast(Lang_chg.payment_fail[config.language], 'center');
+          setWebView(false)
+          return false;
+        }
     }
 
     // if (webViewState.loading == false) {

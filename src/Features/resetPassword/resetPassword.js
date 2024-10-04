@@ -65,6 +65,7 @@ export default async function resetPassword(data , user_id , navigation){
     apifuntion
       .postApi(url, fd)
       .then(obj => {
+        
         if (obj.success == 'true') {
           msgProvider.toast(
             Lang_chg.successUpdatePass[config.language],

@@ -4438,6 +4438,7 @@ __metadata:
     react-native-modal: "npm:^13.0.1"
     react-native-open-maps: "npm:^0.4.3"
     react-native-otp-textinput: "npm:^1.1.5"
+    react-native-permissions: "npm:^4.1.5"
     react-native-push-notification: "npm:^8.1.1"
     react-native-ratings: "npm:^8.1.0"
     react-native-reanimated: "npm:^3.8.1"
@@ -12353,6 +12354,20 @@ __metadata:
   peerDependencies:
     react-native: ^0.72.4
   checksum: 10c0/8ff97f3cb7c2707d543c2a26ac94d9dda3d93691644c930b2ebe2d4d8791127a862f99e66cd7f9f71aa269128d010bb5926896f0e5f804287c28238f92f5b7ac
+  languageName: node
+  linkType: hard
+
+"react-native-permissions@npm:^4.1.5":
+  version: 4.1.5
+  resolution: "react-native-permissions@npm:4.1.5"
+  peerDependencies:
+    react: ">=18.1.0"
+    react-native: ">=0.70.0"
+    react-native-windows: ">=0.70.0"
+  peerDependenciesMeta:
+    react-native-windows:
+      optional: true
+  checksum: 10c0/93dd8ec9c4f5259b959fe0ec560c95c10518e893358b53acf9a380dca7d58e541274bf25cfe83e09c769b260fbce1361fa4497488b6bbcad499d8fb2cdefb5c0
   languageName: node
   linkType: hard
 

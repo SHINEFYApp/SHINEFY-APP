@@ -5,7 +5,7 @@ import {config} from '../../Provider/configProvider';
 import {localStorage} from '../../Provider/localStorageProvider';
 
 export default async function updateVehicle(currentCar) {
-  console.log(currentCar)
+  
   let user_arr = await localStorage.getItemObject('user_arr');
   let user_id = user_arr.user_id;
   const fd = new FormData();
@@ -23,8 +23,7 @@ export default async function updateVehicle(currentCar) {
   let url = config.baseURL + 'update_vehicle';
   try {
     let res = await apifuntion.postApi(url, fd);
-    console.log(fd)
-    console.log(res)
+
     msgProvider.toast(Lang_chg.vehicleUpdateSuccess[config.language], 'center');
     return true;
   } catch (err) {}

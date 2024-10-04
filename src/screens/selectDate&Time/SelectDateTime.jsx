@@ -89,13 +89,13 @@ export default function SelectDateTime({navigation , route}) {
 
   return (
     <SafeAreaView>
-      <View className="pt-[50] px-5 relative h-full ">
+      <View className="p-[10]  relative h-full ">
         <ScrollView className="mb-[100]">
           <View>
             <Text className={'font-semibold my-3'}>
               {Lang_chg.Selectdatetime_txt[config.language]}
             </Text>
-            <View className="flex-row justify-between">
+            <View className="flex-row justify-between ">
               <SelectDateBox
                 title={Lang_chg.today_txt[config.language]}
                 onPress={() =>
@@ -154,7 +154,7 @@ export default function SelectDateTime({navigation , route}) {
             </Text>
               {
                 isLoadingData ?
-            <View className="flex-row  flex-wrap">
+            <View className="flex-row  flex-wrap ">
               {[...Array(9).keys()].map((_ , index) => {
                 return (
                 <View key={index} className="w-1/4 h-[30px] m-2">
@@ -164,7 +164,7 @@ export default function SelectDateTime({navigation , route}) {
               })}
             </View>
               :  
-            <View className="flex-row  flex-wrap">
+            <View className="flex-row  flex-wrap  justify-between">
               {slots?.slots?.map(slot => {
                 return (
                   <SelectDateBox

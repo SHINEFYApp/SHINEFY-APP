@@ -18,15 +18,17 @@ export default function MyBookingScreen({navigation}) {
     let fetchData = async () => {
       setIsLoading(true)
       let data = await getBooking();
+
       setData(data.booking_arr);
       setIsLoading(false)
+
     };
     fetchData();
   }, [currentPage]);
 
 
   return (
-    <View style={{paddingTop: insets.top + 70}} className=" px-4 flex-1">
+    <View style={{paddingTop: insets.top + 10}} className=" px-4 flex-1">
       <View
         className="bg-[#FFFAF2] py-3 px-8 flex-row justify-between rounded-xl"
         style={style.tabStyle}>

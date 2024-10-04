@@ -19,7 +19,7 @@ export default function LanguageScreen() {
 
 
   return (
-    <View className="mt-[80] p-5">
+    <View className="mt-[10] p-5">
       <RadioButton
         buttons={radioButtons}
         currentActive={

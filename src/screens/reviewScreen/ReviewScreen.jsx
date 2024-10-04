@@ -11,22 +11,36 @@ import Button from '../../components/mainButton/Button';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 import ReviewQuestion from '../../components/reviewQuestion/ReviewQuestion';
-import getBooking from '../../Features/getBooking/getBooking';
 import getServiceBoyData from '../../Features/getServiceBoy/getServiceBoy';
+import getBooking from '../../Features/getBooking/getBooking';
 import { reviewBooking } from '../../Features/reviewBooking/reviewBooking';
+import getUnratedBooking from '../../Features/getUnratedBooking/getUnratedBooking';
 
 const ReviewScreen = ({route , navigation}) => {
   const [userRating, setUserRating] = useState(0);
-  const [servicesBoy , setServiceBoy] = useState({})
+  const [servicesBoy , setServiceBoy] = useState([])
   const [answers , setAnswers] = useState([])
   const [data , setData] = useState({})
+
   useEffect(()=>{
     const fetchData = async ()=>{
-     setData(await getBooking(route.params.book_id))
-     setServiceBoy(await getServiceBoyData(route.params.service_boy_id))
+    
+    setData(await getBooking(route.params.book_id))
+    if (route.params.service_boy_id != 0) {
+      setServiceBoy(await getServiceBoyData(route.params.service_boy_id))
+      
+    } 
+    if (route.params.order_type == 0) {
+
+      setServiceBoy(await getUnratedBooking(route.params.book_id))
+
+    }
     }
     fetchData()
   },[])
+
+
+
   return (
     <View className={'flex-1'}>
       <ScrollView>
@@ -89,27 +103,33 @@ const ReviewScreen = ({route , navigation}) => {
               />
             </View>
           </View>
-          <View className={'mt-4'}>
-            <ReviewQuestion
-              question={`1. ${Lang_chg.your_satisfied_with_work[config.language]}`}
-              setAnswers = {setAnswers}
-              questionKey = {"behavior_status"}
-            />
-            <ReviewQuestion
-              question={
-               `  2. ${Lang_chg.agian_serive_with_worker[config.language]} ${servicesBoy?.name} ${Lang_chg.agian_serive_with_worker2[config.language]}`
-              }
-              setAnswers = {setAnswers}
-              questionKey = {"work_status"}
-            />
-            <ReviewQuestion
-              question={
-                `3. ${Lang_chg.worker_nature_txt[config.language]} ${servicesBoy?.name} ${Lang_chg.worker_nature_txt2[config.language]}`
-              }
-              setAnswers = {setAnswers}
-              questionKey = {"nature_status"}
-            />
-          </View>
+          {
+         (   route.params.order_type == 0 
+            ||
+            route.params.service_boy_id != 0 )
+             &&
+            <View className={'mt-4'}>
+              <ReviewQuestion
+                question={`1. ${Lang_chg.your_satisfied_with_work[config.language]}`}
+                setAnswers = {setAnswers}
+                questionKey = {"behavior_status"}
+              />
+              <ReviewQuestion
+                question={
+                `  2. ${Lang_chg.agian_serive_with_worker[config.language]} ${servicesBoy?.name} ${Lang_chg.agian_serive_with_worker2[config.language]}`
+                }
+                setAnswers = {setAnswers}
+                questionKey = {"work_status"}
+              />
+              <ReviewQuestion
+                question={
+                  `3. ${Lang_chg.worker_nature_txt[config.language]} ${servicesBoy?.name} ${Lang_chg.worker_nature_txt2[config.language]}`
+                }
+                setAnswers = {setAnswers}
+                questionKey = {"nature_status"}
+              />
+            </View>
+          }
           <View className={'mt-12'}>
             <Button
               Title={Lang_chg.Submit[config.language]}
@@ -121,7 +141,8 @@ const ReviewScreen = ({route , navigation}) => {
                   behavior_status : answers.behavior_status ,
                   work_status: answers.work_status,
                   nature_status:answers.nature_status ,
-                  rating: userRating
+                  rating: userRating,
+                  order_type :route.params.order_type ? route.params.order_type :  route.params.service_boy_id == 0 ? 1 : route.params.service_boy_id 
                 },navigation)
               }}
             />

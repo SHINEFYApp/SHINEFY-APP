@@ -37,7 +37,7 @@ export default function RequestDetails({navigation, route}) {
 
   return (
     <>
-      <View className=" pt-[100px] flex-1">
+      <View className=" pt-[10] flex-1">
         <ScrollView className="px-2 w-[95%] flex-1 mx-auto">
           <View>
             <Text className="text-xl mb-3" >
@@ -136,7 +136,7 @@ export default function RequestDetails({navigation, route}) {
             if (!bookingDetails.service_id) {
               msgProvider.toast('Please Select Service', 'center');
             } else {
-              navigation.push('selectBookingvehicle');
+              navigation.replace('selectBookingvehicle');
             }
           }}
         />

@@ -1,11 +1,10 @@
 import {SocialLogin} from '../../Provider/Apicallingprovider/SocialLoginProvider';
 import {localStorage} from '../../Provider/localStorageProvider';
 
-const googleLogin = async navigation => {
-  let data = await localStorage.getItemObject('socialdata');
-  if (data == null) {
-    SocialLogin.Socialfunction(navigation, 'google');
-  }
+const googleLogin = async (navigation , setSignUp) => {
+
+    SocialLogin.Socialfunction(navigation, 'google' , null , setSignUp);
+
 };
 
 export default googleLogin;

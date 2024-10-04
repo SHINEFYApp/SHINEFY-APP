@@ -38,7 +38,7 @@ export default function ForgotPasswordScreen({navigation}) {
                     keyboardType={'numeric'}
                     placeholder={Lang_chg.mobile_placeholder[config.language]}
                     icon={phoneIcon}
-                    text={'+20'}
+                    text={'+20 '}
                     isBorder={true}
                     onChange={e => {
                       setPhoneNumber(e.nativeEvent.text);

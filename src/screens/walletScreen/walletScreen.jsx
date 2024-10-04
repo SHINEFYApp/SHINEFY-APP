@@ -19,7 +19,7 @@ export default function WalletScreen() {
 
   return (
     <SafeAreaView>
-      <View className="pt-[80] px-5">
+      <View className="pt-[10] px-5">
         <View className="bg-[#FFCC73EB] rounded-xl px-4 py-9 flex-row justify-between">
           <View>
             <Text className="text-black mb-2 text-lg">

@@ -35,6 +35,7 @@ target 'Shinefy' do
   pod 'react-native-google-maps', :path => rn_maps_path
   pod 'Firebase/Messaging'
 
+
   use_react_native!(
     :path => config[:reactNativePath],
     # Enables Flipper.

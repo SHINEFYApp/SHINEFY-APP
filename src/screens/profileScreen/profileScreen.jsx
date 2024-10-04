@@ -31,7 +31,7 @@ export default function ProfileScreen({navigation}) {
     <View className="flex-1 px-4 bg-white">
       <ScrollView
         contentContainerStyle={{
-          paddingTop: insets.top + 30,
+          paddingTop: insets.top+ 20,
           paddingBottom: insets.bottom,
         }}>
         <View className="my-10 ">

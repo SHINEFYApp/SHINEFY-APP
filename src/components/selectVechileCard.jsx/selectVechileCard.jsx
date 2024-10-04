@@ -49,7 +49,7 @@ export default function SelectVechileCard({
       }}
       className="flex-row items-center bg-white px-3 py-5 mb-3 border-[#ccc] border rounded-lg">
       <Image source={icon} className="mr-3" />
-      <Text>{text}</Text>
+      <Text className="w-full">{text}</Text>
       {!arrow && (
         <Image
           source={arrowIcon}

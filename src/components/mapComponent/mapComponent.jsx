@@ -13,8 +13,11 @@ import myLocationList, { fetchMyLoaction } from '../../atoms/locationList/myLoca
 import { useSetRecoilState } from 'recoil';
 import PackageCardSkeleton from '../packageCard/packageCardSkeleton';
 import checkLocation from '../../Features/checkLocation/checkLocation';
+import { msgProvider, msgTitle } from '../../Provider/Messageconsolevalidationprovider/messageProvider';
+import { Alert, Linking } from 'react-native';
+import editBookingLocation from '../../Features/editBookingLocation/editBookingLocation';
 
-export default function MapComponent({isNewLocation, navigation , setCurrentLocation ,isMove}) {
+export default function MapComponent({isNewLocation, navigation , setCurrentLocation ,isMove , isEditLocation ,editLocaiton}) {
   const [region, setRegion] = useState({
     latitude: 29.96073734024412,
     latitudeDelta: 0.001162180276701008,
@@ -33,12 +36,17 @@ export default function MapComponent({isNewLocation, navigation , setCurrentLoca
   const [isLoadingAdd , setIsLoadingAdd] = useState(false)
 
   useEffect(() => {
+
+
+
     const getLocation = async () => {
       setIsLoading(false)
-      const location = await GetLocation.getCurrentPosition({
-        enableHighAccuracy: true,
-      });
-      setIsLoading(true)
+      try{
+
+        const location = await GetLocation.getCurrentPosition({
+          enableHighAccuracy: true,
+        });
+             setIsLoading(true)
       if(setCurrentLocation){
         setCurrentLocation(r=>({
           ...r,
@@ -57,10 +65,47 @@ export default function MapComponent({isNewLocation, navigation , setCurrentLoca
         longitude: location.longitude,
       }));
 
+      }catch (err) {
+         Alert.alert(
+       "ERROR GET LOCATION" ,
+        "GET LOCATION PERMISSION YOU CAN CHANGE FROM SETTING" ,
+        [
+          {
+            text: msgTitle.cancel[0],
+            onPress: () => {},
+          },
+          {
+            text: msgTitle.ok[0],
+            onPress: () => {
+              Linking.openSettings()
+            },
+          },
+        ],
+        {cancelable: false},
+      );
+
+      }
+ 
       
       
     };
-    getLocation();
+    if(isEditLocation) {
+
+      setIsLoading(true)
+      setName(editLocaiton.user_address_name)
+       setNewLocation(r=>({
+        ...r,
+        latitude: editLocaiton.latitude,
+        longitude: editLocaiton.longitude,
+      }))
+      setRegion(r => ({
+        ...r,
+        latitude: editLocaiton.latitude,
+        longitude: editLocaiton.longitude,
+      }));
+    }else { 
+      getLocation();
+    }
   }, []);
 
   useEffect(()=>{
@@ -105,21 +150,29 @@ export default function MapComponent({isNewLocation, navigation , setCurrentLoca
                   {Lang_chg.booking_location[config.language]}
                 </Text>
                 <Input
+                value={name}
                   placeholder={Lang_chg.confirm_booking_location[config.language]}
                   onChange={e => {
                     setName(e.nativeEvent.text);
                   }}
                 />
                 <Button
-                isLoading={isLoadingAdd}
-                  Title={Lang_chg.confirm_booking[config.language]}
+                  sLoading={isLoadingAdd}
+                  Title={isEditLocation ? Lang_chg.edit_location[config.language]: Lang_chg.confirm_booking[config.language]}
                   onPress={async () => {
                     setIsLoadingAdd(true)
                     let checked = await checkLocation(newLocation)
-                    let res = checked && await addLocation(newLocation, name);
-                    fetchMyLoaction(setLocationList);
-                    res && navigation.goBack()
-                    setIsLoadingAdd(false)
+                   
+                        let res = checked && await addLocation({...newLocation ,
+                           locationID : editLocaiton ? editLocaiton.user_location_id : 'NA', 
+                           status : editLocaiton ? 2 : 1
+                        }, name);
+                        res && navigation.goBack()
+                        
+                      
+                      setIsLoadingAdd(false)
+                      fetchMyLoaction(setLocationList);
+                    
                   }}
                 />
               </View>

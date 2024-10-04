@@ -4,7 +4,7 @@ import SafeAreaView from '../../components/SafeAreaView';
 export default function AboutUsScreen() {
   return (
     <SafeAreaView>
-      <View className="pt-[80] px-5">
+      <View className="pt-[20] px-5">
         <View className="mb-6">
           <Text className="text-lg font-bold mb-2"> About Us :</Text>
           <Text>

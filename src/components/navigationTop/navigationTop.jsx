@@ -7,6 +7,7 @@ import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import getHome from '../../Features/getHome/getHome';
+import { Platform } from 'react-native';
 export default function NavigationTop(props) {
   function handleTitle() {
     switch (props.route.name) {
@@ -72,22 +73,12 @@ export default function NavigationTop(props) {
         return props.route.name;
     }
   }
-  useEffect(()=>{
-
-    const fetchData = async ()=>{
-      const isRating = await getHome()
-        if (isRating.isRate) {
-          // props.navigation.navigate("Review" , {...isRating})
-        }
-    }
-    fetchData()
-  },[props])
   const insets = useSafeAreaInsets();
   return (
     <View
-      style={{paddingTop: insets.top}}
+
       className={
-        'absolute flex-row w-full justify-between z-10 p-5 bg-white items-center rounded-b-2xl border-b border-l border-r border-[#C3C3C3]'
+        `  flex-row w-full  justify-between z-10 p-5 bg-white items-center rounded-b-2xl border-b border-l border-r border-[#C3C3C3]`
       }>
       {props.route.name == 'Home' ? (
         <TouchableOpacity
@@ -96,7 +87,7 @@ export default function NavigationTop(props) {
           }}>
           <Image source={saveIcon} />
         </TouchableOpacity>
-      ) : (
+      ) : !props.route?.params?.isRate && (
         <TouchableOpacity
           onPress={() => {
             props.navigation.goBack();
@@ -107,17 +98,20 @@ export default function NavigationTop(props) {
           />
         </TouchableOpacity>
       )}
-      <View>
+      <View className="mx-auto">
         <Text className="font-extrabold text-xl text-center w-full">
           {handleTitle()}
         </Text>
       </View>
+      {
+        !props.route?.params?.isRate &&
       <TouchableOpacity
         onPress={() => {
           props.navigation.navigate('notficationScreen');
         }}>
         <Image source={notfiIcon} />
       </TouchableOpacity>
+      }
     </View>
   );
 }

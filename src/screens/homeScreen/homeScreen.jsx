@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Image, Text, View, KeyboardAwareScrollView} from 'react-native-ui-lib';
-import {FlatList, ScrollView} from 'react-native';
+import {BackHandler, FlatList, ScrollView} from 'react-native';
 import SearchInput from '../../components/searchInput/searchInput';
 import SaleBox from '../../components/saleBox/saleBox';
 import locationIcon from '../../assets/icons/locationIcon.png';
@@ -20,7 +20,6 @@ import PackageCardSkeleton from '../../components/packageCard/packageCardSkeleto
 import getHome from '../../Features/getHome/getHome';
 
 export default function HomeScreen({navigation}) {
-  console.log(navigation)
   const [services, SetServices] = useState([]);
   const [specialOffers, SetSpecialOffers] = useState([]);
   const [isPackagesLoading , setIsPackagesLoading] = useState(false)
@@ -42,20 +41,30 @@ export default function HomeScreen({navigation}) {
     };
     fetchData();
   }, []);
+ 
 
-  // useEffect(()=>{
-  //   const fetchData = async ()=>{
-  //     const isRating = await getHome()
-  //       if (isRating.isRate) {
-  //         navigation.navigate("Review" , {...isRating})
-  //       }
-  //   }
-  //   fetchData()
-  // },[navigation])
+
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', (e) => {
+     
+    });
+    return BackHandler.removeEventListener('hardwareBackPress');
+  }, []);
+
+
+  useEffect(()=>{
+    const fetchData = async ()=>{
+      const isRating = await getHome()
+        if (isRating.isRate) {
+          navigation.navigate("Review" , {...isRating})
+        }
+    }
+    fetchData()
+  },[navigation])
 
   return (
     <KeyboardAwareScrollView>
-      <View style={{paddingTop: insets.top + 70}} className="px-4">
+      <View className="px-4">
         {/* <SearchInput
           placeholder={Lang_chg.what_looking_for_placholder[config.language]}
           onChange={t => setSearchText(t)}
@@ -103,40 +112,43 @@ export default function HomeScreen({navigation}) {
         }
        
       </View> */}
-      <View>
-        <View className="mt-2 flex-row items-center px-4">
-          <Text className="text-[#000] text-xl ">
-            {Lang_chg.packages[config.language]}
-          </Text>
-          <Text
-            className="text-mainColor flex-1 text-right"
-            onPress={() => {
-              navigation.navigate('PackageScreen');
-            }}>
-            {Lang_chg.see_all[config.language]}
-          </Text>
-        </View>
-        {
-          isPackagesLoading ? 
-          <FlatList
-           data={packages}
-           horizontal={true}
-           renderItem={({item, index}) => (
-             <View key={item.id} className="w-[350px] mx-2">
-                 <PackageCard pack={item} navigation={navigation} />
-               </View>
-           )}
-         /> :  <FlatList
-           data={[...Array(5).keys()]}
-           horizontal={true}
-           renderItem={({item, index}) => (
-             <View key={item.id} className="w-[350px] h-[90] mx-2">
-                 <PackageCardSkeleton/>
-               </View>
-           )}
-         /> 
-        }
-      </View>
+      {
+        packages.length > 0 &&
+          <View>
+            <View className="mt-2 flex-row items-center px-4">
+              <Text className="text-[#000] text-xl ">
+                {Lang_chg.packages[config.language]}
+              </Text>
+              <Text
+                className="text-mainColor flex-1 text-right"
+                onPress={() => {
+                  navigation.navigate('PackageScreen');
+                }}>
+                {Lang_chg.see_all[config.language]}
+              </Text>
+            </View>
+            {
+              isPackagesLoading ? 
+              <FlatList
+              data={packages}
+              horizontal={true}
+              renderItem={({item, index}) => (
+                <View key={item.id} className="w-[350px] mx-2">
+                    <PackageCard pack={item} navigation={navigation} />
+                  </View>
+              )}
+            /> :  <FlatList
+              data={[...Array(5).keys()]}
+              horizontal={true}
+              renderItem={({item, index}) => (
+                <View key={item.id} className="w-[350px] h-[90] mx-2">
+                    <PackageCardSkeleton/>
+                  </View>
+              )}
+            /> 
+            }
+          </View>
+      }
       <View className={'p-4'}>
         <View>
           <View className="flex-row items-center justify-between">
@@ -146,7 +158,7 @@ export default function HomeScreen({navigation}) {
                 {Lang_chg.location_text[config.language]}
               </Text>
             </View>
-            <Text>Cairo,Egypt</Text>
+            {/* <Text className="text-red-500">Cairo,Egypt  </Text> */}
           </View>
 
           <View className="h-[165px] mt-1 rounded-lg overflow-hidden">

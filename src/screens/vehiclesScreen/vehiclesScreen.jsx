@@ -29,7 +29,7 @@ export default function VehiclesScreen({navigation}) {
   }, []);
   return (
     <View
-      style={{paddingTop: insets.top + 70}}
+      style={{paddingTop: insets.top + 10}}
       className="px-4 relative flex-1">
         {
           isLoading ?

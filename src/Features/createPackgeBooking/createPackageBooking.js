@@ -14,10 +14,10 @@ export default async function create_package_booking (bookingDetails, navigation
 
   var data = new FormData();
   data.append('user_id', user_arr.user_id);
-  data.append('user_package_id', bookingDetails.package_user_id);
-  data.append('package_id', bookingDetails.package_id);
+  data.append('user_package_id', bookingDetails.package_id );
+  data.append('package_id', bookingDetails.package_user_id);
  
-
+  
       bookingDetails.extraData.allSelectedCars.map((ele,index)=>{
   
         data.append(`vehicle_id[${index}]`, ele);
@@ -45,8 +45,7 @@ export default async function create_package_booking (bookingDetails, navigation
   
   try {
     apifuntion.postApi(url, data).then(obj => {
-      console.log(data)
-      console.log(obj)
+  
       if(obj.success == "true") {
         navigation.navigate('HomeScreen');
       }

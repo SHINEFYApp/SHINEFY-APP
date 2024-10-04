@@ -39,7 +39,7 @@ export default function Bookings({navigation, bookings, currentPage,isLoading}) 
           ListEmptyComponent={
           <EmptyBooking />
           }
-          data={bookings[currentPage]?.reverse()}
+          data={bookings[currentPage] != "NA" ? bookings[currentPage]?.reverse() : []}
           
           keyExtractor={item => item.booking_id}
           renderItem={({item}) => (

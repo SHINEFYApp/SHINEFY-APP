@@ -32,6 +32,7 @@ const BookingOverview = ({navigation, route}) => {
     for (let key in bookingDetails?.extraData?.extraServices) {
       extraData.push(bookingDetails?.extraData?.extraServices[key]);
     }
+    
     return extraData;
   }, []);
   useEffect(() => {
@@ -59,6 +60,7 @@ const BookingOverview = ({navigation, route}) => {
     };
     fetchData();
   }, []);
+
 
   function handleAmount() {
     if (isWallet == Lang_chg.wallet_txt[config.language]) {
@@ -90,7 +92,7 @@ const BookingOverview = ({navigation, route}) => {
   }, [isWallet, coupon]);
 
   return (
-    <View className={'pt-[110px] px-5'}>
+    <View className={'pt-[10px] px-5'}>
       <ScrollView className={'pb-16'}>
         <View className={'bg-mainColor py-4 w-full rounded'}>
           <Text className={'font-bold text-center text-lg'}>
@@ -144,7 +146,7 @@ const BookingOverview = ({navigation, route}) => {
               'flex bg-[#C3C3C3] w-[80%] h-[1px] items-center my-5 mx-auto justify-center'
             }
           />
-          {extraServiceData.map(extraService => {
+          {/* {extraServiceData.map(extraService => {
             return (
               <React.Fragment key={extraService.extra_service_id}>
                 <BookingOverviewTextDetails
@@ -163,13 +165,33 @@ const BookingOverview = ({navigation, route}) => {
                 />
               </React.Fragment>
             );
-          })}
+          })} */}
+          <FlatList 
+            data={extraServiceData}
+            renderItem={({item:extraService}) => <React.Fragment>
+                <BookingOverviewTextDetails
+                  title={Lang_chg.extraservice_txt[config.language]}
+                  value={extraService?.extra_service_name[config.language]}
+                  price={` ${extraService.extra_services_quantity} X ${
+                    extraService.extra_service_price
+                  } = ${
+                    extraService.extra_services_quantity * extraService.extra_service_price
+                  }EGP`}
+                />
+                <View
+                  className={
+                    'flex bg-[#C3C3C3] w-[80%] h-[1px] items-center my-5 mx-auto justify-center'
+                  }
+                />
+              </React.Fragment>}
+          keyExtractor={item => item.extra_service_id}
+          />
           {coupon?.couponName !== '' && coupon && (
             <>
               <BookingOverviewTextDetails
                 title={'Coupon'}
-                value={coupon.couponName}
-                price={`-${coupon.dis_amount}`}
+                value={coupon?.couponName}
+                price={`-${coupon?.dis_amount}`}
               />
               <View
                 className={

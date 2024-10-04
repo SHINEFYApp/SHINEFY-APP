@@ -45,13 +45,15 @@ export default function PaymentMethodPackage({navigation , route}) {
   }
 
   return (
-    <View className="pt-[120] px-5">
+    <View className="pt-[10] px-5">
           <Modal
         swipeDirection={'down'}
         onSwipeMove={handleClosePopUp}
         avoidKeyboard={true}
         hasBackdrop={true}
-        isVisible={isPopUpOpen}>
+        isVisible={isPopUpOpen}
+        
+        >
         <SuccessAddVehicle closePopUp={handleClosePopUp} title={Lang_chg.packageBookingSuccess[config.language]} />
       </Modal>
       {webView && (
@@ -61,6 +63,10 @@ export default function PaymentMethodPackage({navigation , route}) {
           webView={webView}
           navigation={navigation}
           setIsPopUpOpen={setIsPopUpOpen}
+           success= {()=>{
+            setIsPopUpOpen(true)
+            navigation.navigate('HomeScreen')
+          }}
         />
       )}
       <ScrollView>
@@ -119,7 +125,7 @@ export default function PaymentMethodPackage({navigation , route}) {
           Title={Lang_chg.Confirm[config.language]}
           onPress={async () => {
             // setIsLoading(true)
-            console.log(activePayment)
+
             let paymentLink = await subscripePackage(route.params.packId , activePayment == Lang_chg.wallet[config.language] ? "wallet" : "visa");
             if (paymentLink != undefined){
               setCurrentUrl(paymentLink)

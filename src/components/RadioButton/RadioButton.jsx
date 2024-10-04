@@ -29,7 +29,7 @@ export default function RadioButton({buttons, currentActive, set, onPress}) {
             <View className="flex-row justify-between items-center">
               <View className="flex-row items-center gap-2">
                 {button.icon && <Image source={button.icon} />}
-                <Text>{button.title}</Text>
+                <Text className="w-[250]">{button.title}</Text>
               </View>
               <View
                 className={`w-[25] h-[25] border border-mainColor  rounded ${

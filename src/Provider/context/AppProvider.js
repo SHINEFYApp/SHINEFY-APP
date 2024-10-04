@@ -4,6 +4,7 @@ import {Colors, mediaprovider} from '../utilslib/Utils';
 import AppLoader from './AppLoader';
 import * as Animatable from 'react-native-animatable';
 import NetInfo from '@react-native-community/netinfo';
+import SafeAreaView from '../../components/SafeAreaView';
 
 const AppContext = React.createContext({});
 export const AppConsumer = AppContext.Consumer;
@@ -62,6 +63,8 @@ export class AppProvider extends Component {
 
     return (
       <AppContext.Provider value={{...funcs}}>
+        <SafeAreaView>
+
         <View style={{flex: 1}}>
           <StatusBar
             hidden={false}
@@ -118,6 +121,8 @@ export class AppProvider extends Component {
             </View>
           )}
         </View>
+        </SafeAreaView>
+
       </AppContext.Provider>
     );
   }

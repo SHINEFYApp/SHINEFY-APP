@@ -15,7 +15,7 @@ const AddCard = () => {
   const toggleCheckBox = () => setActiveButton(prev => !prev);
 
   return (
-    <View className={'mt-[90px] mx-5'}>
+    <View className={'mt-[20px] mx-5'}>
       <ScrollView>
         <Image
           source={creditCard}

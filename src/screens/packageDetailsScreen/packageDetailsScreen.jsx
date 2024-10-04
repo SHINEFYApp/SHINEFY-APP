@@ -38,6 +38,10 @@ export default function PackageDetailsScreen({navigation, route}) {
           webView={webView}
           navigation={navigation}
           amount={data.package.price}
+            success= {()=>{
+            setIsPopUpOpen(true)
+            navigation.navigate('HomeScreen')
+          }}
         />
       )}
       <Modal

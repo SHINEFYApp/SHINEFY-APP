@@ -41,7 +41,7 @@ export default function LoginModal({openSignup, navigation, closeLogin}) {
               keyboardType={'numeric'}
               placeholder={Lang_chg.mobile_txt[config.language]}
               icon={phoneIcon}
-              text={'+20'}
+              text={'+20 '}
               isBorder={true}
             />
             <Input

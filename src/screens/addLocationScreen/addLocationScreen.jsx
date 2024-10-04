@@ -2,10 +2,10 @@ import {View} from 'react-native-ui-lib';
 import MapComponent from '../../components/mapComponent/mapComponent';
 import React from 'react';
 
-export default function AddLocationScreen({navigation}) {
+export default function AddLocationScreen({navigation , route}) {
   return (
     <View className="flex-1">
-      <MapComponent isNewLocation navigation={navigation} />
+      <MapComponent isNewLocation navigation={navigation} isEditLocation={route.params?.isEdit} editLocaiton={route.params}/>
     </View>
   );
 }

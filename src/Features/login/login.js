@@ -15,6 +15,7 @@ export default async function loginAuth(data, navigation, closeLoginModal , setI
 
 
   let url = config.baseURL + 'Login';
+
   apifuntion
     .postApi(url, formData)
     .then(obj => {
@@ -77,9 +78,7 @@ export default async function loginAuth(data, navigation, closeLoginModal , setI
       }
     })
     .catch(err => {
-   
 
-      this.setState({loading: false});
       if (err == 'noNetwork') {
         msgProvider.alert(
           Lang_chg.msgTitleNoNetwork[config.language],

@@ -10,7 +10,7 @@ import { getLocationName } from '../../Features/addLocation/addLocation';
 import checkLocation from '../../Features/checkLocation/checkLocation';
 export default function AddVehiclePopup({closePopUp, nextScreen , Map , navigation}) {
   const [currentLocation , setCurrentLocation] = useState({})
-  
+  const [isLoading , setIsloading] = useState(false)
 
   
   return (
@@ -28,10 +28,13 @@ export default function AddVehiclePopup({closePopUp, nextScreen , Map , navigati
               <MapComponent setCurrentLocation={setCurrentLocation} isMove={false}/>
         </View>
       <Button
+      isLoading={isLoading}
         Title={Lang_chg.yes_confirm[config.language]}
         onPress={async() => {
+          setIsloading(true)
           const state = await checkLocation(currentLocation)
-
+          setIsloading(false)
+          
           if(state) {
             let location = await getLocationName(currentLocation)
             navigation.push('BookingTypeScreen', {...currentLocation ,

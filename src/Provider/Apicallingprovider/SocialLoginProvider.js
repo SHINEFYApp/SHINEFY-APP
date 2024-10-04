@@ -40,7 +40,7 @@ class SocialLoginProvider extends Component {
     );
   };
 
-  Socialfunction = (navigation, btn, type) => {
+  Socialfunction = async (navigation, btn, type , setSignUp) => {
     if (type == 'normal') {
       var social_type = btn;
       var login_type = btn;
@@ -67,16 +67,16 @@ class SocialLoginProvider extends Component {
       this.callsocailweb(result, navigation);
     } else {
       if (btn == 'facebook') {
-        this.FacebookLogin(navigation);
+        this.FacebookLogin(navigation , setSignUp);
       } else if (btn == 'google') {
-        this.GoogleLogin(navigation);
+        this.GoogleLogin(navigation , setSignUp);
       } else if (btn == 'apple') {
         this.Applelogin(navigation);
       }
     }
   };
 
-  FacebookLogin = async navigation => {
+  FacebookLogin = async (navigation , setSignUp) => {
     navigatefunction = navigation;
     LoginManager.logInWithPermissions(['public_profile', 'email']).then(
       result => {
@@ -88,8 +88,9 @@ class SocialLoginProvider extends Component {
           AccessToken.getCurrentAccessToken().then(data => {
             const processRequest = new GraphRequest(
               '/me?fields=id,name,email,first_name,middle_name,last_name,picture.type(large)',
-              null,
-              this.get_Response_Info,
+              null,(error, result) => {
+                this.get_Response_Info(error, result , setSignUp)
+               }
             );
             new GraphRequestManager().addRequest(processRequest).start();
           });
@@ -101,7 +102,7 @@ class SocialLoginProvider extends Component {
       },
     );
   };
-  get_Response_Info = (error, result) => {
+  get_Response_Info = (error, result , setSignUp) => {
     if (error) {
       Alert.alert('Error fetching data: ' + error.toString());
     } else {
@@ -116,11 +117,11 @@ class SocialLoginProvider extends Component {
         social_type: 'facebook',
         logintype: 'facebook',
       };
-      this.callsocailweb(socaildata, navigatefunction);
+      this.callsocailweb(socaildata, navigatefunction , setSignUp);
     }
   };
 
-  GoogleLogin = async navigation => {
+  GoogleLogin = async (navigation , setSignUp) => {
     //Prompts a modal to let the user sign in into your application.
     try {
       await GoogleSignin.hasPlayServices();
@@ -135,7 +136,7 @@ class SocialLoginProvider extends Component {
         logintype: 'google',
         social_id: userInfo.user.id,
       };
-      this.callsocailweb(result, navigation);
+      this.callsocailweb(result, navigation , setSignUp);
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
       } else if (error.code === statusCodes.IN_PROGRESS) {
@@ -184,7 +185,8 @@ class SocialLoginProvider extends Component {
     }
   };
 
-  callsocailweb = (result, navigation) => {
+  callsocailweb = (result, navigation , setSignUp) => {
+
     var data = new FormData();
     data.append('social_email', result.social_email);
     data.append('social_id', result.social_id);
@@ -218,7 +220,12 @@ class SocialLoginProvider extends Component {
               }, 500);
             }
           } else {
-            navigation.navigate('Signup');
+            let user = {
+              email : result.social_email,
+              firstName : result.social_first_name , 
+              lastName : result.social_last_name ,
+            }
+            setSignUp( {signUp : true , ...user})
           }
         } else {
           if (

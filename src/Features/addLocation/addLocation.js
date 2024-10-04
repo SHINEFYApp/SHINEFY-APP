@@ -36,22 +36,22 @@ export default async function addLocation(location, name) {
     msgProvider.toast(Lang_chg.minlenaddress[config.language], 'center');
     return false;
   }
-  let status = 1;
+  let status = location.status;
   var data = new FormData();
   data.append('user_type', 1);
   data.append('status', status);
   data.append('user_id', user_id);
-  data.append('user_location_id', 'NA');
+  data.append('user_location_id', location.locationID);
   data.append('name', name);
   data.append('latitude', location.latitude);
   data.append('longitude', location.longitude);
   data.append('location', await getLocationName(location));
-
+2
   let url = config.baseURL + 'save_user_location';
 
   try {
     let obj = await apifuntion.postApi(url, data);
-
+   
     if (obj.success == 'true') {
       localStorage.removeItem('saved_location_arr');
       localStorage.setItemObject('user_arr', obj.user_details);

@@ -27,7 +27,7 @@ export default function MySubscreptionScreen({navigation} , route) {
   }, []);
   
   return (
-    <View className="pt-[110]">
+    <View className="pt-[10]">
       <View>
         <View className="mt-2 flex-row items-center px-4">
           <Text className="text-[#000] text-xl ">
@@ -42,7 +42,6 @@ export default function MySubscreptionScreen({navigation} , route) {
           </Text>
         </View>
         <ScrollView
-          horizontal={true}
           className="pl-3 mt-3"
           showsHorizontalScrollIndicator={false}>
           <View className="w-[350px]">

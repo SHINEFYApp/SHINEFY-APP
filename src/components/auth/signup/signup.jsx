@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Checkbox,
   KeyboardAwareScrollView,
@@ -15,11 +15,10 @@ import signupAuth from '../../../Features/signup/signup';
 import {Lang_chg} from '../../../Provider/Language_provider';
 import {config} from '../../../Provider/configProvider';
 
-export default function SignupModal({openLogin, navigation, closeSignup}) {
+export default function SignupModal({openLogin, navigation, closeSignup , userDataSocial}) {
   const [isCompany, setIsCompany] = useState(false);
   const [isSelected, setSelection] = useState(false);
   const [isLoading , setIsLoading] = useState(false)
-
   const [userData, setUserData] = useState({});
 
   function handleUserData(data) {
@@ -27,6 +26,12 @@ export default function SignupModal({openLogin, navigation, closeSignup}) {
       return {...prev, ...data};
     });
   }
+  
+  useEffect(()=>{
+    setUserData(prev => {
+      return {...prev, ...userDataSocial};
+    });
+  },[])
 
   return (
     <View className="absolute transition-all left-0 right-0 -bottom-5 bg-white w-full p-5 rounded-xl h-full">
@@ -45,6 +50,7 @@ export default function SignupModal({openLogin, navigation, closeSignup}) {
                     firstName: e.nativeEvent.text,
                   });
                 }}
+                value={userData.firstName}
                 placeholder={Lang_chg.firstname_txt[config.language]}
                 icon={userIcon}
               />
@@ -58,6 +64,7 @@ export default function SignupModal({openLogin, navigation, closeSignup}) {
                 }}
                 placeholder={Lang_chg.lastname_txt[config.language]}
                 icon={userIcon}
+                  value={userData.lastName}
               />
             </View>
           </View>
@@ -69,6 +76,7 @@ export default function SignupModal({openLogin, navigation, closeSignup}) {
                 });
               }}
               placeholder={Lang_chg.email_txt[config.language]}
+                value={userData.email}
               icon={phoneIcon}
             />
           </View>

@@ -12,18 +12,18 @@ export default function PackageCard({navigation, pack , isUse , route , profile}
   const [bookingDetails, setBookingDetails] =
     useRecoilState(bookingDetailsAtom);
   return (
-    <View className="bg-white py-4 px-5 rounded-xl m-2" style={style.box}>
+    <View className="bg-white p-4  rounded-xl m-2" style={style.box}>
       <View className="flex-row mb-3">
         <Image
           source={{uri: pack.package_img}}
           style={{width: 50, resizeMode: 'cover'}}
         />
-        <View className="flex-row justify-between ml-4 flex-1">
+        <View className="flex-row w-full justify-between ml-4 flex-1">
           <Text
             className={
-              'text-xs text-center p-1 rounded-full text-[#DD9923] bg-[#DD992345] absolute right-0 '
+              'text-xs text-center p-1 w-[100] rounded-full text-[#DD9923] bg-[#DD992345] absolute right-0 '
             }>
-            Car Detailing
+            Car Detailing 
           </Text>
           <View className="gap-2">
             <Text className="font-bold text-xl">
@@ -36,20 +36,19 @@ export default function PackageCard({navigation, pack , isUse , route , profile}
               <Image source={timeIcon} />
               <Text className="ml-2 font-bold">One Wash (SHINEFY Plus)</Text>
             </View> */}
-            <View className="flex-row items-center">
+            <View className="flex-row gap-x-2 items-center">
               <Image source={timeIcon} />
-              <Text className="ml-2">
-                {pack?.extra_services_count ? +pack.extra_services_count + +pack.main_services_count : 
-                pack?.extra_services?.length}{' '}
-                {Lang_chg.other_services[config.language]}
+              <Text className=" w-[150]">
+                {`${pack?.extra_services_count ? +pack.extra_services_count + +pack.main_services_count : 
+                pack?.extra_services?.length} ${Lang_chg.other_services[config.language]}`}
               </Text>
             </View>
             {
               pack?.extra_services_count &&
-            <View className="flex-row items-center">
+            <View className="flex-row gap-x-2 items-center">
               <Image source={timeIcon} />
-              <Text className="ml-2">
-                
+              <Text className="w-[150]">
+             
                 {pack.total_days} {Lang_chg.mins[config.language]}
               </Text>
             </View>

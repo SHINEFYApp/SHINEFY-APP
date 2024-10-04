@@ -7,6 +7,7 @@ export default async function getServiceBoyData(service_boy_id , navigation)  {
     var url = config.baseURL + 'getServiceBoy/' + service_boy_id;
     try{
         const res = await apifuntion.getApi(url)
+    
         if (res.success == 'true') {
           return res.service_boy_arr
         } else {

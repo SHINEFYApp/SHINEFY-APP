@@ -25,8 +25,7 @@ export default function SavedLocationScreen({navigation ,route}) {
     fetchData()
   }, []);
   return (
-    <SafeAreaView>
-      <View className="flex-1 px-4 pt-[60px]">
+      <View className="flex-1 px-4 pt-[0px]">
         {
           isLoading ? <FlatList
            data={[...Array(5).keys()]}
@@ -61,6 +60,5 @@ export default function SavedLocationScreen({navigation ,route}) {
         />
         }
       </View>
-    </SafeAreaView>
   );
 }

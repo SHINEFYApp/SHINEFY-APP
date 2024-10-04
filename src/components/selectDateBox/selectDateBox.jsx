@@ -1,20 +1,23 @@
 import {StyleSheet} from 'react-native';
 import {TouchableHighlight} from 'react-native-gesture-handler';
-import {Text} from 'react-native-ui-lib';
+import {Text, View} from 'react-native-ui-lib';
 
 export default function SelectDateBox({title, selected, onPress}) {
   return (
+    <View className="p-2 w-1/3">
     <TouchableHighlight
       onPress={() => {
         onPress(title);
       }}
       underlayColor={'white'}
-      className={`bg-white rounded-lg px-3 py-2 m-2  ${
+      className={`bg-white rounded-lg px-3 py-2  ${
         title === selected || selected === true ? 'bg-mainColor' : 'bg-white'
-      }`}
+    
+      } w-full`}
       style={title !== selected && style.box}>
-      <Text className={`${title === selected || selected === true ? 'text-white' : 'text-black'}`}>{title}</Text>
+      <Text className={`${title === selected || selected === true ? 'text-white' : 'text-black'} text-center`}>{title}</Text>
     </TouchableHighlight>
+    </View>
   );
 }
 

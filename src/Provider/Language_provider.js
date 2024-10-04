@@ -108,6 +108,10 @@ class Language_provider {
     'Please select vehicle category',
     'الرجاء تحديد فئة السيارة',
   ];
+  emptyQuestions = [
+    'Please answer all questions',
+    'الرجاء الاجابة علي كل الاسئلة',
+  ];
   emptyTimeSlot = [
     'Please select time slot',
     'الرجاء تحديد وقت الخدمة المناسب',
@@ -136,6 +140,8 @@ class Language_provider {
     'Email address is not correct, please enter a valid email address',
     'عنوان البريد الإلكتروني غير صحيح ، برجاء إدخال عنوان بريد إلكتروني صحيح',
   ];
+  emptyPackageSubscribe = ["you're not subscribe in package", ' انت الان ليس مشترك في باقة'];
+  emptyPackage = ["No packages Added yet", 'لا يوجد باقات حاليا'];
 
   //password=========================
   PasswordSpace = ['Spaces not allowed', 'لا يسمح باستخدام المسافات'];
@@ -441,7 +447,7 @@ class Language_provider {
   // ---------------Atul Texts--------------
   //===========14-03-2022------------
   myvehicles_txt = ['My Vehicles', 'سياراتي'];
-  Vehicles_txt = ['Vehicles', 'سيارات'];
+  Vehicles_txt = ['Vehicles ', 'سيارات'];
   hyundai_txt = ['Hyundai Tucson', 'هيونداي توسان'];
   microcar_txt = ['Micro Car', 'سيارة صغيرة'];
   platenumber_txt = ['Plate Number', 'رقم اللوحة'];
@@ -458,12 +464,12 @@ class Language_provider {
   brand_txt = ['Brand', 'الماركة'];
   hyundai2_txt = ['Hyundai', 'هيونداي'];
   selectmodel_txt = ['Select Model', 'حدد الطراز'];
-  model_txt = [' Model', ' الطراز'];
+  model_txt = ['Model', ' الطراز'];
   selectcolor_txt = ['Select Color', 'إختر اللون'];
   enterplatenumber_txt = ['Enter Plate Number', 'أدخل رقم اللوحة'];
   update_txt = ['Update', 'تحديث'];
   red_txt = ['Red', 'أحمر'];
-  profile_txt = ['Profile', 'الملف الشخصي'];
+  profile_txt = ['Profile ', 'الملف الشخصي'];
   asimsheikh_txt = ['Asim Sheikh', 'عاصم شيخ'];
   asimsheikh1_txt = ['+20 0837920271', '+20 0837920271'];
   asimsheikh2_txt = ['Asimsheikh@gmail.com', 'Asimsheikh@gmail.com'];
@@ -550,10 +556,10 @@ class Language_provider {
   terms_txt = ['Privacy Policy', 'سياسة الخصوصية'];
   mybookings_txt = ['My Bookings', 'حجوزاتي'];
   book_Now = ['Create Book Now', 'احجز الان'];
-  bookings_txt = ['Bookings', 'الحجوزات'];
+  bookings_txt = ['Bookings ', 'الحجوزات'];
   normalBooking = ['Normal Booking', 'حجز عادي'];
-  packageBooking = ['Package Booking', 'حجز بالحزم'];
-  packageBookingSuccess = ["subscribe package Success", 'تم الاشتراك في بنجاح'];
+  packageBooking = ['Package Booking', 'حجز بالباقة'];
+  packageBookingSuccess = ["subscribe package Success", 'تم الاشتراك في الباقة بنجاح'];
   bookingid_txt = ['Booking ID: #7899302010', 'رقم الحجز: # 7899302010'];
   time_txt = ['15/Feb/22, 10:00AM', '15 / فبراير / 22 ، 10:00 صباحًا'];
   service_txt = ['Service', 'خدمة'];
@@ -827,12 +833,12 @@ class Language_provider {
     'يجب أن تكون كلمة المرور وكلمة المرور الحالية مختلفتين',
   ];
 
-  packages = ['Packages', 'الحزم'];
-  package_details = ['Package Details', ' تفاصيل الحزم'];
+  packages = ['Packages', 'الباقات'];
+  package_details = ['Package Details', ' تفاصيل الباقة'];
 
   //-------------------------------------my subscriptions----------------------//
 
-  mySubscriptions = ['My Subscriptions', 'اشتراكاتي'];
+  mySubscriptions = ['My Subscribtions', 'اشتراكاتي'];
 
   //-------------------------------------Saved Location----------------------//
 

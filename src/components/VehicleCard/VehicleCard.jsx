@@ -45,35 +45,34 @@ export default function VehicleCard({car, navigation}) {
           buttonTitle={Lang_chg.delete[config.language]}
         />
       </Modal>
-      <View className="items-center pr-2 border-r border-[#ccc] mr-5">
+      <View className="items-center pr-2 border-r border-[#ccc] mr-5 w-1/3">
         <Text className="text-xl font-semibold mb-2">
           {car.vehicle_name[config.language]}
         </Text>
         <Image source={img} />
       </View>
-      <View className="gap-2 justify-end w-1/2 mb-3">
-        <View className="flex-row justify-between">
+      <View className="gap-2 flex-row w-2/3 mb-3 pt-7 pr-2">
+      <View>
           <Text className="text-[#888]">
             {Lang_chg.platenumber_txt[config.language]}:
           </Text>
-          <Text>{car.plate_number}</Text>
-        </View>
-        <View className="flex-row justify-between">
           <Text className="text-[#888]">
             {Lang_chg.brand_txt[config.language]}:
           </Text>
-          <Text>{car.make_name[config.language]}</Text>
-        </View>
-        <View className="flex-row justify-between">
           <Text className="text-[#888]">
             {Lang_chg.model_txt[config.language]}:
           </Text>
-          <Text>{car.model_name[config.language]}</Text>
-        </View>
-        <View className="flex-row justify-between">
           <Text className="text-[#888]">
             {Lang_chg.color1_txt[config.language]}:
           </Text>
+
+      </View>
+      <View className="align-baseline">
+
+          <Text>{car.plate_number}</Text>
+          <Text>{car.make_name[config.language]}</Text>
+          <Text >  {car.model_name[config.language]}</Text>
+        <View className="flex-row justify-between">
           <View className="flex-row gap-2">
             <View
               className={'w-[20] h-[20] rounded-full'}
@@ -82,9 +81,11 @@ export default function VehicleCard({car, navigation}) {
             <Text>{car.color_name[config.language]}</Text>
           </View>
         </View>
+        </View>
+
       </View>
       <TouchableOpacity
-        className="absolute top-3 right-3"
+        className="absolute top-3 right-3 z-50"
         onPress={() => {
           setIsPopUpOpen(true);
         }}>

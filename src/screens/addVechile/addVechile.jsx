@@ -41,9 +41,12 @@ export default function AddVechileScreen({navigation, route}) {
     }
   }
 
+
+
   const createOrUpdateVehicle = async () => {
     if (route.params === 'updateVehicle') {
       setNewCar(cC => ({
+        ...newCar,
         ...cC,
         carID: currentCar.vehicle_id,
       }));
@@ -69,7 +72,7 @@ export default function AddVechileScreen({navigation, route}) {
     
   }
   return (
-    <KeyboardAwareScrollView className="pt-[120px] px-4">
+    <KeyboardAwareScrollView className="pt-[20px] px-4">
       <Modal
         swipeDirection={'down'}
         onSwipeMove={handleClosePopUp}

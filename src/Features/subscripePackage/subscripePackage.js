@@ -20,8 +20,7 @@ export default async function subscripePackage(
   data.append('payment_method', payment_method);
 
   let res = await apifuntion.postApi(url, data);
-  console.log(res)
-  console.log(data)
+
   if (res.success === 'true') {
     return res.online_payment_url;
   } else {

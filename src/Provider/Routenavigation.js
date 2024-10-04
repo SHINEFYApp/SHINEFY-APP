@@ -43,188 +43,214 @@ import BookingDetails from '../screens/bookingDetails/bookingDetails';
 import MyPackages from '../screens/myPackages/myPackages';
 import PackageInfo from '../screens/packgesInfo/packagesInfo';
 import PaymentMethodPackage from '../screens/PaymentMethodPackage/PaymentMethodScreenPackage';
+import { NavigationContainer } from '@react-navigation/native';
+import { useRecoilValue } from 'recoil';
+import bookingDetailsAtom from '../atoms/bookingDetails/bookingDetails.atom';
+import { localStorage } from './localStorageProvider';
 
 const Stack = createStackNavigator();
 
+
+
 const Stacknav = navigation => {
+  
+    const bookingDetails = useRecoilValue(bookingDetailsAtom)
+
+
+    const user_details = localStorage.getItemObject('user_arr');
+
   return (
-    <Stack.Navigator
-      screenOptions={{
-        header: props => <NavigationTop {...props} />,
-        cardStyle: { backgroundColor: '#FFFAF2' },
-      }}
-      initialRouteName={'WelcomeScreen'}>
-      <Stack.Screen
-        name="WelcomeScreen"
-        component={WelcomeScreen}
-        options={{ headerShown: false, gestureEnabled: false }}
-      />
-      <Stack.Screen
-        name="HomeScreen"
-        component={HomeTabs}
-        options={{ headerShown: false , gestureEnabled: false}}
-      />
-      <Stack.Screen
-        name="SavedLocationScreen"
-        component={SavedLocationScreen}
-      />
-      <Stack.Screen
-        name="PaymentMethodPackage"
-        component={PaymentMethodPackage}
-      />
-      <Stack.Screen
-        name="MyPackagesScreen"
-        component={MyPackages}
-      />
-      <Stack.Screen
-        name="PackageInfoScreen"
-        component={PackageInfo}
-      />
-      <Stack.Screen
-        name="BookingDetailsScreen"
-        component={BookingDetails}
-      />
-      <Stack.Screen
-        name="PackageScreen"
-        component={PackageScreen}
-      />
-      <Stack.Screen
-        name="SelectDateTime"
-        component={SelectDateTime}
-      />
-      <Stack.Screen
-        name="Booking Overview"
-        component={BookingOverview}
-      />
-      <Stack.Screen
-        name="PaymentMethod"
-        component={PaymentMethod}
-      />
-      <Stack.Screen
-        name="AddCardScreen"
-        component={AddCard}
-      />
-      <Stack.Screen
-        name="PackageDetailsScreen"
-        component={PackageDetailsScreen}
-      />
-      <Stack.Screen
-        name="addVehiclesDetails"
-        component={AddVehiclesDetails}
-      />
-      <Stack.Screen
-        name="CarPlateNumberScreen"
-        component={CarPlateNumberScreen}
-        title="Car Plate Number"
-      />
-      <Stack.Screen
-        name="MySubscreptionScreen"
-        component={MySubscreptionScreen}
-      />
-      <Stack.Screen
-        name="Cancel Booking"
-        component={CancelBooking}
-      />
-      <Stack.Screen
-        name="Review"
-        component={ReviewScreen}
-      />
-      <Stack.Screen
-        name="LanguageScreen"
-        component={LanguageScreen}
-      />
-      <Stack.Screen
-        name="WashServiceDetails"
-        component={WashServiceDetails}
-      />
-      <Stack.Screen
-        name="MyWallet"
-        component={WalletScreen}
-      />
-      <Stack.Screen
-        name="AddCar"
-        component={AddVechileScreen}
-      />
-      <Stack.Screen
-        name="RequestDetails"
-        component={RequestDetails}
-      />
-      <Stack.Screen
-        name="SettingScreen"
-        component={SettingScreen}
-      />
-      <Stack.Screen
-        name="AboutUsScreen"
-        component={AboutUsScreen}
-      />
-      <Stack.Screen
-        name={Lang_chg.tearmsetting[config.language]}
-        component={TermsConditions}
-      />
-      <Stack.Screen
-        name={Lang_chg.privacypolicy_txt[config.language]}
-        component={PrivacyPolicy}
-      />
-      <Stack.Screen
-        name="ChangePasswordProfile"
-        component={ChangePasswordProfile}
-      />
-      <Stack.Screen
-        name="EditProfileScreen"
-        component={EditProfileScreen}
-      />
-      <Stack.Screen
-        name="Contact Us"
-        component={ContactUsScreen}
-      />
-      <Stack.Screen
-        name="FAQ's"
-        component={FAQ}
-      />
-      <Stack.Screen
-        name="specialOffersScreen"
-        component={SpecialOffersScreen}
-      />
-      <Stack.Screen
-        name="WashServicesScreen"
-        component={WashServicesScreen}
-      />
-      <Stack.Screen
-        name="notficationScreen"
-        component={NotficationScreen}
-      />
-      <Stack.Screen
-        name="BookingTypeScreen"
-        component={BookingType}
-      />
-      <Stack.Screen
-        name="addLocationScreen"
-        component={AddLocationScreen}
-      />
-      <Stack.Screen
-        name="selectBookingvehicle"
-        component={SelectBookingVehicles}
-      />
-      <Stack.Screen
-        name="ForgotPassword"
-        component={ForgotPasswordScreen}
-        options={{ headerShown: false, gestureEnabled: false }}
-      />
-      <Stack.Screen
-        name="updateVehicle"
-        component={AddVechileScreen}
-      />
-      <Stack.Screen
-        name="OTPScreen"
-        component={OTPScreen}
-        options={{ headerShown: false, gestureEnabled: false }}
-      />
-      <Stack.Screen
-        name="ChangePassword"
-        component={ChangePassword}
-        options={{ headerShown: false, gestureEnabled: false }}
-      />
-    </Stack.Navigator>
+    
+      <Stack.Navigator
+        screenOptions={{
+          header: props => <NavigationTop {...props} />,
+          cardStyle: { backgroundColor: '#FFFAF2' },
+        }}
+        initialRouteName={"WelcomeScreen"}>
+        <Stack.Screen
+          name="WelcomeScreen"
+          component={WelcomeScreen}
+          options={{ headerShown: false, gestureEnabled: false }}
+        />
+        <Stack.Screen
+          name="HomeScreen"
+          component={HomeTabs}
+          options={{ headerShown: false , gestureEnabled: false}}
+        />
+        <Stack.Screen
+          name="SavedLocationScreen"
+          component={SavedLocationScreen}
+        />
+        <Stack.Screen
+          name="PaymentMethodPackage"
+          component={PaymentMethodPackage}
+        />
+        <Stack.Screen
+          name="MyPackagesScreen"
+          component={MyPackages}
+        />
+        <Stack.Screen
+          name="PackageInfoScreen"
+          component={PackageInfo}
+        />
+        <Stack.Screen
+          name="BookingDetailsScreen"
+          component={BookingDetails}
+        />
+        <Stack.Screen
+          name="PackageScreen"
+          component={PackageScreen}
+        />
+        
+          <>
+            <Stack.Screen
+              name="SelectDateTime"
+              component={SelectDateTime}
+            />
+            <Stack.Screen
+              name="Booking Overview"
+              component={BookingOverview}
+              />
+              <Stack.Screen
+                name="PaymentMethod"
+                component={PaymentMethod}
+              />
+              <Stack.Screen
+                name="selectBookingvehicle"
+                component={SelectBookingVehicles}
+              />
+            </>
+      
+        {
+          bookingDetails.address_loc && 
+          <>
+          </>
+        }
+        <Stack.Screen
+  name="RequestDetails"
+  component={RequestDetails}
+/>
+        <Stack.Screen
+name="BookingTypeScreen"
+component={BookingType}
+/>
+        <Stack.Screen
+          name="AddCardScreen"
+          component={AddCard}
+        />
+        <Stack.Screen
+          name="PackageDetailsScreen"
+          component={PackageDetailsScreen}
+        />
+        <Stack.Screen
+          name="addVehiclesDetails"
+          component={AddVehiclesDetails}
+        />
+        <Stack.Screen
+          name="CarPlateNumberScreen"
+          component={CarPlateNumberScreen}
+          title="Car Plate Number"
+        />
+        <Stack.Screen
+          name="MySubscreptionScreen"
+          component={MySubscreptionScreen}
+        />
+        <Stack.Screen
+          name="Cancel Booking"
+          component={CancelBooking}
+        />
+        <Stack.Screen
+          name="Review"
+          component={ReviewScreen}
+        />
+        <Stack.Screen
+          name="LanguageScreen"
+          component={LanguageScreen}
+        />
+        <Stack.Screen
+          name="WashServiceDetails"
+          component={WashServiceDetails}
+        />
+        <Stack.Screen
+          name="MyWallet"
+          component={WalletScreen}
+        />
+        <Stack.Screen
+          name="AddCar"
+          component={AddVechileScreen}
+        />
+
+        <Stack.Screen
+          name="SettingScreen"
+          component={SettingScreen}
+        />
+        <Stack.Screen
+          name="AboutUsScreen"
+          component={AboutUsScreen}
+        />
+        <Stack.Screen
+          name={Lang_chg.tearmsetting[config.language]}
+          component={TermsConditions}
+        />
+        <Stack.Screen
+          name={Lang_chg.privacypolicy_txt[config.language]}
+          component={PrivacyPolicy}
+        />
+        <Stack.Screen
+          name="ChangePasswordProfile"
+          component={ChangePasswordProfile}
+        />
+        <Stack.Screen
+          name="EditProfileScreen"
+          component={EditProfileScreen}
+        />
+        <Stack.Screen
+          name="Contact Us"
+          component={ContactUsScreen}
+        />
+        <Stack.Screen
+          name="FAQ's"
+          component={FAQ}
+        />
+        <Stack.Screen
+          name="specialOffersScreen"
+          component={SpecialOffersScreen}
+        />
+        <Stack.Screen
+          name="WashServicesScreen"
+          component={WashServicesScreen}
+        />
+        <Stack.Screen
+          name="notficationScreen"
+          component={NotficationScreen}
+        />
+
+        <Stack.Screen
+          name="addLocationScreen"
+          component={AddLocationScreen}
+        />
+
+        <Stack.Screen
+          name="ForgotPassword"
+          component={ForgotPasswordScreen}
+          options={{ headerShown: false, gestureEnabled: false }}
+        />
+        <Stack.Screen
+          name="updateVehicle"
+          component={AddVechileScreen}
+        />
+        <Stack.Screen
+          name="OTPScreen"
+          component={OTPScreen}
+          options={{ headerShown: false, gestureEnabled: false }}
+        />
+        <Stack.Screen
+          name="ChangePassword"
+          component={ChangePassword}
+          options={{ headerShown: false, gestureEnabled: false }}
+        />
+      </Stack.Navigator>
+
   );
 };
 export default Stacknav;
