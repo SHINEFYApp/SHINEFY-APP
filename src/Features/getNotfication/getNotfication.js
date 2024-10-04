@@ -10,10 +10,11 @@ export default async function getNotification(page) {
   let user_details = await localStorage.getItemObject('user_arr');
   let user_id = user_details.user_id;
   let url = config.baseURL + 'get_notification?user_id=' + user_id;
-
+  console.log(url)
 
   try {
     let obj = await apifuntion.getApi(url);
+    console.log(obj)
     if (obj.success == 'true') {
       return obj;
       this.setState({

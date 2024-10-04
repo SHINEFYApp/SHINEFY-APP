@@ -18,6 +18,7 @@ import { useRecoilState } from 'recoil';
 import currentMapAtom from '../../atoms/currentMap/currentMapAtom';
 import PackageCardSkeleton from '../../components/packageCard/packageCardSkeleton';
 import getHome from '../../Features/getHome/getHome';
+import messaging from '@react-native-firebase/messaging';
 
 export default function HomeScreen({navigation}) {
   const [services, SetServices] = useState([]);
@@ -41,7 +42,14 @@ export default function HomeScreen({navigation}) {
     };
     fetchData();
   }, []);
- 
+
+// useEffect(() => {
+//   const unsubscribe = messaging().onMessage(async remoteMessage => {
+//     console.log('A new FCM message arrived!', JSON.stringify(remoteMessage));
+//   });
+
+//   return unsubscribe;
+// }, []);
 
 
   useEffect(() => {

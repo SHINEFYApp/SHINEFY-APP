@@ -47,6 +47,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { useRecoilValue } from 'recoil';
 import bookingDetailsAtom from '../atoms/bookingDetails/bookingDetails.atom';
 import { localStorage } from './localStorageProvider';
+import Splash from '../Splash';
 
 const Stack = createStackNavigator();
 
@@ -66,10 +67,15 @@ const Stacknav = navigation => {
           header: props => <NavigationTop {...props} />,
           cardStyle: { backgroundColor: '#FFFAF2' },
         }}
-        initialRouteName={"WelcomeScreen"}>
+        initialRouteName={"SplashScreen"}>
         <Stack.Screen
           name="WelcomeScreen"
           component={WelcomeScreen}
+          options={{ headerShown: false, gestureEnabled: false }}
+        />
+        <Stack.Screen
+          name="SplashScreen"
+          component={Splash}
           options={{ headerShown: false, gestureEnabled: false }}
         />
         <Stack.Screen
