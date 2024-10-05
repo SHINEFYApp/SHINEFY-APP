@@ -39,6 +39,7 @@ import {
 import {validationprovider} from '../src/Provider/Validation_provider';
 import {notification} from './Provider/NotificationProvider';
 // //import OneSignal from 'react-native-onesignal';
+import FastImage from 'react-native-fast-image'
 
 global.latitude = '26.911588824432545';
 global.longitude = '29.3977009691298';
@@ -48,7 +49,10 @@ global.longdelta = '2.7328608557581973';
 global.address = 'NA';
 global.player_id_me1 = '123456';
 import messaging from '@react-native-firebase/messaging';
+import {PermissionsAndroid} from 'react-native';
+
 const requestUserPermission = async () => {
+  PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
   const authStatus = await messaging().requestPermission();
   return (
     authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
@@ -113,6 +117,7 @@ export default class Splash extends Component {
       messaging()
         .getToken()
         .then(async fcmToken => {
+          console.log(fcmToken)
           this.setState({
             player_id: fcmToken,
           });
@@ -231,7 +236,7 @@ export default class Splash extends Component {
           barStyle="light-content"
         />
         <View>
-          <ImageBackground
+          <FastImage
             imageStyle={{
               width: (mobileW * 100) / 100,
               height: (mobileH * 100) / 100,
