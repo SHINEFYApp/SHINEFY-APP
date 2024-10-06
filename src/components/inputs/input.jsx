@@ -31,11 +31,7 @@ export default function Input({
         onChange={onChange}
         value={value && value}
         placeholderTextColor={'#C3C3C3'}
-        className={`text-black w-full ${
-          config.language === 0
-            ? 'placeholder:text-left'
-            : 'placeholder:text-right'
-        }`}
+        className={`text-black w-full  placeholder:text-${config.textalign} text-${config.textalign}`}
       />
       {secureTextEntry && (
         <TouchableOpacity
