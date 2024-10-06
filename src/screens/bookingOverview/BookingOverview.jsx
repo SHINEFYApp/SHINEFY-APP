@@ -331,7 +331,7 @@ const BookingOverview = ({navigation, route}) => {
             let date = new Date();
             navigation.push('HomeScreen')
             setBookingDetails({
-               booking_date: sortDate(date.toLocaleDateString())
+               booking_date: sortDate(date.toLocaleDateString("en-us"))
             })
           }}
         />

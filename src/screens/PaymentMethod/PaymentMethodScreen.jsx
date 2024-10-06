@@ -92,7 +92,7 @@ export default function PaymentMethod({navigation}) {
           navigation.navigate('HomeScreen')
           let date = new Date();
            setBookingDetails({
-              booking_date: sortDate(date.toLocaleDateString())
+              booking_date: sortDate(date.toLocaleDateString("en-us"))
            })
           }}
           amount={

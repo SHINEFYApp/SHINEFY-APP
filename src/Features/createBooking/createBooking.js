@@ -114,7 +114,7 @@ export default async function cashBooking(bookingDetails, navigation ,setIsPopUp
           navigation.replace('HomeScreen')
           let date = new Date();
            setBookingDetails({
-              booking_date: sortDate(date.toLocaleDateString())
+              booking_date: sortDate(date.toLocaleDateString("en-us"))
            })
           }
         } else {

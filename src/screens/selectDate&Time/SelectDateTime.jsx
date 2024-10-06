@@ -42,16 +42,17 @@ export default function SelectDateTime({navigation , route}) {
       }
       setBookingDetails({
         ...bookingDetails,
-        booking_date: sortDate(date.toLocaleDateString()),
+        booking_date: sortDate(date.toLocaleDateString("en-us")),
       });
     } else if (selectedDate == Lang_chg.tomorrow_txt[config.language]) {
       if (isCustomDate) {
         setIsCustomDate(false);
       }
+      date.setDate(date.getDate() + 1);
       setBookingDetails({
         ...bookingDetails,
         booking_date: sortDate(
-          date.toLocaleDateString(date.setDate(date.getDate() + 1)),
+         date.toLocaleDateString('en-US'),
         ),
       });
     } else if (selectedDate !== '') {
@@ -126,7 +127,7 @@ export default function SelectDateTime({navigation , route}) {
                   date={selectDate}
                   onChange={prams => {
                     let x = new Date(prams.date);
-                    handleSelectDate(x.toLocaleDateString());
+                    handleSelectDate(x.toLocaleDateString("en-us"));
                     setSelectDate(prams.date);
                   }}
                   selectedItemColor="#DD9923"
