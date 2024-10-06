@@ -66,24 +66,46 @@ export default function MapComponent({isNewLocation, navigation , setCurrentLoca
       }));
 
       }catch (err) {
-         Alert.alert(
-       "ERROR GET LOCATION" ,
-        "GET LOCATION PERMISSION YOU CAN CHANGE FROM SETTING" ,
-        [
-          {
-            text: msgTitle.cancel[0],
-            onPress: () => {},
-          },
-          {
-            text: msgTitle.ok[0],
-            onPress: () => {
-              Linking.openSettings()
-            },
-          },
-        ],
-        {cancelable: false},
-      );
+     
+        if(String(err).includes("Location not available")) {
+           Alert.alert(
+            "ERROR GET LOCATION" ,
+            "Please open your location and restart App" ,
+            [
+              {
+                text: msgTitle.cancel[0],
+                onPress: () => {},
+              },
+              {
+                text: msgTitle.ok[0],
+                onPress: () => {
+                  
+                },
+              },
+            ],
+            {cancelable: false},
+          );
+        }else {
 
+          Alert.alert(
+            "ERROR GET LOCATION" ,
+            "GET LOCATION PERMISSION YOU CAN CHANGE FROM SETTING" ,
+            [
+              {
+                text: msgTitle.cancel[0],
+                onPress: () => {},
+              },
+              {
+                text: msgTitle.ok[0],
+                onPress: () => {
+                  Linking.openSettings()
+                },
+              },
+            ],
+            {cancelable: false},
+          );
+        }
+          
       }
  
       

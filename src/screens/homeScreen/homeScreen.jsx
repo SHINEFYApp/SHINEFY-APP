@@ -73,8 +73,7 @@ export default function HomeScreen({navigation}) {
 
   useEffect(()=>{
     const unsubscribe = messaging().onMessage(async (remoteMessage) => {
-      console.log ("remote msg======", remoteMessage)
-      PushNotification.createChannel(
+       PushNotification.createChannel(
     {
       channelId: "channel-id", // (required)
       channelName: "My channel", // (required)

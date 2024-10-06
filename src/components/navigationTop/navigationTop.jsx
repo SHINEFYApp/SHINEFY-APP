@@ -9,6 +9,8 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import getHome from '../../Features/getHome/getHome';
 import { Platform } from 'react-native';
 export default function NavigationTop(props) {
+ const insets = useSafeAreaInsets();
+
   function handleTitle() {
     switch (props.route.name) {
       case 'Home':
@@ -73,12 +75,12 @@ export default function NavigationTop(props) {
         return props.route.name;
     }
   }
-  const insets = useSafeAreaInsets();
+
   return (
     <View
-
+      style={{paddingTop:insets.top}}
       className={
-        `  flex-row w-full  justify-between z-10 p-5 bg-white items-center rounded-b-2xl border-b border-l border-r border-[#C3C3C3]`
+        `  flex-row w-full  justify-between z-10 p-5  bg-white items-center rounded-b-2xl border-b border-l border-r border-[#C3C3C3]`
       }>
       {props.route.name == 'Home' ? (
         <TouchableOpacity

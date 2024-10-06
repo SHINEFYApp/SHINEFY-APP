@@ -33,7 +33,7 @@ export default function PayTabs({setWebView, webView, navigation, url , setIsPop
 
     if (webViewState.loading == false && webViewState.url.includes("final")){
       let payment_success = webViewState.url.split("final?")[1].split("=")[1]
-      console.log(payment_success)
+
       if(payment_success == "success") {
         setWebView(false)
         // if (setIsPopUpOpen) {

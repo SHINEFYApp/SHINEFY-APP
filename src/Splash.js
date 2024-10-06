@@ -117,7 +117,7 @@ export default class Splash extends Component {
       messaging()
         .getToken()
         .then(async fcmToken => {
-          console.log(fcmToken)
+      
           this.setState({
             player_id: fcmToken,
           });
@@ -130,8 +130,7 @@ export default class Splash extends Component {
             data.append('device_type', config.device_type);
             data.append('user_id', user_id);
             let res = await apifuntion.postApi(url, data);
-            console.log(res)
-            console.log(data)
+        
           }
         });
     }
@@ -230,10 +229,10 @@ export default class Splash extends Component {
         <StatusBar
           hidden={false}
           StatusBarStyle="dark-content"
-          backgroundColor={Colors.statusbarcolor}
+          backgroundColor={"#fff"}
           translucent={false}
           networkActivityIndicatorVisible={true}
-          barStyle="light-content"
+          barStyle="dark-content"
         />
         <View>
           <FastImage
