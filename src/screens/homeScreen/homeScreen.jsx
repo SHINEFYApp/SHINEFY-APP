@@ -19,7 +19,7 @@ import currentMapAtom from '../../atoms/currentMap/currentMapAtom';
 import PackageCardSkeleton from '../../components/packageCard/packageCardSkeleton';
 import getHome from '../../Features/getHome/getHome';
 import messaging from '@react-native-firebase/messaging';
-
+import PushNotification, {Importance} from 'react-native-push-notification';
 export default function HomeScreen({navigation}) {
   const [services, SetServices] = useState([]);
   const [specialOffers, SetSpecialOffers] = useState([]);
@@ -67,8 +67,34 @@ export default function HomeScreen({navigation}) {
           navigation.navigate("Review" , {...isRating})
         }
     }
+
     fetchData()
   },[navigation])
+
+  useEffect(()=>{
+    const unsubscribe = messaging().onMessage(async (remoteMessage) => {
+      console.log ("remote msg======", remoteMessage)
+      PushNotification.createChannel(
+    {
+      channelId: "channel-id", // (required)
+      channelName: "My channel", // (required)
+      channelDescription: "A channel to categorise your notifications", // (optional) default: undefined.
+      playSound: false, // (optional) default: true
+      soundName: "default", // (optional) See `soundName` parameter of `localNotification` function
+      importance: Importance.HIGH, // (optional) default: Importance.HIGH. Int value of the Android notification importance
+      vibrate: true, // (optional) default: true. Creates the default vibration pattern if true.
+    },
+    (created) => console.log(`createChannel returned '${created}'`) // (optional) callback returns whether the channel was created, false means it already existed.
+  );
+  PushNotification.localNotification({
+  /* Android Only Properties */
+   channelId: "channel-id",
+title: remoteMessage?.notification?.title, // (optional)
+  message: remoteMessage?.notification?.body, // (required)      
+  })
+    })
+  return unsubscribe;
+  })
 
   return (
     <KeyboardAwareScrollView>
