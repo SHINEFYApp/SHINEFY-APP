@@ -71,6 +71,10 @@ export default function NavigationTop(props) {
         return Lang_chg.select_Location[config.language];
       case 'PackageDetailsScreen':
         return Lang_chg.package_details[config.language];
+      case 'BookingTypeScreen':
+        return Lang_chg.booking_type[config.language];
+      case 'selectBookingvehicle':
+        return Lang_chg.booking_vehicle[config.language];
       default:
         return props.route.name;
     }

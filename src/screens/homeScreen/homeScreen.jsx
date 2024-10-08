@@ -43,13 +43,12 @@ export default function HomeScreen({navigation}) {
     fetchData();
   }, []);
 
-// useEffect(() => {
-//   const unsubscribe = messaging().onMessage(async remoteMessage => {
-//     console.log('A new FCM message arrived!', JSON.stringify(remoteMessage));
-//   });
-
-//   return unsubscribe;
-// }, []);
+ useEffect(() => {
+     const unsubscribe = navigation.addListener('beforeRemove', (e) => {
+      e.preventDefault();
+      
+    });
+  }, []);
 
 
   useEffect(() => {

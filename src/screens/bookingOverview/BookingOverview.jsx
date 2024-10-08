@@ -17,6 +17,8 @@ import walletIcon from '../../assets/icons/profile/wallet.png';
 import getWallet from '../../Features/getWallet/getWallet';
 import create_package_booking from '../../Features/createPackgeBooking/createPackageBooking';
 import Modal from 'react-native-modal';
+import SuccessAddVehicle from '../../components/successAddVehicle/successAddVehicle';
+import { msgProvider } from '../../Provider/Messageconsolevalidationprovider/messageProvider';
 
 const BookingOverview = ({navigation, route}) => {
 
@@ -25,8 +27,11 @@ const BookingOverview = ({navigation, route}) => {
   let date = new Date(reverseSortDate(bookingDetails.booking_date));
   const [coupon, setCoupon] = useState();
   const [walletAmount, setWalletAmount] = useState();
+  const [walletUserAmount, setUserWalletAmount] = useState("");
   const [isWallet, setIsWallet] = useState();
-  const couponInput = useRef()
+  const [isLoading, setIsLoading] = useState(false);
+  const [isPopUpOpen , setIsPopUpOpen] = useState(false)
+
   const extraServiceData = useMemo(() => {
     let extraData = [];
     for (let key in bookingDetails?.extraData?.extraServices) {
@@ -35,6 +40,7 @@ const BookingOverview = ({navigation, route}) => {
     
     return extraData;
   }, []);
+
   useEffect(() => {
     if (coupon?.couponName == '') {
       setCoupon();
@@ -53,24 +59,50 @@ const BookingOverview = ({navigation, route}) => {
         bookingDetails.extraData.allSelectedCarsDetails.length,
     });
   }, []);
-  useEffect(() => {
-    let fetchData = async () => {
-      let data = await getWallet();
-      setWalletAmount(data);
-    };
-    fetchData();
-  }, []);
+ function handleClosePopUp() {
+      setIsPopUpOpen(false)
+  }
 
+  useEffect(()=>{
+    async function fetchData() {
+      let data = await getWallet();
+      setWalletAmount(data)
+    }
+    fetchData()
+  },[])
+
+  async function handleWalletAmount(){
+    if(walletUserAmount <= walletAmount) {
+
+      if (walletUserAmount >= 50 && walletAmount >= 50) {
+
+        if(walletUserAmount > handleAmount()) {
+          setUserWalletAmount(handleAmount())
+        }
+        setIsWallet(true)
+        setBookingDetails({
+                  ...bookingDetails,
+                  redemwallet:walletUserAmount,
+                });
+      }else {
+        msgProvider.toast(Lang_chg.wallet_balance_error[config.language] , "center")
+      }
+    }else {
+      msgProvider.toast(Lang_chg.wallet_balance_error_userAmount[config.language] , "center")
+    }
+
+  }
+    
 
   function handleAmount() {
-    if (isWallet == Lang_chg.wallet_txt[config.language]) {
+    if (isWallet) {
       if (coupon?.total_amount) {
-        return +coupon?.total_amount - +walletAmount;
+        return +coupon?.total_amount - +walletUserAmount;
       } else {
         return (
           +route.params.price *
             bookingDetails.extraData.allSelectedCarsDetails.length -
-          +walletAmount
+          +walletUserAmount
         );
       }
     } else {
@@ -93,6 +125,14 @@ const BookingOverview = ({navigation, route}) => {
 
   return (
     <View className={'pt-[10px] px-5'}>
+      <Modal
+        swipeDirection={['down' , "left" , "right" , "up"]}
+        onSwipeMove={handleClosePopUp}
+        avoidKeyboard={true}
+        hasBackdrop={true}
+        isVisible={isPopUpOpen}>
+        <SuccessAddVehicle closePopUp={handleClosePopUp} title={Lang_chg.successbookingTxt[config.language]} />
+      </Modal>
       <ScrollView className={'pb-16'}>
         <View className={'bg-mainColor py-4 w-full rounded'}>
           <Text className={'font-bold text-center text-lg'}>
@@ -125,7 +165,7 @@ const BookingOverview = ({navigation, route}) => {
         {/* <SelectVehicle car={bookingDetails.extraData.car} /> */}
         <View className={'mt-4 py-2 px-6 w-full bg-white rounded-lg'}>
           <BookingOverviewTextDetails
-            title={'services'}
+            title={Lang_chg.services[config.language]}
             value={
               bookingDetails?.extraData?.service?.service_name[config.language]
             }
@@ -146,50 +186,30 @@ const BookingOverview = ({navigation, route}) => {
               'flex bg-[#C3C3C3] w-[80%] h-[1px] items-center my-5 mx-auto justify-center'
             }
           />
-          {/* {extraServiceData.map(extraService => {
-            return (
-              <React.Fragment key={extraService.extra_service_id}>
-                <BookingOverviewTextDetails
-                  title={Lang_chg.extraservice_txt[config.language]}
-                  value={extraService?.extra_service_name[config.language]}
-                  price={` ${extraService?.quantity} X ${
-                    extraService?.extra_service_price
-                  } = ${
-                    extraService?.quantity * extraService?.extra_service_price
-                  }EGP`}
-                />
-                <View
-                  className={
-                    'flex bg-[#C3C3C3] w-[80%] h-[1px] items-center my-5 mx-auto justify-center'
-                  }
-                />
-              </React.Fragment>
-            );
-          })} */}
+      
           <FlatList 
             data={extraServiceData}
-            renderItem={({item:extraService}) => <React.Fragment>
+            renderItem={({item:extraService}) => {
+             return(<React.Fragment>
                 <BookingOverviewTextDetails
                   title={Lang_chg.extraservice_txt[config.language]}
                   value={extraService?.extra_service_name[config.language]}
-                  price={` ${extraService.extra_services_quantity} X ${
+                  price={` ${extraService.quantity} X ${
                     extraService.extra_service_price
-                  } = ${
-                    extraService.extra_services_quantity * extraService.extra_service_price
-                  }EGP`}
+                  } `}
                 />
                 <View
                   className={
                     'flex bg-[#C3C3C3] w-[80%] h-[1px] items-center my-5 mx-auto justify-center'
                   }
                 />
-              </React.Fragment>}
+              </React.Fragment>)}}
           keyExtractor={item => item.extra_service_id}
           />
           {coupon?.couponName !== '' && coupon && (
             <>
               <BookingOverviewTextDetails
-                title={'Coupon'}
+                title={Lang_chg.coupon[config.language]}
                 value={coupon?.couponName}
                 price={`-${coupon?.dis_amount}`}
               />
@@ -200,12 +220,12 @@ const BookingOverview = ({navigation, route}) => {
               />
             </>
           )}
-          {isWallet === Lang_chg.wallet_txt[config.language] && (
+          {isWallet && (
             <>
               <BookingOverviewTextDetails
                 title={Lang_chg.wallet[config.language]}
                 value={Lang_chg.wallet[config.language]}
-                price={`-${walletAmount}`}
+                price={`${walletUserAmount}`}
               />
               <View
                 className={
@@ -229,17 +249,14 @@ const BookingOverview = ({navigation, route}) => {
               {bookingDetails?.total_amount} EGP
             </Text>
           </View>
+
           <View
             className={
               'bg-white items-center w-full rounded mt-4 flex flex-row justify-between px-4 border-2 border-[#C3C3C3] mb-1'
             }>
             <TextInput
             value={coupon?.couponName}
-              className={`h-[40px] w-[70%] font-bold pr-4 border-r border-r-[#C3C3C3] ${
-                config.language === 0
-                  ? 'placeholder:text-left'
-                  : 'placeholder:text-right'
-              }`}
+              className={`h-[40px] w-[70%] font-bold pr-4 border-r border-r-[#C3C3C3] placeholder:text-${config.textalign} text-${config.textalign} `}
               placeholder={Lang_chg.enter_promo_code[config.language]}
               placeholderTextColor={'#C3C3C3'}
               onChange={e => {
@@ -283,7 +300,7 @@ const BookingOverview = ({navigation, route}) => {
               
             </View>
           </View>
-          <RadioButton
+          {/* <RadioButton
             buttons={[
               {
                 id: 1,
@@ -307,15 +324,64 @@ const BookingOverview = ({navigation, route}) => {
                 });
               }
             }}
-          />
+          /> */}
+          <View>
+            <Text className="mt-3 text-lg">
+              {Lang_chg.wallet[config.language]} ({walletAmount} {Lang_chg.sar_txt[config.language]})
+            </Text>
+          </View>
+          {
+           <View
+            className={
+              'bg-white items-center w-full rounded mt-4 flex flex-row justify-between px-4 border-2 border-[#C3C3C3] mb-1'
+            }>
+            <TextInput
+              onChange={(e)=>{
+                setUserWalletAmount(e.nativeEvent.text)
+              }}
+             keyboardType="numeric"
+              className={`h-[40px] w-[70%] font-bold pr-4 border-r border-r-[#C3C3C3] placeholder:text-${config.textalign} text-${config.textalign} `}
+              placeholder={Lang_chg.use_wallet_title[config.language]}
+              placeholderTextColor={'#C3C3C3'}
+              value={`${walletUserAmount}`}
+              editable={!isWallet}
+            />
+            <View className={'w-[25%]'}>
+              {
+                isWallet ? <Button
+                Title={Lang_chg.Remove[config.language]}
+                onPress={async () => {
+                  setIsWallet(false)
+                   setBookingDetails({
+                  ...bookingDetails,
+                  redemwallet:0,
+                });
+                  setUserWalletAmount("")
+                }}
+              /> :<Button
+                Title={Lang_chg.Apply[config.language]}
+                onPress={async () => {
+                
+                    handleWalletAmount()
+                }}
+              />
+              }
+              
+            </View>
+          </View>
+          }
         </>
         }
         <Button
+        isLoading={route.params.type == "package" ? isLoading :false}
           Title={Lang_chg.confirm_booking[config.language]}
           btnStyle={'font-semibold text-lg'}
-          onPress={() => {
+          onPress={async() => {
+            setIsLoading(true)
             if(route.params.type == "package") {
-              create_package_booking(bookingDetails , navigation)
+              create_package_booking(bookingDetails , navigation , setBookingDetails , setIsLoading, setIsPopUpOpen)
+          
+              
             } else {
               navigation.push('PaymentMethod')
             }

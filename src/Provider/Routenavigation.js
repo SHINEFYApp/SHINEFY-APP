@@ -71,7 +71,7 @@ const Stacknav = navigation => {
         <Stack.Screen
           name="WelcomeScreen"
           component={WelcomeScreen}
-          options={{ headerShown: false, gestureEnabled: false }}
+          options={{ headerShown: false, gestureEnabled: false ,  }}
         />
         <Stack.Screen
           name="SplashScreen"

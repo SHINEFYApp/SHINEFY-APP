@@ -74,7 +74,7 @@ export default function PaymentMethod({navigation}) {
   return (
     <View className="pt-[10] px-5">
       <Modal
-        swipeDirection={'down'}
+        swipeDirection={['down' , "left" , "right" , "up"]}
         onSwipeMove={handleClosePopUp}
         avoidKeyboard={true}
         hasBackdrop={true}

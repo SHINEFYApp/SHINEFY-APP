@@ -2,8 +2,9 @@ import { apifuntion } from "../../Provider/Apicallingprovider/apiProvider";
 import { config } from "../../Provider/configProvider";
 import { Lang_chg } from "../../Provider/Language_provider";
 import { localStorage } from "../../Provider/localStorageProvider";
+import sortDate from "../../utlites/sortDate";
 
-export default async function create_package_booking (bookingDetails, navigation) {
+export default async function create_package_booking (bookingDetails, navigation ,setBookingDetails , setIsLoading , setIsPopUpOpen) {
 
     
     var vehicle_data = await localStorage.getItemObject('booking_vehicle_arr');
@@ -45,8 +46,13 @@ export default async function create_package_booking (bookingDetails, navigation
   
   try {
     apifuntion.postApi(url, data).then(obj => {
-  
+      let date = new Date()
       if(obj.success == "true") {
+        setIsPopUpOpen(true)
+        setBookingDetails({
+          booking_date: sortDate(date.toLocaleDateString("en-us"))
+        })
+        setIsLoading(false)
         navigation.navigate('HomeScreen');
       }
     });

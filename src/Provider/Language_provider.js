@@ -594,9 +594,12 @@ class Language_provider {
   varid_txt = ['VAT ID :', 'VAT ID:'];
   totalservicecharges_txt = ['Total Service Charge', 'إجمالي رسوم الخدمة'];
   coupon_txt = ['Coupon Applied', 'تم تطبيق الكوبون'];
+  coupon = ['Coupon', ' الكوبون'];
   wallet_txt = ['Wallet Applied', 'تطبيق المحفظة'];
   wallet = ['Wallet', 'محفظة'];
   wallet_balance = ['Wallet Blance', 'ميزانية المحفظة'];
+  wallet_balance_error = ['wallet amount must be more than or equal 50 LE', ' رصيد المحفظة يجب ان يكون اكبر من او يساوي 50 جنية'];
+  wallet_balance_error_userAmount = [`your don't have this amount in your wallet`, 'انت لا تمتلك هذا المبلغ في محفظتك'];
   use_wallet = ['Use wallet', 'استخدام المحفظة'];
   use_wallet_title = ['Enter wallet amount', 'ادخل القيمة المراد استخدامها'];
 
@@ -725,6 +728,7 @@ class Language_provider {
   card_holder = ['Card Holder Name', 'اسم حامل البطاقة'];
   card_number = ['Card Number', 'رقم البطاقة '];
   expiry_date = ['Expiry Date', 'تاريخ الانتهاء'];
+  selectAll_txt = ['Select All', 'اختيار الكل'];
 
   select_payment_method = ['Select Payment Method', 'اختار طريقة الدفع'];
   select_payment_method_for_bills = [
@@ -835,7 +839,8 @@ class Language_provider {
 
   packages = ['Packages', 'الباقات'];
   package_details = ['Package Details', ' تفاصيل الباقة'];
-
+  booking_type= ['Booking Type' , 'نوع الحجز']
+  booking_vehicle= ['Choose Vehicle' , 'اختيار السيارة']
   //-------------------------------------my subscriptions----------------------//
 
   mySubscriptions = ['My Subscribtions', 'اشتراكاتي'];

@@ -12,13 +12,13 @@ export default function NotficationCard({notfi}) {
       </View>
       <View className="flex flex-1 flex-col">
         <View className="flex items-center justify-between flex-row">
-          <Text className="text-lg font-bold">
+          <Text className="text-lg font-bold text-black">
             {config.language === 0 ? notfi.title : notfi.title_2}
           </Text>
-          <Text className="text-xs font-bold">{notfi.createtime}</Text>
+          <Text className="text-xs font-bold text-black">{notfi.createtime}</Text>
         </View>
         <View className="flex w-full">
-          <Text className="text-xs text-wrap overflow-hidden ">
+          <Text className="text-xs text-wrap overflow-hidden text-black ">
             {config.language === 0 ? notfi.message : notfi.message_2}
           </Text>
         </View>

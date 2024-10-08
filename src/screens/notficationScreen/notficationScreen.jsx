@@ -20,7 +20,7 @@ export default function NotficationScreen() {
   }, []);
 
   return (
-    <SafeAreaView>
+
       <View className="flex-1 flex px-4 items-stretch pt-[60px]">
         <FlatList
           ListEmptyComponent={
@@ -33,6 +33,6 @@ export default function NotficationScreen() {
           renderItem={({item}) => <NotficationCard notfi={item} />}
         />
       </View>
-    </SafeAreaView>
+
   );
 }

@@ -114,16 +114,17 @@ export default function MapComponent({isNewLocation, navigation , setCurrentLoca
     if(isEditLocation) {
 
       setIsLoading(true)
+
       setName(editLocaiton.user_address_name)
        setNewLocation(r=>({
         ...r,
-        latitude: editLocaiton.latitude,
-        longitude: editLocaiton.longitude,
+        latitude: +editLocaiton.latitude,
+        longitude: +editLocaiton.longitude,
       }))
       setRegion(r => ({
         ...r,
-        latitude: editLocaiton.latitude,
-        longitude: editLocaiton.longitude,
+        latitude: +editLocaiton.latitude,
+        longitude: +editLocaiton.longitude,
       }));
     }else { 
       getLocation();
@@ -153,7 +154,7 @@ export default function MapComponent({isNewLocation, navigation , setCurrentLoca
               className="h-full w-full"
               onRegionChangeComplete={setNewLocation}
               region={region}
-              cameraZoomRange={50}>
+              cameraZoomRange={500}>
               {!isNewLocation && (
                 <Marker draggable coordinate={region}>
                   <Image source={indectorIcon} />

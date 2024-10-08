@@ -166,7 +166,7 @@ export default function SelectDateTime({navigation , route}) {
             </View>
               :  
             <View className="flex-row  flex-wrap  justify-between">
-              {slots?.slot_arr?.map(slot => {
+              {slots?.slots?.map(slot => {
                 return (
                   <SelectDateBox
                     key={slot.time}

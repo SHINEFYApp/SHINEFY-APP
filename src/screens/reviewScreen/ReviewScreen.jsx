@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Text, View} from 'react-native';
+import {BackHandler, Text, View} from 'react-native';
 import {Image} from 'react-native-ui-lib';
 import reviewImage from '../../assets/reviewImage.png';
 import locationMark from '../../assets/locationMark.png';
@@ -37,6 +37,16 @@ const ReviewScreen = ({route , navigation}) => {
     }
     }
     fetchData()
+    if(route.params.isRate){
+
+     const unsubscribe = navigation.addListener('beforeRemove', (e) => {
+      e.preventDefault();
+      
+    });
+
+
+
+    }
   },[])
 
 

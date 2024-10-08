@@ -84,24 +84,13 @@ export default function WelcomeScreen({navigation}) {
       localStorage.setItemObject('language', 0);
     }
   };
-  //    useEffect(()=>{
 
-  //   const fetchData = async ()=>{
-  //     const isRating = await getHome()
-  //       if (isRating.isRate) {
-  //         navigation.navigate("Review" , {...isRating})
-  //       }
-  //   }
-  //     fetchData()
-
-  // },[])
-
-  // useEffect(() => {
-  //   BackHandler.addEventListener('hardwareBackPress', () => {
-  //     BackHandler.exitApp();
-  //   });
-  //   return BackHandler.removeEventListener('hardwareBackPress');
-  // }, []);
+  useEffect(() => {
+     const unsubscribe = navigation.addListener('beforeRemove', (e) => {
+      e.preventDefault();
+      
+    });
+  }, []);
 
   useEffect(()=>{
     if(userData.signUp === true) {

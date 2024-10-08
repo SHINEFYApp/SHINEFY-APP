@@ -16,7 +16,7 @@ export default function SelectExtraService({extraService , isPackage ,quan}) {
   useEffect(()=>{
     if(bookingDetails?.extraData?.extraServices){
       if(bookingDetails?.extraData?.extraServices[extraService?.extra_service_name[0]]){
-
+        
         setCounter(bookingDetails?.extraData?.extraServices[extraService?.extra_service_name[0]].quantity)
       }
     } else{
@@ -25,7 +25,7 @@ export default function SelectExtraService({extraService , isPackage ,quan}) {
   },[bookingDetails.service_id])
   
   function handleExtraService(quan) {
-   
+
       setBookingDetails({
                       ...bookingDetails , 
                       extraData : {

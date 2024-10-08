@@ -35,14 +35,7 @@ export default function SelectBookingVehicles({navigation , route}) {
     setIsSelectAll(!isSelectAll);
     if (isSelectAll) {
       setSelectCarsID([]);
-      //   setBookingDetails({
-      //     ...bookingDetails,
-      //     extraData: {
-      //       ...bookingDetails?.extraData,
-      //       allSelectedCarsID: selectCarID,
-      //       allSelectedCarsDetails: selectCarDetails,
-      //     },
-      //   });
+    setSelectCarsDetails([])
     } else {
       setSelectCarsID(carsId);
       setSelectCarsDetails([...myCars]);
@@ -76,7 +69,7 @@ export default function SelectBookingVehicles({navigation , route}) {
         onPress={selectAllCars}
         className="border-mainColor border p-3 mb-3 rounded-lg">
         <View className="flex-row justify-between items-center">
-          <Text className="text-mainColor">Select All</Text>
+          <Text className="text-mainColor">{Lang_chg.selectAll_txt[config.language]}</Text>
           <View
             className={`w-[20] h-[20] border-mainColor border ${
               isSelectAll && 'bg-mainColor'
