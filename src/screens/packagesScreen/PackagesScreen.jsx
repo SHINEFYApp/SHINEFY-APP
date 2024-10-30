@@ -29,6 +29,7 @@ export default function PackageScreen({navigation}) {
           {data?.map(pack => {
             return <PackageCard navigation={navigation} pack={pack} />;
           })}
+          
         </View>
       </ScrollView>
       : 

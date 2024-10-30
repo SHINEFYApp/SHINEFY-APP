@@ -142,6 +142,7 @@ class Language_provider {
   ];
   emptyPackageSubscribe = ["you're not subscribe in package", ' انت الان ليس مشترك في باقة'];
   emptyPackage = ["No packages Added yet", 'لا يوجد باقات حاليا'];
+  packageError = ["You cant't use this package", 'لا يمكن استخدام الباقة'];
 
   //password=========================
   PasswordSpace = ['Spaces not allowed', 'لا يسمح باستخدام المسافات'];
@@ -312,6 +313,7 @@ class Language_provider {
   //==========================Confirmation Messages=============================
   cancel = ['Cancel', 'إلغاء'];
   Yes = ['Yes', 'نعم'];
+  jobDone = ['job Completed', 'تم انهاء العمل'];
   yes_confirm = ['Yes, Confirm', 'نعم ، قم بالتأكيد'];
   no_confirm = ['No, go to Saved Location', 'لا ،  الذهاب الي المواقع المحفوظة'];
   No = ['No', 'لا'];
@@ -473,7 +475,7 @@ class Language_provider {
   asimsheikh_txt = ['Asim Sheikh', 'عاصم شيخ'];
   asimsheikh1_txt = ['+20 0837920271', '+20 0837920271'];
   asimsheikh2_txt = ['Asimsheikh@gmail.com', 'Asimsheikh@gmail.com'];
-  editprofile_txt = ['Edit Profile', 'تعديل الملف الشخصي'];
+  editprofile_txt = ['Edit &  Submit', 'تعديل و حفظ'];
   savedlocation_txt = ['Saved Location', 'المواقع المحفوظة'];
   delete_acc_title = ['Delete Account?', 'حذف الحساب؟'];
   delete_acc_msg = [
@@ -528,6 +530,7 @@ class Language_provider {
   New_password_heading = ['New Password', 'كلمة مرور جديدة'];
   oldPassword_txt = ['Old Password', 'كلمة المرور القديمة'];
   show_txt = ['Show', 'عرض'];
+  washer_txt = ['Service boy Arrived', 'وصول السيرفس بوي'];
   newpassword_txt = ['New Password', 'كلمة مرور جديدة'];
   placeholder_name = ['Benjamin Smith', 'بنيامين سميث'];
   placeholder_email = ['benjaminsmith@gmail.com', 'benjaminsmith@gmail.com'];
@@ -615,7 +618,7 @@ class Language_provider {
     'هل تريد الخروج من التطبيق؟',
   ];
   serviceboy_txt = ['Service Boy', 'سيرفس بوي'];
-  trackyourbooking_txt = ['Track Your Booking', 'تتبع الحجز الخاص بك'];
+  trackyourbooking_txt = ['Track Your Booking', 'تتبع الحجز'];
   ontheway_txt = ['On the way', 'في الطريق'];
   arrive_txt = ['Arrived', 'وصل'];
   car_txt = ['Cars', 'السيارات'];
@@ -646,6 +649,8 @@ class Language_provider {
   ];
   cancelBooking_txt = ['Cancel Booking', 'إلغاء الحجز'];
   cancelservice_txt = ['Cancel Service', 'إلغاء الخدمة'];
+  cancelSubscribe_txt = ['Cancel Subscribe', 'إلغاء الباقة'];
+  of_txt = ['of', 'متبقي من '];
   submit1_txt = ['Submit', 'تقديم'];
   selectdate_txt = ['Select Date', 'حدد تاريخ'];
   Selectdatetime_txt = ['Select Date & Time', 'حدد التاريخ والوقت'];
@@ -716,7 +721,7 @@ class Language_provider {
     'Confirm Booking Location ?',
     'تأكيد موقع الحجز؟',
   ];
-  Booking_overview = ['Booking Overview', 'مراجعة تفاصيل الحجز'];
+  Booking_overview = ['Booking Overview', ' تفاصيل الحجز'];
   Booking_request = ['Request Details', 'تفاصيل طلبك'];
   enter_promo_code = ['Enter Promo Code', 'إدخال الكوبون'];
   Book = ['Book', 'احجز'];
@@ -729,6 +734,10 @@ class Language_provider {
   card_number = ['Card Number', 'رقم البطاقة '];
   expiry_date = ['Expiry Date', 'تاريخ الانتهاء'];
   selectAll_txt = ['Select All', 'اختيار الكل'];
+  dateOfPackage = ['Date of Subscribe', 'تاريخ الاشتراك'];
+  dateOfPackageEnd = ['Expire Date ', 'تاريخ الانتهاء'];
+  expired = ['Expired', 'منتهي'];
+  packageExpired = ['Package Expired', ' باقة منتهي ' ];
 
   select_payment_method = ['Select Payment Method', 'اختار طريقة الدفع'];
   select_payment_method_for_bills = [
@@ -828,7 +837,8 @@ class Language_provider {
   google_pay = ['Google Pay', 'جوجل باي'];
   deactivate = ['deactivate', 'تعطيل'];
   Remove = ['Remove', 'إزالة'];
-  waiting_time_slot = ['Waiting', 'Waiting'];
+  waiting_time_slot = ['Waiting booking', 'انتظر حجز'];
+  waiting_time_msg = ['You can confirm waiting booking and we will schedule a booking for you as soon as available', ' يمكنك تأكيد انتظار الحجز وسنقوم بجدولة الحجز لك في أقرب وقت متاح'];
 
   //-------------------------------------new message----------------------//
 

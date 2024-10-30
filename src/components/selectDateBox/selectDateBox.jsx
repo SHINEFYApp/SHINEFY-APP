@@ -1,13 +1,21 @@
 import {StyleSheet} from 'react-native';
 import {TouchableHighlight} from 'react-native-gesture-handler';
 import {Text, View} from 'react-native-ui-lib';
+import { msgProvider } from '../../Provider/Messageconsolevalidationprovider/messageProvider';
+import { Lang_chg } from '../../Provider/Language_provider';
+import { config } from '../../Provider/configProvider';
 
-export default function SelectDateBox({title, selected, onPress}) {
+export default function SelectDateBox({title, selected, onPress ,classStyle , backendKey}) {
+
+
   return (
-    <View className="p-2 w-1/3">
+    <View className={` p-2 w-1/3 ${classStyle}`}>
     <TouchableHighlight
       onPress={() => {
-        onPress(title);
+        if(backendKey?.includes("Waiting")) {
+          msgProvider.alert(Lang_chg.waiting_time_slot[config.language] , Lang_chg.waiting_time_msg[config.language])
+        }
+        onPress(title ,backendKey);
       }}
       underlayColor={'white'}
       className={`bg-white rounded-lg px-3 py-2  ${

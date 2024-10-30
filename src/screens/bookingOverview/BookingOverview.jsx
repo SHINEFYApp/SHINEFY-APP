@@ -66,7 +66,7 @@ const BookingOverview = ({navigation, route}) => {
   useEffect(()=>{
     async function fetchData() {
       let data = await getWallet();
-      setWalletAmount(data)
+      setWalletAmount(data.userwallet)
     }
     fetchData()
   },[])
@@ -100,8 +100,7 @@ const BookingOverview = ({navigation, route}) => {
         return +coupon?.total_amount - +walletUserAmount;
       } else {
         return (
-          +route.params.price *
-            bookingDetails.extraData.allSelectedCarsDetails.length -
+          +route.params.price -
           +walletUserAmount
         );
       }
@@ -110,18 +109,20 @@ const BookingOverview = ({navigation, route}) => {
         return +coupon?.total_amount;
       } else {
         return (
-          +route.params.price *
-          bookingDetails.extraData.allSelectedCarsDetails.length
+          +route.params.price 
         );
       }
     }
   }
+
+
   useEffect(() => {
     setBookingDetails({
       ...bookingDetails,
       total_amount: handleAmount(),
     });
   }, [isWallet, coupon]);
+
 
   return (
     <View className={'pt-[10px] px-5'}>
@@ -235,6 +236,7 @@ const BookingOverview = ({navigation, route}) => {
             </>
           )}
         </View>
+        
         {
           route.params.type != "package" &&
         <>
@@ -256,7 +258,7 @@ const BookingOverview = ({navigation, route}) => {
             }>
             <TextInput
             value={coupon?.couponName}
-              className={`h-[40px] w-[70%] font-bold pr-4 border-r border-r-[#C3C3C3] placeholder:text-${config.textalign} text-${config.textalign} `}
+              className={`h-[40px] w-[70%] text-black font-bold pr-4 border-r border-r-[#C3C3C3] placeholder:text-${config.textalign} text-${config.textalign} `}
               placeholder={Lang_chg.enter_promo_code[config.language]}
               placeholderTextColor={'#C3C3C3'}
               onChange={e => {
@@ -277,9 +279,7 @@ const BookingOverview = ({navigation, route}) => {
                 Title={Lang_chg.Apply[config.language]}
                 onPress={async () => {
                   let res = await applyCoupon(
-                    isWallet
-                      ? bookingDetails.total_amount + walletAmount
-                      : bookingDetails.total_amount,
+                   bookingDetails?.total_amount,
                     coupon.couponName,
                   );
 
@@ -300,31 +300,7 @@ const BookingOverview = ({navigation, route}) => {
               
             </View>
           </View>
-          {/* <RadioButton
-            buttons={[
-              {
-                id: 1,
-                title: Lang_chg.wallet_txt[config.language],
-                icon: walletIcon,
-              },
-            ]}
-            currentActive={isWallet}
-            set={activeElement => {
-              if (isWallet) {
-                setIsWallet();
-                setBookingDetails({
-                  ...bookingDetails,
-                  redemwallet: 0,
-                });
-              } else {
-                setIsWallet(activeElement);
-                setBookingDetails({
-                  ...bookingDetails,
-                  redemwallet: walletAmount,
-                });
-              }
-            }}
-          /> */}
+     
           <View>
             <Text className="mt-3 text-lg">
               {Lang_chg.wallet[config.language]} ({walletAmount} {Lang_chg.sar_txt[config.language]})
@@ -339,8 +315,9 @@ const BookingOverview = ({navigation, route}) => {
               onChange={(e)=>{
                 setUserWalletAmount(e.nativeEvent.text)
               }}
+             
              keyboardType="numeric"
-              className={`h-[40px] w-[70%] font-bold pr-4 border-r border-r-[#C3C3C3] placeholder:text-${config.textalign} text-${config.textalign} `}
+              className={`h-[40px] text-black w-[70%] font-bold pr-4 border-r border-r-[#C3C3C3] placeholder:text-${config.textalign} text-${config.textalign} `}
               placeholder={Lang_chg.use_wallet_title[config.language]}
               placeholderTextColor={'#C3C3C3'}
               value={`${walletUserAmount}`}
@@ -372,6 +349,27 @@ const BookingOverview = ({navigation, route}) => {
           }
         </>
         }
+        <View
+            className={
+              'bg-white items-center w-full rounded mt-4 flex flex-row justify-between px-4 border-2 border-[#C3C3C3] mb-1'
+            }>
+            <TextInput
+              className={`min-h-[60px] py-5  text-black font-bold pr-4  placeholder:text-${config.textalign} text-${config.textalign} `}
+              placeholder={Lang_chg.emptyNotes[config.language]}
+              placeholderTextColor={'#C3C3C3'}
+              onChange={e => {
+                setBookingDetails({
+                  ...bookingDetails,
+                  notes: e.nativeEvent.text,
+                  
+                });
+              }}
+              multiline={true}
+              returnKeyType="done"
+              blurOnSubmit={true}
+            />
+        
+          </View>
         <Button
         isLoading={route.params.type == "package" ? isLoading :false}
           Title={Lang_chg.confirm_booking[config.language]}

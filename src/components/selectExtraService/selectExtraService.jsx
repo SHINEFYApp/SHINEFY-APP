@@ -13,6 +13,8 @@ export default function SelectExtraService({extraService , isPackage ,quan}) {
   const [bookingDetails, setBookingDetails] = useRecoilState(bookingDetailsAtom)
   const [counter, setCounter] = useState(0);
 
+
+
   useEffect(()=>{
     if(bookingDetails?.extraData?.extraServices){
       if(bookingDetails?.extraData?.extraServices[extraService?.extra_service_name[0]]){
@@ -44,15 +46,22 @@ export default function SelectExtraService({extraService , isPackage ,quan}) {
     <View
       className="bg-white rounded-lg p-2 flex-row mb-3"
       style={globalStyle.boxShadow}>
-      <Image source={{uri: config.img_url3 + extraService.extra_service_image}} className="mr-2" />
+      <Image source={{uri: config.img_url3 + extraService.extra_service_image}} className="mr-2 w-[70px] h-[70px]" resizeMode='contain' />
       <View>
         <Text className="font-bold text-md">
           {extraService.extra_service_name[config.language]}
         </Text>
         <View className="flex-row gap-3 items-center mt-[1px]">
+          {
+            isPackage ? 
+          <Text className="text-mainColor font-bold">
+            {extraService.remind_quantity} {Lang_chg.of_txt[config.language]} {extraService.quantity}
+          </Text>
+          :
           <Text className="text-mainColor font-bold">
             {extraService.extra_service_price} EGP
           </Text>
+          }
           <View className="flex-row items-center">
             <TouchableOpacity
               className="bg-[#DD992345] items-center px-2 rounded-md"

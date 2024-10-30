@@ -7,6 +7,7 @@ import {Image, Text, View} from 'react-native-ui-lib';
 import img from '../../assets/extraService.png';
 import globalStyle from '../../assets/globalStyle';
 import {config} from '../../Provider/configProvider';
+import { Lang_chg } from '../../Provider/Language_provider';
 export default function SelectMainService({selected, service, onPress,isPackage}) {
 
 
@@ -21,7 +22,7 @@ export default function SelectMainService({selected, service, onPress,isPackage}
         className={`${
           selected === service.service_id ? 'bg-mainColor' : 'bg-white'
         } rounded-lg p-2 mb-3 flex-row`}>
-        <Image source={img} className="mr-2" />
+        <Image  source={{uri : config.img_url3 + service?.service_image}} className="mr-2 w-[70px] h-[70px]" resizeMode='contain'/>
         <View>
           <Text className="font-bold text-md ">
             {service.service_name[config.language]}
@@ -35,7 +36,7 @@ export default function SelectMainService({selected, service, onPress,isPackage}
                       ? 'text-white'
                       : 'text-mainColor'
                   } font-bold`}>
-                  {service.remind_quantity} of {service.quantity} 
+                  {service.remind_quantity} {Lang_chg.of_txt[config.language]} {service.quantity} 
                 </Text>
               : 
               <View>

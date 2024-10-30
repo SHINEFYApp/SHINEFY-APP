@@ -68,11 +68,13 @@ const CancelBooking = ({route , navigation}) => {
             className={`w-full px-3 text-[#818181] h-[110px] ${
               config.language === 0 ? 'text-left' : 'text-right'
             }`}
+              multiline={true}
+         blurOnSubmit={true}
             onChange={e => {
               setReason(e.nativeEvent.text);
             }}
-            multiline={true}
-            numberOfLines={10}
+         
+           
             style={{height: 200, textAlignVertical: 'top'}}
           />
         </View>

@@ -49,6 +49,7 @@ export default async function cashBooking(bookingDetails, navigation ,setIsPopUp
       data.append(`extra_services_id`, "NA");
       
     }
+
     // data.append(`extra_service_quantity[${index}]`,value.quantity);
     data.append('free_status', '0'); // false=0 true=1 is Free
     data.append('service_id', bookingDetails.service_id);
@@ -101,8 +102,9 @@ export default async function cashBooking(bookingDetails, navigation ,setIsPopUp
       
       url = config.baseURL + 'create_booking_multi';
     }
-
    
+    console.log(data)
+
     try {
       let obj = await apifuntion.postApi(url, data)
    

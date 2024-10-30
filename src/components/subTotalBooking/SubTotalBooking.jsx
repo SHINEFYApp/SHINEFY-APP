@@ -11,23 +11,26 @@ export default function SubTotalBooking({verfiy, nextPage, Press}) {
   const bookingDetails =
     useRecoilValue(bookingDetailsAtom);
   const totalAmount = useMemo(() => {
+    let total = 0
     let sum = +bookingDetails?.service_price;
-
+    let sumExtraService = 0
     for (let key in bookingDetails?.extraData?.extraServices) {
       let quan = bookingDetails?.extraData?.extraServices[key]?.quantity;
       let price =
         bookingDetails?.extraData?.extraServices[key]?.extra_service_price;
       if (!price) {
-        sum += 0;
+        sumExtraService += 0;
       } else {
-        sum += +quan * +price;
+        sumExtraService += +quan * +price;
       }
     }
      if (bookingDetails?.extraData?.allSelectedCars && bookingDetails?.extraData?.allSelectedCars.length > 0  ){
-      sum = sum * bookingDetails.extraData.allSelectedCars.length
+      total = (sum * bookingDetails.extraData.allSelectedCars.length) + sumExtraService
 
+    } else {
+      total = sum + sumExtraService
     }
-    return (sum);
+    return (total);
   }, [bookingDetails])
 
 

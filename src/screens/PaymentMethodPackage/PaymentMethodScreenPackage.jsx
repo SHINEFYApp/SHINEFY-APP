@@ -127,6 +127,7 @@ export default function PaymentMethodPackage({navigation , route}) {
             // setIsLoading(true)
 
             let paymentLink = await subscripePackage(route.params.packId , activePayment == Lang_chg.wallet[config.language] ? "wallet" : "visa");
+        
             if (paymentLink != undefined){
               setCurrentUrl(paymentLink)
               setIsLoading(false)

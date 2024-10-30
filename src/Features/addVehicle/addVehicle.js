@@ -19,9 +19,7 @@ export default async function addVehicle(newCar , setIsLoading) {
   else if (newCar.car_color == undefined) {
     msgProvider.toast(Lang_chg.emptyCarColor[config.language] , "center")
   } 
-  else if (newCar.plate_number == undefined) {
-    msgProvider.toast(Lang_chg.emptyPlateNo[config.language] , "center")
-  } else {
+  else {
     
     const fd = new FormData();
     fd.append('car_category_id', newCar.car_category.car_category_id);

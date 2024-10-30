@@ -4428,7 +4428,7 @@ __metadata:
     react-native-dropdown-select-list: ^2.0.5
     react-native-fast-image: ^8.6.3
     react-native-fbsdk-next: ^13.0.0
-    react-native-gesture-handler: ^2.15.0
+    react-native-gesture-handler: ^2.20.0
     react-native-get-location: ^4.0.1
     react-native-hide-with-keyboard: ^1.2.1
     react-native-htmlview: ^0.17.0
@@ -4452,6 +4452,7 @@ __metadata:
     react-native-snap-carousel: ^3.9.1
     react-native-star-rating: ^1.1.0
     react-native-svg: ^15.1.0
+    react-native-swiper-flatlist: ^3.2.5
     react-native-ui-datepicker: ^2.0.2
     react-native-ui-lib: ^7.18.0
     react-native-vector-icons: ^10.1.0
@@ -12227,19 +12228,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-gesture-handler@npm:^2.15.0":
-  version: 2.15.0
-  resolution: "react-native-gesture-handler@npm:2.15.0"
+"react-native-gesture-handler@npm:^2.20.0":
+  version: 2.20.0
+  resolution: "react-native-gesture-handler@npm:2.20.0"
   dependencies:
-    "@egjs/hammerjs": "npm:^2.0.17"
-    hoist-non-react-statics: "npm:^3.3.0"
-    invariant: "npm:^2.2.4"
-    lodash: "npm:^4.17.21"
-    prop-types: "npm:^15.7.2"
+    "@egjs/hammerjs": ^2.0.17
+    hoist-non-react-statics: ^3.3.0
+    invariant: ^2.2.4
+    prop-types: ^15.7.2
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 4db52e7b38b047bad677ed570a0ef4c2ddfc413bbbce5ed21f487c9d86c60588ee6b2c9f74bb842e5654284b0d1e6a8af81f68000e737d8a7f1e030b6d3fe6b6
+  checksum: f573bc3717ae0209ff30bf62b95b3c7f11bd97f4797090211bce416c250388f55d1995aac0a7f1bbc99b06223ea64cbeae8d4ef88dcb8c877201b49163ea0e4b
   languageName: node
   linkType: hard
 
@@ -12538,6 +12538,15 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: a3694b74097e56a810a9142c9480532b63fb9cac0ff8b74c038478172d09acdb4077d93cfa53a8bb31e7ec1a9fc9f6e81a95b028c64af5370b5b3534c99aee0b
+  languageName: node
+  linkType: hard
+
+"react-native-swiper-flatlist@npm:^3.2.5":
+  version: 3.2.5
+  resolution: "react-native-swiper-flatlist@npm:3.2.5"
+  peerDependencies:
+    react-native: ">=0.59.0"
+  checksum: 1fc8dad8cec01d28ca54061bb50c26514ae3a3e88a1be4d5f181d90ae7fd72e2707b78dcc1d3ae07ecf34ea0d8f0a76eded53804b403d0905146955ebcd22815
   languageName: node
   linkType: hard
 

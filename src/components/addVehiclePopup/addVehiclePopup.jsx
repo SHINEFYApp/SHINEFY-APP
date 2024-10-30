@@ -48,7 +48,7 @@ export default function AddVehiclePopup({closePopUp, nextScreen , Map , navigati
       <Button
         Title={Lang_chg.no_confirm[config.language]}
         onPress={() => {
-          nextScreen();
+          navigation.navigate('SavedLocationScreen');
           closePopUp();
         }}
       />

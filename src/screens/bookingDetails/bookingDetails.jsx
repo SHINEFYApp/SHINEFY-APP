@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { FlatList, ScrollView } from "react-native-gesture-handler";
-import { Image, Text, View } from "react-native-ui-lib";
+import { Image, Text, TouchableOpacity, View } from "react-native-ui-lib";
 import BookingOverviewTextDetails from "../../components/bookingOverview/BookingOverviewTextDetails";
 import locationMark from '../../assets/icons/bookingOverview/locationMark.png';
 import { config } from "../../Provider/configProvider";
@@ -8,6 +8,10 @@ import SelectVehicle from "../../components/selectVehicle/SelectVehicle";
 import { Lang_chg } from "../../Provider/Language_provider";
 import getBooking from "../../Features/getBooking/getBooking";
 import Button from "../../components/mainButton/Button";
+import StarRating from "react-native-star-rating";
+import { localimag, mobileW } from "../../Provider/utilslib/Utils";
+import { Linking } from "react-native";
+
 
 export default function BookingDetails({route , navigation}) {
     
@@ -19,6 +23,7 @@ export default function BookingDetails({route , navigation}) {
     
   },[bookingData])
 
+  
 
     useEffect(()=>{
         const fetchData = async ()=>{
@@ -42,7 +47,7 @@ export default function BookingDetails({route , navigation}) {
     },[])
 
 
-
+    console.log(bookingData)
 
     return(
          <View className={'pt-[10px] px-5'}>
@@ -53,10 +58,9 @@ export default function BookingDetails({route , navigation}) {
             , {bookingData?.booking_time[0]}
           </Text>
         </View>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <View
             className={
-              'bg-white py-4 px-3 w-full rounded mt-4 flex flex-row items-center mb-6'
+              'bg-white py-4 px-3 w-full rounded mt-4 flex flex-row items-center mb-2'
             }>
             <Image source={locationMark} className={'w-6 h-6 mr-4'} />
             <Text className={'font-bold text-lg mr-2'}>
@@ -66,7 +70,30 @@ export default function BookingDetails({route , navigation}) {
               {bookingData?.address_loc}
             </Text>
           </View>
-        </ScrollView>
+          {
+            bookingData && 
+            <Button 
+              secondStyle={false}
+              buttonColor={bookingData.status == 3 ? "#E15249" : "#5ABC7B"}
+              Title={bookingData.status == 3 ? Lang_chg.cancel_by_you[config.language] : Lang_chg.trackyourbooking_txt[config.language]}
+              onPress={()=>{
+                if(bookingData.status == 3) {
+                  
+                }else {
+                  navigation.navigate("ServiceTrackingScreen" , {
+                    latitude: bookingData?.lat,
+                    longitude: bookingData?.lon,
+                    arrive : bookingData?.arrive_status ,
+                    onWay : bookingData?.on_the_way_status,
+                    washingStatus : bookingData?.washing_status,
+                    status : bookingData?.status,
+                    bookingId: bookingData?.booking_no,
+                    price :bookingData?.total_price
+                  })
+                }
+              }}
+            />
+          }
        <FlatList
           data={vehicleArr}
           renderItem={({item}) => <SelectVehicle car={item} />}
@@ -96,9 +123,28 @@ export default function BookingDetails({route , navigation}) {
               'flex bg-[#C3C3C3] w-[80%] h-[1px] items-center my-5 mx-auto justify-center'
             }
           />
+          {
+            bookingData?.note != "NA" &&
+            <>
+            
+            <BookingOverviewTextDetails
+              title={Lang_chg.note_txt[config.language]}
+              value={bookingData?.note}
+              price={""}
+            />
+            <View
+              className={
+                'flex bg-[#C3C3C3] w-[80%] h-[1px] items-center my-5 mx-auto justify-center'
+              }
+            />
+            </>
+            }
           <FlatList 
             data={extraServices}
-          renderItem={({item:extraService}) => <React.Fragment>
+          renderItem={({item:extraService}) => {
+            
+            return (
+              <React.Fragment>
                 <BookingOverviewTextDetails
                   title={Lang_chg.extraservice_txt[config.language]}
                   value={extraService?.extra_service_name[config.language]}
@@ -113,8 +159,10 @@ export default function BookingDetails({route , navigation}) {
                     'flex bg-[#C3C3C3] w-[80%] h-[1px] items-center my-5 mx-auto justify-center'
                   }
                 />
-              </React.Fragment>}
-          keyExtractor={item => item.booking_id}
+              </React.Fragment>
+            )
+          }}
+          keyExtractor={item => item.extra_service_id}
           />
 
     
@@ -130,6 +178,105 @@ export default function BookingDetails({route , navigation}) {
             {bookingData?.total_price} EGP
           </Text>
         </View>
+        
+        <FlatList 
+        className="mt-3"
+          numColumns={'4'}
+          data={bookingData?.booking_images}
+          renderItem={({item:bookingImage})=>{
+
+            return (
+              <Image className=" w-1/4 h-[25vw] mb-3" source={{
+                uri: config.img_url3 + bookingImage.image
+              }}/>
+            )
+          }}
+          keyExtractor={(item)=>{item.booking_image_id}}
+        />
+        {
+          bookingData?.status >= 1 && bookingData?.rating_status == 0 && bookingData?.status != 3 &&
+          <View className=" bg-white p-3 mt-2 rounded ">
+              <Text className="mb-3">{Lang_chg.serviceboy_txt[config.language]}</Text>
+            <View className="flex-row  items-center">
+
+              <Image className="w-[60] h-[60] " source={{uri:config.img_url3 + bookingData?.service_boy_image}}></Image>
+            
+            <View className="mx-2">
+              <Text>{bookingData?.service_boy_name}</Text>
+                <View className="flex-row">
+
+                  <StarRating
+                          containerStyle={{width: (mobileW * 22) / 100}}
+                          fullStar={localimag.star_rating}
+                          emptyStar={localimag.unactiverating_icon}
+                          halfStarColor={'#FFC815'}
+                          disabled={true}
+                          maxStars={5}
+                          starSize={(mobileW * 4) / 100}
+                          rating={bookingData?.service_boy_rating}
+                          />
+                    <Text className="mx-2">({bookingData?.service_boy_rating})</Text>
+                </View>
+              </View>
+              <TouchableOpacity
+                  onPress={() => {
+                    Linking.openURL(
+                      `tel:+20${bookingData?.service_boy_phone_number}`,
+                    );
+                  }}
+                  activeOpacity={0.7}
+                  className="mx-4"
+                  style={{
+                
+                    justifyContent: 'center',
+                    alignItems: 'flex-end',
+                  }}>
+                      <Image
+                        source={localimag.active_call_icon}
+                        style={{
+                          height: (mobileW * 7) / 100,
+                          width: (mobileW * 7) / 100,
+                        }}
+                      />
+                </TouchableOpacity>
+            </View>
+
+          </View>
+        }
+        {
+          bookingData?.status == 2 && bookingData?.rating_status == 1 &&
+        <View className="bg-white p-3 mt-2 rounded">
+            <Text>{Lang_chg.your_review[config.language]}</Text>
+            <View className="flex-row mt-4">
+
+                <StarRating
+                        containerStyle={{width: (mobileW * 22) / 100}}
+                        fullStar={localimag.star_rating}
+                        emptyStar={localimag.unactiverating_icon}
+                        halfStarColor={'#FFC815'}
+                        disabled={true}
+                        maxStars={5}
+                        starSize={(mobileW * 4) / 100}
+                        rating={bookingData?.user_rating?.rating}
+                        />
+                  <Text className="mx-2">({bookingData?.user_rating?.rating})</Text>
+              </View>
+              <View>
+                <View className="flex-row justify-between items-center ">
+                  <Text className="text-[10px] w-[80%] my-2">{`1. ${Lang_chg.your_satisfied_with_work[config.language]}`}</Text>
+                  <Text className="text-[10px]">{bookingData?.user_rating?.behavior_status == 1 ? Lang_chg.yes_txt[config.language] : Lang_chg.no_txt[config.language]}</Text>
+                </View>
+                <View className="flex-row justify-between items-center ">
+                  <Text className="text-[10px] w-[80%] my-2">{`2. ${Lang_chg.agian_serive_with_worker[config.language]} ${bookingData?.service_boy_name} ${Lang_chg.agian_serive_with_worker2[config.language]}`}</Text>
+                  <Text className="text-[10px]">{bookingData?.user_rating?.work_status == 1 ? Lang_chg.yes_txt[config.language] : Lang_chg.no_txt[config.language]}</Text>
+                </View>
+                <View className="flex-row justify-between items-center ">
+                  <Text className="text-[10px] w-[80%] my-2">{`3. ${Lang_chg.worker_nature_txt[config.language]} ${bookingData?.service_boy_name} ${Lang_chg.worker_nature_txt2[config.language]}`}</Text>
+                  <Text className="text-[10px]">{bookingData?.user_rating?.nature_status == 1 ? Lang_chg.yes_txt[config.language] : Lang_chg.no_txt[config.language]}</Text>
+                </View>
+              </View>
+        </View>
+        }
         {
           bookingData?.status == 0 ? 
         <>

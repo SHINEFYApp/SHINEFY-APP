@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {ScrollView} from 'react-native-gesture-handler';
-import {Text, View} from 'react-native-ui-lib';
+import {Text, TouchableOpacity, View} from 'react-native-ui-lib';
 import SaleBox from '../../components/saleBox/saleBox';
 import PackageCard from '../../components/packageCard/packageCard';
 import getServices from '../../Features/getServices/getServices';
@@ -42,11 +42,19 @@ export default function MySubscreptionScreen({navigation} , route) {
           </Text>
         </View>
         <ScrollView
-          className="pl-3 mt-3"
+          className="pl-3 mt-3 mb-[100px]"
           showsHorizontalScrollIndicator={false}>
           <View className="w-[350px]">
            {packages?.map(pack => {
-            return <PackageCard navigation={navigation} pack={pack} isUse={true} route={route.params} profile={true}/>;
+          
+            return (
+              <TouchableOpacity onPress={()=>{
+                navigation.navigate("MyPackageDetailsScreen" ,{packID:pack.id} )
+              }}>
+
+                <PackageCard navigation={navigation} pack={pack} isUse={true} route={route.params} profile={true}/>
+              </TouchableOpacity>
+            )
           })}
           </View>
         </ScrollView>

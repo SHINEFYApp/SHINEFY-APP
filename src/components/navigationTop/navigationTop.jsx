@@ -2,12 +2,14 @@ import {Image, Text, TouchableOpacity, View} from 'react-native-ui-lib';
 import React, { useEffect } from 'react';
 import notfiIcon from '../../assets/icons/notifcationIcon.png';
 import saveIcon from '../../assets/icons/savedLocationIcon.png';
+import deleteIcon from '../../assets/icons/deleteIcon.png';
 import backIcon from '../../assets/icons/backIcon.png';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import getHome from '../../Features/getHome/getHome';
 import { Platform } from 'react-native';
+import { delete_all_notification_click } from '../../Features/deleteNotfication/deleteNotfication';
 export default function NavigationTop(props) {
  const insets = useSafeAreaInsets();
 
@@ -65,6 +67,8 @@ export default function NavigationTop(props) {
         return Lang_chg.Booking_overview[config.language];
       case 'PaymentMethod':
         return Lang_chg.select_payment_method[config.language];
+      case 'PaymentMethodPackage':
+        return Lang_chg.select_payment_method[config.language];
       case 'WashServiceDetails':
         return Lang_chg.wash_services[config.language];
       case 'AddBooking':
@@ -75,10 +79,18 @@ export default function NavigationTop(props) {
         return Lang_chg.booking_type[config.language];
       case 'selectBookingvehicle':
         return Lang_chg.booking_vehicle[config.language];
+      case 'BookingDetailsScreen':
+        return Lang_chg.Booking_overview[config.language];
+      case 'ServiceTrackingScreen':
+        return Lang_chg.trackyourbooking_txt[config.language];
+      case 'MyPackageDetailsScreen':
+        return Lang_chg.package_details[config.language];
       default:
         return props.route.name;
     }
   }
+
+
 
   return (
     <View
@@ -110,7 +122,17 @@ export default function NavigationTop(props) {
         </Text>
       </View>
       {
-        !props.route?.params?.isRate &&
+       
+      }
+      {
+        props.route.name == 'notficationScreen' ?
+      <TouchableOpacity
+        onPress={() => {
+         delete_all_notification_click(props.navigation)
+        }}>
+        <Image source={deleteIcon} />
+      </TouchableOpacity>
+      :  !props.route?.params?.isRate &&
       <TouchableOpacity
         onPress={() => {
           props.navigation.navigate('notficationScreen');

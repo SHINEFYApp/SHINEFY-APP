@@ -19,6 +19,7 @@ export default function SearchInput({placeholder, onChange, value}) {
             ? 'placeholder:text-left text-left'
             : 'placeholder:text-right text-right'
         }`}
+        blurOnSubmit={true}
         onChangeText={text => {
           onChange(text);
         }}

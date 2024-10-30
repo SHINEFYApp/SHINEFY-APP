@@ -48,6 +48,8 @@ import { useRecoilValue } from 'recoil';
 import bookingDetailsAtom from '../atoms/bookingDetails/bookingDetails.atom';
 import { localStorage } from './localStorageProvider';
 import Splash from '../Splash';
+import ServiceTracking from '../screens/serviceTracking/serviceTracking';
+import MyPackageDetailsScreen from '../screens/myPackageDetailsScreen/myPackageDetailsScreen';
 
 const Stack = createStackNavigator();
 
@@ -86,6 +88,14 @@ const Stacknav = navigation => {
         <Stack.Screen
           name="SavedLocationScreen"
           component={SavedLocationScreen}
+        />
+        <Stack.Screen
+          name="ServiceTrackingScreen"
+          component={ServiceTracking}
+        />
+        <Stack.Screen
+          name="MyPackageDetailsScreen"
+          component={MyPackageDetailsScreen}
         />
         <Stack.Screen
           name="PaymentMethodPackage"

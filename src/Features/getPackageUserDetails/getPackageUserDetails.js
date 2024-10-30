@@ -9,7 +9,9 @@ export default async function getUserPackageDetails(package_id) {
   let data = new FormData();
   data.append('user_id', user_id);
   var url = `user_package_details?user_id=${user_id}&user_package_id=${package_id}`;
+
+
   let res = await apiSauce.get(url, {user_id});
-  
+
   return res.data;
 }

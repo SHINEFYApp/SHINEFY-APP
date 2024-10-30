@@ -19,12 +19,13 @@ export default async function checkLocation (location) {
           location.longitude +
           '/' +
           user_id;
-       
+          
           const {data:obj} = await apiSauce.get(url)
           if (obj.success == 'true') {
-              localStorage.setItemObject('user_arr', obj.user_details);
-              return true
-            }else {
+            localStorage.setItemObject('user_arr', obj.user_details);
+            return true
+          }else {
+        
                 msgProvider.alert(Lang_chg.location_text[config.language] ,obj.msg[config.language])
             }
         

@@ -17,6 +17,8 @@ import profileData from '../../atoms/profileData/profileData';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import phoneIcon from '../../assets/icons/phoneIconYellow.png';
+
 export default function ProfileScreen({navigation}) {
   const [data, setData] = useRecoilState(profileData);
   const insets = useSafeAreaInsets();
@@ -83,6 +85,12 @@ export default function ProfileScreen({navigation}) {
           text={Lang_chg.mySubscriptions[config.language]}
           screen="MySubscreptionScreen"
           navigation={navigation}
+        />
+                <SelectVechileCard
+          text={Lang_chg.contactus_txt[config.language]}
+          screen={'Contact Us'}
+          navigation={navigation}
+          icon={phoneIcon}
         />
         <SelectVechileCard
           icon={SettingIcon}

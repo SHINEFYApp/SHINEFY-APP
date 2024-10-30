@@ -38,7 +38,7 @@ export default function MyBookingScreen({navigation}) {
           }}>
           <Text
             className={
-              currentPage === 'pending_booking' && 'text-mainColor font-bold'
+              `${currentPage === 'pending_booking' && 'text-mainColor'} text-[12px]`
             }>
             {Lang_chg.pending_txt[config.language]}
           </Text>
@@ -49,7 +49,7 @@ export default function MyBookingScreen({navigation}) {
           }}>
           <Text
             className={
-              currentPage === 'inprogress_booking' && 'text-mainColor font-bold'
+              `${currentPage === 'inprogress_booking' && 'text-mainColor'} text-[12px]`
             }>
             {Lang_chg.inprogress_txt[config.language]}
           </Text>
@@ -60,9 +60,20 @@ export default function MyBookingScreen({navigation}) {
           }}>
           <Text
             className={
-              currentPage === 'completed_booking' && 'text-mainColor font-bold'
+              `${currentPage === 'completed_booking' && 'text-mainColor'} text-[12px]`
             }>
             {Lang_chg.complete_txt[config.language]}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            setCurrentPage('cancelled_bookings');
+          }}>
+          <Text
+            className={
+              `${currentPage === 'cancelled_bookings' && 'text-mainColor'} text-[12px]`
+            }>
+            {Lang_chg.cancel_by_you[config.language]}
           </Text>
         </TouchableOpacity>
       </View>

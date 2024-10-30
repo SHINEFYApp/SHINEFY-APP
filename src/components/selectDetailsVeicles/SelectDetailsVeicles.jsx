@@ -91,7 +91,7 @@ export default function SelectDetailsVeicles({title}) {
         <View className="h-[80]">
           <Input
             placeholder={'Enter Your Plate Number Car'}
-            value={newCar.plate_number || currentCar.plate_number}
+            defaultValue={currentCar.plate_number}
             onChange={e => {
               setNewCar({
                 ...newCar,

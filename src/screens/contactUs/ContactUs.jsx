@@ -41,15 +41,16 @@ const ContactUsScreen = ({navigation}) => {
         }>
         <Image source={messageIcon} className={'w-[25px] h-[18px] mt-2'} />
         <TextInput
+        returnKeyType="done"
+        blurOnSubmit={true}
           placeholderTextColor={'#000'}
           placeholder={Lang_chg.message_txt[config.language]}
           className={`${
             config.language === 0
               ? 'placeholder:text-left'
               : 'placeholder:text-right'
-          } w-full px-3 text-black h-[110px]`}
-          multiline={true}
-          numberOfLines={10}
+          } w-full px-3 text-black h-[110px] `}
+            multiline={true}
           style={{height: 200, textAlignVertical: 'top'}}
           onChange={e => {
             setMessage({

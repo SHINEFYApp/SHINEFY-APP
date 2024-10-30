@@ -22,6 +22,7 @@ const ReviewScreen = ({route , navigation}) => {
   const [answers , setAnswers] = useState([])
   const [data , setData] = useState({})
 
+
   useEffect(()=>{
     const fetchData = async ()=>{
     
@@ -105,6 +106,7 @@ const ReviewScreen = ({route , navigation}) => {
               }>
               <Image source={messageIcon} className={'w-[20px] h-[20px]'} />
               <TextInput
+              returnKeyType="done"
                 placeholderTextColor={'#818181'}
                 placeholder={Lang_chg.enter_here[config.language]}
                 className={`w-full px-3 text-[#818181] ${
@@ -152,7 +154,7 @@ const ReviewScreen = ({route , navigation}) => {
                   work_status: answers.work_status,
                   nature_status:answers.nature_status ,
                   rating: userRating,
-                  order_type :route.params.order_type ? route.params.order_type :  route.params.service_boy_id == 0 ? 1 : route.params.service_boy_id 
+                  order_type : route.params.service_boy_id == 0 ? -1 : route.params.service_boy_id 
                 },navigation)
               }}
             />

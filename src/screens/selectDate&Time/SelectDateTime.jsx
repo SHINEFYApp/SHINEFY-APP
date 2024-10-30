@@ -19,7 +19,7 @@ import SafeAreaView from '../../components/SafeAreaView';
 import Button from '../../components/mainButton/Button';
 import editTimeBooking from '../../Features/reschedule/reschedule';
 import PackageCardSkeleton from '../../components/packageCard/packageCardSkeleton';
-import { ScrollView } from 'react-native-gesture-handler';
+import { FlatList, ScrollView } from 'react-native-gesture-handler';
 
 export default function SelectDateTime({navigation , route}) {
  
@@ -62,11 +62,11 @@ export default function SelectDateTime({navigation , route}) {
       });
     }
   }
-  function handleSelectTime(selectedTime) {
+  function handleSelectTime(selectedTime , backendKey) {
     setTime(selectedTime);
     setBookingDetails({
       ...bookingDetails,
-      booking_time: selectedTime,
+      booking_time: backendKey ? backendKey :selectedTime,
       area_id: slots.area_id,
     });
   }
@@ -165,20 +165,36 @@ export default function SelectDateTime({navigation , route}) {
               })}
             </View>
               :  
-            <View className="flex-row  flex-wrap  justify-between">
-              {slots?.slots?.map(slot => {
+             <FlatList
+              numColumns={3}
+              data={slots?.slot_arr}
+              keyExtractor={item => item.time}
+              renderItem={({item})=>{
                 return (
                   <SelectDateBox
-                    key={slot.time}
-                    title={slot.time}
-                    onPress={handleSelectTime}
-                    selected={time}
+                  key={item.time}
+                  title={item.time}
+                  onPress={handleSelectTime}
+                  selected={time}
                   />
-                );
-              })}
-            </View>
+                )
+              }}
+              ListEmptyComponent={()=>{
+                return (
+                  <SelectDateBox
+                  key={"Waiting"}
+                  title={Lang_chg.waiting_time_slot[config.language]}
+                  classStyle={"w-full"}
+                  backendKey={"Waiting"}
+                  onPress={handleSelectTime}
+                  selected={time}
+                  />
+                )
+              }}
+            />
             }
 
+           
           </View>
         </ScrollView>
 

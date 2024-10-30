@@ -15,6 +15,7 @@ export default async function editBookingLocation (data ,navigation) {
 
       let url = config.baseURL + 'edit_booking_location';
       let res = await apifuntion.postApi(url, fd)
+   
       if(res.success== "true") {
         navigation.navigate("HomeScreen")
         msgProvider.toast("your booking location updated succesfully" , "center")

@@ -20,9 +20,16 @@ import PackageCardSkeleton from '../../components/packageCard/packageCardSkeleto
 import getHome from '../../Features/getHome/getHome';
 import messaging from '@react-native-firebase/messaging';
 import PushNotification, {Importance} from 'react-native-push-notification';
+import getAds from '../../Features/getAds/getAds';
+import { SwiperFlatList } from 'react-native-swiper-flatlist';
+
+
+
+
 export default function HomeScreen({navigation}) {
   const [services, SetServices] = useState([]);
   const [specialOffers, SetSpecialOffers] = useState([]);
+  const [ads, setAds] = useState([]);
   const [isPackagesLoading , setIsPackagesLoading] = useState(false)
   const [searchText, setSearchText] = useState('');
   const insets = useSafeAreaInsets();
@@ -30,18 +37,22 @@ export default function HomeScreen({navigation}) {
   const [_, setCurrentMap] = useRecoilState(currentMapAtom);
   useEffect(() => {
     const fetchData = async () => {
+      const ads = await getAds()
       const data = await getServices();
       const packages = await getPackages();
-      
+      setAds(ads)
+
       // const myLocations = await getSavedLocation();
-      SetServices(data.all_service_arr.service_arr);
+      SetServices(data.all_service_arr.sorted_main_services);
       setPackages(packages.packages);
       setIsPackagesLoading(true)
-      SetSpecialOffers(data.all_service_arr.extra_service_arr);
+      SetSpecialOffers(data.all_service_arr.sorted_extra_services);
       localStorage.setItemObject('services', data.all_service_arr);
     };
     fetchData();
   }, []);
+
+  
 
  useEffect(() => {
      const unsubscribe = navigation.addListener('beforeRemove', (e) => {
@@ -61,6 +72,7 @@ export default function HomeScreen({navigation}) {
 
   useEffect(()=>{
     const fetchData = async ()=>{
+      
       const isRating = await getHome()
         if (isRating.isRate) {
           navigation.navigate("Review" , {...isRating})
@@ -103,8 +115,22 @@ title: remoteMessage?.notification?.title, // (optional)
           value={searchText}
         /> */}
       </View>
-      {/* <View>
-        <View className="mt-2 flex-row items-center px-4">
+      <View className="mt-3">
+        <SwiperFlatList
+      autoplay
+      autoplayDelay={2}
+      autoplayLoop
+      index={2}
+      data={ads}
+      renderItem={({ item }) => (
+        <SaleBox
+                key={item.extra_service_id}
+                navigation={navigation}
+                offer={item}
+              />
+      )}
+    />
+        {/* <View className="mt-2 flex-row items-center px-4">
           <Text className="text-[#000] text-xl ">
             {Lang_chg.special_offers[config.language]}
           </Text>
@@ -115,35 +141,37 @@ title: remoteMessage?.notification?.title, // (optional)
             }}>
             {Lang_chg.see_all[config.language]}
           </Text>
-        </View> 
+        </View>  */}
         {
-          isPackagesLoading ? 
-          <FlatList
-          className="px-3 mt-3"
-            data={specialOffers}
-            horizontal={true}
-            renderItem={({item, index}) => (
-              <SaleBox
-                key={item.extra_service_id}
-                navigation={navigation}
-                offer={item}
-              />
+        //   isPackagesLoading ? 
+        //   <FlatList
+        //   className="px-3 mt-3"
+        //     data={ads}
+        //     horizontal={true}
+        //     renderItem={({item, index}) => {
+        //         console.log(item)
+        //       return(
+        //       <SaleBox
+        //         key={item.extra_service_id}
+        //         navigation={navigation}
+        //         offer={item}
+        //       />
              
-            )}
-          /> 
-          :
-           <FlatList
-           data={[...Array(5).keys()]}
-           horizontal={true}
-           renderItem={({item, index}) => (
-             <View key={item.id} className="w-[350px] h-[90] mx-2">
-                 <PackageCardSkeleton/>
-               </View>
-           )}
-         />   
+        //     )}}
+        //   /> 
+        //   :
+        //    <FlatList
+        //    data={[...Array(5).keys()]}
+        //    horizontal={true}
+        //    renderItem={({item, index}) => (
+        //      <View key={item.id} className="w-[350px] h-[90] mx-2">
+        //          <PackageCardSkeleton/>
+        //        </View>
+        //    )}
+        //  />   
         }
        
-      </View> */}
+      </View>
       {
         packages.length > 0 &&
           <View>

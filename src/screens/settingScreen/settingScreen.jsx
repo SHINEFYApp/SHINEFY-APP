@@ -116,12 +116,12 @@ export default function SettingScreen({navigation}) {
           navigation={navigation}
           icon={keyIcon}
         />
-        <SelectVechileCard
+        {/* <SelectVechileCard
           text={Lang_chg.contactus_txt[config.language]}
           screen={'Contact Us'}
           navigation={navigation}
           icon={phoneIcon}
-        />
+        /> */}
         <SelectVechileCard
           text={Lang_chg.faqs_txt[config.language]}
           screen={"FAQ's"}

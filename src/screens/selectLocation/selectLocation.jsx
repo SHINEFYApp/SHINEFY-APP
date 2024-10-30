@@ -12,14 +12,15 @@ import myLocationList, {
 } from '../../atoms/locationList/myLocationList';
 import {useRecoilState} from 'recoil';
 import SafeAreaView from '../../components/SafeAreaView';
-export default function SelectLocation({navigation}) {
+export default function SelectLocation({navigation , route}) {
+  
   const [locationList, setLocationList] = useRecoilState(myLocationList);
 
   useEffect(() => {
     fetchMyLoaction(setLocationList);
   }, []);
   return (
-    <SafeAreaView>
+
       <View className="flex-1 px-4 pt-[80px]">
         <FlatList
           ListEmptyComponent={
@@ -40,11 +41,14 @@ export default function SelectLocation({navigation}) {
             />
           }
           keyExtractor={item => item.user_location_id}
-          renderItem={({item}) => (
-            <LocationCard location={item} navigation={navigation} />
-          )}
+          renderItem={({item}) => {
+             
+            return (
+              <LocationCard location={item} navigation={navigation} isEdit={route?.params?.editLocation}  />
+            )
+          }}
         />
       </View>
-    </SafeAreaView>
+
   );
 }

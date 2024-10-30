@@ -38,7 +38,7 @@ export default function SelectVehicle({car, selected, onPress}) {
               }`}>
               {Lang_chg.platenumber_txt[config.language]}:
             </Text>
-            <Text>{car.plate_number}</Text>
+            <Text>{car.plate_number != "undefined" ? car.plate_number : ""}</Text>
           </View>
           <View className="flex-row justify-between">
             <Text

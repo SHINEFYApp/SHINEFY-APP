@@ -40,7 +40,13 @@ export default function LocationCard({location, navigation ,isEdit ,bookingId}) 
           },navigation)
         }else {
           const state = await checkLocation(location)
-          state && navigation.replace('BookingTypeScreen', location);
+          try {
+
+            state && navigation.replace('BookingTypeScreen', location);
+          } catch(err) {
+     
+          }
+        
         }
       }}>
       <View className="flex-row items-center my-2 pb-3 justify-between border-b border-[#c3c3c3] relative">

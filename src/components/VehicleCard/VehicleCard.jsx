@@ -69,7 +69,7 @@ export default function VehicleCard({car, navigation}) {
       </View>
       <View className="align-baseline">
 
-          <Text>{car.plate_number}</Text>
+          <Text>{car.plate_number != "undefined" ? car.plate_number : ""}</Text>
           <Text>{car.make_name[config.language]}</Text>
           <Text >  {car.model_name[config.language]}</Text>
         <View className="flex-row justify-between">

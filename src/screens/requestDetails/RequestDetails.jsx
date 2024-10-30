@@ -15,25 +15,28 @@ import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 import SubTotalBooking from '../../components/subTotalBooking/SubTotalBooking';
 import myCarsList, {fetchMyCars} from '../../atoms/carsList/myCarsList';
+import sortDate from '../../utlites/sortDate';
 
 export default function RequestDetails({navigation, route}) {
   const [services, setServices] = useState();
   const [bookingDetails, setBookingDetails] =
   useRecoilState(bookingDetailsAtom);
-  const [selectMain, setSelectMain] = useState(bookingDetails.service_id ? bookingDetails.service_id : "");
+  const [selectMain, setSelectMain] = useState("");
   useEffect(() => {
     let fetchData = async () => {
       setServices(await localStorage.getItemObject('services'));
     };
+    let date = new Date();
+
     setBookingDetails({
-      ...bookingDetails,
+             booking_date: sortDate(date.toLocaleDateString("en-us")),
+
       address_loc: route.params.bookingType.params.location,
       longitude: route.params.bookingType.params.longitude,
       latitude: route.params.bookingType.params.latitude,
     });
     fetchData();
   }, []);
-
 
   return (
     <>
@@ -92,7 +95,7 @@ export default function RequestDetails({navigation, route}) {
             <Text className="text-xl mb-3 mt-2">
               {Lang_chg.select_main_service[config.language]}
             </Text>
-            {services?.service_arr?.map(service => {
+            {services?.sorted_main_services?.map(service => {
               return (
                 <SelectMainService
                   key={service.service_id}
@@ -120,7 +123,7 @@ export default function RequestDetails({navigation, route}) {
             <Text className="text-xl my-3">
               {Lang_chg.select_extra_service[config.language]}
             </Text>
-            {services?.extra_service_arr?.map(extra => {
+            {services?.sorted_extra_services?.map(extra => {
               return (
                 <SelectExtraService
                   key={extra.extra_service_id}

@@ -36,12 +36,22 @@ export default async function create_package_booking (bookingDetails, navigation
   data.append('booking_date', `${newDate[0]}-${newDate[1]}-${newDate[2]}`);
   data.append('booking_time', bookingDetails.booking_time);
   data.append('free_status', '0'); // false=0 true=1 is Free
-  data.append('extra_service_id', 'NA'); 
+
+  if(bookingDetails?.extraData?.extraServices) {
+      Object.entries(bookingDetails?.extraData?.extraServices).forEach(([key, value] , index)=>{
+        data.append(`extra_service_id[${index}]`, value.extra_service_id);
+        data.append(`extra_services_quantity[${index}]`,value.quantity);
+      })
+    }else {
+      data.append(`extra_service_id`, "NA");
+      
+    }
+
   data.append('payment_method', 0);
   data.append('area_id', bookingDetails.area_id);
   data.append('note', bookingDetails.notes ? bookingDetails.notes : 'NA');
   // data.append('online_amount', this.state.netpay);
-  let jsonData= {}
+ 
   let url = config.baseURL + 'create_package_booking';
   
   try {

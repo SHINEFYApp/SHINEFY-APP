@@ -28,9 +28,9 @@ export default function NotficationScreen() {
               <Image source={emptyImg} />
             </View>
           }
-          data={notfi}
+          data={notfi != "NA" ? notfi : []}
           keyExtractor={item => item.notification_message_id}
-          renderItem={({item}) => <NotficationCard notfi={item} />}
+          renderItem={({item}) => <NotficationCard notfi={item} setNotfi={setNotfi}/>}
         />
       </View>
 

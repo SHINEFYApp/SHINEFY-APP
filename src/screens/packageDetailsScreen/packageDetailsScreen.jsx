@@ -66,11 +66,7 @@ export default function PackageDetailsScreen({navigation, route}) {
                 {data?.package?.price} EGP
               </Text>
             </View>
-            <View className="items-start">
-              <Text className="text-mainColor  bg-[#DD992345] py-1 px-2 mt-3 rounded-lg font-bold ">
-                Car Detailng
-              </Text>
-            </View>
+           
             <View className="py-2 border-y border-[#ccc] my-5">
               <Text>{data?.package?.description}</Text>
             </View>

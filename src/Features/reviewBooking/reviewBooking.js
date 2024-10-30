@@ -23,13 +23,15 @@ export async function reviewBooking(data , navigation) {
   let user_arr = await localStorage.getItemObject('user_arr');
   let user_id = user_arr.user_id;
   var fd = new FormData();
+
   fd.append('user_id', user_id);
-  fd.append('service_boy_id', data.order_type == 0 ? data.service_boy_id : -1);
+  fd.append('service_boy_id', data.order_type);
   fd.append('booking_id', data.booking_id);
   fd.append('behavior_status', data.behavior_status);
   fd.append('work_status', data.work_status);
   fd.append('nature_status', data.nature_status);
   fd.append('rating', data.rating);
+ 
   let url = config.baseURL + 'user_rating';
 
   apifuntion

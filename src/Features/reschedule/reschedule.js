@@ -22,8 +22,8 @@ export default async function editTimeBooking(data , navigation) {
 
       let url = config.baseURL + 'reschedule_booking';
         try {
-
           let obj = await apifuntion.postApi(url, fd)
+        
           if (obj.success == 'true') {
             msgProvider.toast("your booking reschedule successfuly" , "center")
             navigation.navigate("HomeScreen")

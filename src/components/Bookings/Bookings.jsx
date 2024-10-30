@@ -11,6 +11,9 @@ import { View } from 'react-native-ui-lib';
 export default function Bookings({navigation, bookings, currentPage,isLoading}) {
   const [refreshing, setRefreshing] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  
+
+
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -39,7 +42,7 @@ export default function Bookings({navigation, bookings, currentPage,isLoading}) 
           ListEmptyComponent={
           <EmptyBooking />
           }
-          data={bookings[currentPage] != "NA" ? bookings[currentPage]?.reverse() : []}
+          data={bookings[currentPage] != "NA" ? bookings[currentPage] : []}
           
           keyExtractor={item => item.booking_id}
           renderItem={({item}) => (
@@ -51,7 +54,7 @@ export default function Bookings({navigation, bookings, currentPage,isLoading}) 
                 ? Lang_chg.accepted_txt[config.language]
                 : currentPage == 'completed_booking'
                 ? Lang_chg.review_txt[config.language]
-                : Lang_chg.cancel[config.language]
+                : currentPage == 'cancelled_bookings' ? Lang_chg.cancel_by_you[config.language] : Lang_chg.pending_txt[config.language]
             }
             navigation={navigation}
           />

@@ -154,7 +154,8 @@ export default function MapComponent({isNewLocation, navigation , setCurrentLoca
               className="h-full w-full"
               onRegionChangeComplete={setNewLocation}
               region={region}
-              cameraZoomRange={500}>
+              cameraZoomRange={50}>
+              
               {!isNewLocation && (
                 <Marker draggable coordinate={region}>
                   <Image source={indectorIcon} />

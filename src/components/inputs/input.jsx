@@ -13,6 +13,7 @@ export default function Input({
   text,
   onChange,
   value,
+  defaultValue,
 }) {
   const [isSecure, setIsSecure] = useState(secureTextEntry);
 
@@ -30,6 +31,7 @@ export default function Input({
         placeholder={placeholder}
         onChange={onChange}
         value={value && value}
+        defaultValue={defaultValue && defaultValue}
         placeholderTextColor={'#C3C3C3'}
         className={`text-black w-full  placeholder:text-${config.textalign} text-${config.textalign}`}
       />

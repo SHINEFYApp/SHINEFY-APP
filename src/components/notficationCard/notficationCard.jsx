@@ -1,11 +1,25 @@
-import {Image, View} from 'react-native-ui-lib';
+import {Image, TouchableOpacity, View} from 'react-native-ui-lib';
 import React from 'react';
 import dataIcon from '../../assets/icons/dateIcon.png';
 import {Text} from 'react-native';
 import {config} from '../../Provider/configProvider';
+import { Swipeable } from 'react-native-gesture-handler';
+import deleteIcon from '../../assets/icons/deleteIcon.png';
+import { notification_delete_click } from '../../Features/deleteNotfication/deleteNotfication';
 
-export default function NotficationCard({notfi}) {
+export default function NotficationCard({notfi , setNotfi}) {
+
   return (
+    <Swipeable renderLeftActions={()=>{
+      return (
+        <TouchableOpacity className="p-2 self-center -mt-5" onPress={()=>{
+          notification_delete_click(notfi , setNotfi)
+        }}>
+          <Image source={deleteIcon} />
+        </TouchableOpacity>
+      )
+    }}>
+
     <View className="flex flex-row items-center justify-start my-2 pb-4 relative border-b-0.5 border-[#c3c3c3]">
       <View className="flex w-12">
         <Image source={dataIcon} />
@@ -24,5 +38,7 @@ export default function NotficationCard({notfi}) {
         </View>
       </View>
     </View>
+    </Swipeable>
+
   );
 }

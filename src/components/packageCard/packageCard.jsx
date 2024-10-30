@@ -7,11 +7,14 @@ import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 import { useRecoilState } from 'recoil';
 import bookingDetailsAtom from '../../atoms/bookingDetails/bookingDetails.atom';
+import { msgProvider } from '../../Provider/Messageconsolevalidationprovider/messageProvider';
 
 export default function PackageCard({navigation, pack , isUse , route , profile}) {
   const [bookingDetails, setBookingDetails] =
     useRecoilState(bookingDetailsAtom);
-  return (
+
+
+    return (
     <View className="bg-white p-4  rounded-xl m-2" style={style.box}>
       <View className="flex-row mb-3">
         <Image
@@ -21,9 +24,9 @@ export default function PackageCard({navigation, pack , isUse , route , profile}
         <View className="flex-row w-full justify-between ml-4 flex-1">
           <Text
             className={
-              'text-xs text-center p-1 w-[100] rounded-full text-[#DD9923] bg-[#DD992345] absolute right-0 '
+              `text-xs text-center p-1 w-[100] rounded-full ${pack?.is_expired == 1 ? "text-[#E15249] bg-[#E1524945]"  : "text-[#DD9923] bg-[#DD992345]"}  absolute right-0 `
             }>
-            Car Detailing 
+            {!profile ? "Car Detailing" : pack?.is_expired == 1 ? Lang_chg.expired[config.language] :  pack?.available_from} 
           </Text>
           <View className="gap-2">
             <Text className="font-bold text-xl">
@@ -69,7 +72,16 @@ export default function PackageCard({navigation, pack , isUse , route , profile}
               package_id : pack.id ,
               package_user_id :pack.package_id
             })
-            navigation.navigate(isUse ? 'PackageInfoScreen' : 'PackageDetailsScreen',isUse ? {...route , packID : pack.id} :  pack.id );
+            if (isUse) {
+              if(pack.is_expired == 1){
+                msgProvider.alert(Lang_chg.packageExpired[config.language],Lang_chg.packageError[config.language])
+              }else {
+              navigation.navigate('PackageInfoScreen' , {...route , packID : pack.id})
+              }
+            } else {
+            
+            navigation.navigate('PackageDetailsScreen' ,pack.id)
+            }
           }}
         />
         }

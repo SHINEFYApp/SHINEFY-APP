@@ -26,6 +26,7 @@ export default async function cancelBooking(booking_id , message , navigation) {
     }
     let res = await apifuntion.postApi(url , data)
     msgProvider.toast(res.msg[config.language], 'center');
+
     if(res.msg[0] == "Success") {
       navigation.navigate("HomeScreen")
     }
