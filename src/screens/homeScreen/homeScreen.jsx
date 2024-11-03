@@ -40,6 +40,7 @@ export default function HomeScreen({navigation}) {
       const ads = await getAds()
       const data = await getServices();
       const packages = await getPackages();
+     
       setAds(ads)
 
       // const myLocations = await getSavedLocation();

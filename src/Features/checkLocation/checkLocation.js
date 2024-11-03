@@ -20,12 +20,15 @@ export default async function checkLocation (location) {
           '/' +
           user_id;
           
-          const {data:obj} = await apiSauce.get(url)
+          const {data:obj , status} = await apiSauce.get(url) 
+          if (status === 423) {
+                alert('Must update app version first');
+                return false
+              } 
           if (obj.success == 'true') {
             localStorage.setItemObject('user_arr', obj.user_details);
             return true
           }else {
-        
                 msgProvider.alert(Lang_chg.location_text[config.language] ,obj.msg[config.language])
             }
         

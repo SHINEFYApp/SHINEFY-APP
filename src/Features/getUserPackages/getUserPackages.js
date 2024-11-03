@@ -10,6 +10,9 @@ export default async function getUserPackages() {
   data.append('user_id', user_id);
   var url =  'my_subscription_package/';
   let res = await apiSauce.get(url, {user_id});
-
+if (res.status === 423) {
+                alert('Must update app version first');
+                return false
+              } 
   return res.data;
 }

@@ -8,6 +8,10 @@ const getProfile = async () => {
     let url = config.baseURL + 'get_profile?user_id=' + userdata.user_id;
 
     const res = await apiSauce.get(`/get_profile?user_id=${userdata.user_id}`)
+    if (res.status === 423) {
+                alert('Must update app version first');
+                return false
+              } 
     return res.data.user_details
 };
 

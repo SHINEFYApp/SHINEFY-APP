@@ -28,8 +28,11 @@ export default async function getTimeSlots(data) {
     '/' +
     amount;
   
-  let {data:res} = await apiSauce.get(url);
-
+  let {data:res , status} = await apiSauce.get(url);
+if (status === 423) {
+                alert('Must update app version first');
+                return false
+              } 
   return res.slots_arr.date_slots;
   // .then(obj => {
   //   return obj;

@@ -8,6 +8,10 @@ export default async function getModelData(branId) {
   let user_id = user_arr.user_id;
   try {
     let res = await apiSauce.get(`/get_modal_data/${branId}/`);
+    if (res.status === 423) {
+                alert('Must update app version first');
+                return false
+              } 
     return res.data;
   } catch (err) {
   }

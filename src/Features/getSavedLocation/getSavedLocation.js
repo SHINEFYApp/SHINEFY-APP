@@ -9,6 +9,10 @@ export default async function getSavedLocation(){
     
     try {
         let res = await apiSauce.get(`/get_user_saved_location/${user_id}`)
+        if (res.status === 423) {
+                alert('Must update app version first');
+                return false
+              } 
         return(res.data.saved_location_arr)
 }catch(err) {
 }

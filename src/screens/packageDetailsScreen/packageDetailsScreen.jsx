@@ -12,6 +12,7 @@ import subscripePackage from '../../Features/subscripePackage/subscripePackage';
 import SuccessAddVehicle from '../../components/successAddVehicle/successAddVehicle';
 import {Alert} from 'react-native';
 import paymentTab from '../../Features/paymentTab/paymntTab';
+import { msgProvider } from '../../Provider/Messageconsolevalidationprovider/messageProvider';
 
 export default function PackageDetailsScreen({navigation, route}) {
   const [data, setData] = useState();
@@ -22,6 +23,10 @@ export default function PackageDetailsScreen({navigation, route}) {
 
   useEffect(() => {
     apiSauce.get(`/get_package_details/${route.params}`).then(res => {
+      if (res.status === 423) {
+                msgProvider.alert('Must update app version first');
+                return false
+              } 
       setData(res.data.data);
     });
   }, []);

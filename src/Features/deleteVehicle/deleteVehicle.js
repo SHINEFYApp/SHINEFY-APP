@@ -7,6 +7,10 @@ export default async function deleteVehicle(vehicle_id) {
     var add_car_arr = await localStorage.getItemObject('add_car_arr');
     try {
         let res = await apiSauce.get(`/delete_vehicle/${user_id}/${vehicle_id}`) 
+         if (res.status === 423) {
+                alert('Must update app version first');
+                return false
+              } 
         return(res.data)
 }catch(err) {
   

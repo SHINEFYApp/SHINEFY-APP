@@ -47,7 +47,7 @@ export default function BookingDetails({route , navigation}) {
     },[])
 
 
-    console.log(bookingData)
+
 
     return(
          <View className={'pt-[10px] px-5'}>

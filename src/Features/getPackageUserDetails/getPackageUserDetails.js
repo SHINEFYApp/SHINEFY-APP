@@ -12,6 +12,9 @@ export default async function getUserPackageDetails(package_id) {
 
 
   let res = await apiSauce.get(url, {user_id});
-
+if (res.status === 423) {
+                alert('Must update app version first');
+                return false
+              } 
   return res.data;
 }

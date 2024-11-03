@@ -9,6 +9,10 @@ export default async function getBrand() {
     var add_car_arr = await localStorage.getItemObject('add_car_arr');
     try {
         let res = await apiSauce.get(`/get_add_vehical/${user_id}/`)
+        if (res.status === 423) {
+                alert('Must update app version first');
+                return false
+              } 
         return(res.data)
     }catch(err) {
    

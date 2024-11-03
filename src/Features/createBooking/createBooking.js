@@ -103,7 +103,7 @@ export default async function cashBooking(bookingDetails, navigation ,setIsPopUp
       url = config.baseURL + 'create_booking_multi';
     }
    
-    console.log(data)
+
 
     try {
       let obj = await apifuntion.postApi(url, data)
