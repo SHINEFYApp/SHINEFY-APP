@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {Alert} from 'react-native';
 import {CommonActions} from '@react-navigation/native';
-// import { appleAuth,AppleButton } from '@invertase/react-native-apple-authentication';
+import appleAuth , { AppleAuthRequestOperation,
+  AppleAuthRequestScope,
+  AppleAuthCredentialState,}  from '@invertase/react-native-apple-authentication';
 import {
   msgProvider,
   msgText,
@@ -71,7 +73,7 @@ class SocialLoginProvider extends Component {
       } else if (btn == 'google') {
         this.GoogleLogin(navigation , setSignUp);
       } else if (btn == 'apple') {
-        this.Applelogin(navigation);
+        this.Applelogin(navigation ,setSignUp);
       }
     }
   };
@@ -145,14 +147,19 @@ class SocialLoginProvider extends Component {
       }
     }
   };
-  Applelogin = async navigation => {
+  Applelogin = async (navigation , setSignUp) => {
+ 
+    try {
+
+    
     await appleAuth
       .performRequest({
-        requestedOperation: appleAuth.Operation.LOGIN,
-        requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
+        requestedOperation: AppleAuthRequestOperation.LOGIN,
+        requestedScopes: [AppleAuthRequestScope.EMAIL, AppleAuthRequestScope.FULL_NAME],
       })
       .then(
         res => {
+     
           var result = {
             social_name: res.fullName.familyName,
             social_first_name: res.fullName.givenName,
@@ -163,11 +170,13 @@ class SocialLoginProvider extends Component {
             logintype: 'apple',
             social_id: res.user,
           };
-          this.callsocailweb(result, navigation);
+          this.callsocailweb(result, navigation , setSignUp);
         },
         error => {},
       );
-
+    } catch (err) {
+      
+    }
     // TODO: Send the token to backend
   };
   socaillogout = async (type, navigation) => {

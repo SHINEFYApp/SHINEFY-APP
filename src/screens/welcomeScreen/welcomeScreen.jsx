@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {
   BackHandler,
   ImageBackground,
+  Platform,
   StatusBar,
   StyleSheet,
 } from 'react-native';
@@ -21,11 +22,14 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import googleLogin from '../../Features/googleLogin/googleLogin';
 import googleIcon from '../../assets/icons/googleLoginIcon.webp';
 import facebookIcon from '../../assets/icons/facebookIcon.png';
+import appleIcon from '../../assets/Contact.png';
 import facebookLogin from '../../Features/facebookLogin/facebookLogin';
 import { AccessToken, LoginButton } from 'react-native-fbsdk-next';
 import callsocailweb from '../../Features/socialLogin/socialLogin';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import getHome from '../../Features/getHome/getHome';
+import appleLogin from '../../Features/appleLogin/appleLogin';
+import appleAuth from '@invertase/react-native-apple-authentication';
 export default function WelcomeScreen({navigation}) {
   const logoScale = useSharedValue(1);
   const logoTranslateY = useSharedValue(0);
@@ -129,25 +133,45 @@ export default function WelcomeScreen({navigation}) {
                 secondStyle={true}
               />
               <View className="flex-row justify-center">
-                <TouchableOpacity
-                  onPress={() => {
-                    googleLogin(navigation , setUserData);
-                  
-                  }}>
-                  <Image source={googleIcon} width={70} height={50} />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => {
-                    facebookLogin(navigation , setUserData);
-                  }}>
+                {
+                  Platform.OS == "android" &&
+                  <>
+                    <TouchableOpacity
+                      onPress={() => {
+                        googleLogin(navigation , setUserData);
+                      
+                      }}>
+                      <Image source={googleIcon} width={70} height={50} />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => {
+                        facebookLogin(navigation , setUserData);
+                      }}>
 
-                  <Image
-                    source={facebookIcon}
-                    width={70}
-                    height={50}
-                    resizeMode="contain"
-                  />
-                </TouchableOpacity>
+                      <Image
+                        source={facebookIcon}
+                        width={70}
+                        height={50}
+                        resizeMode="contain"
+                      />
+                    </TouchableOpacity>
+                  </>
+                }
+                {/* {
+                     appleAuth.isSupported &&
+                        <TouchableOpacity
+                          onPress={() => {
+                            appleLogin(navigation , setUserData);
+                          }}>
+
+                          <Image
+                            source={appleIcon}
+                            width={70}
+                            height={50}
+                            resizeMode="contain"
+                          />
+                        </TouchableOpacity>
+                } */}
               </View>
             </View>
             <View className="absolute bottom-5">

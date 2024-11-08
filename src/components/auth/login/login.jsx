@@ -65,6 +65,7 @@ export default function LoginModal({openSignup, navigation, closeLogin}) {
               onPress={async () => {
                 setIsLoading(true)
                 await loginAuth(userData, navigation, closeLogin ,setIsLoading);
+                setIsLoading(false)
                 }}
             />
             <Text

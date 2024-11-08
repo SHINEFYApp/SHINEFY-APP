@@ -16,6 +16,7 @@ import {config} from '../../Provider/configProvider';
 import SubTotalBooking from '../../components/subTotalBooking/SubTotalBooking';
 import myCarsList, {fetchMyCars} from '../../atoms/carsList/myCarsList';
 import getUserPackageDetails from '../../Features/getPackageUserDetails/getPackageUserDetails';
+import sortDate from '../../utlites/sortDate';
 
 export default function PackageInfo({navigation, route}) {
 
@@ -29,12 +30,15 @@ export default function PackageInfo({navigation, route}) {
        let newData = {extra_service_arr : res.data.extra_services , service_arr :res.data.main_services}
         setServices(newData);
       };
-      setBookingDetails({
-        ...bookingDetails,
-        address_loc: route.params.bookingType.params.location,
-        longitude: route.params.bookingType.params.longitude,
-        latitude: route.params.bookingType.params.latitude,
-      });
+    let date = new Date();
+
+        setBookingDetails({
+             booking_date: sortDate(date.toLocaleDateString("en-us")),
+
+      address_loc: route.params.bookingType.params.location,
+      longitude: route.params.bookingType.params.longitude,
+      latitude: route.params.bookingType.params.latitude,
+    });
       fetchData();
     }, []);
 

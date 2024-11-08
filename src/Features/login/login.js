@@ -17,11 +17,12 @@ export default async function loginAuth(data, navigation, closeLoginModal , setI
   let url = config.baseURL + 'Login';
 
   apifuntion
-    .postApi(url, formData)
-    .then(obj => {
-      setIsLoading(false)
-      if (obj.success == 'true') {
-        closeLoginModal();
+  .postApi(url, formData)
+  .then(obj => {
+    setIsLoading(false)
+    if (obj.success == 'true') {
+      
+      closeLoginModal();
         var user_arr = obj.user_details;
         let user_id = user_arr.user_id;
         let otp_verify = user_arr.otp_verify;

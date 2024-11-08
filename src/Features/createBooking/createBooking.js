@@ -107,7 +107,7 @@ export default async function cashBooking(bookingDetails, navigation ,setIsPopUp
 
     try {
       let obj = await apifuntion.postApi(url, data)
-   
+    
       if(obj.success == "true") {
         if(bookingDetails.payment_method == 1) {
           return obj.online_payment_url

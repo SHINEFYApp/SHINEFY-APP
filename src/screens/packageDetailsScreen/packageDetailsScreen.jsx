@@ -58,14 +58,22 @@ export default function PackageDetailsScreen({navigation, route}) {
         <SuccessAddVehicle closePopUp={handleClosePopUp} />
       </Modal>
       <ScrollView>
-        <Image source={img} className="w-full" />
+        <Image source={{uri:data?.package.package_img}} className="w-full h-[180px]" />
         <View className="bg-white flex-1 rounded-3xl px-5 py-10 -mt-2 justify-between">
           <View>
+                <Text className="text-2xl font-bold text-mainColor">
+
+                  {
+                    config.language == 0 ?
+                      data?.package?.name.split(" ").slice(-2).join(" ")
+                    :  data?.package?.name_ar.split(" ").slice(-2).join(" ")
+                    }
+                </Text>
             <View className="flex-row items-center justify-between">
-              <Text className="text-xl font-semibold">
+              <Text className="text-xl font-semibold  w-[70%]">
                 {config.language == 0
-                  ? data?.package?.name
-                  : data?.package?.name_ar}
+                  ? data?.package?.name.split(" ").slice(0 , data?.package?.name.split(" ").length - 2).join(" ")
+                  :data?.package?.name_ar.split(" ").slice(0 , data?.package?.name_ar.split(" ").length - 2).join(" ")}
               </Text>
               <Text className="bg-mainColor text-white py-1 px-2 rounded-lg font-bold text-xl">
                 {data?.package?.price} EGP
@@ -84,8 +92,8 @@ export default function PackageDetailsScreen({navigation, route}) {
                 return (
                   <Text>
                     {config.language == 0
-                      ? service.service_name
-                      : service.service_name_ar}
+                      ? service.extra_service_name
+                      : service.extra_service_name_arabic}
                   </Text>
                 );
               })}

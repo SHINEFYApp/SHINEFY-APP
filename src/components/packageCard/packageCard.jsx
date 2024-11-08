@@ -13,8 +13,8 @@ export default function PackageCard({navigation, pack , isUse , route , profile}
   const [bookingDetails, setBookingDetails] =
     useRecoilState(bookingDetailsAtom);
 
-
-    return (
+    
+  return (
     <View className="bg-white p-4  rounded-xl m-2" style={style.box}>
       <View className="flex-row mb-3">
         <Image
@@ -22,14 +22,17 @@ export default function PackageCard({navigation, pack , isUse , route , profile}
           style={{width: 50, resizeMode: 'cover'}}
         />
         <View className="flex-row w-full justify-between ml-4 flex-1">
+          
           <Text
             className={
-              `text-xs text-center p-1 w-[100] rounded-full ${pack?.is_expired == 1 ? "text-[#E15249] bg-[#E1524945]"  : "text-[#DD9923] bg-[#DD992345]"}  absolute right-0 `
+              `text-xs text-center p-1 w-[90] rounded-full ${pack?.is_expired == 1 ? "text-[#E15249] bg-[#E1524945]"  : "text-[#DD9923] bg-[#DD992345]"}  absolute right-0 `
             }>
-            {!profile ? "Car Detailing" : pack?.is_expired == 1 ? Lang_chg.expired[config.language] :  pack?.available_from} 
+              
+            {!profile ? pack[config.language == 0 ? 'name' : 'name_ar'].split(" ").reverse().slice(2 ,4).reverse().join(" ") : pack?.is_expired == 1 ? Lang_chg.expired[config.language] :  pack?.available_from} 
           </Text>
+        
           <View className="gap-2">
-            <Text className="font-bold text-xl">
+            <Text className="font-bold text-md  w-[40%]" numberOfLines={1}>
               {pack.name ?
                 pack[config.language == 0 ? 'name' : 'name_ar'] 
                 : pack.package_info[config.language == 0 ? 'name' : 'name_ar'] 
@@ -39,18 +42,18 @@ export default function PackageCard({navigation, pack , isUse , route , profile}
               <Image source={timeIcon} />
               <Text className="ml-2 font-bold">One Wash (SHINEFY Plus)</Text>
             </View> */}
-            <View className="flex-row gap-x-2 items-center">
+            <View className="flex-row  items-center">
               <Image source={timeIcon} />
-              <Text className=" w-[150]">
+              <Text className=" w-[140] mx-2">
                 {`${pack?.extra_services_count ? +pack.extra_services_count + +pack.main_services_count : 
                 pack?.extra_services?.length} ${Lang_chg.other_services[config.language]}`}
               </Text>
             </View>
             {
               pack?.extra_services_count &&
-            <View className="flex-row gap-x-2 items-center">
+            <View className="flex-row  items-center">
               <Image source={timeIcon} />
-              <Text className="w-[150]">
+              <Text className="w-[150] mx-2">
              
                 {pack.total_days} {Lang_chg.mins[config.language]}
               </Text>

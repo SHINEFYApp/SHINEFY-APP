@@ -41,14 +41,13 @@
 			<array>
 				<string>com.googleusercontent.apps.927978144846-isqro8n34ick9casun5orghj6i5ag7t1</string>
 				<string>com.googleusercontent.apps.927978144846-a38htlsnmqcnf3h8djcpv925miun85fk</string>
-        	</array>
-
+			</array>
 		</dict>
 	</array>
 	<key>GIDClientID</key>
-    <string>927978144846-a38htlsnmqcnf3h8djcpv925miun85fk.apps.googleusercontent.com</string>
-    <key>GIDRedirectURI</key>
-    <string>com.googleusercontent.927978144846-a38htlsnmqcnf3h8djcpv925miun85fk:/oauth2redirect/google</string>
+	<string>927978144846-a38htlsnmqcnf3h8djcpv925miun85fk.apps.googleusercontent.com</string>
+	<key>GIDRedirectURI</key>
+	<string>com.googleusercontent.927978144846-a38htlsnmqcnf3h8djcpv925miun85fk:/oauth2redirect/google</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FacebookAdvertiserIDCollectionEnabled</key>
@@ -79,9 +78,8 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSUserTrackingUsageDescription</key>
-<string>This identifier will be used to deliver personalized ads to you.</string>
-
+	<key></key>
+	<string></string>
 	<key>NSCameraUsageDescription</key>
 	<string>Shinefy would like to access your Camera for App Profile Photo Uploading. Your photos wont be shared without your permission.It is safe and secure.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

@@ -124,14 +124,19 @@ export default function PaymentMethodPackage({navigation , route}) {
         isLoading={isLoading}
           Title={Lang_chg.Confirm[config.language]}
           onPress={async () => {
-            // setIsLoading(true)
+            setIsLoading(true)
 
-            let paymentLink = await subscripePackage(route.params.packId , activePayment == Lang_chg.wallet[config.language] ? "wallet" : "visa");
+            let {paymentLink , success} = await subscripePackage(route.params.packId , activePayment == Lang_chg.wallet[config.language] ? "wallet" : "visa");
         
-            if (paymentLink != undefined){
+            if (paymentLink != ""){
               setCurrentUrl(paymentLink)
               setIsLoading(false)
               setWebView(true)
+              return false
+            } 
+            if(success) {
+                 setIsPopUpOpen(true)
+            navigation.navigate('HomeScreen')
             }
           }}
         />

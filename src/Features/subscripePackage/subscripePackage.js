@@ -18,11 +18,10 @@ export default async function subscripePackage(
   data.append('user_id', user_id);
   data.append('package_id', package_id);
   data.append('payment_method', payment_method);
-
   let res = await apifuntion.postApi(url, data);
 
   if (res.success === 'true') {
-    return res.online_payment_url;
+    return {paymentLink :res.online_payment_url , success: true};
   } else {
     msgProvider.alert(res.msg[config.language]);
 
