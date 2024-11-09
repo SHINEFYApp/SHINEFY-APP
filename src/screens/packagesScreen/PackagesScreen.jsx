@@ -27,7 +27,7 @@ export default function PackageScreen({navigation}) {
       <ScrollView>
         <View className="pt-[10] px-4">
           {data?.map(pack => {
-            return <PackageCard navigation={navigation} pack={pack} />;
+            return <PackageCard navigation={navigation} pack={pack} isButton={true}/>;
           })}
           
         </View>

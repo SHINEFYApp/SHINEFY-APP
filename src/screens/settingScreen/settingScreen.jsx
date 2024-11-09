@@ -27,6 +27,7 @@ import deleteAccount from '../../Features/deleteAccount/deleteAccount';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 import RateModal from '@pankod/react-native-store-rating/dist/index';
+import { Platform } from 'react-native';
 
 export default function SettingScreen({navigation}) {
   const [isPopUpOpenDelete, setIsPopUpOpenDelete] = useState(false);
@@ -152,11 +153,15 @@ export default function SettingScreen({navigation}) {
             arrow
             icon={rateIcon}
             Press={() => {
-              setIsPopUpRate(true);
-              // Shareratepro.Rateusfunction(
-              //   'Shinefy',
-              //   'https://play.google.com/store/apps/details?id=com.shinefy&hl=en_US&pli=1',
-              // );
+              // setIsPopUpRate(true);
+              if(Platform.OS != "ios") {
+                Shareratepro.Rateusfunction("https://apps.apple.com/eg/app/id1619736170");
+              }else {
+                Shareratepro.Rateusfunction(
+                  'https://play.google.com/store/apps/details?id=com.shinefy',
+                );
+
+              }
             }}
           />
           <SelectVechileCard

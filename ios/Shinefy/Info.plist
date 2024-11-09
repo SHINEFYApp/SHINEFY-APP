@@ -4,6 +4,7 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+
 	<key>CFBundleDisplayName</key>
 	<string>Shinefy</string>
 	<key>CFBundleExecutable</key>
@@ -20,6 +21,10 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location to provide personalized content based on your current location.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We need your location to provide personalized content even when the app is in the background.</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

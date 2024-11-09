@@ -29,7 +29,7 @@ export default function MyPackages ({navigation , route}) {
         <ScrollView>
           <View className=" px-4">
             {data?.map(pack => {
-              return <PackageCard navigation={navigation} pack={pack} isUse={true} route={route.params}/>;
+              return <PackageCard navigation={navigation} pack={pack} isUse={true} route={route.params} profile={true} isButton={true}/>;
             })}
           </View>
         </ScrollView>

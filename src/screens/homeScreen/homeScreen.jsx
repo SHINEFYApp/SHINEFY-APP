@@ -195,7 +195,7 @@ title: remoteMessage?.notification?.title, // (optional)
               horizontal={true}
               renderItem={({item, index}) => (
                 <View key={item.id} className="w-[350px] mx-2">
-                    <PackageCard pack={item} navigation={navigation} />
+                    <PackageCard pack={item} navigation={navigation} isButton={true} />
                   </View>
               )}
             /> :  <FlatList
