@@ -70,16 +70,13 @@ export default function PackageCard({navigation, pack , isUse , route , profile 
           Title={isUse ? Lang_chg.claim[config.language] :Lang_chg.buy[config.language] }
           smallButton
           onPress={() => {
-            setBookingDetails({
-              ...bookingDetails ,
-              package_id : pack.id ,
-              package_user_id :pack.package_id
-            })
+            
             if (isUse) {
               if(pack.is_expired == 1){
                 msgProvider.alert(Lang_chg.packageExpired[config.language],Lang_chg.packageError[config.language])
               }else {
-              navigation.navigate('PackageInfoScreen' , {...route , packID : pack.id})
+              navigation.navigate('PackageInfoScreen' , {...route ,  package_id : pack.id ,
+              package_user_id :pack.package_id})
               }
             } else {
             

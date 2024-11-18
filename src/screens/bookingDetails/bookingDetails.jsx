@@ -23,8 +23,6 @@ export default function BookingDetails({route , navigation}) {
     
   },[bookingData])
 
-  
-
     useEffect(()=>{
         const fetchData = async ()=>{
             const res = await getBooking(route.params)
@@ -123,6 +121,21 @@ export default function BookingDetails({route , navigation}) {
               'flex bg-[#C3C3C3] w-[80%] h-[1px] items-center my-5 mx-auto justify-center'
             }
           />
+          {
+            bookingData?.coupan_id && 
+            <>
+              <BookingOverviewTextDetails
+                title={Lang_chg.coupon[config.language]}
+                value={bookingData.coupan_code}
+                price={`${bookingData.coupan_discount} %`}
+                />
+              <View
+                className={
+                  'flex bg-[#C3C3C3] w-[80%] h-[1px] items-center my-5 mx-auto justify-center'
+                }
+                />
+                </>
+          }
           {
             bookingData?.note != "NA" &&
             <>

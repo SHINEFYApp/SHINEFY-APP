@@ -2,11 +2,12 @@ import { apifuntion } from "../../Provider/Apicallingprovider/apiProvider";
 import { config } from "../../Provider/configProvider";
 import { Lang_chg } from "../../Provider/Language_provider";
 import { localStorage } from "../../Provider/localStorageProvider";
+import { msgProvider } from "../../Provider/Messageconsolevalidationprovider/messageProvider";
 import sortDate from "../../utlites/sortDate";
 
 export default async function create_package_booking (bookingDetails, navigation ,setBookingDetails , setIsLoading , setIsPopUpOpen) {
 
-    
+    setIsLoading(true)
     var vehicle_data = await localStorage.getItemObject('booking_vehicle_arr');
     var location_data = await localStorage.getItemObject('location_arr');
     var all_service_data = await localStorage.getItemObject('booking_service_arr',);
@@ -53,9 +54,10 @@ export default async function create_package_booking (bookingDetails, navigation
   // data.append('online_amount', this.state.netpay);
  
   let url = config.baseURL + 'create_package_booking';
-  
+
   try {
     apifuntion.postApi(url, data).then(obj => {
+    
       let date = new Date()
       if(obj.success == "true") {
         setIsPopUpOpen(true)
@@ -64,6 +66,9 @@ export default async function create_package_booking (bookingDetails, navigation
         })
         setIsLoading(false)
         navigation.navigate('HomeScreen');
+      }else {
+        msgProvider.toast(obj.msg[config.language] , "center")
+        setIsLoading(false)
       }
     });
   } catch (err) {

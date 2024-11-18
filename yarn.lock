@@ -4433,6 +4433,7 @@ __metadata:
     react-native-calendar-picker: ^8.0.1
     react-native-countdown-component: ^2.7.1
     react-native-dashed-line: ^1.1.0
+    react-native-dotenv: ^3.4.11
     react-native-dropdown-select-list: ^2.0.5
     react-native-fast-image: ^8.6.3
     react-native-fbsdk-next: ^13.0.0
@@ -6475,7 +6476,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:^16.4.4, dotenv@npm:~16.4.5":
+"dotenv@npm:^16.4.4, dotenv@npm:^16.4.5, dotenv@npm:~16.4.5":
   version: 16.4.5
   resolution: "dotenv@npm:16.4.5"
   checksum: 301a12c3d44fd49888b74eb9ccf9f07a1f5df43f489e7fcb89647a2edcd84c42d6bc349dc8df099cd18f07c35c7b04685c1a4f3e6a6a9e6b30f8d48c15b7f49c
@@ -12203,6 +12204,17 @@ __metadata:
   version: 1.1.0
   resolution: "react-native-dashed-line@npm:1.1.0"
   checksum: 8be97e53929b9ec16c98037e8c59429e7784d1d93c60750e3a572185518fd4ff8b8cbe947707d991b6c0ea040ce71630517a2737b09b1b11f4814fbadb5d2c81
+  languageName: node
+  linkType: hard
+
+"react-native-dotenv@npm:^3.4.11":
+  version: 3.4.11
+  resolution: "react-native-dotenv@npm:3.4.11"
+  dependencies:
+    dotenv: ^16.4.5
+  peerDependencies:
+    "@babel/runtime": ^7.20.6
+  checksum: 3ebac2c2ed79dd7e4920fd3fc2da9187413b7190231618e4858b46c47833677838b96d531afe7bd5c4b0a60454dba40cb8708722210df5d522e30aefbf41da05
   languageName: node
   linkType: hard
 

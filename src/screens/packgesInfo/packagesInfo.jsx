@@ -24,9 +24,10 @@ export default function PackageInfo({navigation, route}) {
   const [services, setServices] = useState();
   const [bookingDetails, setBookingDetails] =
     useRecoilState(bookingDetailsAtom);
+  
     useEffect(() => {
       let fetchData = async () => {
-        let res = await getUserPackageDetails(route.params.packID)
+        let res = await getUserPackageDetails(route.params.package_id)
        let newData = {extra_service_arr : res.data.extra_services , service_arr :res.data.main_services}
         setServices(newData);
       };
@@ -34,7 +35,8 @@ export default function PackageInfo({navigation, route}) {
 
         setBookingDetails({
              booking_date: sortDate(date.toLocaleDateString("en-us")),
-
+        package_user_id:route.params.package_user_id,
+        package_id : route.params.package_id,
       address_loc: route.params.bookingType.params.location,
       longitude: route.params.bookingType.params.longitude,
       latitude: route.params.bookingType.params.latitude,

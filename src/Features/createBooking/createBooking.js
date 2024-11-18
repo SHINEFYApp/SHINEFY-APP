@@ -50,6 +50,7 @@ export default async function cashBooking(bookingDetails, navigation ,setIsPopUp
       
     }
 
+
     // data.append(`extra_service_quantity[${index}]`,value.quantity);
     data.append('free_status', '0'); // false=0 true=1 is Free
     data.append('service_id', bookingDetails.service_id);
@@ -71,11 +72,11 @@ export default async function cashBooking(bookingDetails, navigation ,setIsPopUp
     );
     data.append(
       'coupan_id',
-      bookingDetails.coupan_id ? bookingDetails.coupan_id : 'NA',
+      bookingDetails.coupon_id ? bookingDetails.coupon_id : 'NA',
     );
     data.append(
       'discount_amount',
-      bookingDetails.dis_amount ? bookingDetails.dis_amount : 'NA',
+      bookingDetails.discount_amount ? bookingDetails.discount_amount : 'NA',
     );
     data.append('service_time', bookingDetails.service_time); // selected srvice time + extra service time
     data.append('address_loc', bookingDetails.address_loc);
@@ -107,7 +108,7 @@ export default async function cashBooking(bookingDetails, navigation ,setIsPopUp
 
     try {
       let obj = await apifuntion.postApi(url, data)
-    
+      
       if(obj.success == "true") {
         if(bookingDetails.payment_method == 1) {
           return obj.online_payment_url

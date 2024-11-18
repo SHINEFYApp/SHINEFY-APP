@@ -32,6 +32,8 @@ const BookingOverview = ({navigation, route}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isPopUpOpen , setIsPopUpOpen] = useState(false)
 
+
+
   const extraServiceData = useMemo(() => {
     let extraData = [];
     for (let key in bookingDetails?.extraData?.extraServices) {
@@ -274,6 +276,11 @@ const BookingOverview = ({navigation, route}) => {
                 Title={Lang_chg.Remove[config.language]}
                 onPress={async () => {
                   setCoupon();
+                  setBookingDetails({
+                    ...bookingDetails,
+                    coupon_id: "NA",
+                    discount_amount: "NA",
+                  });
                 }}
               /> :<Button
                 Title={Lang_chg.Apply[config.language]}
@@ -283,15 +290,15 @@ const BookingOverview = ({navigation, route}) => {
                     coupon.couponName,
                   );
 
-                  setCoupon({
-                    ...coupon,
-                    dis_amount: res.dis_amount,
-                    total_amount: res.total_amount,
-                  });
                   setBookingDetails({
                     ...bookingDetails,
                     coupon_id: res.coupan_id,
                     discount_amount: res.dis_amount,
+                    total_amount: res.total_amount,
+                  });
+                  setCoupon({
+                    ...coupon,
+                    dis_amount: res.dis_amount,
                     total_amount: res.total_amount,
                   });
                 }}

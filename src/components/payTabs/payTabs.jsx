@@ -41,7 +41,7 @@ export default function PayTabs({setWebView, webView, navigation, url , setIsPop
           //   }
           navigation.navigate("HomeScreen")
           success()
-        }else if (t.includes('payment_cancel')) {
+        }else {
           msgProvider.toast(Lang_chg.payment_fail[config.language], 'center');
           setWebView(false)
           return false;

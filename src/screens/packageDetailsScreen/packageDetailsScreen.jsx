@@ -91,6 +91,8 @@ export default function PackageDetailsScreen({navigation, route}) {
               {data?.extra_services?.map(service => {
                 return (
                   <Text>
+                    {service.quantity  && `${service.quantity} X `} 
+
                     {config.language == 0
                       ? service.extra_service_name
                       : service.extra_service_name_arabic}
@@ -105,7 +107,8 @@ export default function PackageDetailsScreen({navigation, route}) {
               </Text>
               {data?.main_services?.map(service => {
                 return (
-                  <Text>
+                  <Text className="mb-3">
+                    {service.quantity  && `${service.quantity} X `} 
                     {config.language == 0
                       ? service.service_name
                       : service.service_name_ar}

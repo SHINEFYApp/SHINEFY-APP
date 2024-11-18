@@ -154,7 +154,7 @@ export default function SettingScreen({navigation}) {
             icon={rateIcon}
             Press={() => {
               // setIsPopUpRate(true);
-              if(Platform.OS != "ios") {
+              if(Platform.OS == "ios") {
                 Shareratepro.Rateusfunction("https://apps.apple.com/eg/app/id1619736170");
               }else {
                 Shareratepro.Rateusfunction(
