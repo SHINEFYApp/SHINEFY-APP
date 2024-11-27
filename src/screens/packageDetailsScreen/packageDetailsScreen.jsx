@@ -13,6 +13,7 @@ import SuccessAddVehicle from '../../components/successAddVehicle/successAddVehi
 import {Alert} from 'react-native';
 import paymentTab from '../../Features/paymentTab/paymntTab';
 import { msgProvider } from '../../Provider/Messageconsolevalidationprovider/messageProvider';
+import { localStorage } from '../../Provider/localStorageProvider';
 
 export default function PackageDetailsScreen({navigation, route}) {
   const [data, setData] = useState();
@@ -22,13 +23,18 @@ export default function PackageDetailsScreen({navigation, route}) {
   const [webView, setWebView] = useState(false);
 
   useEffect(() => {
-    apiSauce.get(`/get_package_details/${route.params}`).then(res => {
+    const fetchData = async()=>{
+    var user_arr = await localStorage.getItemObject('user_arr');
+    let user_id = user_arr.user_id;
+    apiSauce.get(`/get_package_details/${route.params}` , {user_id}).then(res => {
       if (res.status === 423) {
                 msgProvider.alert('Must update app version first');
                 return false
               } 
       setData(res.data.data);
-    });
+    }); 
+    }
+    fetchData()
   }, []);
   function handleClosePopUp() {
     setIsPopUpOpen(false);

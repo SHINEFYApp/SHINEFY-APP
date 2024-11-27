@@ -6,14 +6,31 @@ import sortDate from '../../utlites/sortDate';
 
 export default async function getTimeSlots(data) {
 
+let extraServicesTime = 0
+let totalServiceTime = 0
+    if(data.isEdit) {
+      totalServiceTime = data.service_time
+    }else {
+      if(data?.extraData?.extraServices){
+        Object.entries(data?.extraData?.extraServices).forEach(([key, value] , index)=>{
+          let time = (value.extra_service_time * value.quantity)   
+          extraServicesTime += +time
+        })
+      }
+        totalServiceTime = (data.service_time * (data?.extraData?.allSelectedCars?.length ? data.extraData.allSelectedCars.length : 1)) + extraServicesTime
+
+          }
+
   var user_arr = await localStorage.getItemObject('user_arr');
   let user_id = user_arr.user_id;
   let latitude = data.latitude;
   let longitude = data.longitude;
-  let service_time = data.service_time;
+
+  let service_time = totalServiceTime;
   let amount = data.service_price ? data.service_price : 0;
   let date = data.booking_date;
-  
+
+
   var url =
     'get_slots/' +
     latitude +
@@ -27,7 +44,7 @@ export default async function getTimeSlots(data) {
     user_id +
     '/' +
     amount;
-  
+
   let {data:res , status} = await apiSauce.get(url);
 if (status === 423) {
                 alert('Must update app version first');

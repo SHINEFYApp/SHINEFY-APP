@@ -26,8 +26,8 @@ export default async function forgotPassword(navigation, phone_number) {
   data.append('phone_number', phone_number);
   data.append('user_type', 1);
   let url = config.baseURL + 'forgot_password';
-  let res = await apifuntion.postApi(url, data);
-
+  let res = await apifuntion.postApi(url, data)
+  msgProvider.alert("Warning" , "Please check your Email to get OTP")
   navigation.navigate('OTPScreen', {
     check: 2,
     phone_number,

@@ -71,7 +71,7 @@ export default function SelectDateTime({navigation , route}) {
     });
   }
 
-
+  
   useEffect(() => {
     const fetchDate = async () => {
       setIsLoadingData(true)
@@ -79,8 +79,9 @@ export default function SelectDateTime({navigation , route}) {
         longitude : route.params.longitude,
         latitude : route.params.latitude,
         booking_date : bookingDetails.booking_date,
-        service_time : route.params.service_hours,
-        service_price : 0
+        service_time : route.params.service_hours ,
+        service_price : 0,
+        isEdit:route.params?.isEdit
       } :bookingDetails));
       setIsLoadingData(false)
     };

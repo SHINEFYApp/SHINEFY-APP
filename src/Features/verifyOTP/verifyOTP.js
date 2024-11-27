@@ -28,6 +28,7 @@ export async function sendOTP(OTP , phoneNumber , userId , navigation) {
   apifuntion
     .postApi(url, data)
     .then(obj => {
+   
       if (obj.success == 'true') {
         navigation.navigate('ChangePassword' , userId)
         if (check == 1) {

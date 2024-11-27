@@ -6,25 +6,20 @@ import {localStorage} from '../../Provider/localStorageProvider';
 import sortDate from '../../utlites/sortDate';
 
 export default async function cashBooking(bookingDetails, navigation ,setIsPopUpOpen ,setBookingDetails) {
+  let extraServicesTime = 0
+   if(bookingDetails?.extraData?.extraServices) {
+
+     Object.entries(bookingDetails?.extraData?.extraServices).forEach(([key, value] , index)=>{
+       let time = (value.extra_service_time * value.quantity)   
+       extraServicesTime += +time
+      })
+    }
   var vehicle_data = await localStorage.getItemObject('booking_vehicle_arr');
   var location_data = await localStorage.getItemObject('location_arr');
   var all_service_data = await localStorage.getItemObject(
     'booking_service_arr',
   );
-  // let service_data = all_service_data.service_data;
-  // var extra_service_all_id = [];
-  // let extra_service_data = all_service_data.extra_service_data;
-  // for (let i = 0; i < extra_service_data.length; i++) {
-    //   extra_service_all_id[i] = extra_service_data[i].extra_service_id;
-    // }
-    // let extra_id = extra_service_all_id.toString();
-    // var vat_data = await localStorage.getItemObject('vat_data');
-    // var slot_data = await localStorage.getItemObject('booking_time_slots');
-    // var discount_arr = await localStorage.getItemObject('discount_arr');
-    // this.setState({bookingPrice: discount_arr.new_amount});
     var user_arr = await localStorage.getItemObject('user_arr');
-    // this.setState({user_id: user_arr.user_id});
-    
     var data = new FormData();
     data.append('user_id', user_arr.user_id);
     if (bookingDetails.extraData.allSelectedCars.length == 1) {
@@ -51,7 +46,6 @@ export default async function cashBooking(bookingDetails, navigation ,setIsPopUp
     }
 
 
-    // data.append(`extra_service_quantity[${index}]`,value.quantity);
     data.append('free_status', '0'); // false=0 true=1 is Free
     data.append('service_id', bookingDetails.service_id);
     data.append('service_price', bookingDetails.service_price);
@@ -61,9 +55,6 @@ export default async function cashBooking(bookingDetails, navigation ,setIsPopUp
       ? bookingDetails.total_amount
       : bookingDetails.service_price,
     );
-    // data.append('vat_amount', vat_data.amount); //no validation
-    // data.append('vat_per', vat_data.commission_amt);// no v/aliation
-    // data.append('service_boy_id', slot_data.service_boy_id);
     data.append(
       'total_price',
       bookingDetails.total_amount
@@ -78,7 +69,7 @@ export default async function cashBooking(bookingDetails, navigation ,setIsPopUp
       'discount_amount',
       bookingDetails.discount_amount ? bookingDetails.discount_amount : 'NA',
     );
-    data.append('service_time', bookingDetails.service_time); // selected srvice time + extra service time
+    data.append('service_time', (bookingDetails.service_time * bookingDetails.extraData.allSelectedCars.length) + extraServicesTime); // selected srvice time + extra service time
     data.append('address_loc', bookingDetails.address_loc);
     data.append('latitude', bookingDetails.latitude);
     data.append('longitude', bookingDetails.longitude);
@@ -105,10 +96,9 @@ export default async function cashBooking(bookingDetails, navigation ,setIsPopUp
     }
    
 
-
     try {
       let obj = await apifuntion.postApi(url, data)
-      
+      console.log(obj)
       if(obj.success == "true") {
         if(bookingDetails.payment_method == 1) {
           return obj.online_payment_url

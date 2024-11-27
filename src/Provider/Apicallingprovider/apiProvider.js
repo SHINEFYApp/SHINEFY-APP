@@ -2,7 +2,7 @@ import NetInfo from '@react-native-community/netinfo';
 import {Platform} from 'react-native';
 
 class ApiContainer {
-  myAppVersion = Platform.OS === 'ios' ? '16' : '16';
+  myAppVersion = Platform.OS === 'ios' ? '19' : '19';
   usertype = 'user';
 
   getApi = async (url, status) => {
@@ -30,6 +30,7 @@ class ApiContainer {
               
               if (response.status === 423) {
                 alert('Must update app version first');
+                
               } else {
                 return response.json();
               }

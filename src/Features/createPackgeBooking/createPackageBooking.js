@@ -7,6 +7,15 @@ import sortDate from "../../utlites/sortDate";
 
 export default async function create_package_booking (bookingDetails, navigation ,setBookingDetails , setIsLoading , setIsPopUpOpen) {
 
+  let extraServicesTime = 0
+     if(bookingDetails?.extraData?.extraServices)  {
+
+       Object.entries(bookingDetails?.extraData?.extraServices).forEach(([key, value] , index)=>{
+         let time = (value.extra_service_time * value.quantity)   
+         extraServicesTime += +time
+        })
+      }
+
     setIsLoading(true)
     var vehicle_data = await localStorage.getItemObject('booking_vehicle_arr');
     var location_data = await localStorage.getItemObject('location_arr');
@@ -24,12 +33,15 @@ export default async function create_package_booking (bookingDetails, navigation
   
         data.append(`vehicle_id[${index}]`, ele);
       })
-    
-
   
  
   data.append('service_id', bookingDetails.service_id);
-  data.append('service_time', bookingDetails.service_time); // selected srvice time + extra service time
+  if(extraServicesTime){
+    data.append('service_time', (bookingDetails.service_time * bookingDetails.extraData.allSelectedCars.length) + extraServicesTime); // selected srvice time + extra service time // selected srvice time + extra service time
+  } else {
+    data.append('service_time', (bookingDetails.service_time * bookingDetails.extraData.allSelectedCars.length)); // selected srvice time + extra service time // selected srvice time + extra service time
+  }
+
   data.append('address_loc', bookingDetails.address_loc);
   data.append('latitude', bookingDetails.latitude);
   data.append('longitude', bookingDetails.longitude);
@@ -51,7 +63,7 @@ export default async function create_package_booking (bookingDetails, navigation
   data.append('payment_method', 0);
   data.append('area_id', bookingDetails.area_id);
   data.append('note', bookingDetails.notes ? bookingDetails.notes : 'NA');
-  // data.append('online_amount', this.state.netpay);
+
  
   let url = config.baseURL + 'create_package_booking';
 

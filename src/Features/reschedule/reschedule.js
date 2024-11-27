@@ -20,6 +20,7 @@ export default async function editTimeBooking(data , navigation) {
       fd.append('service_boy_id', data.service_boy_id);
       fd.append('address_loc', data.address_loc);
 
+
       let url = config.baseURL + 'reschedule_booking';
         try {
           let obj = await apifuntion.postApi(url, fd)
