@@ -10,6 +10,8 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import getHome from '../../Features/getHome/getHome';
 import { Platform } from 'react-native';
 import { delete_all_notification_click } from '../../Features/deleteNotfication/deleteNotfication';
+import { useRecoilValue } from 'recoil';
+import isGuestAtom from '../../atoms/isGuest';
 export default function NavigationTop(props) {
  const insets = useSafeAreaInsets();
 
@@ -89,6 +91,7 @@ export default function NavigationTop(props) {
         return props.route.name;
     }
   }
+  const isGuest = useRecoilValue(isGuestAtom)
 
 
 
@@ -98,7 +101,10 @@ export default function NavigationTop(props) {
       className={
         `  flex-row w-full  justify-between z-10 p-5  bg-white items-center rounded-b-2xl border-b border-l border-r border-[#C3C3C3]`
       }>
-      {props.route.name == 'Home' ? (
+        {
+          !isGuest && 
+          <>
+              {props.route.name == 'Home' ? (
         <TouchableOpacity
           onPress={() => {
             props.navigation.navigate('SavedLocationScreen');
@@ -115,16 +121,19 @@ export default function NavigationTop(props) {
             className={config.language === 0 ? '' : 'rotate-180'}
           />
         </TouchableOpacity>
-      )}
+      )}</>
+          
+        }
+  
       <View className="mx-auto">
         <Text className="font-extrabold text-xl text-center w-full">
           {handleTitle()}
         </Text>
       </View>
       {
-       
-      }
-      {
+       !isGuest&& 
+       <>
+        {
         props.route.name == 'notficationScreen' ?
       <TouchableOpacity
         onPress={() => {
@@ -140,6 +149,9 @@ export default function NavigationTop(props) {
         <Image source={notfiIcon} />
       </TouchableOpacity>
       }
+       </>
+      }
+     
     </View>
   );
 }

@@ -14,6 +14,8 @@ import {Alert} from 'react-native';
 import paymentTab from '../../Features/paymentTab/paymntTab';
 import { msgProvider } from '../../Provider/Messageconsolevalidationprovider/messageProvider';
 import { localStorage } from '../../Provider/localStorageProvider';
+import isGuestAtom from '../../atoms/isGuest';
+import { useRecoilValue } from 'recoil';
 
 export default function PackageDetailsScreen({navigation, route}) {
   const [data, setData] = useState();
@@ -21,6 +23,7 @@ export default function PackageDetailsScreen({navigation, route}) {
   const [isPaymentURL, setIsPaymentURL] = useState('');
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   const [webView, setWebView] = useState(false);
+  const isGuest = useRecoilValue(isGuestAtom)
 
   useEffect(() => {
     const fetchData = async()=>{
@@ -123,12 +126,15 @@ export default function PackageDetailsScreen({navigation, route}) {
               })}
             </View>
           </View>
+          {
+            !isGuest &&
           <Button
             Title={Lang_chg.claim[config.language]}
             onPress={async () => {
               navigation.navigate("PaymentMethodPackage" , {packId :route.params })
             }}
           />
+          }
         </View>
       </ScrollView>
     </View>

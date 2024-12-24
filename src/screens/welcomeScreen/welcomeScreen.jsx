@@ -30,6 +30,8 @@ import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import getHome from '../../Features/getHome/getHome';
 import appleLogin from '../../Features/appleLogin/appleLogin';
 import appleAuth from '@invertase/react-native-apple-authentication';
+import { useRecoilState } from 'recoil';
+import isGuestAtom from '../../atoms/isGuest';
 export default function WelcomeScreen({navigation}) {
   const logoScale = useSharedValue(1);
   const logoTranslateY = useSharedValue(0);
@@ -45,7 +47,7 @@ export default function WelcomeScreen({navigation}) {
     };
     language_fun();
     getIsLoggedIn();
-  });
+  },[]);
   const handleLoginPress = () => {
     setIsSignupModalVisible(false);
     logoScale.value = withTiming(1);
@@ -102,6 +104,9 @@ export default function WelcomeScreen({navigation}) {
     }
   },[userData])
 
+  const [isGuest , setIsGuest] = useRecoilState(isGuestAtom)
+
+
   return (
     <View className="flex-1">
       <StatusBar
@@ -130,6 +135,18 @@ export default function WelcomeScreen({navigation}) {
               <Button
                 onPress={handleSignupPress}
                 Title={Lang_chg.create_new_account[config.language]}
+                secondStyle={true}
+              />
+              <Button
+                onPress={async()=>{
+                    setIsGuest(true)
+                    localStorage.setItemObject('user_arr', "0000");
+                   localStorage.setItemObject('user_arr', {user_id : "0000"})
+                  //  await localStorage.setItemObject('isGust', true)
+                   
+                   navigation.navigate('HomeScreen', {home_status: 1});
+                }}
+                Title={Lang_chg.continueWithout[config.language]}
                 secondStyle={true}
               />
               <View className="flex-row justify-center">

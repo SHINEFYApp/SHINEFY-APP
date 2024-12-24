@@ -20,7 +20,7 @@ import rateIcon from '../../assets/icons/setting/rateIcon.png';
 import shareIcon from '../../assets/icons/setting/shareIcon.png';
 import Share from 'react-native-share';
 import {Shareratepro} from '../../Provider/Sharerateapp';
-import {useRecoilValue} from 'recoil';
+import {useRecoilState, useRecoilValue} from 'recoil';
 import profileData from '../../atoms/profileData/profileData';
 import notificationStatus from '../../Features/notificationStatus/notificationStatus';
 import deleteAccount from '../../Features/deleteAccount/deleteAccount';
@@ -28,12 +28,14 @@ import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 import RateModal from '@pankod/react-native-store-rating/dist/index';
 import { Platform } from 'react-native';
+import isGuestAtom from '../../atoms/isGuest';
 
 export default function SettingScreen({navigation}) {
   const [isPopUpOpenDelete, setIsPopUpOpenDelete] = useState(false);
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   const [isPopUpRate, setIsPopUpRate] = useState(false);
   const data = useRecoilValue(profileData);
+  const [isGuest , setIsGuest] = useRecoilState(isGuestAtom)
 
   function handleClosePopUp() {
     setIsPopUpOpen(false);
@@ -41,6 +43,7 @@ export default function SettingScreen({navigation}) {
   function handleClosePopUpDelete() {
     setIsPopUpOpenDelete(false);
   }
+
 
   return (
     <View className="pt-[10] px-5">
@@ -91,6 +94,7 @@ export default function SettingScreen({navigation}) {
           onConfirm={async () => {
             AppLogout(navigation);
             handleClosePopUp();
+            setIsGuest(false)
           }}
           heading={Lang_chg.logout_txt[config.language]}
           p={Lang_chg.msgConfirmTextLogoutMsg[config.language]}
@@ -99,30 +103,30 @@ export default function SettingScreen({navigation}) {
         />
       </Modal>
       <ScrollView>
-        <SelectVechileCard
-          text={Lang_chg.notification_txt[config.language]}
-          screen={null}
-          navigation={navigation}
-          isSwitch
-          isSwitchEnabled={Boolean(data?.notification_status)}
-          arrow
-          icon={notifyIcon}
-          onChangeSwitch={() => {
-            notificationStatus(data.notification_status);
-          }}
-        />
-        <SelectVechileCard
-          text={Lang_chg.changepassword_txt[config.language]}
-          screen={'ChangePasswordProfile'}
-          navigation={navigation}
-          icon={keyIcon}
-        />
-        {/* <SelectVechileCard
-          text={Lang_chg.contactus_txt[config.language]}
-          screen={'Contact Us'}
-          navigation={navigation}
-          icon={phoneIcon}
-        /> */}
+        {
+          !isGuest && 
+          <>
+          
+          <SelectVechileCard
+            text={Lang_chg.notification_txt[config.language]}
+            screen={null}
+            navigation={navigation}
+            isSwitch
+            isSwitchEnabled={Boolean(data?.notification_status)}
+            arrow
+            icon={notifyIcon}
+            onChangeSwitch={() => {
+              notificationStatus(data.notification_status);
+            }}
+          />
+          <SelectVechileCard
+            text={Lang_chg.changepassword_txt[config.language]}
+            screen={'ChangePasswordProfile'}
+            navigation={navigation}
+            icon={keyIcon}
+          />
+          </>
+        }
         <SelectVechileCard
           text={Lang_chg.faqs_txt[config.language]}
           screen={"FAQ's"}

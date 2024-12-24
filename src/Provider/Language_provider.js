@@ -381,7 +381,9 @@ class Language_provider {
     "If your company don't have domain registered please enter company code",
     'اذا لم يكن لديك بريد الكتروني خاص بالشركة يمكنك ادخل كود الشركة',
   ];
+   
   companyCodeTitle = ['Company Code (optional)', 'كود الشركة (اختياري)'];
+  companyCodeTitleTxt = ['Company Code ', 'كود الشركة '];
   clicking_signup_btn = ['I accept all', 'أنا أقبل كل شيء'];
   tearmsetting = ['Terms & Conditions', 'الشروط والأحكام'];
   and = ['and', 'و'];
@@ -407,6 +409,7 @@ class Language_provider {
   month = ['Monthly', 'شهريا'];
   login = ['Login To SHINEFY', 'تسجيل الدخول '];
   create_new_account = ['Create New Account', ' انشاء حساب جديد'];
+  continueWithout = ['Continue without Login', 'متابعة بدون حساب'];
   continue_agreement = [
     'By Continuing, you agree to our',
     'من خلال الاستمرار، فإنك توافق على لدينا',

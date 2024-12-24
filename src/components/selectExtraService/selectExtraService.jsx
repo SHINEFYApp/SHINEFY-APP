@@ -15,6 +15,7 @@ export default function SelectExtraService({extraService , isPackage ,quan}) {
 
 
 
+
   useEffect(()=>{
     if(bookingDetails?.extraData?.extraServices){
       if(bookingDetails?.extraData?.extraServices[extraService?.extra_service_name[0]]){
@@ -58,9 +59,25 @@ export default function SelectExtraService({extraService , isPackage ,quan}) {
             {extraService.remind_quantity} {Lang_chg.of_txt[config.language]} {extraService.quantity}
           </Text>
           :
-          <Text className="text-mainColor font-bold">
-            {extraService.extra_service_price} EGP
-          </Text>
+            <View>
+                {
+                  extraService.extra_service_discount != null &&
+                <Text
+                  className={`
+                   
+                    text-mainColor
+                   font-bold`}>
+                  {extraService.extra_service_price} EGP
+                </Text>
+                }
+                <Text
+                  className={`
+                    text-mainColor
+                  } font-bold ${extraService.extra_service_discount != null && "line-through"} `}>
+                  {extraService.extra_service_price_before_discount} EGP
+                </Text>
+              </View>
+         
           }
           <View className="flex-row items-center">
             <TouchableOpacity

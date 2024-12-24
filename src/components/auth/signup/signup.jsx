@@ -14,6 +14,8 @@ import {useState} from 'react';
 import signupAuth from '../../../Features/signup/signup';
 import {Lang_chg} from '../../../Provider/Language_provider';
 import {config} from '../../../Provider/configProvider';
+import isGuestAtom from '../../../atoms/isGuest';
+import { useRecoilState } from 'recoil';
 
 export default function SignupModal({openLogin, navigation, closeSignup , userDataSocial}) {
   const [isCompany, setIsCompany] = useState(false);
@@ -32,6 +34,7 @@ export default function SignupModal({openLogin, navigation, closeSignup , userDa
       return {...prev, ...userDataSocial};
     });
   },[])
+
 
   return (
     <View className="absolute transition-all left-0 right-0 -bottom-5 bg-white w-full p-5 rounded-xl h-full">

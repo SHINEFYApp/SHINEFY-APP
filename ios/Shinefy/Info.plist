@@ -11,7 +11,7 @@
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
+	<string>7.3.0</string>
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
@@ -29,7 +29,7 @@
 			<string>com.shinefy</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb2414590135385437</string>
+				<string>fb250981121434170</string>
 			</array>
 		</dict>
 		<dict>
@@ -39,49 +39,44 @@
 			<string>com.shinefy</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.927978144846-isqro8n34ick9casun5orghj6i5ag7t1</string>
-				<string>com.googleusercontent.apps.927978144846-a38htlsnmqcnf3h8djcpv925miun85fk</string>
+				<string>com.googleusercontent.apps.927978144846-8f77qrnp816f7f5gsv4907ce0fhlgcrm</string>
 			</array>
 		</dict>
 	</array>
-	<key>GIDClientID</key>
-	<string>927978144846-a38htlsnmqcnf3h8djcpv925miun85fk.apps.googleusercontent.com</string>
-	<key>GIDRedirectURI</key>
-	<string>com.googleusercontent.927978144846-a38htlsnmqcnf3h8djcpv925miun85fk:/oauth2redirect/google</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FacebookAdvertiserIDCollectionEnabled</key>
 	<true/>
 	<key>FacebookAppID</key>
-	<string>2414590135385437</string>
+	<string>250981121434170</string>
 	<key>FacebookAutoLogAppEventsEnabled</key>
 	<true/>
 	<key>FacebookClientToken</key>
-	<string>ef0478a85270c7870365f2bb6f57dda3</string>
+	<string>204ab0ce29c165d4a42461e50ed83fb4</string>
 	<key>FacebookDisplayName</key>
 	<string>Shinefy</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
 		<string>fb-messenger-share-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
-		<key>NSExceptionDomains</key>
-		<dict>
-			<key>localhost</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-			</dict>
-		</dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<false/>
+		<key>NSAllowsLocalNetworking</key>
+		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Shinefy would like to access your Camera for App Profile Photo Uploading. Your photos wont be shared without your permission.It is safe and secure.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Shinefy would like to access your location to send the service boy to your location to wash your car. , it is safe and secure.</string>
+	<string>Shinefy would like to access your location to send the service boy to your location to wash your car.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Shinefy would like to access your Microphone for vedio recording. Your vedio won&apos;t be shared without your permission.It is safe and secure.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
@@ -115,7 +110,7 @@
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
-	<string>SHINEFY</string>
+	<string></string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

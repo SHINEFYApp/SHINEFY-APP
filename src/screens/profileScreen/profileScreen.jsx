@@ -12,16 +12,19 @@ import pic from '../../assets/icons/profile/pic.png';
 import {useEffect} from 'react';
 import {ScrollView} from 'react-native';
 import getProfile from '../../Features/getProfile/getProfile';
-import {useRecoilState} from 'recoil';
+import {useRecoilState, useRecoilValue} from 'recoil';
 import profileData from '../../atoms/profileData/profileData';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import phoneIcon from '../../assets/icons/phoneIconYellow.png';
+import isGuestAtom from '../../atoms/isGuest';
 
 export default function ProfileScreen({navigation}) {
   const [data, setData] = useRecoilState(profileData);
   const insets = useSafeAreaInsets();
+  const isGuest = useRecoilValue(isGuestAtom)
+
   useEffect(() => {
     const fetchData = async () => {
       setData(await getProfile());
@@ -36,6 +39,10 @@ export default function ProfileScreen({navigation}) {
           paddingTop: insets.top+ 20,
           paddingBottom: insets.bottom,
         }}>
+        {
+          !isGuest && 
+          <>
+          
         <View className="my-10 ">
           <View className="items-center relative border-2 border-mainColor w-[110px] p-1 rounded-full mx-auto">
             <Image
@@ -56,42 +63,44 @@ export default function ProfileScreen({navigation}) {
             <Text>0{data?.phone_number}</Text>
           </View>
         </View>
-        <SelectVechileCard
-          icon={userIcon}
-          text={Lang_chg.editprofile_txt[config.language]}
-          screen="EditProfileScreen"
-          navigation={navigation}
-        />
-        <SelectVechileCard
-          icon={locationIcon}
-          text={Lang_chg.savedlocation[config.language]}
-          screen="SavedLocationScreen"
-          navigation={navigation}
-        />
-        <SelectVechileCard
-          icon={walletIcon}
-          text={Lang_chg.mywallet_txt[config.language]}
-          screen="MyWallet"
-          navigation={navigation}
-        />
-        <SelectVechileCard
-          icon={packageIcon}
-          text={Lang_chg.packages[config.language]}
-          screen="PackageScreen"
-          navigation={navigation}
-        />
-        <SelectVechileCard
-          icon={SubIcon}
-          text={Lang_chg.mySubscriptions[config.language]}
-          screen="MySubscreptionScreen"
-          navigation={navigation}
-        />
-                <SelectVechileCard
-          text={Lang_chg.contactus_txt[config.language]}
-          screen={'Contact Us'}
-          navigation={navigation}
-          icon={phoneIcon}
-        />
+            <SelectVechileCard
+              icon={userIcon}
+              text={Lang_chg.editprofile_txt[config.language]}
+              screen="EditProfileScreen"
+              navigation={navigation}
+            />
+            <SelectVechileCard
+              icon={locationIcon}
+              text={Lang_chg.savedlocation[config.language]}
+              screen="SavedLocationScreen"
+              navigation={navigation}
+            />
+            <SelectVechileCard
+              icon={walletIcon}
+              text={Lang_chg.mywallet_txt[config.language]}
+              screen="MyWallet"
+              navigation={navigation}
+            />
+            <SelectVechileCard
+              icon={packageIcon}
+              text={Lang_chg.packages[config.language]}
+              screen="PackageScreen"
+              navigation={navigation}
+            />
+            <SelectVechileCard
+              icon={SubIcon}
+              text={Lang_chg.mySubscriptions[config.language]}
+              screen="MySubscreptionScreen"
+              navigation={navigation}
+            />
+                    <SelectVechileCard
+              text={Lang_chg.contactus_txt[config.language]}
+              screen={'Contact Us'}
+              navigation={navigation}
+              icon={phoneIcon}
+            />
+          </>
+        }
         <SelectVechileCard
           icon={SettingIcon}
           text={Lang_chg.setting_txt[config.language]}

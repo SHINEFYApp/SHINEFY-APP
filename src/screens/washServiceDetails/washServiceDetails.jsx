@@ -9,6 +9,8 @@ import {config} from '../../Provider/configProvider';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {KeyboardAwareScrollView} from 'react-native-ui-lib';
 import SafeAreaView from '../../components/SafeAreaView';
+import isGuestAtom from '../../atoms/isGuest';
+import { useRecoilValue } from 'recoil';
 export default function WashServiceDetails({navigation, route}) {
   const [data, setData] = useState({});
 
@@ -24,6 +26,7 @@ export default function WashServiceDetails({navigation, route}) {
     } 
     return dataName
   }
+  const isGuest = useRecoilValue(isGuestAtom)
  
 
   return (
@@ -92,12 +95,15 @@ export default function WashServiceDetails({navigation, route}) {
               <Text>Vacuum Cleaning</Text>
             </View> */}
           </View>
+          {
+            !isGuest && 
           <Button
             onPress={() => {
               navigation.push('SavedLocationScreen');
             }}
             Title={Lang_chg.Book[config.language]}
           />
+          }
         </View>
       </KeyboardAwareScrollView>
     </SafeAreaView>

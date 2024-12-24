@@ -18,6 +18,6 @@ export default async function AppLogout(navigation) {
   localStorage.setItemObject('language', language);
   localStorage.setItemObject('languagecathc', languagecathc);
   localStorage.setItemObject('languagesetenglish', languagesetenglish);
-
+  localStorage.setItemObject('isGust' , false)
   navigation.replace('WelcomeScreen');
 }

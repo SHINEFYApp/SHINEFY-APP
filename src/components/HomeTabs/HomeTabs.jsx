@@ -22,9 +22,14 @@ import MyBookingScreen from '../../screens/myBookingScreen/myBookingScreen';
 import {Lang_chg} from '../../Provider/Language_provider';
 import {config} from '../../Provider/configProvider';
 import SelectLocation from '../../screens/selectLocation/selectLocation';
+import isGuestAtom from '../../atoms/isGuest';
+import { useRecoilValue } from 'recoil';
 const Tab = createBottomTabNavigator();
 
 export default function MyTabs(parentProps) {
+
+  const isGuest = useRecoilValue(isGuestAtom)
+
   return (
     <Tab.Navigator
       sceneContainerStyle={{
@@ -55,21 +60,31 @@ export default function MyTabs(parentProps) {
           ),
         }}
       />
-      <Tab.Screen
-        name="Vehicles"
-        component={VehiclesScreen}
-        options={{
-          tabBarIcon: () => <Image source={vechileIcon} />,
-          tabBarButton: props => (
-            <CustomTabBarButton
-              {...props}
-              screenName={Lang_chg.Vehicles_txt[config.language]}
-              activeIcon={vechileActiveIcon}
-            />
-          ),
-        }}
-      />
-      <Tab.Screen
+      {
+        !isGuest &&
+        <>
+          <Tab.Screen
+            name="Vehicles"
+            component={VehiclesScreen}
+            options={{
+              tabBarIcon: () => <Image source={vechileIcon} />,
+              tabBarButton: props => (
+                <CustomTabBarButton
+                  {...props}
+                  screenName={Lang_chg.Vehicles_txt[config.language]}
+                  activeIcon={vechileActiveIcon}
+                />
+              ),
+            }}
+          />
+
+        </>
+
+      }
+      {
+        !isGuest &&
+        <>
+                <Tab.Screen
         name="AddBooking"
         component={SelectLocation}
         options={{
@@ -78,6 +93,14 @@ export default function MyTabs(parentProps) {
           tabBarLabel: () => {},
         }}
       />
+
+        </>
+
+      }
+      {
+        !isGuest &&
+        <>
+      
       <Tab.Screen
         name="Bookings"
         component={MyBookingScreen}
@@ -92,6 +115,9 @@ export default function MyTabs(parentProps) {
           ),
         }}
       />
+        </>
+
+      }
       <Tab.Screen
         name="ProfileScreen"
         component={ProfileScreen}

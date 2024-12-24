@@ -22,6 +22,7 @@ import messaging from '@react-native-firebase/messaging';
 import PushNotification, {Importance} from 'react-native-push-notification';
 import getAds from '../../Features/getAds/getAds';
 import { SwiperFlatList } from 'react-native-swiper-flatlist';
+import checkCodeCompanyc from '../../Features/checkCodeCompany/checkCodeCompany';
 
 
 
@@ -83,7 +84,10 @@ export default function HomeScreen({navigation}) {
     fetchData()
   },[navigation])
 
+
+
   useEffect(()=>{
+
     const unsubscribe = messaging().onMessage(async (remoteMessage) => {
        PushNotification.createChannel(
     {
@@ -106,6 +110,16 @@ title: remoteMessage?.notification?.title, // (optional)
     })
   return unsubscribe;
   })
+
+  useEffect(()=>{
+     const fetchData = async ()=>{
+      
+      const isRating = await checkCodeCompanyc()
+    
+    }
+
+    fetchData()
+  },[])
 
   return (
     <KeyboardAwareScrollView>
