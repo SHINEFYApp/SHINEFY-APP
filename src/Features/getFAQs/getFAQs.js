@@ -1,5 +1,6 @@
 import {apifuntion} from '../../Provider/Apicallingprovider/apiProvider';
 import {Lang_chg} from '../../Provider/Language_provider';
+import { msgProvider } from '../../Provider/Messageconsolevalidationprovider/messageProvider';
 import {config} from '../../Provider/configProvider';
 import {localStorage} from '../../Provider/localStorageProvider';
 
@@ -7,7 +8,9 @@ export default async function setFAQS() {
   let user_arr = await localStorage.getItemObject('user_arr');
   let user_id = user_arr.user_id;
   let url = config.baseURL + 'get_faqs/' + 1 + '/' + user_id;
+
   let obj = await apifuntion.getApi(url);
+
   try {
     if (obj.success == 'true') {
       return obj.faqs;

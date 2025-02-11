@@ -23,6 +23,7 @@ import PushNotification, {Importance} from 'react-native-push-notification';
 import getAds from '../../Features/getAds/getAds';
 import { SwiperFlatList } from 'react-native-swiper-flatlist';
 import checkCodeCompanyc from '../../Features/checkCodeCompany/checkCodeCompany';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
 
 

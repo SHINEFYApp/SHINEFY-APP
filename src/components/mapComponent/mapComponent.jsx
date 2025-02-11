@@ -1,6 +1,6 @@
 import {Image, Text, View} from 'react-native-ui-lib';
-import React from 'react';
-import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
+import React, { useRef } from 'react';
+import MapView, {Animated, AnimatedRegion, Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import GetLocation from 'react-native-get-location';
 import indectorIcon from '../../assets/icons/mapIndecator.png';
 import {useEffect, useState} from 'react';
@@ -17,7 +17,7 @@ import { msgProvider, msgTitle } from '../../Provider/Messageconsolevalidationpr
 import { Alert, Linking } from 'react-native';
 import editBookingLocation from '../../Features/editBookingLocation/editBookingLocation';
 
-export default function MapComponent({isNewLocation, navigation , setCurrentLocation ,isMove , isEditLocation ,editLocaiton}) {
+export default function MapComponent({searchLoaction, isNewLocation, navigation, setCurrentLocation, isMove, isEditLocation, editLocaiton }) {
   const [region, setRegion] = useState({
     latitude: 29.96073734024412,
     latitudeDelta: 0.001162180276701008,
@@ -32,8 +32,8 @@ export default function MapComponent({isNewLocation, navigation , setCurrentLoca
   });
   const setLocationList = useSetRecoilState(myLocationList);
 
-  const [isLoading , setIsLoading] = useState(false)
-  const [isLoadingAdd , setIsLoadingAdd] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [isLoadingAdd, setIsLoadingAdd] = useState(false)
 
   useEffect(() => {
 
@@ -41,40 +41,40 @@ export default function MapComponent({isNewLocation, navigation , setCurrentLoca
 
     const getLocation = async () => {
       setIsLoading(false)
-      try{
+      try {
 
         const location = await GetLocation.getCurrentPosition({
           enableHighAccuracy: true,
         });
-             setIsLoading(true)
-      if(setCurrentLocation){
-        setCurrentLocation(r=>({
+        setIsLoading(true)
+        if (setCurrentLocation) {
+          setCurrentLocation(r => ({
+            ...r,
+            latitude: location.latitude,
+            longitude: location.longitude,
+          }))
+        }
+        setNewLocation(r => ({
           ...r,
           latitude: location.latitude,
           longitude: location.longitude,
         }))
-      }
-      setNewLocation(r=>({
-        ...r,
-        latitude: location.latitude,
-        longitude: location.longitude,
-      }))
-      setRegion(r => ({
-        ...r,
-        latitude: location.latitude,
-        longitude: location.longitude,
-      }));
+        setRegion(r => ({
+          ...r,
+          latitude: location.latitude,
+          longitude: location.longitude,
+        }));
 
-      }catch (err) {
+      } catch (err) {
      
-        if(String(err).includes("Location not available")) {
-           Alert.alert(
-            "ERROR GET LOCATION" ,
-            "Please open your location and restart App" ,
+        if (String(err).includes("Location not available")) {
+          Alert.alert(
+            "ERROR GET LOCATION",
+            "Please open your location and restart App",
             [
               {
                 text: msgTitle.cancel[0],
-                onPress: () => {},
+                onPress: () => { },
               },
               {
                 text: msgTitle.ok[0],
@@ -83,17 +83,17 @@ export default function MapComponent({isNewLocation, navigation , setCurrentLoca
                 },
               },
             ],
-            {cancelable: false},
+            { cancelable: false },
           );
-        }else {
+        } else {
 
           Alert.alert(
-            "ERROR GET LOCATION" ,
-            "GET LOCATION PERMISSION YOU CAN CHANGE FROM SETTING" ,
+            "ERROR GET LOCATION",
+            "GET LOCATION PERMISSION YOU CAN CHANGE FROM SETTING",
             [
               {
                 text: msgTitle.cancel[0],
-                onPress: () => {},
+                onPress: () => { },
               },
               {
                 text: msgTitle.ok[0],
@@ -102,7 +102,7 @@ export default function MapComponent({isNewLocation, navigation , setCurrentLoca
                 },
               },
             ],
-            {cancelable: false},
+            { cancelable: false },
           );
         }
           
@@ -111,12 +111,12 @@ export default function MapComponent({isNewLocation, navigation , setCurrentLoca
       
       
     };
-    if(isEditLocation) {
+    if (isEditLocation) {
 
       setIsLoading(true)
 
       setName(editLocaiton.user_address_name)
-       setNewLocation(r=>({
+      setNewLocation(r => ({
         ...r,
         latitude: +editLocaiton.latitude,
         longitude: +editLocaiton.longitude,
@@ -126,19 +126,36 @@ export default function MapComponent({isNewLocation, navigation , setCurrentLoca
         latitude: +editLocaiton.latitude,
         longitude: +editLocaiton.longitude,
       }));
-    }else { 
+    } else {
       getLocation();
     }
   }, []);
 
-  useEffect(()=>{
-     if(setCurrentLocation){
-        setCurrentLocation(newLocation)
-      }
-  },[newLocation])
+  useEffect(() => {
+    if (setCurrentLocation) {
+      setCurrentLocation(newLocation)
+    }
+  }, [newLocation])
 
+  useEffect(() => {
+    if (searchLoaction) {
+      setNewLocation((r => ({
+        ...r,
+        latitude: +searchLoaction.lat,
+        longitude: +searchLoaction.lng,
+      })))
+      setRegion((r => (
+        {
+          ...r,
+          latitude: +searchLoaction.lat,
+          longitude: +searchLoaction.lng,
+        }
+        
+      )))
+    }
 
-
+    
+  },[searchLoaction])
 
   const [name, setName] = useState('');
   return (
@@ -146,21 +163,31 @@ export default function MapComponent({isNewLocation, navigation , setCurrentLoca
       {
         isLoading ? 
           <View className="flex-1 relative">
+            {/* <Animated
+              customMapStyle={mapStyle}
+              className="h-full w-full"
+              provider={PROVIDER_GOOGLE}
+              // scrollEnabled
+              onRegionChangeComplete={setNewLocation}
+              region={region}
+              showsUserLocation
+              showsMyLocationButton
+              ref={currentMap}
+              
+            >
+              
+            </Animated> */}
             <MapView
-            scrollEnabled={isMove}
+              scrollEnabled={isMove}
               customMapStyle={mapStyle}
               provider={PROVIDER_GOOGLE}
               // scrollEnabled
               className="h-full w-full"
               onRegionChangeComplete={setNewLocation}
               region={region}
-              cameraZoomRange={50}>
-              
-              {!isNewLocation && (
-                <Marker draggable coordinate={region}>
-                  <Image source={indectorIcon} />
-                </Marker>
-              )}
+              showsUserLocation
+              showsMyLocationButton
+            >
             </MapView>
             {isNewLocation && (
               <Image
@@ -169,7 +196,7 @@ export default function MapComponent({isNewLocation, navigation , setCurrentLoca
               />
             )}
             {isNewLocation && (
-              <View className="absolute bottom-16 mx-5 p-5 rounded-xl bg-[#FFFAF2]">
+              <View className="absolute bottom-20 mx-5 p-5 rounded-xl bg-[#FFFAF2]">
                 <Text className="text-xl text-center mb-5 font-bold">
                   {Lang_chg.booking_location[config.language]}
                 </Text>

@@ -19,6 +19,7 @@ import {config} from '../../Provider/configProvider';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import phoneIcon from '../../assets/icons/phoneIconYellow.png';
 import isGuestAtom from '../../atoms/isGuest';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
 export default function ProfileScreen({navigation}) {
   const [data, setData] = useRecoilState(profileData);

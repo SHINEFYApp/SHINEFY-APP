@@ -6,7 +6,6 @@ import { localStorage } from "../../Provider/localStorageProvider";
 
 export async function sendOTP(OTP , phoneNumber , userId , navigation) {
   let user_value = await localStorage.getItemObject('user_value');
-  
   if (OTP.length <= 0) {
     msgProvider.toast(Lang_chg.Otp_validation[config.language], 'center');
     return false;
@@ -16,7 +15,7 @@ export async function sendOTP(OTP , phoneNumber , userId , navigation) {
     return false;
   }
   var data = new FormData();
-  data.append('user_id', userId);
+  data.append('user_id', user_value.user_value);
   data.append('otp', OTP);
   data.append('user_type', 1);
   data.append('device_type', config.device_type);

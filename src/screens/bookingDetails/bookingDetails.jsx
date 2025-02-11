@@ -21,7 +21,8 @@ export default function BookingDetails({route , navigation}) {
   const extraServices = useMemo(()=>{
    return Object.values(bookingData?.extra_services ? bookingData?.extra_services : {})
     
-  },[bookingData])
+  }, [bookingData])
+  
 
     useEffect(()=>{
         const fetchData = async ()=>{
@@ -68,6 +69,10 @@ export default function BookingDetails({route , navigation}) {
               {bookingData?.address_loc}
             </Text>
           </View>
+             { 
+                bookingData?.status_text?.length != 0 &&
+                <Text className="text-center my-2">{bookingData?.status_text[config.language]}</Text>
+              }
           {
             bookingData && 
             <Button 
